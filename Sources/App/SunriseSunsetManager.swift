@@ -46,11 +46,26 @@ class SunriseSunsetManager
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
         
         let response = try? self.client.get(urlString)
-        self.sunriseTime = response?.data["results", "sunrise"]?.string ?? nil
-        if let time = self.sunriseTime {print("sunriseTime : \(time)")}
+        guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
+   //     if let time = self.sunriseTime {print("sunriseTime : \(time)")}
         
-        self.sunsetTime = response?.data["results", "sunset"]?.string ?? nil
-        if let time = self.sunsetTime {print("sunsetTime : \(time)")}
+        guard let sunsetDateStr = response?.data["results", "sunset"]?.string else {return}
+     //   if let time = self.sunsetTime {print("sunsetTime : \(time)")}
+        
+        let dateFormatter = ISO8601DateFormatterLinux()
+      //  let tz = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
+     //   dateFormatter.timeZone = tz
+     //   let sunsetDate = sunsetDateStr == nil ? nil :  dateFormatter.date(from: sunsetDateStr!)
+       
+        guard let sunsetDate = dateFormatter.date(from: sunsetDateStr), let sunriseDate = dateFormatter.date(from: sunriseDateStr) else {return}
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        self.sunsetTime = formatter.string(from: sunsetDate)
+        self.sunriseTime = formatter.string(from: sunriseDate)
+        if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
+        if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
+
         
    /*
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
@@ -126,6 +141,21 @@ class SunriseSunsetManager
     }
  */
 
+}
+
+class ISO8601DateFormatterLinux: DateFormatter {
+    
+    static let sharedDateFormatter = ISO8601DateFormatterLinux()
+    
+    override init() {
+        super.init()
+        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder:aDecoder)!
+    }
+ 
 }
 
 
