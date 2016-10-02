@@ -30,7 +30,9 @@ class SunriseSunsetManager
     init(droplet:Droplet)
     {
         self.client = droplet.client
-        NotificationCenter.default.addObserver(self, selector: #selector(timerSeconde), name: NSNotification.Name("TimerSeconde"), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("TimerSeconde"), object: nil, queue: OperationQueue()) { (notification:Notification) in
+            print("AAA")
+        }
         
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
             {
@@ -42,9 +44,6 @@ class SunriseSunsetManager
         }
     }
     
-   @objc func timerSeconde()  {
-        print("AAA")
-    }
 
 
     func retrieveSunriseSunset()
