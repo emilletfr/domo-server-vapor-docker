@@ -35,6 +35,8 @@ DispatchQueue(label: "init").async {
                     let resp = try drop.client.request(.get, urlString, headers: ["Connection":"close"], query: ["":""], body: "")
                 
                     
+ 
+ 
                     print("\(index1)-\(index2)")
 
                 } catch {
