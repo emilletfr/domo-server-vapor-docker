@@ -54,7 +54,7 @@ class SunriseSunsetManager
         
     
         
-        let dateFormatter = ISO8601DateFormatterLinux()
+   //     let dateFormatter = ISO8601DateFormatterLinux()
         
         
         
@@ -149,24 +149,25 @@ class SunriseSunsetManager
     }
  */
     
-    class ISO8601DateFormatterLinux: DateFormatter {
-        
-        static let sharedDateFormatter = ISO8601DateFormatterLinux()
-        
-        override init() {
-            super.init()
-            self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
-        }
-        
-        required init(coder aDecoder: NSCoder) {
-            super.init(coder:aDecoder)!
-        }
-        
-    }
+
 
 
 }
 
+class ISO8601DateFormatterLinux: DateFormatter {
+    
+    static let sharedDateFormatter = ISO8601DateFormatterLinux()
+    
+    override init() {
+        super.init()
+        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder:aDecoder)!
+    }
+    
+}
 
 
 
