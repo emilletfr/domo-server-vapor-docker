@@ -56,6 +56,7 @@ class SunriseSunsetManager
             
             return ""
         }
+        
     }
     
     
@@ -66,10 +67,21 @@ class SunriseSunsetManager
                 let state = openOrClose ? "0" : "1"
                 for index in 1...4
                 {
+                    if index == 3
+                    {
+                        let state = openOrClose ? "open" : "close"
+                        let urlString = "http://10.0.1.21/\(state)"
+                        _ = try? self.client.get(urlString)
+                        print("Ouvrir volets : \(state)")
+                        sleep(13)
+                    }
+                    else
+                    {
                     let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
                     _ = try? self.client.get(urlString)
                     print("Ouvrir volets : \(state)")
                     sleep(13)
+                    }
                 }
         }
     }
