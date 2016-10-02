@@ -3,6 +3,7 @@ import HTTP
 import Fluent
 import VaporSQLite
 import Foundation
+import Dispatch
 
 
 let drop = Droplet(preparations:[Temperature.self], providers:[VaporSQLite.Provider.self])
