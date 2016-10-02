@@ -149,7 +149,7 @@ class ISO8601DateFormatterLinux: DateFormatter {
     
     override init() {
         super.init()
-        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
     }
     
     required init(coder aDecoder: NSCoder) {
