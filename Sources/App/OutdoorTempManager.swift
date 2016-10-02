@@ -14,7 +14,7 @@ import HTTP
 
 class OutdoorTempManager// : NSObject
 {
-    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager")
+    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Internal")
     private var internalDegresValue : Double?
     var degresValue : Double? {
         get {return serialQueue.sync { internalDegresValue }}

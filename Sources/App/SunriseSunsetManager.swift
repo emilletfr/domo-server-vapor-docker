@@ -8,10 +8,12 @@
 
 import Foundation
 import Dispatch
+import Vapor
+import HTTP
 
 class SunriseSunsetManager
 {
-    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManagerInternal")
+    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Internal")
     private var sunriseTimeInternalValue : String?
     var sunriseTime : String? {
         get {return serialQueue.sync { sunriseTimeInternalValue }}
@@ -22,17 +24,35 @@ class SunriseSunsetManager
         get {return serialQueue.sync { sunsetTimeInternalValue }}
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
- //   var sunsetTimer : DispatchSourceTimer?
-  //  var sunriseTimer : DispatchSourceTimer?
-   // var retrieveTimer : DispatchSourceTimer?
+    private var client: ClientProtocol.Type
+
     
-    init()
+    init(droplet:Droplet)
     {
+        self.client = droplet.client
+        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
+            {
+                while true
+                {
+                    self.retrieveSunriseSunset()
+                    sleep(10)
+                }
+        }
     }
-/*
+
+
     func retrieveSunriseSunset()
     {
-        let url = URL(string: "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0")
+        let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
+        
+        let response = try? self.client.get(urlString)
+        self.sunriseTime = response?.data["results", "sunrise"]?.string ?? nil
+        if let time = self.sunriseTime {print("sunriseTime : \(time)")}
+        
+        self.sunsetTime = response?.data["results", "sunset"]?.string ?? nil
+        if let time = self.sunriseTime {print("sunsetTime : \(time)")}
+        
+   /*
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
             
             guard let dataResp = data,
@@ -56,7 +76,7 @@ class SunriseSunsetManager
                 self.sunriseTime = formatter.string(from: sunriseDate!)
                 if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
                 if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
-                
+      /*
                 let sunsetTimeInterval = sunsetDate?.timeIntervalSinceNow
                 if let sunsetTimeInterval = sunsetTimeInterval
                 {
@@ -82,11 +102,13 @@ class SunriseSunsetManager
                         self.sunriseTimer?.resume()
                     }
                 }
+                 */
             }
             else { }
         }).resume()
+         */
     }
-    
+    /*
     func sunriseWorkItem()
     {
         let formatter = DateFormatter()
@@ -102,7 +124,8 @@ class SunriseSunsetManager
         print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
         print(self.sunsetTime)
     }
-*/
+ */
+
 }
 
 
