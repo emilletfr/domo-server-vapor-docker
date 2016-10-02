@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Dispatch
 
 class IndoorTempManager : NSObject, XMLParserDelegate
 {
