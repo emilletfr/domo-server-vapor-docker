@@ -69,6 +69,7 @@ class SunriseSunsetManager
         guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
         
         let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
         formatter.dateFormat = "HH:mm"
         self.sunsetTime = formatter.string(from: sunsetDate)
         self.sunriseTime = formatter.string(from: sunriseDate)
