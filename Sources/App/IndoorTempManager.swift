@@ -9,7 +9,7 @@
 import Foundation
 import Dispatch
 
-class IndoorTempManager : NSObject, XMLParserDelegate
+class IndoorTempManager : NSObject//, XMLParserDelegate
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager")
     private var internalDegresValue : Double?
