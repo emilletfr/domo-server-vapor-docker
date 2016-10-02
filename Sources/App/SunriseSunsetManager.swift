@@ -52,11 +52,19 @@ class SunriseSunsetManager
         guard let sunsetDateStr = response?.data["results", "sunset"]?.string else {return}
      //   if let time = self.sunsetTime {print("sunsetTime : \(time)")}
         
+    
+        
         let dateFormatter = ISO8601DateFormatterLinux()
+        
+        
+        
+        
       //  let tz = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
      //   dateFormatter.timeZone = tz
      //   let sunsetDate = sunsetDateStr == nil ? nil :  dateFormatter.date(from: sunsetDateStr!)
-       
+     
+        
+        /*
         guard let sunsetDate = dateFormatter.date(from: sunsetDateStr), let sunriseDate = dateFormatter.date(from: sunriseDateStr) else {return}
         
         let formatter = DateFormatter()
@@ -65,7 +73,7 @@ class SunriseSunsetManager
         self.sunriseTime = formatter.string(from: sunriseDate)
         if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
-
+*/
         
    /*
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
@@ -140,23 +148,25 @@ class SunriseSunsetManager
         print(self.sunsetTime)
     }
  */
+    
+    class ISO8601DateFormatterLinux: DateFormatter {
+        
+        static let sharedDateFormatter = ISO8601DateFormatterLinux()
+        
+        override init() {
+            super.init()
+            self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
+        }
+        
+        required init(coder aDecoder: NSCoder) {
+            super.init(coder:aDecoder)!
+        }
+        
+    }
+
 
 }
 
-class ISO8601DateFormatterLinux: DateFormatter {
-    
-    static let sharedDateFormatter = ISO8601DateFormatterLinux()
-    
-    override init() {
-        super.init()
-        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder:aDecoder)!
-    }
- 
-}
 
 
 
