@@ -54,7 +54,8 @@ class SunriseSunsetManager
         
     
         
-   //     let dateFormatter = ISO8601DateFormatterLinux()
+        let iso8601DateFormatter = DateFormatter()
+        iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
         
         
         
@@ -64,8 +65,8 @@ class SunriseSunsetManager
      //   let sunsetDate = sunsetDateStr == nil ? nil :  dateFormatter.date(from: sunsetDateStr!)
      
         
-        /*
-        guard let sunsetDate = dateFormatter.date(from: sunsetDateStr), let sunriseDate = dateFormatter.date(from: sunriseDateStr) else {return}
+        
+        guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
         
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
@@ -73,7 +74,7 @@ class SunriseSunsetManager
         self.sunriseTime = formatter.string(from: sunriseDate)
         if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
-*/
+
         
    /*
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
