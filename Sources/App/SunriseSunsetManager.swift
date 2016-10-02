@@ -30,7 +30,7 @@ class SunriseSunsetManager
     init(droplet:Droplet)
     {
         self.client = droplet.client
-        NotificationCenter.default.addObserver(forName: NSNotification.Name("TimerSeconde"), object: nil, queue: OperationQueue()) { (notification:Notification) in
+        NotificationCenter.default.addObserver(forName: Notification.Name("TimerSeconde"), object: nil, queue: OperationQueue()) { (notification:Notification) in
             print("AAA")
         }
         
