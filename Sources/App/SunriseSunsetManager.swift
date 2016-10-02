@@ -27,13 +27,8 @@ class SunriseSunsetManager
     
     init()
     {
-        self.retrieveTimer?.cancel()
-        self.retrieveTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
-        self.retrieveTimer?.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.seconds(3600))
-        self.retrieveTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
-        self.retrieveTimer?.resume()
     }
-
+/*
     func retrieveSunriseSunset()
     {
         let url = URL(string: "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0")
@@ -106,7 +101,7 @@ class SunriseSunsetManager
         print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
         print(self.sunsetTime)
     }
-
+*/
 }
 
 

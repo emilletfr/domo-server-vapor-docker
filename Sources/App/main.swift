@@ -62,7 +62,7 @@ class FooMiddleware: Middleware {
 let drop2 = Droplet(availableMiddleware: [
     "foo": FooMiddleware()
     ], clientMiddleware: ["foo"])
- */
+
 let drop2 = Droplet()
 drop2.middleware.append(FooMiddleware())
 
@@ -70,10 +70,10 @@ let res = try? drop2.client.get("http://httpbin.org/headers")
 
 let ident = drop2.sessions.makeIdentifier()
 drop2.sessions.destroy(ident)
+ */
 
 
 
-/*
 drop.resource("temperatures", TemperatureController())
 
 var outdoorTempManager = OutdoorTempManager(droplet: drop)
@@ -82,7 +82,7 @@ drop.get("outdoorTemp") { request in
     guard let degresValue = outdoorTempManager.degresValue else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
     return String(describing: degresValue)
  }
-*/
+
 
 /*
 var indoorTempManager = IndoorTempManager()

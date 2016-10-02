@@ -24,13 +24,15 @@ class IndoorTempManager : NSObject, XMLParserDelegate
     override init()
     {
         super.init()
+        /*
         self.retrieveTimer?.cancel()
         self.retrieveTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         self.retrieveTimer?.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.seconds(60))
         self.retrieveTimer?.setEventHandler(handler: self.retrieveTemp)
         self.retrieveTimer?.resume()
+ */
     }
-    
+    /*
     private func retrieveTemp()
     {
         self.xmlParser?.abortParsing()
@@ -71,5 +73,5 @@ class IndoorTempManager : NSObject, XMLParserDelegate
     {
         print(parseError)
     }
-
+*/
 }
