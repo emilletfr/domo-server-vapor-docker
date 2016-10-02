@@ -84,10 +84,10 @@ drop.get("outdoorTemp") { request in
  }
 
 
-/*
-var indoorTempManager = IndoorTempManager()
 
-var sunriseSunsetManager = SunriseSunsetManager()
+//var indoorTempManager = IndoorTempManager()
+
+var sunriseSunsetManager = SunriseSunsetManager(droplet: drop)
 
 drop.get("sunriseTime") { request in
     guard let sunriseTime = sunriseSunsetManager.sunriseTime else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
@@ -98,7 +98,7 @@ drop.get("sunsetTime") { request in
     guard let sunsetTime = sunriseSunsetManager.sunsetTime else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
     return String(describing: sunsetTime)
 }
-*/
+
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 drop.serve()
