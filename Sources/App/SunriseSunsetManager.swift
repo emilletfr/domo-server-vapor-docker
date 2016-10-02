@@ -54,13 +54,13 @@ class SunriseSunsetManager
         
     
         
-        
+        print("AAA")
         let iso8601DateFormatter = DateFormatter()
         iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
         iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        
+        print("AAB")
          guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
-        
+        print("AAC")
         let localDateformatter = DateFormatter()
         localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
         localDateformatter.dateFormat = "HH:mm"
