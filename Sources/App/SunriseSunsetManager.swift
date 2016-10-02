@@ -29,6 +29,8 @@ class SunriseSunsetManager
     
     init(droplet:Droplet)
     {
+        
+        
         self.client = droplet.client
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
             {
@@ -67,7 +69,7 @@ class SunriseSunsetManager
                     let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
                     _ = try? self.client.get(urlString)
                     print("Ouvrir volets : \(state)")
-                    sleep(13000)
+                    sleep(13)
                 }
         }
     }

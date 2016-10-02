@@ -8,30 +8,51 @@
 
 import Foundation
 import Dispatch
+import Vapor
+import HTTP
 
-class IndoorTempManager : NSObject//, XMLParserDelegate
+class IndoorTempManager //: NSObject//, XMLParserDelegate
 {
-    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager")
+    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager")
     private var internalDegresValue : Double?
     var degresValue : Double? {
         get {return serialQueue.sync { internalDegresValue }}
         set (newValue) {serialQueue.sync { internalDegresValue = newValue}}
     }
- //   var retrieveTimer : DispatchSourceTimer?
- //   var xmlParser : XMLParser?
+    private var client: ClientProtocol.Type
+
     
-  //  private var parsed : (key:String?,val:String?)
-    
-    override init()
+     init(droplet:Droplet)
     {
-        super.init()
-        /*
-        self.retrieveTimer?.cancel()
-        self.retrieveTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
-        self.retrieveTimer?.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.seconds(60))
-        self.retrieveTimer?.setEventHandler(handler: self.retrieveTemp)
-        self.retrieveTimer?.resume()
+        self.client = droplet.client
+        DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager.Timer").async
+            {
+                while true
+                {
+                    self.retrieveTemp()
+                    sleep(3600)
+                }
+        }
+/*
+
  */
+     }
+    
+    
+    private func retrieveTemp()
+    {
+        let urlString = "http://10.0.1.200/status.xml"
+        let response = try? self.client.get(urlString)
+        guard (response?.data) != nil else {return}
+        
+     //   let resp = try? self.client.
+      //  print(resp)
+        print(String(describing: response?.data))
+        let request = URLRequest(url: URL(string: urlString)!)
+        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue()) { (response:URLResponse?, data:Data?, error:Error?) in
+            print(data)
+            print(error)
+        }
     }
     /*
     private func retrieveTemp()

@@ -89,8 +89,7 @@ drop.get("outdoorTemp") { request in
 
 
 
-//var indoorTempManager = IndoorTempManager()
-
+var indoorTempManager = IndoorTempManager(droplet: drop)
 var sunriseSunsetManager = SunriseSunsetManager(droplet: drop)
 
 
