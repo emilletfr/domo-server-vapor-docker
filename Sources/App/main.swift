@@ -13,7 +13,7 @@ let _ = drop.config["app", "key"]?.string ?? ""
 
 
 
-
+/*
 
 
 DispatchQueue(label: "init").async {
@@ -55,6 +55,7 @@ class FooMiddleware: Middleware {
         return response
     }
 }
+ */
 /*
 let drop2 = Droplet(availableMiddleware: [
     "foo": FooMiddleware()
