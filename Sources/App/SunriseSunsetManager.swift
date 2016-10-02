@@ -54,25 +54,18 @@ class SunriseSunsetManager
         
     
         
+        
         let iso8601DateFormatter = DateFormatter()
         iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
+        iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         
+         guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
         
-        
-        
-      //  let tz = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
-     //   dateFormatter.timeZone = tz
-     //   let sunsetDate = sunsetDateStr == nil ? nil :  dateFormatter.date(from: sunsetDateStr!)
-     
-        
-        
-        guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
-        
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
-        formatter.dateFormat = "HH:mm"
-        self.sunsetTime = formatter.string(from: sunsetDate)
-        self.sunriseTime = formatter.string(from: sunriseDate)
+        let localDateformatter = DateFormatter()
+        localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
+        localDateformatter.dateFormat = "HH:mm"
+        self.sunsetTime = localDateformatter.string(from: sunsetDate)
+        self.sunriseTime = localDateformatter.string(from: sunriseDate)
         if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
 
