@@ -25,6 +25,7 @@ class IndoorTempManager //: NSObject//, XMLParserDelegate
      init(droplet:Droplet)
     {
         self.client = droplet.client
+        /*
         DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager.Timer").async
             {
                 while true
@@ -33,9 +34,7 @@ class IndoorTempManager //: NSObject//, XMLParserDelegate
                     sleep(3600)
                 }
         }
-/*
-
- */
+*/
      }
     
     
@@ -48,11 +47,7 @@ class IndoorTempManager //: NSObject//, XMLParserDelegate
      //   let resp = try? self.client.
       //  print(resp)
         print(String(describing: response?.data))
-        let request = URLRequest(url: URL(string: urlString)!)
-        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue()) { (response:URLResponse?, data:Data?, error:Error?) in
-            print(data)
-            print(error)
-        }
+        
     }
     /*
     private func retrieveTemp()
