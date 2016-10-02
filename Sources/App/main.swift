@@ -72,16 +72,9 @@ let ident = drop2.sessions.makeIdentifier()
 drop2.sessions.destroy(ident)
  */
 
+var timerSecondeBock : (() -> Void)?
 
-DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
-    {
-        while true
-        {
-            sleep(1)
-            
-            NotificationCenter.default.post(name: Notification.Name("TimerSeconde"), object: Date(timeIntervalSinceNow: 0))
-        }
-}
+
 
 
 drop.resource("temperatures", TemperatureController())
@@ -107,6 +100,18 @@ drop.get("sunriseTime") { request in
 drop.get("sunsetTime") { request in
     guard let sunsetTime = sunriseSunsetManager.sunsetTime else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
     return String(describing: sunsetTime)
+}
+
+DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
+    {
+        while true
+        {
+            sleep(1)
+            DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async {
+                sunriseSunsetManager.timerSeconde()
+            }
+            
+        }
 }
 
 drop.middleware.append(SampleMiddleware())
