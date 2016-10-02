@@ -38,17 +38,37 @@ class SunriseSunsetManager
                     sleep(3600)
                 }
         }
+        
+        droplet.get("sunriseTime") { request in
+            guard let sunriseTime = self.sunriseTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
+            return String(describing: sunriseTime)
+        }
+        
+        droplet.get("sunsetTime") { request in
+            guard let sunsetTime = self.sunsetTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
+            return String(describing: sunsetTime)
+        }
+        
+        droplet.get("rollingShutter") { (req:Request) -> ResponseRepresentable in
+            
+            
+            return ""
+        }
     }
     
     
     func actionRollingShutters(openOrClose:Bool)
     {
-        let state = openOrClose ? "0" : "1"
-        for index in 1...4
-        {
-            let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
-            _ = try? self.client.get(urlString)
-            print("Ouvrir volets : \(state)")
+        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Action").async
+            {
+                let state = openOrClose ? "0" : "1"
+                for index in 1...4
+                {
+                    let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
+                    _ = try? self.client.get(urlString)
+                    print("Ouvrir volets : \(state)")
+                    sleep(13000)
+                }
         }
     }
     

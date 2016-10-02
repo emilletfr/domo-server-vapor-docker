@@ -93,15 +93,7 @@ drop.get("outdoorTemp") { request in
 
 var sunriseSunsetManager = SunriseSunsetManager(droplet: drop)
 
-drop.get("sunriseTime") { request in
-    guard let sunriseTime = sunriseSunsetManager.sunriseTime else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
-    return String(describing: sunriseTime)
-}
 
-drop.get("sunsetTime") { request in
-    guard let sunsetTime = sunriseSunsetManager.sunsetTime else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
-    return String(describing: sunsetTime)
-}
 
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
     {
