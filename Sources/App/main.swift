@@ -109,7 +109,11 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         {
             sleep(1)
             DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async {
-                sunriseSunsetManager.timerSeconde()
+                let date = Date(timeIntervalSinceNow: 0)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat =  "HH:mm:ss"
+             
+                sunriseSunsetManager.timerSeconde(date: dateFormatter.string(from: date))
             }
             
         }

@@ -46,9 +46,9 @@ class SunriseSunsetManager
         }
     }
     
-    func timerSeconde ()
+    func timerSeconde (date:String)
     {
-        print("BBB")
+        print(date)
     }
     
 
