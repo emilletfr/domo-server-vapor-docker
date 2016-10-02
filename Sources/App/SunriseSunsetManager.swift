@@ -50,7 +50,7 @@ class SunriseSunsetManager
         if let time = self.sunriseTime {print("sunriseTime : \(time)")}
         
         self.sunsetTime = response?.data["results", "sunset"]?.string ?? nil
-        if let time = self.sunriseTime {print("sunsetTime : \(time)")}
+        if let time = self.sunsetTime {print("sunsetTime : \(time)")}
         
    /*
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
