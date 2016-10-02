@@ -16,10 +16,10 @@ class IndoorTempManager : NSObject, XMLParserDelegate
         get {return serialQueue.sync { internalDegresValue }}
         set (newValue) {serialQueue.sync { internalDegresValue = newValue}}
     }
-    var retrieveTimer : DispatchSourceTimer?
-    var xmlParser : XMLParser?
+ //   var retrieveTimer : DispatchSourceTimer?
+ //   var xmlParser : XMLParser?
     
-    private var parsed : (key:String?,val:String?)
+  //  private var parsed : (key:String?,val:String?)
     
     override init()
     {
