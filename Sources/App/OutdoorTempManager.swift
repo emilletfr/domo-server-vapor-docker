@@ -23,15 +23,15 @@ class OutdoorTempManager// : NSObject
     private var client: ClientProtocol.Type
 
     
-     init(droplet:Droplet)
+    init(droplet:Droplet)
     {
         self.client = droplet.client
         DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Timer").async
             {
                 while true
                 {
-               self.retrieveTemp()
-                sleep(3600)
+                    self.retrieveTemp()
+                    sleep(3600)
                 }
         }
     }

@@ -112,10 +112,8 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
                 let date = Date(timeIntervalSinceNow: 0)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat =  "HH:mm:ss"
-             
                 sunriseSunsetManager.timerSeconde(date: dateFormatter.string(from: date))
             }
-            
         }
 }
 

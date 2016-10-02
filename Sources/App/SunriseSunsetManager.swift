@@ -30,12 +30,6 @@ class SunriseSunsetManager
     init(droplet:Droplet)
     {
         self.client = droplet.client
-//        NotificationCenter.default.post(name: Notification.Name("TimerSeconde2"), object: Date(timeIntervalSinceNow: 0))
- //       NotificationCenter.default.addObserver(forName: Notification.Name("TimerSeconde"), object: nil, queue: OperationQueue()) { (notification:Notification) in
-    //        print("AAA")
-     //   }
-    
-        
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
             {
                 while true
@@ -46,18 +40,33 @@ class SunriseSunsetManager
         }
     }
     
-    func timerSeconde (date:String)
+    
+    func actionRollingShutters(openOrClose:Bool)
     {
-        print(date)
+        let state = openOrClose ? "0" : "1"
+        for index in 1...4
+        {
+            let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
+            _ = try? self.client.get(urlString)
+            print("Ouvrir volets : \(state)")
+        }
     }
     
+    
+    func timerSeconde (date:String)
+    {
+        if let sunriseTime = self.sunriseTime , let sunsetTime = self.sunsetTime
+        {
+            if date == "\(sunriseTime):00" {self.actionRollingShutters(openOrClose: true)}
+            if date == "\(sunsetTime):00" {self.actionRollingShutters(openOrClose: false)}
+        }
+    }
 
 
     func retrieveSunriseSunset()
     {
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
-        
-        let response = try? self.client.get(urlString)
+         let response = try? self.client.get(urlString)
         guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
         guard let sunsetDateStr = response?.data["results", "sunset"]?.string else {return}
         let iso8601DateFormatter = DateFormatter()
