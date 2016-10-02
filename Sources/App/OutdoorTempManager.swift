@@ -31,7 +31,7 @@ class OutdoorTempManager// : NSObject
                 while true
                 {
                self.retrieveTemp()
-                sleep(10)
+                sleep(3600)
                 }
         }
     }

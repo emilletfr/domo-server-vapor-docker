@@ -73,6 +73,16 @@ drop2.sessions.destroy(ident)
  */
 
 
+DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
+    {
+        while true
+        {
+            sleep(1)
+            
+            NotificationCenter.default.post(name: Notification.Name("TimerSeconde"), object: Date(timeIntervalSinceNow: 0))
+        }
+}
+
 
 drop.resource("temperatures", TemperatureController())
 
