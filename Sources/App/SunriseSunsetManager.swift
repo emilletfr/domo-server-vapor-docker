@@ -21,9 +21,9 @@ class SunriseSunsetManager
         get {return serialQueue.sync { sunsetTimeInternalValue }}
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
-    var sunsetTimer : DispatchSourceTimer?
-    var sunriseTimer : DispatchSourceTimer?
-    var retrieveTimer : DispatchSourceTimer?
+ //   var sunsetTimer : DispatchSourceTimer?
+  //  var sunriseTimer : DispatchSourceTimer?
+   // var retrieveTimer : DispatchSourceTimer?
     
     init()
     {
