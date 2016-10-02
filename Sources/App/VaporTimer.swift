@@ -2,6 +2,7 @@ import Foundation
 
 class VaporTimer
 {
+    /*
     public class func every(interval: TimeInterval, _ block: () -> Void) -> Void
     {
         let queue = DispatchQueue.global(qos: .utility)
@@ -14,6 +15,7 @@ class VaporTimer
             
         }
     }
+ */
 }
 
 
