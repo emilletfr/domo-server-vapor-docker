@@ -30,9 +30,11 @@ class SunriseSunsetManager
     init(droplet:Droplet)
     {
         self.client = droplet.client
+        NotificationCenter.default.post(name: Notification.Name("TimerSeconde2"), object: Date(timeIntervalSinceNow: 0))
         NotificationCenter.default.addObserver(forName: Notification.Name("TimerSeconde"), object: nil, queue: OperationQueue()) { (notification:Notification) in
             print("AAA")
         }
+    
         
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
             {
