@@ -12,11 +12,11 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "848C6150-F4DD-4B45-8635-84A0D0810B2D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "VaporServer\/Packages\/Jay-0.21.3\/",
-    "CEB2E85BAD5A62B0D123EC0B10F5265A329CEEBA" : "VaporServer\/Packages\/SQLite-0.3.1\/",
+    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "domo-server-vapor\/Packages\/Jay-0.21.3\/",
+    "CEB2E85BAD5A62B0D123EC0B10F5265A329CEEBA" : "domo-server-vapor\/Packages\/SQLite-0.3.1\/",
     "9099ACC60FDF825D6E7028867B6118FFA3A7530B" : "domo-server-vapor\/",
     "7E7C1062562B886ABFA1C65C1E929E1339657116" : "VaporServer\/Packages\/Turnstile-0.4.0\/",
-    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3" : "VaporServer\/Packages\/Vapor-0.18.0\/"
+    "52AFDBC9624F22D94526E36BBEE271C6D7FC65D3" : "domo-server-vapor\/Packages\/Vapor-0.18.0\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "VaporApp",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
