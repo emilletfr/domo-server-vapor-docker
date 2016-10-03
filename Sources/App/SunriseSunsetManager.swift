@@ -70,7 +70,7 @@ class SunriseSunsetManager
                     if index == 3
                     {
                         let state = openOrClose ? "open" : "close"
-                        let urlString = "http://10.0.1.21/\(state)"
+                        let urlString = "http://10.0.1.2/\(state)"
                         _ = try? self.client.get(urlString)
                         print("Ouvrir volets : \(state)")
                         sleep(13)
