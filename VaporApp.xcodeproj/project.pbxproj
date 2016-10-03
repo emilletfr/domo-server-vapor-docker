@@ -1970,6 +1970,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07851BD51DA2713200E6728D /* CoreTeststttt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTeststttt.swift; sourceTree = "<group>"; };
+		07851BD71DA2713200E6728D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		__PBXFileRef_Config /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = "<group>"; };
 		__PBXFileRef_Database /* Database */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Database; sourceTree = "<group>"; };
 		__PBXFileRef_Localization /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = "<group>"; };
@@ -3989,6 +3991,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07851BD41DA2713200E6728D /* CoreTeststttt */ = {
+			isa = PBXGroup;
+			children = (
+				07851BD51DA2713200E6728D /* CoreTeststttt.swift */,
+				07851BD71DA2713200E6728D /* Info.plist */,
+			);
+			path = CoreTeststttt;
+			sourceTree = "<group>";
+		};
 		Dependencies_ /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -4049,6 +4060,7 @@
 				__PBXFileRef_Public /* Public */,
 				__PBXFileRef_Resources /* Resources */,
 				Dependencies_ /* Dependencies */,
+				07851BD41DA2713200E6728D /* CoreTeststttt */,
 				"____Products_" /* Products */,
 			);
 			sourceTree = "<group>";
@@ -6803,6 +6815,7 @@
 		__RootObject_ /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 9999;
 			};
 			buildConfigurationList = "___RootConfs_" /* Build configuration list for PBXProject "VaporApp" */;
