@@ -12,8 +12,24 @@ let _ = drop.config["app", "key"]?.string ?? ""
 
 
 
+#if os(Linux)
+func shell(launchPath: String, arguments: [String] = []) -> (String? , Int32) {
+    let task = Process()
+    task.launchPath = launchPath
+    task.arguments = arguments
+    
+    let pipe = Pipe()
+    task.standardOutput = pipe
+    task.standardError = pipe
+    task.launch()
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output = String(data: data, encoding: String.Encoding.utf8)
+    task.waitUntilExit()
+    return (output, task.terminationStatus)
+}
 
-
+print(shell(launchPath: "/usr/local/bin/ls", arguments: [""]))
+    #endif
 /*
 
 
