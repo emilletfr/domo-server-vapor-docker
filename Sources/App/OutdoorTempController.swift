@@ -12,7 +12,7 @@ import Dispatch
 import HTTP
 
 
-class OutdoorTempManager// : NSObject
+class OutdoorTempDownloader// : NSObject
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Internal")
     private var internalDegresValue : Double?
@@ -33,6 +33,11 @@ class OutdoorTempManager// : NSObject
                     self.retrieveTemp()
                     sleep(3600)
                 }
+        }
+        
+        droplet.get("outdoorTemp") { request in
+            guard let degresValue = self.degresValue else { let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
+            return String(describing: degresValue)
         }
     }
     

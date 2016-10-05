@@ -11,7 +11,7 @@ import Dispatch
 import Vapor
 import HTTP
 
-class SunriseSunsetManager
+class SunriseSunsetDownloader
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Internal")
     private var sunriseTimeInternalValue : String?

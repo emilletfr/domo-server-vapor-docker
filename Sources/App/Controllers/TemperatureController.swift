@@ -4,12 +4,7 @@ import HTTP
 final class TemperatureController: ResourceRepresentable {
     typealias Item = Temperature
     
-/*
-    let drop: Droplet
-    init(droplet: Droplet) {
-        drop = droplet
-    }
-    */
+
     func index(request: Request) throws -> ResponseRepresentable {
      return try Temperature.all().makeNode().converted(to: JSON.self)
     }
