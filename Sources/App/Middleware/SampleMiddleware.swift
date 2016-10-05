@@ -1,15 +1,14 @@
 import Vapor
 import HTTP
 
-class SampleMiddleware: Middleware {
-    
-
+class SampleMiddleware: Middleware
+{
 	func respond(to request: Request, chainingTo chain: Responder) throws -> Response {
         // You can manipulate the request before calling the handler
         // and abort early if necessary, a good injection point for
         // handling auth.
 
-        // return Response(status: .Forbidden, text: "Permission denied")
+        print(request)
 
         let response = try chain.respond(to: request)
         
@@ -18,6 +17,15 @@ class SampleMiddleware: Middleware {
         {
             response.headers["Content-Type"] = "text/css"
         }
+        
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"
+
+  
+       // content-type, accept
+        print(response)
+        
+   //     response.h
 
         // You can also manipulate the response to add headers
         // cookies, etc.

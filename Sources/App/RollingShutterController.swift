@@ -97,7 +97,11 @@ final class RollingShutterController: ResourceRepresentable {
             destroy: destroy
         )
     }
+    
+
 }
+
+
 
 extension Request {
     func rollingShutter() throws -> RollingShutter {
