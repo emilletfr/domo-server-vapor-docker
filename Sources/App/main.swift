@@ -32,6 +32,10 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
+drop.get("/") { request in
+    return try drop.view.make("index.html")
+}
+
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 drop.serve()
