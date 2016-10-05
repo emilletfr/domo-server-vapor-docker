@@ -11,7 +11,8 @@ import Dispatch
 import Vapor
 import HTTP
 
-class IndoorTempDownloader //: NSObject//, XMLParserDelegate
+
+class IndoorTempController //: NSObject//, XMLParserDelegate
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager")
     private var internalDegresValue : Double?

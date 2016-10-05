@@ -6,8 +6,146 @@
 //
 //
 
-import UIKit
+import Vapor
+import Foundation
+import Dispatch
+import HTTP
 
-class RollingShutterController: NSObject {
+final class RollingShutterController: ResourceRepresentable {
+    typealias Item = RollingShutter
+    private var client: ClientProtocol.Type
+    
+    init(droplet: Droplet) {
+        self.client = droplet.client
+        /*
+        let clientResponse = try? droplet.client.get("http://10.0.1.12/status")
+        let status = clientResponse?.data["status"]?.bool ?? nil
+        
+        guard let open = status else {return}
+        let rollingShutter = RollingShutter(open: open, index:0)
+ */
+
+ 
+            do
+            {
+                for rollingShutter in try RollingShutter.all() {try? rollingShutter.delete()}
+                let clientResponse = try? self.client.get("http://10.0.1.12/status")
+                let status = clientResponse?.data["status"]?.bool ?? false
+                for order in 0...3
+                {
+                    var rollingShutter = try RollingShutter(from: status, order: order)
+                    try rollingShutter?.save()
+                }
+            }
+            catch{print(error)}
+    }
+    
+    
+    func index(request: Request) throws -> ResponseRepresentable
+    {
+        return try RollingShutter.query().sort("order", .ascending).makeQuery().all().makeNode().converted(to: JSON.self)
+    }
+    
+    func create(request: Request) throws -> ResponseRepresentable
+    {
+        var rollingShutter = try request.rollingShutter()
+        for rs in try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().all() {
+            
+            print("delete : \(rs.order)")
+            do
+            {
+            try  rs.delete()
+            }
+            catch{print(error)}
+        }
+        do
+        {
+            print("rs to save : \(rollingShutter.order) \(rollingShutter.open)")
+        try rollingShutter.save()
+        }
+        catch{print(error)}
+    
+        return try RollingShutter.query().sort("order", .ascending).makeQuery().all().makeNode().converted(to: JSON.self)
+    }
+    
+    
+    
+    /**
+    	Since item is of type User,
+    	only instances of user will be received
+     */
+    func show(request: Request, item rollingShutter: RollingShutter) throws -> ResponseRepresentable {
+        return try JSON(node: [rollingShutter])
+    }
+    
+    func update(request: Request, item rollingShutter: RollingShutter) throws -> ResponseRepresentable {
+        //User is JsonRepresentable
+        return rollingShutter.makeJSON()
+    }
+    
+    func destroy(request: Request, item rollingShutter: RollingShutter) throws -> ResponseRepresentable {
+        //User is ResponseRepresentable by proxy of JsonRepresentable
+        return rollingShutter
+    }
+    
+    func makeResource() -> Resource<RollingShutter> {
+        return Resource(
+            index: index,
+            store: create,
+            show: show,
+            replace: update,
+            destroy: destroy
+        )
+    }
+}
+
+extension Request {
+    func rollingShutter() throws -> RollingShutter {
+        guard let json = json else
+        {
+            throw Abort.badRequest
+        }
+        return try RollingShutter(node: json)
+    }
+    
+}
+
+
+/*
+class RollingShutterController
+{
+    private var client: ClientProtocol.Type
+    
+    init(droplet:Droplet)
+    {
+        self.client = droplet.client
+        
+        droplet.get("rollingShutter", String.self) { request, wildcard in
+            let index = wildcard.index(wildcard.startIndex, offsetBy: 0)
+            let shutterNumberString =  String(wildcard[index])
+            var urlString = "http://10.0.1.1\(shutterNumberString)"
+      
+            if wildcard.characters.count == 2
+            {
+                let index = wildcard.index(wildcard.startIndex, offsetBy: 1)
+               urlString += "/" + String(wildcard[index])
+            }
+            else if wildcard.characters.count == 1
+            {
+                urlString += "/status";
+            }
+            print(wildcard)
+            print(urlString)
+            let clientResponse = try droplet.client.get(urlString)
+            let status = clientResponse.data["status"]?.bool ?? nil
+            print(status)
+            let json = try JSON(node: ["status": status])
+            let response = try Response(status: .ok, json: json)
+            response.headers = ["Access-Control-Allow-Origin": "*", "Content-Type":"application/json"]
+            return response
+        }
+    }
+
 
 }
+ */

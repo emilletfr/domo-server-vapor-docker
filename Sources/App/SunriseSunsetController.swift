@@ -11,7 +11,7 @@ import Dispatch
 import Vapor
 import HTTP
 
-class SunriseSunsetDownloader
+class SunriseSunsetController
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Internal")
     private var sunriseTimeInternalValue : String?
@@ -50,12 +50,7 @@ class SunriseSunsetDownloader
             guard let sunsetTime = self.sunsetTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunsetTime)
         }
-        
-        droplet.get("rollingShutter") { (req:Request) -> ResponseRepresentable in
-            
-            
-            return ""
-        }
+
         
     }
     

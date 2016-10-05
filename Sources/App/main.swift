@@ -6,88 +6,16 @@ import Foundation
 import Dispatch
 
 
-let drop = Droplet(preparations:[Temperature.self], providers:[VaporSQLite.Provider.self])
+let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
 let _ = drop.config["app", "key"]?.string ?? ""
 
-
-/*
-
-
-DispatchQueue(label: "init").async {
-    
-    let dispatchQueue = DispatchQueue(label: "queuename", attributes: .concurrent)
-    
-    for  index1 in 1...400 {
-        sleep(1)
-        
-        for  index2 in 1...10 {
-            dispatchQueue.async {
-                
-                do {
-                    let urlString = "http://api.openweathermap.org/data/2.5/weather?zip=54360,fr&APPID=9c44d7610c061d8c3a7873c51da2e885&units=metric"
-                    
-                    
-                    
-                    
-                    let resp = try drop.client.request(.get, urlString, headers: ["Connection":"close"], query: ["":""], body: "")
-                
-                    
- 
- 
-                    print("\(index1)-\(index2)")
-
-                } catch {
-                    print(error)
-                }
-                
-            }
-        }
-    }
-}
-
-class FooMiddleware: Middleware {
-    init() {}
-    func respond(to request: Request, chainingTo next: Responder) throws -> Response {
-        request.headers["foo"] = "bar"
-        let response = try next.respond(to: request)
-        response.headers["bar"] = "baz"
-        return response
-    }
-}
- */
-/*
-let drop2 = Droplet(availableMiddleware: [
-    "foo": FooMiddleware()
-    ], clientMiddleware: ["foo"])
-
-let drop2 = Droplet()
-drop2.middleware.append(FooMiddleware())
-
-let res = try? drop2.client.get("http://httpbin.org/headers")
-
-let ident = drop2.sessions.makeIdentifier()
-drop2.sessions.destroy(ident)
- */
-
-var timerSecondeBock : (() -> Void)?
-
-
-
-
 drop.resource("temperatures", TemperatureController())
+drop.resource("rollingShutter", RollingShutterController(droplet: drop))
 
-var outdoorTempManager = OutdoorTempManager(droplet: drop)
-
-drop.get("outdoorTemp") { request in
-    guard let degresValue = outdoorTempManager.degresValue else {var res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
-    return String(describing: degresValue)
- }
-
-
-
-var indoorTempManager = IndoorTempManager(droplet: drop)
-var sunriseSunsetManager = SunriseSunsetManager(droplet: drop)
-
+var outdoorTempController = OutdoorTempController(droplet: drop)
+var indoorTempController = IndoorTempController(droplet: drop)
+var sunriseSunsetController = SunriseSunsetController(droplet: drop)
+//var rollingController = RollingShutterController(droplet: drop)
 
 
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
@@ -99,7 +27,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
                 let date = Date(timeIntervalSinceNow: 0)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat =  "HH:mm:ss"
-                sunriseSunsetManager.timerSeconde(date: dateFormatter.string(from: date))
+                sunriseSunsetController.timerSeconde(date: dateFormatter.string(from: date))
             }
         }
 }
@@ -107,6 +35,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 drop.serve()
+
 
 /**
     Vapor configuration files are located

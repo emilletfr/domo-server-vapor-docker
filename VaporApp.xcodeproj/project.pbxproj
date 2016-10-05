@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07851BE51DA3DAA000E6728D /* RollingShutterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07851BE41DA3DAA000E6728D /* RollingShutterController.swift */; };
+		07851BEB1DA3DF0D00E6728D /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07851BEA1DA3DF0D00E6728D /* Temperature.swift */; };
+		07851BED1DA3DF2700E6728D /* TemperatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07851BEC1DA3DF2700E6728D /* TemperatureController.swift */; };
+		07851BEF1DA3DF4300E6728D /* SampleMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07851BEE1DA3DF4300E6728D /* SampleMiddleware.swift */; };
+		07851BF11DA4D62100E6728D /* RollingShutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07851BF01DA4D62100E6728D /* RollingShutter.swift */; };
 		_LinkFileRef_Auth_via_App /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
 		_LinkFileRef_Auth_via_Vapor /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
 		_LinkFileRef_Auth_via_VaporSQLite /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
@@ -1669,13 +1674,9 @@
 		"__src_cc_ref_Packages/Vapor-0.18.0/Sources/Vapor/View/ViewRenderer.swift" /* View/ViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Packages/Vapor-0.18.0/Sources/Vapor/View/ViewRenderer.swift" /* View/ViewRenderer.swift */; };
 		"__src_cc_ref_Packages/Vapor-0.18.0/Sources/Vapor/WebSockets/WebSockets.swift" /* WebSockets/WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Packages/Vapor-0.18.0/Sources/Vapor/WebSockets/WebSockets.swift" /* WebSockets/WebSockets.swift */; };
 		"__src_cc_ref_Packages/VaporSQLite-0.4.0/Sources/VaporSQLite/Provider.swift" /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = "__PBXFileRef_Packages/VaporSQLite-0.4.0/Sources/VaporSQLite/Provider.swift" /* Provider.swift */; };
-		__src_cc_ref_Sources/App/Controllers/UserController.swift /* Controllers/UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/Controllers/UserController.swift /* Controllers/UserController.swift */; };
-		__src_cc_ref_Sources/App/IndoorTempManager.swift /* IndoorTempManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/IndoorTempManager.swift /* IndoorTempManager.swift */; };
-		__src_cc_ref_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift */; };
-		__src_cc_ref_Sources/App/Models/User.swift /* Models/User.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/Models/User.swift /* Models/User.swift */; };
-		__src_cc_ref_Sources/App/OutdoorTempManager.swift /* OutdoorTempManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/OutdoorTempManager.swift /* OutdoorTempManager.swift */; };
-		__src_cc_ref_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetManager.swift */; };
-		__src_cc_ref_Sources/App/VaporTimer.swift /* VaporTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/VaporTimer.swift /* VaporTimer.swift */; };
+		__src_cc_ref_Sources/App/IndoorTempManager.swift /* IndoorTempController.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/IndoorTempManager.swift /* IndoorTempController.swift */; };
+		__src_cc_ref_Sources/App/OutdoorTempManager.swift /* OutdoorTempController.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/OutdoorTempManager.swift /* OutdoorTempController.swift */; };
+		__src_cc_ref_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetController.swift */; };
 		__src_cc_ref_Sources/App/main.swift /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/App/main.swift /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -1972,6 +1973,11 @@
 /* Begin PBXFileReference section */
 		07851BD51DA2713200E6728D /* CoreTeststttt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTeststttt.swift; sourceTree = "<group>"; };
 		07851BD71DA2713200E6728D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07851BE41DA3DAA000E6728D /* RollingShutterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollingShutterController.swift; sourceTree = "<group>"; };
+		07851BEA1DA3DF0D00E6728D /* Temperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Temperature.swift; path = Models/Temperature.swift; sourceTree = "<group>"; };
+		07851BEC1DA3DF2700E6728D /* TemperatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemperatureController.swift; path = Controllers/TemperatureController.swift; sourceTree = "<group>"; };
+		07851BEE1DA3DF4300E6728D /* SampleMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SampleMiddleware.swift; path = Middleware/SampleMiddleware.swift; sourceTree = "<group>"; };
+		07851BF01DA4D62100E6728D /* RollingShutter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollingShutter.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Config /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = "<group>"; };
 		__PBXFileRef_Database /* Database */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Database; sourceTree = "<group>"; };
 		__PBXFileRef_Localization /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = "<group>"; };
@@ -3077,13 +3083,9 @@
 		"__PBXFileRef_Packages/VaporSQLite-0.4.0/Sources/VaporSQLite/Provider.swift" /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Public /* Public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Public; sourceTree = "<group>"; };
 		__PBXFileRef_Resources /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/Controllers/UserController.swift /* Controllers/UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controllers/UserController.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/IndoorTempManager.swift /* IndoorTempManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorTempManager.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middleware/SampleMiddleware.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/Models/User.swift /* Models/User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/User.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/OutdoorTempManager.swift /* OutdoorTempManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdoorTempManager.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetManager.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/App/VaporTimer.swift /* VaporTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaporTimer.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/App/IndoorTempManager.swift /* IndoorTempController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorTempController.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/App/OutdoorTempManager.swift /* OutdoorTempController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdoorTempController.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetController.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/App/main.swift /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		__PBXFileRef_VaporApp.xcodeproj/Configs/Project.xcconfig /* VaporApp.xcodeproj/Configs/Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = VaporApp.xcodeproj/Configs/Project.xcconfig; sourceTree = "<group>"; };
 		"_____Product_App" /* App */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = App; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4000,6 +4002,35 @@
 			path = CoreTeststttt;
 			sourceTree = "<group>";
 		};
+		07851BE61DA3DE7D00E6728D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				07851BEC1DA3DF2700E6728D /* TemperatureController.swift */,
+				07851BE41DA3DAA000E6728D /* RollingShutterController.swift */,
+				__PBXFileRef_Sources/App/IndoorTempManager.swift /* IndoorTempController.swift */,
+				__PBXFileRef_Sources/App/OutdoorTempManager.swift /* OutdoorTempController.swift */,
+				__PBXFileRef_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		07851BE71DA3DE8C00E6728D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				07851BEA1DA3DF0D00E6728D /* Temperature.swift */,
+				07851BF01DA4D62100E6728D /* RollingShutter.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		07851BE81DA3DE9A00E6728D /* Middleware */ = {
+			isa = PBXGroup;
+			children = (
+				07851BEE1DA3DF4300E6728D /* SampleMiddleware.swift */,
+			);
+			name = Middleware;
+			sourceTree = "<group>";
+		};
 		Dependencies_ /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -4134,13 +4165,9 @@
 			isa = PBXGroup;
 			children = (
 				__PBXFileRef_Sources/App/main.swift /* main.swift */,
-				__PBXFileRef_Sources/App/IndoorTempManager.swift /* IndoorTempManager.swift */,
-				__PBXFileRef_Sources/App/OutdoorTempManager.swift /* OutdoorTempManager.swift */,
-				__PBXFileRef_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetManager.swift */,
-				__PBXFileRef_Sources/App/VaporTimer.swift /* VaporTimer.swift */,
-				__PBXFileRef_Sources/App/Controllers/UserController.swift /* Controllers/UserController.swift */,
-				__PBXFileRef_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift */,
-				__PBXFileRef_Sources/App/Models/User.swift /* Models/User.swift */,
+				07851BE61DA3DE7D00E6728D /* Controllers */,
+				07851BE71DA3DE8C00E6728D /* Models */,
+				07851BE81DA3DE9A00E6728D /* Middleware */,
 			);
 			name = App;
 			path = Sources/App;
@@ -6881,14 +6908,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				__src_cc_ref_Sources/App/IndoorTempManager.swift /* IndoorTempManager.swift in Sources */,
+				__src_cc_ref_Sources/App/IndoorTempManager.swift /* IndoorTempController.swift in Sources */,
+				07851BEF1DA3DF4300E6728D /* SampleMiddleware.swift in Sources */,
 				__src_cc_ref_Sources/App/main.swift /* main.swift in Sources */,
-				__src_cc_ref_Sources/App/OutdoorTempManager.swift /* OutdoorTempManager.swift in Sources */,
-				__src_cc_ref_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetManager.swift in Sources */,
-				__src_cc_ref_Sources/App/VaporTimer.swift /* VaporTimer.swift in Sources */,
-				__src_cc_ref_Sources/App/Controllers/UserController.swift /* Controllers/UserController.swift in Sources */,
-				__src_cc_ref_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift in Sources */,
-				__src_cc_ref_Sources/App/Models/User.swift /* Models/User.swift in Sources */,
+				07851BED1DA3DF2700E6728D /* TemperatureController.swift in Sources */,
+				07851BF11DA4D62100E6728D /* RollingShutter.swift in Sources */,
+				__src_cc_ref_Sources/App/OutdoorTempManager.swift /* OutdoorTempController.swift in Sources */,
+				__src_cc_ref_Sources/App/SunriseSunsetManager.swift /* SunriseSunsetController.swift in Sources */,
+				07851BEB1DA3DF0D00E6728D /* Temperature.swift in Sources */,
+				07851BE51DA3DAA000E6728D /* RollingShutterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

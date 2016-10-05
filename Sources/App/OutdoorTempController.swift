@@ -12,7 +12,7 @@ import Dispatch
 import HTTP
 
 
-class OutdoorTempDownloader// : NSObject
+class OutdoorTempController// : NSObject
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Internal")
     private var internalDegresValue : Double?
