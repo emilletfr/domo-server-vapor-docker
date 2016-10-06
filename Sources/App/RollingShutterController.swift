@@ -49,22 +49,15 @@ final class RollingShutterController: ResourceRepresentable {
     func create(request: Request) throws -> ResponseRepresentable
     {
         var rollingShutter = try request.rollingShutter()
-        for rs in try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().all() {
-            
-            print("delete : \(rs.order)")
-            do
-            {
-            try  rs.delete()
-            }
-            catch{print(error)}
-        }
-        do
+        for rs in try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().all()
         {
-            print("rs to save : \(rollingShutter.order) \(rollingShutter.open)")
-        try rollingShutter.save()
+            do {try  rs.delete()} catch {print(error)}
         }
-        catch{print(error)}
-    
+        
+        do {try rollingShutter.save()} catch{print(error)}
+        
+         _ = try? self.client.get("http://10.0.1.12/\(rollingShutter.open == true ? "1" : "0")")
+        
         return try RollingShutter.query().sort("order", .ascending).makeQuery().all().makeNode().converted(to: JSON.self)
     }
     
