@@ -8,7 +8,7 @@ class SampleMiddleware: Middleware
         // and abort early if necessary, a good injection point for
         // handling auth.
 
-        print(request)
+     //   print(request)
 
         let response = try chain.respond(to: request)
         
@@ -23,10 +23,9 @@ class SampleMiddleware: Middleware
         response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE, PUT"
         response.headers["Access-Control-Max-Age"] = "1000"
         
-       
         
        // content-type, accept
-        print(response)
+       // print(response)
         
    //     response.h
 
