@@ -20,8 +20,11 @@ class SampleMiddleware: Middleware
         
         response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"
-
-  
+        response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE, PUT"
+        response.headers["Access-Control-Max-Age"] = "1000"
+        
+       
+        
        // content-type, accept
         print(response)
         
