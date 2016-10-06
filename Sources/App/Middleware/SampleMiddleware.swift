@@ -12,7 +12,7 @@ class SampleMiddleware: Middleware
 
         let response = try chain.respond(to: request)
         
-        print("startLine:"+response.startLine)
+      //  print("startLine:"+response.startLine)
         if request.startLine.range(of: ".css")?.isEmpty == false
         {
             response.headers["Content-Type"] = "text/css"
