@@ -34,8 +34,8 @@ final class RollingShutterController: ResourceRepresentable {
                 let names = ["Salon", "Salle a manger", "Bureau", "Cuisine"]
                 for order in 0...3
                 {
-                    var rollingShutter = try RollingShutter(from :names[order], auto: true, open: status, order: order)
-                    try rollingShutter?.save()
+                    var rollingShutter = RollingShutter(name:names[order], auto: true, open: status, order: order)
+                    try rollingShutter.save()
                 }
             }
             catch{print(error)}
@@ -49,25 +49,23 @@ final class RollingShutterController: ResourceRepresentable {
     
     func create(request: Request) throws -> ResponseRepresentable
     {
+        var previousOpenState = false
         var rollingShutter = try request.rollingShutter()
         for rs in try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().all()
         {
+            previousOpenState = rs.open
             do {try  rs.delete()} catch {print(error)}
         }
         
         do {try rollingShutter.save()} catch{print(error)}
         
-        if rollingShutter.order == 2
+        if rollingShutter.order == 2 && rollingShutter.open != previousOpenState
         {
          _ = try? self.client.get("http://10.0.1.1\(rollingShutter.order)/\(rollingShutter.open == true ? "1" : "0")")
         }
-        
-    //    return try RollingShutter.query().sort("order", .ascending).makeQuery().all().makeNode().converted(to: JSON.self)
-      //  return try JSON(node: [rollingShutter])
 
           return try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().first()!.makeNode().converted(to: JSON.self)
     }
-    
     
     
     /**
