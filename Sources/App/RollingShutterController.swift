@@ -34,7 +34,7 @@ final class RollingShutterController: ResourceRepresentable {
                 let names = ["Salon", "Salle a manger", "Bureau", "Cuisine"]
                 for order in 0...3
                 {
-                    var rollingShutter = RollingShutter(name:names[order], auto: true, open: status, order: order)
+                    var rollingShutter = RollingShutter(name:"Volet", auto: true, open: status, order: order)
                     try rollingShutter.save()
                 }
             }
