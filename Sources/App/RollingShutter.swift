@@ -51,7 +51,7 @@ extension RollingShutter: Preparation {
         
         try database.create(entity) { builder in
             builder.id()
-            builder.bool("name")
+            builder.string("name")
             builder.bool("auto")
             builder.bool("open")
             builder.int("order")
