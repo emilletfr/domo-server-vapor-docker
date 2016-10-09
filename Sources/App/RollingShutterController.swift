@@ -31,9 +31,10 @@ final class RollingShutterController: ResourceRepresentable {
                 for rollingShutter in try RollingShutter.all() {try? rollingShutter.delete()}
                 let clientResponse = try? self.client.get("http://10.0.1.12/status")
                 let status = clientResponse?.data["status"]?.bool ?? false
+                let names = ["Salon", "Salle a manger", "Bureau", "Cuisine"]
                 for order in 0...3
                 {
-                    var rollingShutter = try RollingShutter(from: status, order: order)
+                    var rollingShutter = try RollingShutter(from :names[order], auto: true, open: status, order: order)
                     try rollingShutter?.save()
                 }
             }
@@ -56,9 +57,15 @@ final class RollingShutterController: ResourceRepresentable {
         
         do {try rollingShutter.save()} catch{print(error)}
         
-         _ = try? self.client.get("http://10.0.1.12/\(rollingShutter.open == true ? "1" : "0")")
+        if rollingShutter.order == 2
+        {
+         _ = try? self.client.get("http://10.0.1.1\(rollingShutter.order)/\(rollingShutter.open == true ? "1" : "0")")
+        }
         
-        return try RollingShutter.query().sort("order", .ascending).makeQuery().all().makeNode().converted(to: JSON.self)
+    //    return try RollingShutter.query().sort("order", .ascending).makeQuery().all().makeNode().converted(to: JSON.self)
+      //  return try JSON(node: [rollingShutter])
+
+          return try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().first()!.makeNode().converted(to: JSON.self)
     }
     
     
@@ -93,7 +100,6 @@ final class RollingShutterController: ResourceRepresentable {
     
 
 }
-
 
 
 extension Request {

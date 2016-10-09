@@ -14,6 +14,8 @@ import Foundation
 final class RollingShutter: Model {
     
     var id: Node?
+    var name: String
+    var auto : Bool
     var open: Bool
     var order: Int
     
@@ -21,19 +23,23 @@ final class RollingShutter: Model {
     // used by fluent internally
     var exists: Bool = false
     
-    init(open: Bool, order: Int) {
+    init(name: String, auto: Bool, open: Bool, order: Int) {
+        self.name = name
+        self.auto = auto
         self.open = open
         self.order = order
     }
     
     init(node: Node, in context: Context) throws {
         self.id = UUID().uuidString.makeNode()
+        self.name = try node.extract("name")
+        self.auto = try node.extract("auto")
         self.open = try node.extract("open")
         self.order = try node.extract("order")
      }
     
     func makeNode() throws -> Node {
-        return try Node(node: ["open": open, "order": order])
+        return try Node(node: ["name":name, "auto":auto, "open": open, "order": order])
     }
     
 }
@@ -45,6 +51,8 @@ extension RollingShutter: Preparation {
         
         try database.create(entity) { builder in
             builder.id()
+            builder.bool("name")
+            builder.bool("auto")
             builder.bool("open")
             builder.int("order")
         }
@@ -57,8 +65,8 @@ extension RollingShutter: Preparation {
 
 
 extension RollingShutter {
-    public convenience init?(from open: Bool, order: Int) throws {
-        self.init(open:open, order:order)
+    public convenience init?(from name:String, auto:Bool, open: Bool, order: Int) throws {
+        self.init(name:name, auto:auto, open:open, order:order)
     }
     
 
