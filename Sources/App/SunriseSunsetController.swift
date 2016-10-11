@@ -26,11 +26,8 @@ class SunriseSunsetController
     }
     private var client: ClientProtocol.Type
 
-    
     init(droplet:Droplet)
     {
-        
-        
         self.client = droplet.client
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
             {
@@ -50,8 +47,6 @@ class SunriseSunsetController
             guard let sunsetTime = self.sunsetTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunsetTime)
         }
-
-        
     }
     
     
@@ -60,24 +55,32 @@ class SunriseSunsetController
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Action").async
             {
                 let state = openOrClose ? "0" : "1"
-                for index in 1...4
+                do
                 {
-                    if index == 3
+                    for rs in try RollingShutter.query().all()
                     {
-                        let stateLocal = openOrClose ? "1" : "0"
-                        let urlString = "http://10.0.1.12/\(stateLocal)"
-                        _ = try? self.client.get(urlString)
-                        print("Ouvrir volets : \(state)")
-                        sleep(13)
-                    }
-                    else
-                    {
-                    let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
-                    _ = try? self.client.get(urlString)
-                    print("Ouvrir volets : \(state)")
-                    sleep(13)
+                        let index = rs.order + 1
+                        if rs.progOrManual == true
+                        {
+                            if index == 3
+                            {
+                                let stateLocal = openOrClose ? "1" : "0"
+                                let urlString = "http://10.0.1.12/\(stateLocal)"
+                                _ = try? self.client.get(urlString)
+                                print("Ouvrir volets : \(state)")
+                                sleep(13)
+                            }
+                            else
+                            {
+                                let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
+                                _ = try? self.client.get(urlString)
+                                print("Ouvrir volets : \(state)")
+                                sleep(13)
+                            }
+                        }
                     }
                 }
+                catch {print(error)}
         }
     }
     

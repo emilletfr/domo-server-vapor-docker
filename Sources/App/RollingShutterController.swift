@@ -14,7 +14,7 @@ import HTTP
 final class RollingShutterController: ResourceRepresentable {
     typealias Item = RollingShutter
     private var client: ClientProtocol.Type
-    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.RollingShutterController.Internal")
+    let serialQueue = DispatchQueue(label: "net.emilletfr.domo.RollingShutterController.Database")
     
     init(droplet: Droplet) {
         self.client = droplet.client
@@ -35,8 +35,12 @@ final class RollingShutterController: ResourceRepresentable {
             let names = ["Salon", "Salle a manger", "Bureau", "Cuisine"]
             for order in 0...3
             {
-                var rollingShutter = RollingShutter(name:names[order], auto: true, open: status, order: order)
-                try rollingShutter.save()
+                do
+                {
+                var rollingShutter = try RollingShutter(from: names[order], open: status, order: order, progOrManual: true, progOnSunriseOrFixed: true, progOnSunriseOffset: "0", progOnFixedTime: "08:00", progOffSunsetOrFixed: true, progOffSunsetOffset: "0", progOffFixedTime: "20:00")
+                try rollingShutter?.save()
+                }
+                catch {print(error)}
             }
         }
         catch{print(error)}
