@@ -15,18 +15,12 @@ final class RollingShutterController: ResourceRepresentable {
     typealias Item = RollingShutter
     private var client: ClientProtocol.Type
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.RollingShutterController.Database")
+    var sunriseSunsetController : SunriseSunsetController!
     
-    init(droplet: Droplet) {
+    init(droplet: Droplet)
+    {
         self.client = droplet.client
-        /*
-         let clientResponse = try? droplet.client.get("http://10.0.1.12/status")
-         let status = clientResponse?.data["status"]?.bool ?? nil
-         
-         guard let open = status else {return}
-         let rollingShutter = RollingShutter(open: open, index:0)
-         */
-        
-        
+        sunriseSunsetController = SunriseSunsetController(droplet: droplet)
         do
         {
             for rollingShutter in try RollingShutter.all() {try? rollingShutter.delete()}
@@ -46,6 +40,16 @@ final class RollingShutterController: ResourceRepresentable {
         catch{print(error)}
     }
     
+    
+    func timerSeconde (date:String)
+    {
+        if let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime
+        {
+            if date == "\(sunriseTime):00" {self.actionRollingShutters(openOrClose: true)}
+            if date == "\(sunsetTime):00" {self.actionRollingShutters(openOrClose: false)}
+        }
+    }
+
     
     func index(request: Request) throws -> ResponseRepresentable
     {
@@ -118,6 +122,39 @@ final class RollingShutterController: ResourceRepresentable {
     }
     
     
+    func actionRollingShutters(openOrClose:Bool)
+    {
+        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Action").async
+            {
+                let state = openOrClose ? "0" : "1"
+                do
+                {
+                    for rs in try RollingShutter.query().all()
+                    {
+                        let index = rs.order + 1
+                        if rs.progOrManual == true
+                        {
+                            if index == 3
+                            {
+                                let stateLocal = openOrClose ? "1" : "0"
+                                let urlString = "http://10.0.1.12/\(stateLocal)"
+                                _ = try? self.client.get(urlString)
+                                print("Ouvrir volets : \(state)")
+                                sleep(13)
+                            }
+                            else
+                            {
+                                let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
+                                _ = try? self.client.get(urlString)
+                                print("Ouvrir volets : \(state)")
+                                sleep(13)
+                            }
+                        }
+                    }
+                }
+                catch {print(error)}
+        }
+    }
 }
 
 
@@ -131,6 +168,7 @@ extension Request {
     }
     
 }
+
 
 
 /*

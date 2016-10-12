@@ -9,13 +9,12 @@ import Dispatch
 let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
 let _ = drop.config["app", "key"]?.string ?? ""
 
+let rollingShutterController = RollingShutterController(droplet: drop)
 drop.resource("temperatures", TemperatureController())
-drop.resource("rollingShutter", RollingShutterController(droplet: drop))
+drop.resource("rollingShutter", rollingShutterController)
 
 var outdoorTempController = OutdoorTempController(droplet: drop)
 var indoorTempController = IndoorTempController(droplet: drop)
-var sunriseSunsetController = SunriseSunsetController(droplet: drop)
-//var rollingController = RollingShutterController(droplet: drop)
 
 
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
@@ -27,7 +26,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
                 let date = Date(timeIntervalSinceNow: 0)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat =  "HH:mm:ss"
-                sunriseSunsetController.timerSeconde(date: dateFormatter.string(from: date))
+                rollingShutterController.timerSeconde(date: dateFormatter.string(from: date))
             }
         }
 }

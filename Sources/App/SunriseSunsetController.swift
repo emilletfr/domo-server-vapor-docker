@@ -49,52 +49,6 @@ class SunriseSunsetController
         }
     }
     
-    
-    func actionRollingShutters(openOrClose:Bool)
-    {
-        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Action").async
-            {
-                let state = openOrClose ? "0" : "1"
-                do
-                {
-                    for rs in try RollingShutter.query().all()
-                    {
-                        let index = rs.order + 1
-                        if rs.progOrManual == true
-                        {
-                            if index == 3
-                            {
-                                let stateLocal = openOrClose ? "1" : "0"
-                                let urlString = "http://10.0.1.12/\(stateLocal)"
-                                _ = try? self.client.get(urlString)
-                                print("Ouvrir volets : \(state)")
-                                sleep(13)
-                            }
-                            else
-                            {
-                                let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
-                                _ = try? self.client.get(urlString)
-                                print("Ouvrir volets : \(state)")
-                                sleep(13)
-                            }
-                        }
-                    }
-                }
-                catch {print(error)}
-        }
-    }
-    
-    
-    func timerSeconde (date:String)
-    {
-        if let sunriseTime = self.sunriseTime , let sunsetTime = self.sunsetTime
-        {
-            if date == "\(sunriseTime):00" {self.actionRollingShutters(openOrClose: true)}
-            if date == "\(sunsetTime):00" {self.actionRollingShutters(openOrClose: false)}
-        }
-    }
-
-
     func retrieveSunriseSunset()
     {
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
