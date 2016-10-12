@@ -72,9 +72,16 @@ final class RollingShutterController: ResourceRepresentable {
                 }
                 do {try rollingShutter.save()} catch{print(error)}
                 
-                if rollingShutter.order == 2 && rollingShutter.open != previousOpenState
+                if rollingShutter.open != previousOpenState
                 {
-                    _ = try? self.client.get("http://10.0.1.1\(rollingShutter.order)/\(rollingShutter.open == true ? "1" : "0")")
+                    if rollingShutter.order == 2
+                    {
+                        _ = try? self.client.get("http://10.0.1.1\(rollingShutter.order)/\(rollingShutter.open == true ? "1" : "0")")
+                    }
+                    else
+                    {
+                        _ = try? self.client.get( "http://10.0.1.200/preset.htm?led\(rollingShutter.order+1)=\(rollingShutter.open == true ? "0" : "1")")
+                    }
                 }
                 responseRepresentable = try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().first()!.makeNode().converted(to: JSON.self)
         }
