@@ -8487,7 +8487,7 @@
 		_ReleaseConf_App /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Packages/CLibreSSL-0.1.17/Sources/CLibreSSL/include",
 					"$(SRCROOT)/Packages/CSQLite-0.1.0",
@@ -9193,7 +9193,7 @@
 		"___DebugConf_App" /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Packages/CLibreSSL-0.1.17/Sources/CLibreSSL/include",
 					"$(SRCROOT)/Packages/CSQLite-0.1.0",
