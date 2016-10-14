@@ -8489,8 +8489,8 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = (
-					"/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-0.1.17/Sources/CLibreSSL/include",
-					"/Users/eric/Desktop/domo/domo-server-vapor/Packages/CSQLite-0.1.0",
+					"$(SRCROOT)/Packages/CLibreSSL-0.1.17/Sources/CLibreSSL/include",
+					"$(SRCROOT)/Packages/CSQLite-0.1.0",
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -9195,8 +9195,8 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = (
-					"/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-0.1.17/Sources/CLibreSSL/include",
-					"/Users/eric/Desktop/domo/domo-server-vapor/Packages/CSQLite-0.1.0",
+					"$(SRCROOT)/Packages/CLibreSSL-0.1.17/Sources/CLibreSSL/include",
+					"$(SRCROOT)/Packages/CSQLite-0.1.0",
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				OTHER_LDFLAGS = "$(inherited)";

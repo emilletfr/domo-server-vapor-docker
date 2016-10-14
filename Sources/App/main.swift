@@ -31,6 +31,14 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
+drop.get("/status") { request in
+    return try JSON(node: [
+            "targetTemperature":18,
+            "temperature":"21.40",
+            "humidity":"69.20"
+        ])
+}
+
 drop.get("/") { request in
     return try drop.view.make("index.html")
 }
