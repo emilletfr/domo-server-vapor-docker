@@ -17,7 +17,7 @@ var outdoorTempController = OutdoorTempController(droplet: drop)
 var indoorTempController = IndoorTempController(droplet: drop)
 
 
-DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
+emDispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
     {
         while true
         {
