@@ -6,6 +6,8 @@ import Foundation
 import Dispatch
 
 
+
+
 let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
 let _ = drop.config["app", "key"]?.string ?? ""
 
