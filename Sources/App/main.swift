@@ -18,7 +18,7 @@ var indoorTempController = IndoorTempController(droplet: drop)
 
 
 
-DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
+zzzDispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
     {
         while true
         {
