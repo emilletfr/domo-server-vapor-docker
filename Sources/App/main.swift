@@ -40,14 +40,21 @@ drop.get("/status") { request in
             "humidity":"69.20"
         ])
 }
+
+drop.get("/") { request in
+    return "Hello, World!"
+}
 /*
 drop.get("/") { request in
     return try drop.view.make("index.html")
 }
 */
+
+/*
 drop.get("plaintext") { request in
     return "Hello, World!"
 }
+ */
 
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
