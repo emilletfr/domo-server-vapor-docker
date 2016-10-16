@@ -71,7 +71,7 @@ class SunriseSunsetController
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
         
         self.sunsetTimer?.cancel()
-        self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+        self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "TT"))
         self.sunsetTimer?.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:2))
         self.sunsetTimer?.setEventHandler(handler: self.sunsetWorkItem)
         self.sunsetTimer?.resume()
