@@ -33,11 +33,11 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
-var targetTemperature : Double = 5
+var targetTemperature : Double = 10.0
 
 drop.get("thermostat/status") { request in
     return try JSON(node: [
-            "targetTemperature":10.0,
+            "targetTemperature":targetTemperature,
             "temperature": indoorTempController.degresValue ,
             "humidity":"0"
         ])
