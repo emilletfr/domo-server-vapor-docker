@@ -46,7 +46,7 @@ class SunriseSunsetController
         let repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         //  self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "eee"))
     //    repeatTimer.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:10))
-        repeatTimer.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:00), interval: DispatchTimeInterval.seconds(10))
+        repeatTimer.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:5), interval: DispatchTimeInterval.seconds(10))
         repeatTimer.setEventHandler(handler: self.retrieveSunriseSunset)
         repeatTimer.resume()
         
@@ -66,6 +66,7 @@ class SunriseSunsetController
     
     func retrieveSunriseSunset()
     {
+        print("retrieveSunriseSunset()")
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
          let response = try? self.client.get(urlString)
         guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
