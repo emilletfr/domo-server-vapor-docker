@@ -83,7 +83,8 @@ class SunriseSunsetController
             
          //   if #available(OSX 10.12, *)
         //    {
-                let dateFormatter = ISO8601DateFormatterLinux()
+                let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
                 let tz = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
                 dateFormatter.timeZone = tz
                 let sunsetDate = dateFormatter.date(from: (sunset as! String))
@@ -149,7 +150,7 @@ class SunriseSunsetController
 
 
 }
-
+/*
 class ISO8601DateFormatterLinux: DateFormatter {
     
     static let sharedDateFormatter = ISO8601DateFormatterLinux()
@@ -164,6 +165,7 @@ class ISO8601DateFormatterLinux: DateFormatter {
     }
     
 }
+ */
 
 
 
