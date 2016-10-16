@@ -134,7 +134,7 @@ class SunriseSunsetController
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
-        print(self.sunriseTime)
+     //   print(self.sunriseTime)
     }
     
     func sunsetWorkItem ()
@@ -142,7 +142,7 @@ class SunriseSunsetController
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
-        print(self.sunsetTime)
+      //  print(self.sunsetTime)
     }
  
     
