@@ -51,31 +51,7 @@ class SunriseSunsetController
         
         
         
-        let urlString = "http://78.240.101.103:1080/status.xml"
-        let sessionConfiguration = URLSessionConfiguration.default
-        self.urlSession = URLSession(configuration:sessionConfiguration)
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
-            
-            guard
-                let dataResp = data,
-                let dataString = String(data: dataResp, encoding: .utf8),
-                let startRange = dataString.range(of: "<an1>"),
-                let endRange = dataString.range(of: "</an1>")
-                else {return}
-            
-            
-            let start = dataString.index((startRange.lowerBound), offsetBy: 5)
-            let end = dataString.index((endRange.lowerBound), offsetBy: 0)
-            let temperatureString = dataString[start ..< end]
-            guard let temperatureIpx = Float(temperatureString) else {return}
-            let temperature =  (temperatureIpx * 0.3223) - 50
-            print(temperature)
-            
-            
-            
-            
-            }.resume()
-        
+          
         
         
     }

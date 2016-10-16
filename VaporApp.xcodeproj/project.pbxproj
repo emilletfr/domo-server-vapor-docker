@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		076FBCDB1DAE7E310010BFCE /* RollingShutterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076FBCDA1DAE7E310010BFCE /* RollingShutterAction.swift */; };
 		_LinkFileRef_Auth_via_App /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
 		_LinkFileRef_Auth_via_Vapor /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
 		_LinkFileRef_Auth_via_VaporSQLite /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
@@ -1972,7 +1971,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		076FBCDA1DAE7E310010BFCE /* RollingShutterAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollingShutterAction.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Config /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = "<group>"; };
 		__PBXFileRef_Database /* Database */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Database; sourceTree = "<group>"; };
 		__PBXFileRef_Localization /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = "<group>"; };
@@ -4130,7 +4128,6 @@
 				__PBXFileRef_Sources/App/OutdoorTempController.swift /* OutdoorTempController.swift */,
 				__PBXFileRef_Sources/App/RollingShutter.swift /* RollingShutter.swift */,
 				__PBXFileRef_Sources/App/RollingShutterController.swift /* RollingShutterController.swift */,
-				076FBCDA1DAE7E310010BFCE /* RollingShutterAction.swift */,
 				__PBXFileRef_Sources/App/SunriseSunsetController.swift /* SunriseSunsetController.swift */,
 				__PBXFileRef_Sources/App/Controllers/TemperatureController.swift /* Controllers/TemperatureController.swift */,
 				__PBXFileRef_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift */,
@@ -6881,7 +6878,6 @@
 				__src_cc_ref_Sources/App/RollingShutterController.swift /* RollingShutterController.swift in Sources */,
 				__src_cc_ref_Sources/App/SunriseSunsetController.swift /* SunriseSunsetController.swift in Sources */,
 				__src_cc_ref_Sources/App/Controllers/TemperatureController.swift /* Controllers/TemperatureController.swift in Sources */,
-				076FBCDB1DAE7E310010BFCE /* RollingShutterAction.swift in Sources */,
 				__src_cc_ref_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift in Sources */,
 				__src_cc_ref_Sources/App/Models/Temperature.swift /* Models/Temperature.swift in Sources */,
 			);
