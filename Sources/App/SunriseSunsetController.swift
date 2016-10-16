@@ -28,6 +28,7 @@ class SunriseSunsetController
     var repeatTimer: DispatchSourceTimer?
  //   var sunsetTimer : DispatchSourceTimer?
   //  var sunriseTimer: DispatchSourceTimer?
+    var urlSession : URLSession?
 
     init(droplet:Droplet)
     {
@@ -51,7 +52,7 @@ class SunriseSunsetController
         
         
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
-        URLSession(configuration: URLSessionConfiguration()).dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+        self.urlSession = URLSession(configuration: URLSessionConfiguration()).dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
             print(String(data: data!, encoding: .utf8))
         }
         
