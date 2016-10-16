@@ -34,12 +34,14 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
 }
 
 var targetTemperature : Double = 10.0
+var thermostatMode = "auto"
 
 drop.get("thermostat/status") { request in
     return try JSON(node: [
             "targetTemperature":targetTemperature,
             "temperature": indoorTempController.degresValue ,
-            "humidity":"0"
+            "humidity":"0",
+        "thermostat": thermostatMode
         ])
 }
 
@@ -48,6 +50,18 @@ drop.get("thermostat/targetTemperature", String.self) { request, temperature in
     targetTemperature = Double(temperature) ?? 10.0
     return temperature
 }
+
+drop.get("thermostat", String.self) { request, mode in
+    print(mode) // off / comfort / comfort-minus-two / auto
+    thermostatMode = mode
+    return try JSON(node: [
+        "targetTemperature":targetTemperature,
+        "temperature": indoorTempController.degresValue ,
+         "humidity":"0",
+        "thermostat":thermostatMode
+        ])
+}
+
 
 /*
 drop.get("/") { request in
