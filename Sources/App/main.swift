@@ -33,17 +33,22 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
+var targetTemperature : Double?
+
 drop.get("thermostat/status") { request in
     return try JSON(node: [
-            "targetTemperature":"20",
+            "targetTemperature":targetTemperature,
             "temperature": indoorTempController.degresValue ,
             "humidity":"0"
         ])
 }
 
-drop.get("/") { request in
-    return "Hello, World!"
+drop.get("thermostat/targettemperature", String.self) { request, temperature in
+    
+    targetTemperature = Double(temperature)
+    return temperature
 }
+
 /*
 drop.get("/") { request in
     return try drop.view.make("index.html")
