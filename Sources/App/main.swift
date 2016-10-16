@@ -33,7 +33,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
-drop.get("thermostat") { request in
+drop.get("thermostat/status") { request in
     return try JSON(node: [
             "targetTemperature":"19.7",
             "temperature":"21.40",
