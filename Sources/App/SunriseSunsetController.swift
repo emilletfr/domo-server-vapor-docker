@@ -25,6 +25,8 @@ class SunriseSunsetController
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
     private var client: ClientProtocol.Type
+    var sunsetTimer : DispatchSourceTimer?
+    var sunriseTimer: DispatchSourceTimer?
 
     init(droplet:Droplet)
     {
@@ -69,7 +71,7 @@ class SunriseSunsetController
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
 
         
-   /*
+        let url = URL(string: urlString);
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
             
             guard let dataResp = data,
@@ -93,7 +95,7 @@ class SunriseSunsetController
                 self.sunriseTime = formatter.string(from: sunriseDate!)
                 if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
                 if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
-      /*
+      
                 let sunsetTimeInterval = sunsetDate?.timeIntervalSinceNow
                 if let sunsetTimeInterval = sunsetTimeInterval
                 {
@@ -119,13 +121,13 @@ class SunriseSunsetController
                         self.sunriseTimer?.resume()
                     }
                 }
-                 */
+                
             }
             else { }
         }).resume()
-         */
+        
     }
-    /*
+    
     func sunriseWorkItem()
     {
         let formatter = DateFormatter()
@@ -141,7 +143,7 @@ class SunriseSunsetController
         print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
         print(self.sunsetTime)
     }
- */
+ 
     
 
 
