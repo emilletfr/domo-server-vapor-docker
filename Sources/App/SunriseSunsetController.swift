@@ -25,6 +25,7 @@ class SunriseSunsetController
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
     private var client: ClientProtocol.Type
+    var repeatTimer: DispatchSourceTimer?
  //   var sunsetTimer : DispatchSourceTimer?
   //  var sunriseTimer: DispatchSourceTimer?
 
@@ -42,13 +43,13 @@ class SunriseSunsetController
         }
         
         
-    //    self.sunsetTimer?.cancel()
-        let repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+        self.repeatTimer?.cancel()
+        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         //  self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "eee"))
     //    repeatTimer.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:10))
-        repeatTimer.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:5), interval: DispatchTimeInterval.seconds(10))
-        repeatTimer.setEventHandler(handler: self.retrieveSunriseSunset)
-        repeatTimer.resume()
+        self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:5), interval: DispatchTimeInterval.seconds(10))
+        self.repeatTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
+        self.repeatTimer?.resume()
         
         /*
         DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
