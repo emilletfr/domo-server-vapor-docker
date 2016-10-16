@@ -37,7 +37,7 @@ var targetTemperature : Double = 0
 
 drop.get("thermostat/status") { request in
     return try JSON(node: [
-            "targetTemperature":targetTemperature,
+            "targetTemperature":String(targetTemperature),
             "temperature": indoorTempController.degresValue ,
             "humidity":"0"
         ])
