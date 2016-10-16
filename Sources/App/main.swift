@@ -45,7 +45,7 @@ drop.get("thermostat/status") { request in
 
 drop.get("thermostat/targettemperature", String.self) { request, temperature in
     
-    targetTemperature = Double(temperature) ?? 0.0
+    targetTemperature = Double(temperature) ?? 10.0
     return temperature
 }
 
