@@ -42,27 +42,20 @@ class SunriseSunsetController
             return String(describing: sunsetTime)
         }
         
-        
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
-        //  self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "eee"))
-    //    repeatTimer.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:10))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
         self.repeatTimer?.resume()
         
-        /*
-        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
-            {
-                while true
-                {
-                    self.retrieveSunriseSunset()
-                    sleep(3600)
-                }
-        }
- */
         
-
+        
+        let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
+        URLSession(configuration: URLSessionConfiguration()).dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+            print(String(data: data!, encoding: .utf8))
+        }
+        
+        
     }
     
     func retrieveSunriseSunset()
