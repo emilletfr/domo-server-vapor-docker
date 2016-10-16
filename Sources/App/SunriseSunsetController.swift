@@ -47,7 +47,7 @@ class SunriseSunsetController
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         //  self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "eee"))
     //    repeatTimer.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:10))
-        self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:5), interval: DispatchTimeInterval.seconds(10))
+        self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:0), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
         self.repeatTimer?.resume()
         
