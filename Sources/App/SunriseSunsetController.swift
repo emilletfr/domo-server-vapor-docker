@@ -25,21 +25,12 @@ class SunriseSunsetController
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
     private var client: ClientProtocol.Type
-    var sunsetTimer : DispatchSourceTimer?
-    var sunriseTimer: DispatchSourceTimer?
+ //   var sunsetTimer : DispatchSourceTimer?
+  //  var sunriseTimer: DispatchSourceTimer?
 
     init(droplet:Droplet)
     {
         self.client = droplet.client
-        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
-            {
-                while true
-                {
-                    self.retrieveSunriseSunset()
-                    sleep(3600)
-                }
-        }
-        
         droplet.get("sunriseTime") { request in
             guard let sunriseTime = self.sunriseTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunriseTime)
@@ -49,6 +40,28 @@ class SunriseSunsetController
             guard let sunsetTime = self.sunsetTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunsetTime)
         }
+        
+        
+    //    self.sunsetTimer?.cancel()
+        let repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+        //  self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "eee"))
+    //    repeatTimer.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:10))
+        repeatTimer.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:00), interval: DispatchTimeInterval.seconds(10))
+        repeatTimer.setEventHandler(handler: self.retrieveSunriseSunset)
+        repeatTimer.resume()
+        
+        /*
+        DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Timer").async
+            {
+                while true
+                {
+                    self.retrieveSunriseSunset()
+                    sleep(3600)
+                }
+        }
+ */
+        
+
     }
     
     func retrieveSunriseSunset()
@@ -69,6 +82,7 @@ class SunriseSunsetController
         self.sunriseTime = localDateformatter.string(from: sunriseDate)
         if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
+        /*
         print("AAA")
         self.sunsetTimer?.cancel()
         self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
@@ -76,6 +90,7 @@ class SunriseSunsetController
         self.sunsetTimer?.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:10))
         self.sunsetTimer?.setEventHandler(handler: self.sunsetWorkItem)
         self.sunsetTimer?.resume()
+ */
 
         /*
         let url = URL(string: urlString);
