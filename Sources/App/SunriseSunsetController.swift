@@ -52,9 +52,11 @@ class SunriseSunsetController
         
         
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
-        self.urlSession = URLSession(configuration: URLSessionConfiguration()).dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+        self.urlSession = URLSession(configuration: URLSessionConfiguration())
+        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
             print(String(data: data!, encoding: .utf8))
-        }
+        }.resume()
+
         
         
     }
