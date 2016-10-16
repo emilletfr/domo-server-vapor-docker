@@ -69,8 +69,14 @@ class SunriseSunsetController
         self.sunriseTime = localDateformatter.string(from: sunriseDate)
         if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
         if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
-
         
+        self.sunsetTimer?.cancel()
+        self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+        self.sunsetTimer?.scheduleOneshot(deadline: DispatchTime.init(secondsFromNow:2))
+        self.sunsetTimer?.setEventHandler(handler: self.sunsetWorkItem)
+        self.sunsetTimer?.resume()
+
+        /*
         let url = URL(string: urlString);
         URLSession.shared.dataTask(with: url!, completionHandler: { (data:Data?, response:URLResponse?,error: Error?) in
             
@@ -126,7 +132,7 @@ class SunriseSunsetController
      //       }
       //      else { }
         }).resume()
-        
+        */
     }
     
     func sunriseWorkItem()
@@ -139,9 +145,10 @@ class SunriseSunsetController
     
     func sunsetWorkItem ()
     {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
+        print("sunsetWorkItem")
+      //  let formatter = DateFormatter()
+       // formatter.dateFormat = "HH:mm"
+       // print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
       //  print(self.sunsetTime)
     }
  
