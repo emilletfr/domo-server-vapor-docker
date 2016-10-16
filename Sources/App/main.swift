@@ -48,7 +48,12 @@ drop.get("thermostat/status") { request in
 drop.get("thermostat/targetTemperature", String.self) { request, temperature in
     
     targetTemperature = Double(temperature) ?? 10.0
-    return temperature
+    return try JSON(node: [
+        "targetTemperature":targetTemperature,
+        "temperature": indoorTempController.degresValue ,
+        "humidity":"50",
+        "thermostat":thermostatMode
+        ])
 }
 
 drop.get("thermostat", String.self) { request, mode in
@@ -57,7 +62,7 @@ drop.get("thermostat", String.self) { request, mode in
     return try JSON(node: [
         "targetTemperature":targetTemperature,
         "temperature": indoorTempController.degresValue ,
-         "humidity":"0",
+         "humidity":"50",
         "thermostat":thermostatMode
         ])
 }
