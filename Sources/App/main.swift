@@ -33,7 +33,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
-var targetTemperature : Double?
+var targetTemperature : Double = 0
 
 drop.get("thermostat/status") { request in
     return try JSON(node: [
@@ -45,7 +45,7 @@ drop.get("thermostat/status") { request in
 
 drop.get("thermostat/targettemperature", String.self) { request, temperature in
     
-    targetTemperature = Double(temperature)
+    targetTemperature = Double(temperature) ?? 0.0
     return temperature
 }
 
