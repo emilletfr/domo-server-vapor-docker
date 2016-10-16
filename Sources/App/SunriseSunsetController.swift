@@ -81,9 +81,9 @@ class SunriseSunsetController
                 let sunset = results["sunset"],
                 let sunrise = results["sunrise"] else {print("----------error"); return}
             
-            if #available(OSX 10.12, *)
-            {
-                let dateFormatter = ISO8601DateFormatter()
+         //   if #available(OSX 10.12, *)
+        //    {
+                let dateFormatter = ISO8601DateFormatterLinux()
                 let tz = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
                 dateFormatter.timeZone = tz
                 let sunsetDate = dateFormatter.date(from: (sunset as! String))
@@ -122,8 +122,8 @@ class SunriseSunsetController
                     }
                 }
                 
-            }
-            else { }
+     //       }
+      //      else { }
         }).resume()
         
     }
@@ -149,7 +149,7 @@ class SunriseSunsetController
 
 
 }
-/*
+
 class ISO8601DateFormatterLinux: DateFormatter {
     
     static let sharedDateFormatter = ISO8601DateFormatterLinux()
@@ -164,7 +164,7 @@ class ISO8601DateFormatterLinux: DateFormatter {
     }
     
 }
-*/
+
 
 
 
