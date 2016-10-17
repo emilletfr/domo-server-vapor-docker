@@ -48,10 +48,10 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         let urlString = "http://10.0.1.200/status.xml"
   //      let response = try? self.client.get(urlString)
     //    print(response?.body)
-        print("13:32")
+        print("13:33")
         print("111")
   //      self.urlSessionDataTask?.cancel()
-        let sessionConfiguration = URLSessionConfiguration.background(withIdentifier: "myIdentifier...")
+        let sessionConfiguration = URLSessionConfiguration.ephemeral
         self.urlSession = URLSession(configuration:sessionConfiguration)
         let semaphore = DispatchSemaphore(value: 1)
         self.urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
