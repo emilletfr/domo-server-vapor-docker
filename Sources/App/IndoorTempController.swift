@@ -46,7 +46,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
        // self.urlSession?.invalidateAndCancel()
 
         let urlString = "http://78.240.101.103:1080/status.xml"
-        print("13:08")
+        print("13:12")
         print("111")
   //      self.urlSessionDataTask?.cancel()
         let sessionConfiguration = URLSessionConfiguration.default
