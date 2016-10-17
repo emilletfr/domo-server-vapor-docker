@@ -28,7 +28,7 @@ class SunriseSunsetController
     var repeatTimer: DispatchSourceTimer?
    // var sunsetTimer : DispatchSourceTimer?
     // var sunriseTimer: DispatchSourceTimer?
-    var urlSession : URLSession?
+  //  var urlSession : URLSession?
 
     init(droplet:Droplet)
     {

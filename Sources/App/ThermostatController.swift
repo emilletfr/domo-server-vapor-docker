@@ -18,7 +18,7 @@ class ThermostatController
     var thermostatMode = "auto"
     private var client: ClientProtocol.Type
     var repeatTimer: DispatchSourceTimer?
-    var urlSession : URLSession?
+    //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
    // var indoorTemperature : Double = 10.0
     
@@ -75,7 +75,7 @@ class ThermostatController
     {
         print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))")
         let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
-        let response = try? self.client.get(urlString)
+        _ = try? self.client.get(urlString)
        // print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
@@ -95,7 +95,7 @@ class ThermostatController
     {
         print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))")
         let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
-        let response = try? self.client.get(urlString)
+        _ = try? self.client.get(urlString)
       //  print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
