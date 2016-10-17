@@ -47,11 +47,12 @@ class ThermostatController
                 ])
          }
         
-        droplet.get("thermostat/targetTemperature", String.self) { request, temperature in
-            print(temperature)
-            self.thermostatTargetTemperature = Double(temperature) ?? 10.0
+        droplet.get("thermostat/targetTemperature", String.self) { request, temperatureString in
+            print(temperatureString)
+            let temperature = Double(temperatureString) ?? 10.0
+            self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
             self.refresh()
-            return temperature
+            return temperatureString
         }
         
         droplet.get("thermostat", String.self) { request, mode in

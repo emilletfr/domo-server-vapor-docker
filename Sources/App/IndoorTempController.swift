@@ -53,7 +53,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         print((response?.json?["temperature"])?.double)
 
         guard let temperature = (response?.json?["temperature"])?.double else {return}
-        self.degresValue = 5
+        self.degresValue = temperature
         
         /*
         do
