@@ -35,6 +35,10 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
 }
 
 
+let urlString = "http://10.0.1.200/status.xml"
+let res = try? drop.client.request(.get, urlString, headers: ["" : ""], query: ["" : ""], body:"")
+print(res?.body)
+
 
 /*
 drop.get("/") { request in

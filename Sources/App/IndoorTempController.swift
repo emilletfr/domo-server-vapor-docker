@@ -30,7 +30,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     {
         self.client = droplet.client
         
-        
+
 
         
         self.repeatTimer?.cancel()
@@ -45,14 +45,23 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
      func retrieveTemp()
     {
         print("15h26")
-        let urlString = "http://10.0.1.200/status.xml"
         
+
+        let urlString = "http://10.0.1.10/status"
+        let response = try? self.client.get(urlString)
+
+        print((response?.json?["temperature"])?.double)
+
+        guard let temperature = (response?.json?["temperature"])?.double else {return}
+        self.degresValue = temperature
+        
+        /*
         do
             {
         self.data = try Data(contentsOf: URL(string: urlString)!)
         }
         catch{print(error)}
- 
+ */
         /*
         guard
                 let dataResp = self.data,
