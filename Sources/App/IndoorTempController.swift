@@ -23,7 +23,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     private var client: ClientProtocol.Type
     var urlSession : URLSession?
     var repeatTimer: DispatchSourceTimer?
-  //  var urlSessionDataTask : URLSessionDataTask?
+    var urlSessionDataTask : URLSessionDataTask?
     
      init(droplet:Droplet)
     {
@@ -52,7 +52,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
         let semaphore = DispatchSemaphore(value: 1)
-        let urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+        self.urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
             print("222")
             guard
                 let dataResp = data,
@@ -72,7 +72,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         semaphore.signal()
             
             }
-        urlSessionDataTask?.resume()
+        self.urlSessionDataTask?.resume()
         
         semaphore.wait()
      //   return(self.degresValue)
