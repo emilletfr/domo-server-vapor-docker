@@ -15,7 +15,7 @@ drop.resource("temperatures", TemperatureController())
 drop.resource("rollingShutter", rollingShutterController)
 
 var outdoorTempController = OutdoorTempController(droplet: drop)
-var indoorTempController = IndoorTempController(droplet: drop)
+//var indoorTempController = IndoorTempController(droplet: drop)
 var thermostatController = ThermostatController(droplet: drop)
 
 

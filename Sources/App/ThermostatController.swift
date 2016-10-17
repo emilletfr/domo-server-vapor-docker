@@ -24,6 +24,7 @@ class ThermostatController
     
     init(droplet:Droplet)
     {
+        print("ThermostatController:init")
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
         
@@ -63,7 +64,9 @@ class ThermostatController
     
     func refresh()
     {
+        print("refresh")
         self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
+            print("AAA")
             self.indoorTemperature = indoorTemperature
             self.forceHeaterOnOrOff(heaterOnOrOff: indoorTemperature < self.thermostatTargetTemperature)
             self.forcePompOnOrOff(pompOnOrOff: indoorTemperature < self.thermostatTargetTemperature)
