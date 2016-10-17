@@ -74,7 +74,7 @@ class ThermostatController
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
         print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))")
-        let urlString = "http://78.240.101.103:8015/0" + (heaterOnOrOff ? "1" : "0")
+        let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
         let response = try? self.client.get(urlString)
         print(response)
         /*
@@ -94,7 +94,7 @@ class ThermostatController
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
         print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))")
-        let urlString = "http://78.240.101.103:8015/1" + (pompOnOrOff ? "1" : "0")
+        let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
         let response = try? self.client.get(urlString)
         print(response)
         /*
