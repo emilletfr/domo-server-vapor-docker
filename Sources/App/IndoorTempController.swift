@@ -23,6 +23,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     private var client: ClientProtocol.Type
     var urlSession : URLSession?
     var repeatTimer: DispatchSourceTimer?
+    var urlSessionDataTask : URLSessionDataTask?
     
      init(droplet:Droplet)
     {
@@ -47,9 +48,10 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         print(self.urlSession)
         self.urlSession = URLSession(configuration:sessionConfiguration)
         let urlString = "http://78.240.101.103:1080/status.xml"
-        print("1111")
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
-            print("2222")
+        print("11111")
+        self.urlSessionDataTask?.cancel()
+        self.urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+            print("22222")
             guard
                 let dataResp = data,
                 let dataString = String(data: dataResp, encoding: .utf8),
@@ -67,7 +69,8 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             self.degresValue = temperature
             completion(temperature)
             
-            }.resume()
+            }
+        self.urlSessionDataTask?.resume()
         
         
     }
