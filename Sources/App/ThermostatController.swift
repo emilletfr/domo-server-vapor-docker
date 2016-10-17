@@ -41,7 +41,7 @@ class ThermostatController
         droplet.get("thermostat/status") { request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
-                "temperature": self.indoorTempController.degresValue ,
+                "temperature": self.indoorTempController.degresValue <= 10.0 ? 10.0 :  self.indoorTempController.degresValue,
                 "humidity":"0",
                 "thermostat": self.thermostatMode
                 ])
