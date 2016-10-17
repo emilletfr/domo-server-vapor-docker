@@ -63,12 +63,12 @@ class ThermostatController
     func refresh()
     {
         print("refresh")
-     //   self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
-            print("indoorTemperature:\(indoorTempController.degresValue)")
+        self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
+            print("indoorTemperature:\(self.indoorTempController.degresValue)")
        //     self.indoorTemperature = indoorTemperature
-            self.forceHeaterOnOrOff(heaterOnOrOff: indoorTempController.degresValue < self.thermostatTargetTemperature)
-            self.forcePompOnOrOff(pompOnOrOff: indoorTempController.degresValue < self.thermostatTargetTemperature)
-     //   })
+            self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
+            self.forcePompOnOrOff(pompOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
+        })
     }
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
@@ -76,7 +76,7 @@ class ThermostatController
         print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))")
         let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
         let response = try? self.client.get(urlString)
-        print(response)
+       // print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
@@ -96,7 +96,7 @@ class ThermostatController
         print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))")
         let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
         let response = try? self.client.get(urlString)
-        print(response)
+      //  print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
