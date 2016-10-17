@@ -43,20 +43,9 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
-       // self.urlSession?.invalidateAndCancel()
-
         let urlString = "http://10.0.1.200/status.xml"
-  //      let response = try? self.client.get(urlString)
-    //    print(response?.body)
-        print("13:33")
-        print("111")
-  //      self.urlSessionDataTask?.cancel()
-        let sessionConfiguration = URLSessionConfiguration.ephemeral
-        self.urlSession = URLSession(configuration:sessionConfiguration)
-        let semaphore = DispatchSemaphore(value: 1)
-        self.urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
-            print("222")
-            guard
+        let data = try? Data(contentsOf: URL(string: urlString)!)
+        guard
                 let dataResp = data,
                 let dataString = String(data: dataResp, encoding: .utf8),
                 let startRange = dataString.range(of: "<an1>"),
@@ -71,12 +60,12 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             print(temperature)
             
             self.degresValue = temperature
-        semaphore.signal()
+    //    semaphore.signal()
             
-            }
-        self.urlSessionDataTask?.resume()
+      //      }
+  //      self.urlSessionDataTask?.resume()
         
-        semaphore.wait()
+   //     semaphore.wait()
      //   return(self.degresValue)
     }
     /*

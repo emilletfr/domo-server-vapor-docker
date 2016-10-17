@@ -8,7 +8,8 @@ class SampleMiddleware: Middleware
         // and abort early if necessary, a good injection point for
         // handling auth.
 
-     //   print(request)
+        print("SampleMiddleware")
+        print(request)
 
         let response = try chain.respond(to: request)
         
