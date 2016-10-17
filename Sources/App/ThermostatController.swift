@@ -20,7 +20,7 @@ class ThermostatController
     var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
-    var indoorTemperature : Double = 10.0
+  //  var indoorTemperature : Double = 10.0
     
     init(droplet:Droplet)
     {
@@ -39,7 +39,7 @@ class ThermostatController
         droplet.get("thermostat/status") { request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
-                "temperature": self.indoorTemperature ,
+                "temperature": self.indoorTempController.degresValue ,
                 "humidity":"0",
                 "thermostat": self.thermostatMode
                 ])
@@ -63,10 +63,10 @@ class ThermostatController
     func refresh()
     {
         print("refresh")
-        self.indoorTemperature = self.indoorTempController.retrieveTemp()
-            print("indoorTemperature:\(self.indoorTemperature)")
-            self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTemperature < self.thermostatTargetTemperature)
-            self.forcePompOnOrOff(pompOnOrOff: self.indoorTemperature < self.thermostatTargetTemperature)
+  //      self.indoorTemperature = self.indoorTempController.retrieveTemp()
+            print("indoorTemperature:\(self.indoorTempController.degresValue)")
+            self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
+            self.forcePompOnOrOff(pompOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
    
     }
     
