@@ -24,6 +24,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     var urlSession : URLSession?
     var repeatTimer: DispatchSourceTimer?
     var urlSessionDataTask : URLSessionDataTask?
+    var data : Data?
     
      init(droplet:Droplet)
     {
@@ -43,11 +44,11 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
-        print("15h20")
+        print("15h22")
         let urlString = "http://10.0.1.200/status.xml"
-        let data = try? Data(contentsOf: URL(string: urlString)!)
+        self.data = try? Data(contentsOf: URL(string: urlString)!)
         guard
-                let dataResp = data,
+                let dataResp = self.data,
                 let dataString = String(data: dataResp, encoding: .utf8),
                 let startRange = dataString.range(of: "<an1>"),
                 let endRange = dataString.range(of: "</an1>")
