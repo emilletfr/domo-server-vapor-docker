@@ -72,7 +72,7 @@ class ThermostatController
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
-        let urlString = "http://78.240.101.103:8015/0" + (heaterOnOrOff ? "1" : "0")
+        let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in  }
@@ -81,7 +81,7 @@ class ThermostatController
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
-        let urlString = "http://78.240.101.103:8015/1" + (pompOnOrOff ? "1" : "0")
+        let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in }
