@@ -31,19 +31,19 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
-        /*
+        
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
- */
+ 
     }
     
     
-     func retrieveTemp(completion:@escaping (Double)->Void)
+     func retrieveTemp()
     {
-let urlString = "http://78.240.101.103:1080/status.xml"
+        let urlString = "http://78.240.101.103:1080/status.xml"
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
             
             guard
@@ -61,7 +61,7 @@ let urlString = "http://78.240.101.103:1080/status.xml"
             print(temperature)
             
             self.degresValue = temperature
-            completion(temperature)
+          //  completion(temperature)
             
             }.resume()
         

@@ -28,9 +28,7 @@ class ThermostatController
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
         
-        self.indoorTempController?.retrieveTemp(completion: { (temperature :Double) in
-            self.indoorTemperature = temperature
-        })
+      //  self.indoorTempController?.retrieveTemp()
         
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
@@ -65,12 +63,12 @@ class ThermostatController
     func refresh()
     {
         print("refresh")
-        self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
+     //   self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
             print("indoorTemperature:\(indoorTemperature)")
-            self.indoorTemperature = indoorTemperature
-            self.forceHeaterOnOrOff(heaterOnOrOff: indoorTemperature < self.thermostatTargetTemperature)
-            self.forcePompOnOrOff(pompOnOrOff: indoorTemperature < self.thermostatTargetTemperature)
-        })
+       //     self.indoorTemperature = indoorTemperature
+            self.forceHeaterOnOrOff(heaterOnOrOff: (indoorTempController?.degresValue)! < self.thermostatTargetTemperature)
+            self.forcePompOnOrOff(pompOnOrOff: (indoorTempController?.degresValue)! < self.thermostatTargetTemperature)
+     //   })
     }
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
