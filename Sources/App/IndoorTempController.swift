@@ -42,6 +42,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp(completion: @escaping (Double)->Void)
     {
+        self.urlSession?.invalidateAndCancel()
         let sessionConfiguration = URLSessionConfiguration.default
         print(self.urlSession)
         self.urlSession = URLSession(configuration:sessionConfiguration)
