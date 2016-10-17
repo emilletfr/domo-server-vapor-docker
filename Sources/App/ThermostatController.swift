@@ -33,7 +33,7 @@ class ThermostatController
         })
         
         self.repeatTimer?.cancel()
-        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ljhgklhjgkhjglhj"))
+        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.refresh)
         self.repeatTimer?.resume()
@@ -50,7 +50,7 @@ class ThermostatController
         droplet.get("thermostat/targetTemperature", String.self) { request, temperature in
             print(temperature)
             self.thermostatTargetTemperature = Double(temperature) ?? 10.0
-       //     self.refresh()
+            self.refresh()
             return temperature
         }
         
