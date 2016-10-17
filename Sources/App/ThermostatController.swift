@@ -39,7 +39,7 @@ class ThermostatController
         droplet.get("thermostat/status") { request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
-                "temperature": self.indoorTemperature ,
+                "temperature": self.indoorTempController?.degresValue ,
                 "humidity":"0",
                 "thermostat": self.thermostatMode
                 ])
@@ -64,7 +64,7 @@ class ThermostatController
     {
         print("refresh")
      //   self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
-            print("indoorTemperature:\(indoorTemperature)")
+            print("indoorTemperature:\(indoorTempController?.degresValue)")
        //     self.indoorTemperature = indoorTemperature
             self.forceHeaterOnOrOff(heaterOnOrOff: (indoorTempController?.degresValue)! < self.thermostatTargetTemperature)
             self.forcePompOnOrOff(pompOnOrOff: (indoorTempController?.degresValue)! < self.thermostatTargetTemperature)
