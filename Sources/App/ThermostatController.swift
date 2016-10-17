@@ -77,6 +77,9 @@ class ThermostatController
     {
         print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))")
         let urlString = "http://78.240.101.103:8015/0" + (heaterOnOrOff ? "1" : "0")
+        let response = try? self.client.get(urlString)
+        print(response)
+        /*
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
@@ -86,6 +89,7 @@ class ThermostatController
                 let dataString = String(data: dataResp, encoding: .utf8) else {return}
             print(dataString)
         }
+ */
     }
     
     
@@ -93,6 +97,9 @@ class ThermostatController
     {
         print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))")
         let urlString = "http://78.240.101.103:8015/1" + (pompOnOrOff ? "1" : "0")
+        let response = try? self.client.get(urlString)
+        print(response)
+        /*
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
@@ -102,6 +109,7 @@ class ThermostatController
             print(dataString)
         
         }
+ */
     }
 
     
