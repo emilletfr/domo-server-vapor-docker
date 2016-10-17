@@ -44,9 +44,13 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
-        print("15h22")
+        print("15h23")
         let urlString = "http://10.0.1.200/status.xml"
-        self.data = try? Data(contentsOf: URL(string: urlString)!)
+        do
+            {
+        self.data = try Data(contentsOf: URL(string: urlString)!)
+        }
+        catch{print(error)}
         /*
         guard
                 let dataResp = self.data,
