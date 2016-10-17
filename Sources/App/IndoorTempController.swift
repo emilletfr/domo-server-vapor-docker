@@ -27,6 +27,10 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
      init(droplet:Droplet)
     {
         self.client = droplet.client
+        
+        
+        let sessionConfiguration = URLSessionConfiguration.default
+        self.urlSession = URLSession(configuration:sessionConfiguration)
         /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
@@ -39,9 +43,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp(completion:@escaping (Double)->Void)
     {
-        let urlString = "http://78.240.101.103:1080/status.xml"
-        let sessionConfiguration = URLSessionConfiguration.default
-        self.urlSession = URLSession(configuration:sessionConfiguration)
+let urlString = "http://78.240.101.103:1080/status.xml"
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
             
             guard
