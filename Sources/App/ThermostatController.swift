@@ -76,20 +76,32 @@ class ThermostatController
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
         print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))")
-        let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
+        let urlString = "http://10.0.1.15/0" + (heaterOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in  }
+        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+        
+            guard
+            let dataResp = data,
+                let dataString = String(data: dataResp, encoding: .utf8) else {return}
+            print(dataString)
+        }
     }
     
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
         print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))")
-        let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
+        let urlString = "http://10.0.1.15/1" + (pompOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in  }
+        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+            guard
+                let dataResp = data,
+                let dataString = String(data: dataResp, encoding: .utf8) else {return}
+            print(dataString)
+        
+        }
     }
 
     
