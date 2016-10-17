@@ -65,7 +65,7 @@ class ThermostatController
     {
         self.indoorTempController?.retrieveTemp(completion: { (indoorTemperature :Double) in
             self.indoorTemperature = indoorTemperature
-            self.forceHeaterOnOrOff(heaterOnOrOff: true)
+            self.forceHeaterOnOrOff(heaterOnOrOff: indoorTemperature < self.thermostatTargetTemperature)
             self.forcePompOnOrOff(pompOnOrOff: indoorTemperature < self.thermostatTargetTemperature)
         })
     }
