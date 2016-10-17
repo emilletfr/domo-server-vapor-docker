@@ -42,7 +42,7 @@ class ThermostatController
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
                 "temperature": self.indoorTempController.degresValue <= 10.0 ? 10.0 :  self.indoorTempController.degresValue,
-                "humidity":"0",
+                "humidity": self.indoorTempController.humidityValue,
                 "thermostat": self.thermostatMode
                 ])
          }

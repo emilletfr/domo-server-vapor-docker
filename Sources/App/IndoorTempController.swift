@@ -15,6 +15,13 @@ import HTTP
 class IndoorTempController //: NSObject//, XMLParserDelegate
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager")
+    
+    private var internalHumidityValue : Double = 0.0
+    var humidityValue : Double {
+        get {return serialQueue.sync { internalHumidityValue }}
+        set (newValue) {serialQueue.sync { internalHumidityValue = newValue}}
+    }
+    
     private var internalDegresValue : Double = 11.0
     var degresValue : Double {
         get {return serialQueue.sync { internalDegresValue }}
@@ -52,8 +59,9 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
 
         print((response?.json?["temperature"])?.double)
 
-        guard let temperature = (response?.json?["temperature"])?.double else {return}
+        guard let temperature = (response?.json?["temperature"])?.double, let humidity = (response?.json?["humidity"])?.double else {return}
         self.degresValue = temperature
+        self.humidityValue = humidity
         
         /*
         do
