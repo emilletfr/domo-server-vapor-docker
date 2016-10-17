@@ -47,6 +47,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         print("15h22")
         let urlString = "http://10.0.1.200/status.xml"
         self.data = try? Data(contentsOf: URL(string: urlString)!)
+        /*
         guard
                 let dataResp = self.data,
                 let dataString = String(data: dataResp, encoding: .utf8),
@@ -62,6 +63,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             print(temperature)
             
             self.degresValue = temperature
+ */
     //    semaphore.signal()
             
       //      }
