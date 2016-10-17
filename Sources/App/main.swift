@@ -31,6 +31,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
                 rollingShutterController.timerSeconde(date: dateFormatter.string(from: date))
             }
         }
+        
 }
 
 
