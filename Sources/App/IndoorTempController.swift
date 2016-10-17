@@ -64,7 +64,6 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             completion(temperature)
             
             }.resume()
-        
     }
     /*
     private func retrieveTemp()
