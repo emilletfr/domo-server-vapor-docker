@@ -26,8 +26,8 @@ class SunriseSunsetController
     }
     private var client: ClientProtocol.Type
     var repeatTimer: DispatchSourceTimer?
- //   var sunsetTimer : DispatchSourceTimer?
-  //  var sunriseTimer: DispatchSourceTimer?
+   // var sunsetTimer : DispatchSourceTimer?
+    // var sunriseTimer: DispatchSourceTimer?
     var urlSession : URLSession?
 
     init(droplet:Droplet)
@@ -48,12 +48,6 @@ class SunriseSunsetController
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(3600))
         self.repeatTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
         self.repeatTimer?.resume()
-        
-        
-        
-          
-        
-        
     }
     
     func retrieveSunriseSunset()

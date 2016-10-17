@@ -16,7 +16,7 @@ drop.resource("rollingShutter", rollingShutterController)
 
 var outdoorTempController = OutdoorTempController(droplet: drop)
 var indoorTempController = IndoorTempController(droplet: drop)
-
+var thermostatController = ThermostatController(droplet: drop)
 
 
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
@@ -33,29 +33,6 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
 }
 
-var thermostatTargetTemperature : Double = 10.0
-var thermostatMode = "auto"
-
-drop.get("thermostat/status") { request in
-    return try JSON(node: [
-            "targetTemperature":thermostatTargetTemperature,
-            "temperature": indoorTempController.degresValue ,
-            "humidity":"0",
-        "thermostat": thermostatMode
-        ])
-}
-
-drop.get("thermostat/targetTemperature", String.self) { request, temperature in
-    print(temperature)
-    thermostatTargetTemperature = Double(temperature) ?? 10.0
-    return temperature
-}
-
-drop.get("thermostat", String.self) { request, mode in
-    print(mode) // off / comfort / comfort-minus-two / auto
-    thermostatMode = mode
-    return thermostatMode
-}
 
 
 /*

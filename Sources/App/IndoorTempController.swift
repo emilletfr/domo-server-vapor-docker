@@ -27,19 +27,17 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
      init(droplet:Droplet)
     {
         self.client = droplet.client
-        
-        
-        
+        /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
-
-          }
+ */
+    }
     
     
-    private func retrieveTemp()
+     func retrieveTemp(completion:@escaping (Double)->Void)
     {
         let urlString = "http://78.240.101.103:1080/status.xml"
         let sessionConfiguration = URLSessionConfiguration.default
@@ -53,7 +51,6 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
                 let endRange = dataString.range(of: "</an1>")
                 else {return}
             
-            
             let start = dataString.index((startRange.lowerBound), offsetBy: 5)
             let end = dataString.index((endRange.lowerBound), offsetBy: 0)
             let temperatureString = dataString[start ..< end]
@@ -62,6 +59,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             print(temperature)
             
             self.degresValue = temperature
+            completion(temperature)
             
             }.resume()
         
