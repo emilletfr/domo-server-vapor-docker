@@ -64,8 +64,7 @@ class ThermostatController
     {
         print("refresh")
         self.indoorTemperature = self.indoorTempController.retrieveTemp()
-            print("indoorTemperature:\(self.indoorTempController.degresValue)")
-       //     self.indoorTemperature = indoorTemperature
+            print("indoorTemperature:\(self.indoorTemperature)")
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTemperature < self.thermostatTargetTemperature)
             self.forcePompOnOrOff(pompOnOrOff: self.indoorTemperature < self.thermostatTargetTemperature)
    

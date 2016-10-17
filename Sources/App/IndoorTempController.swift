@@ -23,14 +23,15 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     private var client: ClientProtocol.Type
     var urlSession : URLSession?
     var repeatTimer: DispatchSourceTimer?
-    var urlSessionDataTask : URLSessionDataTask?
+  //  var urlSessionDataTask : URLSessionDataTask?
     
      init(droplet:Droplet)
     {
         self.client = droplet.client
         
         
-        
+        let sessionConfiguration = URLSessionConfiguration.default
+        self.urlSession = URLSession(configuration:sessionConfiguration)
         /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
@@ -44,15 +45,13 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
      func retrieveTemp() -> Double
     {
        // self.urlSession?.invalidateAndCancel()
-        let sessionConfiguration = URLSessionConfiguration.default
-        print(self.urlSession)
-        self.urlSession = URLSession(configuration:sessionConfiguration)
+
         let urlString = "http://78.240.101.103:1080/status.xml"
-        print("12:15")
+        print("12:24")
         print("111")
   //      self.urlSessionDataTask?.cancel()
         let semaphore = DispatchSemaphore(value: 1)
-        self.urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
+        let urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
             print("222")
             guard
                 let dataResp = data,
@@ -72,7 +71,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         semaphore.signal()
             
             }
-        self.urlSessionDataTask?.resume()
+        urlSessionDataTask?.resume()
         
         semaphore.wait()
         return(self.degresValue)
