@@ -49,12 +49,14 @@ class ThermostatController
         droplet.get("thermostat/targetTemperature", String.self) { request, temperature in
             print(temperature)
             self.thermostatTargetTemperature = Double(temperature) ?? 10.0
+            self.refresh()
             return temperature
         }
         
         droplet.get("thermostat", String.self) { request, mode in
             print(mode) // off / comfort / comfort-minus-two / auto
             self.thermostatMode = mode
+            self.refresh()
             return self.thermostatMode
         }
     }
@@ -73,7 +75,7 @@ class ThermostatController
         let urlString = "http://78.240.101.103:8015/0" + (heaterOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in }
+        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in  }
     }
     
     
