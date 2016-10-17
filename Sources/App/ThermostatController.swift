@@ -21,6 +21,8 @@ class ThermostatController
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
   //  var indoorTemperature : Double = 10.0
+    var heaterOnOrOffMemory = -1
+    var pompOnOrOffMemory = -1
     
     init(droplet:Droplet)
     {
@@ -32,7 +34,7 @@ class ThermostatController
         
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
-        self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
+        self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(60))
         self.repeatTimer?.setEventHandler(handler: self.refresh)
         self.repeatTimer?.resume()
         
@@ -72,9 +74,14 @@ class ThermostatController
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
-        print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))")
-        let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
+        let heaterOnOrOffMemoryLocal = heaterOnOrOff == true ? 1 : 0
+        if self.heaterOnOrOffMemory == -1 || heaterOnOrOffMemoryLocal != heaterOnOrOffMemory
+        {
+            self.heaterOnOrOffMemory = heaterOnOrOffMemoryLocal
+        print("forceHeaterOnOrOff:\((self.heaterOnOrOffMemory))")
+        let urlString = "http://10.0.1.15:8015/0" + (String( self.heaterOnOrOffMemory))
         _ = try? self.client.get(urlString)
+        }
        // print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
@@ -92,9 +99,14 @@ class ThermostatController
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
-        print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))")
-        let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
+        let pompOnOrOffMemoryLocal = pompOnOrOff == true ? 1 : 0
+        if self.pompOnOrOffMemory == -1 || pompOnOrOffMemoryLocal != pompOnOrOffMemory
+        {
+            self.pompOnOrOffMemory = pompOnOrOffMemoryLocal
+        print("forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
+        let urlString = "http://10.0.1.15:8015/1" + (string(self.pompOnOrOffMemory))
         _ = try? self.client.get(urlString)
+        }
       //  print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
