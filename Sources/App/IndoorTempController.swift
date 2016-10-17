@@ -48,12 +48,12 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         print(self.urlSession)
         self.urlSession = URLSession(configuration:sessionConfiguration)
         let urlString = "http://78.240.101.103:1080/status.xml"
-        print("12:05")
-        print("11111")
+        print("12:15")
+        print("111")
   //      self.urlSessionDataTask?.cancel()
         let semaphore = DispatchSemaphore(value: 1)
         self.urlSessionDataTask = self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
-            print("22222")
+            print("222")
             guard
                 let dataResp = data,
                 let dataString = String(data: dataResp, encoding: .utf8),
