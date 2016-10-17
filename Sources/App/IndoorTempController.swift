@@ -47,9 +47,9 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         print(self.urlSession)
         self.urlSession = URLSession(configuration:sessionConfiguration)
         let urlString = "http://78.240.101.103:1080/status.xml"
-        print("111")
+        print("1111")
         self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in
-            print("222")
+            print("2222")
             guard
                 let dataResp = data,
                 let dataString = String(data: dataResp, encoding: .utf8),
