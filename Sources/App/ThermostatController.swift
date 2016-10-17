@@ -104,7 +104,7 @@ class ThermostatController
         {
             self.pompOnOrOffMemory = pompOnOrOffMemoryLocal
         print("forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
-        let urlString = "http://10.0.1.15:8015/1" + (string(self.pompOnOrOffMemory))
+        let urlString = "http://10.0.1.15:8015/1" + (String(self.pompOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }
       //  print(response)
