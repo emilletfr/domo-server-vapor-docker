@@ -75,7 +75,7 @@ class ThermostatController
         let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in  }
+        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in print("forceHeaterOnOrOff:\((heaterOnOrOff ? "1" : "0"))") }
     }
     
     
@@ -84,7 +84,7 @@ class ThermostatController
         let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff ? "1" : "0")
         let sessionConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession(configuration:sessionConfiguration)
-        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in }
+        self.urlSession?.dataTask(with: URL(string:urlString)!) { (data:Data?, response:URLResponse?, error:Error?) in print("forcePompOnOrOff:\((pompOnOrOff ? "1" : "0"))") }
     }
 
     
