@@ -17,7 +17,6 @@ class SampleMiddleware: Loggable, Middleware
         {
             response.headers["Content-Type"] = "text/css"
         }
-        
         response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept"
         response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE, PUT"
