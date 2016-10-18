@@ -34,7 +34,7 @@ class ThermostatController
     init(droplet:Droplet)
     {
 
-        
+        Log.shared.printString(string: "éric")
         Log.shared.printString(string: "ThermostatController:init")
         Log.shared.printString(string: "ThermostatController:init")
         print(Log.shared.emptyStringArray)
