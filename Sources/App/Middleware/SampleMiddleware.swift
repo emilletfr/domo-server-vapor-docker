@@ -8,8 +8,8 @@ class SampleMiddleware: Loggable, Middleware
         // and abort early if necessary, a good injection point for
         // handling auth.
 
-        log("SampleMiddleware")
-        log(request)
+      //  log("SampleMiddleware")
+     //   log(request)
 
         let response = try chain.respond(to: request)
         
