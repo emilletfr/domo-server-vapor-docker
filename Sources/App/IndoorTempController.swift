@@ -47,13 +47,15 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
  */
-        
+        var count = 0
         self.repeatTimerQueue = DispatchQueue(label: "IndoorTempController.Timer")
         self.repeatTimerQueue?.async { // DispatchSourceTimer : 100% cpu
             while (true)
             {
                 self.retrieveTemp()
-                usleep(100_000)
+                usleep(1_000)
+                count += 1
+                log(count)
             }
         }
         
