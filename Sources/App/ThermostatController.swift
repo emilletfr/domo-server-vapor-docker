@@ -16,7 +16,7 @@ class ThermostatController
 {
     var thermostatTargetTemperature : Double // = 10.0
         {
-        get {print(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")); return UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")}
+        get {print("USD:\(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"))"); return UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")}
         set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
         }
  
