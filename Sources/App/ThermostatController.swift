@@ -16,7 +16,7 @@ class ThermostatController
 {
     var thermostatTargetTemperature : Double // = 10.0
         {
-        get {print("USD:\(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"))"); return UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")}
+        get {let value = UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"); return (value < 10.0 ? 10.0 : value) }
         set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
         }
  
@@ -52,7 +52,7 @@ class ThermostatController
         droplet.get("thermostat/status") { request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
-                "temperature": self.indoorTempController.degresValue <= 10.0 ? 10.0 :  self.indoorTempController.degresValue,
+                "temperature": self.indoorTempController.degresValue < 10.0 ? 10.0 :  self.indoorTempController.degresValue,
                 "humidity": self.indoorTempController.humidityValue,
                 "thermostat": self.thermostatMode
                 ])
@@ -78,7 +78,7 @@ class ThermostatController
     {
    //     DispatchQueue(label: "REFRESH").sync {
         print("refresh")
-        print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
+   //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
             print("indoorTemperature:\(self.indoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
