@@ -31,17 +31,9 @@ class ThermostatController
     
     init(droplet:Droplet)
     {
-        /*
-        let dict:[String:String] = ["key":"Hello"]
-        UserDefaults.standard.set(dict, forKey: "dict")
-        let result = UserDefaults.standard.value(forKey: "dict")
-         */
-        
         print("ThermostatController:init")
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
-        
-      //  self.indoorTempController?.retrieveTemp()
         
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
