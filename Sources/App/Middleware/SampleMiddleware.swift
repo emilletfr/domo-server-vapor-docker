@@ -10,7 +10,6 @@ class SampleMiddleware: Loggable, Middleware
 
       //  log("SampleMiddleware")
      //   log(request)
-
         let response = try chain.respond(to: request)
         
       //  print("startLine:"+response.startLine)
