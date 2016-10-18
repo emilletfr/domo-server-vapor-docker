@@ -28,7 +28,6 @@ class ThermostatController : Loggable
   //  var indoorTemperature : Double = 10.0
     var heaterOnOrOffMemory = -1
     var pompOnOrOffMemory = -1
-    
 
     
     init(droplet:Droplet)
