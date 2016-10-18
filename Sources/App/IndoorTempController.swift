@@ -54,7 +54,6 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             {
                 self.retrieveTemp()
                 sleep(10)
-                log("AAA")
             }
         }
         
