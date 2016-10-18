@@ -21,7 +21,7 @@ var outdoorTempController = OutdoorTempController(droplet: drop)
 //var indoorTempController = IndoorTempController(droplet: drop)
 var thermostatController = ThermostatController(droplet: drop)
 
-
+/*
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
     {
         while true
@@ -36,6 +36,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
         }
         
 }
+ */
 
 
 //let urlString = "http://10.0.1.200/status.xml"
