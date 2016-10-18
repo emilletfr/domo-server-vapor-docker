@@ -53,7 +53,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             while (true)
             {
                 self.retrieveTemp()
-                sleep(1)
+                usleep(100_000)
             }
         }
         
