@@ -12,7 +12,7 @@ final class TemperatureController: ResourceRepresentable {
     func create(request: Request) throws -> ResponseRepresentable {
         var temp = try request.temperature()
         try temp.save()
-        return temp.makeJSON()
+        return try temp.makeJSON()
     }
 
     
@@ -31,7 +31,7 @@ final class TemperatureController: ResourceRepresentable {
 
     func update(request: Request, item temperature: Temperature) throws -> ResponseRepresentable {
         //User is JsonRepresentable
-        return temperature.makeJSON()
+        return try temperature.makeJSON()
     }
 
     func destroy(request: Request, item temperature: Temperature) throws -> ResponseRepresentable {

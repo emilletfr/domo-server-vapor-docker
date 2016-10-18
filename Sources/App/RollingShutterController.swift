@@ -105,7 +105,7 @@ final class RollingShutterController: ResourceRepresentable {
     
     func update(request: Request, item rollingShutter: RollingShutter) throws -> ResponseRepresentable {
         //User is JsonRepresentable
-        return rollingShutter.makeJSON()
+        return try rollingShutter.makeJSON()
     }
     
     func destroy(request: Request, item rollingShutter: RollingShutter) throws -> ResponseRepresentable {

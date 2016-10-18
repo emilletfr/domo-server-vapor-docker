@@ -70,9 +70,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_Cipher"
+               BuildableName = "Cipher.framework"
+               BlueprintName = "Cipher"
+               ReferencedContainer = "container:VaporApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "______Target_Essentials"
                BuildableName = "Essentials.framework"
                BlueprintName = "Essentials"
+               ReferencedContainer = "container:VaporApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_Hash"
+               BuildableName = "Hash.framework"
+               BlueprintName = "Hash"
                ReferencedContainer = "container:VaporApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -98,51 +126,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_MD5"
-               BuildableName = "MD5.framework"
-               BlueprintName = "MD5"
-               ReferencedContainer = "container:VaporApp.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "______Target_Random"
                BuildableName = "Random.framework"
                BlueprintName = "Random"
-               ReferencedContainer = "container:VaporApp.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_SHA1"
-               BuildableName = "SHA1.framework"
-               BlueprintName = "SHA1"
-               ReferencedContainer = "container:VaporApp.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_SHA2"
-               BuildableName = "SHA2.framework"
-               BlueprintName = "SHA2"
                ReferencedContainer = "container:VaporApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -476,9 +462,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Middleware"
-               BuildableName = "Middleware.framework"
-               BlueprintName = "Middleware"
+               BlueprintIdentifier = "______Target_Routing"
+               BuildableName = "Routing.framework"
+               BlueprintName = "Routing"
                ReferencedContainer = "container:VaporApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -490,9 +476,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Routing"
-               BuildableName = "Routing.framework"
-               BlueprintName = "Routing"
+               BlueprintIdentifier = "______Target_Sessions"
+               BuildableName = "Sessions.framework"
+               BlueprintName = "Sessions"
                ReferencedContainer = "container:VaporApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

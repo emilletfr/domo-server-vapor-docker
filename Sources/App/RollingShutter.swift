@@ -12,6 +12,16 @@ import Foundation
 
 
 final class RollingShutter: Model {
+    /**
+     Turn the convertible into a node
+     
+     - throws: if convertible can not create a Node
+     - returns: a node if possible
+     */
+    public func makeNode(context: Context) throws -> Node {
+              return try Node(node: ["name":name, "open":open , "order":order , "progOrManual":progOrManual , "progOnSunriseOrFixed":progOnSunriseOrFixed , "progOnSunriseOffset":progOnSunriseOffset , "progOnFixedTime":progOnFixedTime , "progOffSunsetOrFixed":progOffSunsetOrFixed , "progOffSunsetOffset":progOffSunsetOffset , "progOffFixedTime":progOffFixedTime ])
+    }
+
     
     var id: Node?
     var name: String
@@ -56,10 +66,11 @@ final class RollingShutter: Model {
         self.progOffSunsetOffset = try node.extract("progOffSunsetOffset")
         self.progOffFixedTime = try node.extract("progOffFixedTime")
      }
-    
+    /*
     func makeNode() throws -> Node {
         return try Node(node: ["name":name, "open":open , "order":order , "progOrManual":progOrManual , "progOnSunriseOrFixed":progOnSunriseOrFixed , "progOnSunriseOffset":progOnSunriseOffset , "progOnFixedTime":progOnFixedTime , "progOffSunsetOrFixed":progOffSunsetOrFixed , "progOffSunsetOffset":progOffSunsetOffset , "progOffFixedTime":progOffFixedTime ])
     }
+ */
     
 }
 

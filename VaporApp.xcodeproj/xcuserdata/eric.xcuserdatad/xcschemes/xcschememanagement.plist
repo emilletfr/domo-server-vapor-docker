@@ -42,6 +42,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>______Target_Cipher</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>______Target_Console</key>
 		<dict>
 			<key>primary</key>
@@ -87,6 +92,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>______Target_Hash</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>______Target_JSON</key>
 		<dict>
 			<key>primary</key>
@@ -98,16 +108,6 @@
 			<true/>
 		</dict>
 		<key>______Target_Leaf</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_MD5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Middleware</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,22 +137,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_SHA1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_SHA2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>______Target_SMTP</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>______Target_SQLite</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_Sessions</key>
 		<dict>
 			<key>primary</key>
 			<true/>

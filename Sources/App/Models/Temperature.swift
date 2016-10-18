@@ -4,6 +4,19 @@ import Foundation
 
 final class Temperature: Model
 {
+    /**
+     Turn the convertible into a node
+     
+     - throws: if convertible can not create a Node
+     - returns: a node if possible
+     */
+    public func makeNode(context: Context) throws -> Node {
+        return try Node(node: [
+            "color": color,
+            "value":value
+            ])
+    }
+
     var id: Node?
     var color: String
     var value:Float
@@ -22,13 +35,14 @@ final class Temperature: Model
         self.color = try node.extract("color")
         self.value = try node.extract("value")
     }
-
+/*
     func makeNode() throws -> Node {
         return try Node(node: [
             "color": color,
             "value":value
         ])
     }
+ */
 
 }
 

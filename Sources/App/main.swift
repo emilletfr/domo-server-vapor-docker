@@ -7,7 +7,11 @@ import Dispatch
 
 
 
-let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
+//let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
+let drop = Droplet()
+drop.preparations.append(Temperature.self)
+drop.preparations.append(RollingShutter.self)
+try drop.addProvider(VaporSQLite.Provider.self)
 let _ = drop.config["app", "key"]?.string ?? ""
 
 let rollingShutterController = RollingShutterController(droplet: drop)
@@ -54,9 +58,7 @@ drop.get("plaintext") { request in
 
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
-drop.serve()
-
-
+drop.run()
 
 
 /**
