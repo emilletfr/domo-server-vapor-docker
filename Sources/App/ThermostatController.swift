@@ -57,7 +57,7 @@ class ThermostatController
         
         droplet.get("thermostat/status") {  request in
             return try JSON(node: [
-                "targetTemperature":self.thermostatTargetTemperature,
+                "targetTemperature":self.thermostatTargetTemperature < 10.0 ? 10.0 :  self.thermostatTargetTemperature,
                 "temperature": self.indoorTempController.degresValue < 10.0 ? 10.0 :  self.indoorTempController.degresValue,
                 "humidity": self.indoorTempController.humidityValue,
                 "thermostat": self.thermostatMode
@@ -69,7 +69,7 @@ class ThermostatController
             let temperature = Double(temperatureString) ?? 10.0
             self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
             self.refresh()
-            return (temperature < 10.0 ? "10" : temperatureString)
+            return temperatureString
         }
         
         droplet.get("thermostat", String.self) { request, mode in
