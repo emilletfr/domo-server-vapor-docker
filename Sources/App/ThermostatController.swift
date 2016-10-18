@@ -53,7 +53,7 @@ class ThermostatController : Loggable
          }
         
         droplet.get("thermostat/targetTemperature", String.self) { request, temperatureString in
-            self.log(temperatureString)
+            self.log("targetTemperature : \(temperatureString)")
             let temperature = Double(temperatureString) ?? 10.0
             self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
             self.refresh()
@@ -74,7 +74,7 @@ class ThermostatController : Loggable
         log("ThermostatController:refresh")
    //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
-            log("indoorTemperature:\(self.indoorTempController.degresValue)")
+            log("indoorTemperature : \(self.indoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
@@ -91,7 +91,7 @@ class ThermostatController : Loggable
         if self.heaterOnOrOffMemory == -1 || heaterOnOrOffMemoryLocal != heaterOnOrOffMemory
         {
             self.heaterOnOrOffMemory = heaterOnOrOffMemoryLocal
-        log("forceHeaterOnOrOff:\((self.heaterOnOrOffMemory))")
+        log("forceHeaterOnOrOff : \((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/0" + (String( self.heaterOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }
@@ -116,7 +116,7 @@ class ThermostatController : Loggable
         if self.pompOnOrOffMemory == -1 || pompOnOrOffMemoryLocal != pompOnOrOffMemory
         {
             self.pompOnOrOffMemory = pompOnOrOffMemoryLocal
-        log("forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
+        log("forcePompOnOrOff : \((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/1" + (String(self.pompOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }
