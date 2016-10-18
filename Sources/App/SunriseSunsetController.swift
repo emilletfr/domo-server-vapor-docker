@@ -11,7 +11,7 @@ import Dispatch
 import Vapor
 import HTTP
 
-class SunriseSunsetController
+class SunriseSunsetController : Loggable
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Internal")
     private var sunriseTimeInternalValue : String?
@@ -24,7 +24,7 @@ class SunriseSunsetController
         get {return serialQueue.sync { sunsetTimeInternalValue }}
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
-    private var client: ClientProtocol.Type
+    private var client: ClientProtocol.Type!
     var repeatTimer: DispatchSourceTimer?
    // var sunsetTimer : DispatchSourceTimer?
     // var sunriseTimer: DispatchSourceTimer?
@@ -32,6 +32,7 @@ class SunriseSunsetController
 
     init(droplet:Droplet)
     {
+        super.init()
         self.client = droplet.client
         droplet.get("sunriseTime") { request in
             guard let sunriseTime = self.sunriseTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
@@ -52,7 +53,7 @@ class SunriseSunsetController
     
     func retrieveSunriseSunset()
     {
-        Log.shared.printString(string: "retrieveSunriseSunset()")
+        log("retrieveSunriseSunset()")
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
          let response = try? self.client.get(urlString)
         guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
@@ -67,8 +68,8 @@ class SunriseSunsetController
         localDateformatter.dateFormat = "HH:mm"
         self.sunsetTime = localDateformatter.string(from: sunsetDate)
         self.sunriseTime = localDateformatter.string(from: sunriseDate)
-        if let sunrise = self.sunriseTime {Log.shared.printString(string: "sunriseTime : \(sunrise)")}
-        if let sunset = self.sunsetTime {Log.shared.printString(string: "sunsetTime : \(sunset)")}
+        if let sunrise = self.sunriseTime {log("sunriseTime : \(sunrise)")}
+        if let sunset = self.sunsetTime {log("sunsetTime : \(sunset)")}
         /*
         print("AAA")
         self.sunsetTimer?.cancel()
@@ -142,8 +143,6 @@ class SunriseSunsetController
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
-        Log.shared.printString(string: formatter.string(from: Date(timeIntervalSinceNow: 0 )))
-     //   print(self.sunriseTime)
     }
     
     func sunsetWorkItem ()

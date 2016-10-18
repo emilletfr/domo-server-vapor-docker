@@ -12,7 +12,7 @@ import Dispatch
 import Vapor
 import HTTP
 
-class ThermostatController
+class ThermostatController : Loggable
 {
     var thermostatTargetTemperature : Double = 10.0
         /*{
@@ -21,7 +21,7 @@ class ThermostatController
         }*/
  
     var thermostatMode = "auto"
-    private var client: ClientProtocol.Type
+    private var client: ClientProtocol.Type!
     var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
@@ -33,12 +33,7 @@ class ThermostatController
     
     init(droplet:Droplet)
     {
-
-        Log.shared.printString(string: "éric")
-        Log.shared.printString(string: "ThermostatController:init")
-        Log.shared.printString(string: "ThermostatController:init")
-        print(Log.shared.emptyStringArray)
-        
+        super.init()
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
         
@@ -58,7 +53,7 @@ class ThermostatController
          }
         
         droplet.get("thermostat/targetTemperature", String.self) { request, temperatureString in
-            print(temperatureString)
+            self.log(temperatureString)
             let temperature = Double(temperatureString) ?? 10.0
             self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
             self.refresh()
@@ -66,7 +61,7 @@ class ThermostatController
         }
         
         droplet.get("thermostat", String.self) { request, mode in
-            print(mode) // off / comfort / comfort-minus-two / auto
+            self.log(mode) // off / comfort / comfort-minus-two / auto
             self.thermostatMode = mode
            // self.refresh()
             return self.thermostatMode
@@ -76,10 +71,10 @@ class ThermostatController
     func refresh()
     {
    //     DispatchQueue(label: "REFRESH").sync {
-        Log.shared.printString(string: "refresh")
+        log("refresh")
    //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
-            Log.shared.printString(string: "indoorTemperature:\(self.indoorTempController.degresValue)")
+            log("indoorTemperature:\(self.indoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
@@ -96,7 +91,7 @@ class ThermostatController
         if self.heaterOnOrOffMemory == -1 || heaterOnOrOffMemoryLocal != heaterOnOrOffMemory
         {
             self.heaterOnOrOffMemory = heaterOnOrOffMemoryLocal
-        Log.shared.printString(string: "forceHeaterOnOrOff:\((self.heaterOnOrOffMemory))")
+        log("forceHeaterOnOrOff:\((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/0" + (String( self.heaterOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }
@@ -121,7 +116,7 @@ class ThermostatController
         if self.pompOnOrOffMemory == -1 || pompOnOrOffMemoryLocal != pompOnOrOffMemory
         {
             self.pompOnOrOffMemory = pompOnOrOffMemoryLocal
-        Log.shared.printString(string: "forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
+        log("forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/1" + (String(self.pompOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }

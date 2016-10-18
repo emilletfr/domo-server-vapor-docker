@@ -44,7 +44,7 @@ DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
 
 drop.get("/") { request in
     
-    var stringToSend = " "
+    var stringToSend = ""
     for string in Log.shared.emptyStringArray
     {
         stringToSend.append(string + "\r\n")

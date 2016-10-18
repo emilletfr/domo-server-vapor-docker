@@ -12,7 +12,7 @@ import Vapor
 import HTTP
 
 
-class IndoorTempController //: NSObject//, XMLParserDelegate
+class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager")
     
@@ -27,7 +27,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         get {return serialQueue.sync { internalDegresValue }}
         set (newValue) {serialQueue.sync { internalDegresValue = newValue}}
     }
-    private var client: ClientProtocol.Type
+    private var client: ClientProtocol.Type!
     var urlSession : URLSession?
     var repeatTimer: DispatchSourceTimer?
     var urlSessionDataTask : URLSessionDataTask?
@@ -35,23 +35,23 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      init(droplet:Droplet)
     {
+        super.init()
         self.client = droplet.client
-        
-
-
         
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
+        
+       
  
     }
     
     
      func retrieveTemp()
     {
-        Log.shared.printString(string: "15h26")
+        log("15h26")
         
 
         let urlString = "http://10.0.1.10/status"

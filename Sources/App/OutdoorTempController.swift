@@ -12,7 +12,7 @@ import Dispatch
 import HTTP
 
 
-class OutdoorTempController// : NSObject
+class OutdoorTempController : Loggable
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Internal")
     private var internalDegresValue : Double?
@@ -20,11 +20,12 @@ class OutdoorTempController// : NSObject
         get {return serialQueue.sync { internalDegresValue }}
         set (newValue) {serialQueue.sync { internalDegresValue = newValue}}
     }
-    private var client: ClientProtocol.Type
+    private var client: ClientProtocol.Type!
 
     
     init(droplet:Droplet)
     {
+        super.init()
         self.client = droplet.client
         DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Timer").async
             {
@@ -50,9 +51,9 @@ class OutdoorTempController// : NSObject
                     let urlString = "http://api.openweathermap.org/data/2.5/weather?zip=54360,fr&APPID=9c44d7610c061d8c3a7873c51da2e885&units=metric"
                     let response = try self.client.get(urlString)
                     self.degresValue = response.data["main", "temp"]?.double ?? nil
-                    if let temp = self.degresValue {Log.shared.printString(string: "outdoorTemp : \(temp)")}
+                    if let temp = self.degresValue {self.log( "outdoorTemp : \(temp)")}
                 } catch {
-                    Log.shared.printString(string: String(describing: error))
+                    self.log(error)
                 }
         }
     }

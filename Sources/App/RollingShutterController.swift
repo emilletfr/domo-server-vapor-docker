@@ -11,14 +11,15 @@ import Foundation
 import Dispatch
 import HTTP
 
-final class RollingShutterController: ResourceRepresentable {
+final class RollingShutterController:Loggable, ResourceRepresentable {
     typealias Item = RollingShutter
-    private var client: ClientProtocol.Type
+    private var client: ClientProtocol.Type!
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.RollingShutterController.Database")
     var sunriseSunsetController : SunriseSunsetController!
     
     init(droplet: Droplet)
     {
+        super.init()
         self.client = droplet.client
         sunriseSunsetController = SunriseSunsetController(droplet: droplet)
         do
@@ -34,10 +35,10 @@ final class RollingShutterController: ResourceRepresentable {
                 var rollingShutter = try RollingShutter(from: names[order], open: status, order: order, progOrManual: true, progOnSunriseOrFixed: true, progOnSunriseOffset: "0", progOnFixedTime: "08:00", progOffSunsetOrFixed: true, progOffSunsetOffset: "0", progOffFixedTime: "20:00")
                 try rollingShutter?.save()
                 }
-                catch {Log.shared.printString(string: String(describing: error))}
+                catch {log(error)}
             }
         }
-        catch{Log.shared.printString(string: String(describing: error))}
+        catch{log(error)}
     }
     
     
@@ -74,9 +75,9 @@ final class RollingShutterController: ResourceRepresentable {
                 for rs in try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().all()
                 {
                     previousOpenState = rs.open
-                    do {try  rs.delete()} catch {Log.shared.printString(string: String(describing: error))}
+                    do {try  rs.delete()} catch {log(error)}
                 }
-                do {try rollingShutter.save()} catch{Log.shared.printString(string: String(describing: error))}
+                do {try rollingShutter.save()} catch{log(error)}
                 
                 if rollingShutter.open != previousOpenState
                 {
@@ -141,20 +142,20 @@ final class RollingShutterController: ResourceRepresentable {
                                 let stateLocal = openOrClose ? "1" : "0"
                                 let urlString = "http://10.0.1.12/\(stateLocal)"
                                 _ = try? self.client.get(urlString)
-                                print("Ouvrir volets : \(state)")
+                                self.log("Ouvrir volets : \(state)")
                                 sleep(13)
                             }
                             else
                             {
                                 let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
                                 _ = try? self.client.get(urlString)
-                                print("Ouvrir volets : \(state)")
+                                self.log("Ouvrir volets : \(state)")
                                 sleep(13)
                             }
                         }
                     }
                 }
-                catch {Log.shared.printString(string: String(describing: error))}
+                catch {self.log(error)}
         }
     }
 }

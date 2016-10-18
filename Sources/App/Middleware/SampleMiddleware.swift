@@ -1,15 +1,15 @@
 import Vapor
 import HTTP
 
-class SampleMiddleware: Middleware
+class SampleMiddleware: Loggable, Middleware
 {
 	func respond(to request: Request, chainingTo chain: Responder) throws -> Response {
         // You can manipulate the request before calling the handler
         // and abort early if necessary, a good injection point for
         // handling auth.
 
-        print("SampleMiddleware")
-        print(request)
+        log("SampleMiddleware")
+        log(request)
 
         let response = try chain.respond(to: request)
         
