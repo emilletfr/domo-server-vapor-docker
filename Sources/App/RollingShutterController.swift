@@ -95,7 +95,6 @@ final class RollingShutterController:Loggable, ResourceRepresentable {
         return  responseRepresentable!
     }
     
-    
     /**
     	Since item is of type User,
     	only instances of user will be received
