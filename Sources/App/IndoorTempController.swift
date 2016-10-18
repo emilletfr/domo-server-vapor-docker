@@ -47,15 +47,14 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
  */
-        var count = 0
+        
         self.repeatTimerQueue = DispatchQueue(label: "IndoorTempController.Timer")
         self.repeatTimerQueue?.async { // DispatchSourceTimer : 100% cpu
             while (true)
             {
                 self.retrieveTemp()
-                usleep(1_000)
-                count += 1
-                log(count)
+                sleep(10)
+                print("AAA")
             }
         }
         
@@ -73,7 +72,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         guard let temperature = response?.json?["temperature"]?.double, let humidity = response?.json?["humidity"]?.double else {return}
         self.degresValue = temperature
         self.humidityValue = humidity
-        log("\(temperature)° - \(humidity)%")
+     //   log("\(temperature)° - \(humidity)%")
         /*
         do
             {

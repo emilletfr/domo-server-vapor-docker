@@ -84,7 +84,7 @@ class ThermostatController
         log("ThermostatController:refresh")
    //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
-            log("indoorTemperature : \(self.indoorTempController.degresValue)")
+            log("indoorTemperature : \(self.indoorTempController.degresValue) - humidity : \(self.indoorTempController.humidityValue)")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
