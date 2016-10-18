@@ -51,7 +51,7 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
-        log("15h26")
+      //  log("15h26")
         
 
         let urlString = "http://10.0.1.10/status"
