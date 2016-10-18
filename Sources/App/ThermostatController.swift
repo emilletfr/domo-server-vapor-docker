@@ -35,13 +35,13 @@ class ThermostatController : Loggable
         super.init()
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
-        
+        /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(60))
         self.repeatTimer?.setEventHandler(handler: self.refresh)
         self.repeatTimer?.resume()
-        
+        */
         droplet.get("thermostat/status") { request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
