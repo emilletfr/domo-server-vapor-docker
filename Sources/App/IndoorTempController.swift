@@ -57,7 +57,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         let urlString = "http://10.0.1.10/status"
         let response = try? self.client.get(urlString)
 
-        print((response?.json?["temperature"])?.double)
+     //   print((response?.json?["temperature"])?.double)
 
         guard let temperature = response?.json?["temperature"]?.double, let humidity = response?.json?["humidity"]?.double else {return}
         self.degresValue = temperature
