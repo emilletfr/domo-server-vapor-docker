@@ -8,20 +8,17 @@ import Dispatch
 
 //let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
 let drop = Droplet()
-drop.preparations.append(Temperature.self)
-drop.preparations.append(RollingShutter.self)
-try drop.addProvider(VaporSQLite.Provider.self)
+//drop.preparations.append(Temperature.self)
+//drop.preparations.append(RollingShutter.self)
+//try drop.addProvider(VaporSQLite.Provider.self)
 let _ = drop.config["app", "key"]?.string ?? ""
 
-drop.middleware.append(SampleMiddleware())
-let port = drop.config["app", "port"]?.int ?? 80
-drop.run()
 
 let rollingShutterController = RollingShutterController(droplet: drop)
-drop.resource("temperatures", TemperatureController())
-drop.resource("rollingShutter", rollingShutterController)
+//drop.resource("temperatures", TemperatureController())
+//drop.resource("rollingShutter", rollingShutterController)
 
-var outdoorTempController = OutdoorTempController(droplet: drop)
+//var outdoorTempController = OutdoorTempController(droplet: drop)
 //var indoorTempController = IndoorTempController(droplet: drop)
 var thermostatController = ThermostatController(droplet: drop)
 
@@ -68,11 +65,10 @@ drop.get("plaintext") { request in
     return "Hello, World!"
 }
  */
-/*
+
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 drop.run()
- */
 
 
 /**
