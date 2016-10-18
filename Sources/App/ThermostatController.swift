@@ -14,11 +14,11 @@ import HTTP
 
 class ThermostatController
 {
-    var thermostatTargetTemperature : Double? // = 10.0
-        {
+    var thermostatTargetTemperature : Double = 10.0
+        /*{
         get {let value = UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"); return (value < 10.0 ? 10.0 : value) }
         set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
-        }
+        }*/
  
     var thermostatMode = "auto"
     private var client: ClientProtocol.Type
@@ -37,8 +37,8 @@ class ThermostatController
         
         
         
-        UserDefaults.standard.set(25.0, forKey: "ThermostatTargetTemperature2")
-        print(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature2"))
+     //   UserDefaults.standard.set(25.0, forKey: "ThermostatTargetTemperature2")
+      //  print(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature2"))
 //        self.thermostatTargetTemperature = 20.0
  //       print(self.thermostatTargetTemperature)
         
@@ -84,10 +84,10 @@ class ThermostatController
 
             print("indoorTemperature:\(self.indoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
-            self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature!)
+            self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
         DispatchQueue.global(qos:.background).async {
-            self.forcePompOnOrOff(pompOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature!)
+            self.forcePompOnOrOff(pompOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
  //       }
    
