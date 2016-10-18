@@ -28,6 +28,7 @@ class ThermostatController : Loggable
   //  var indoorTemperature : Double = 10.0
     var heaterOnOrOffMemory = -1
     var pompOnOrOffMemory = -1
+    var repeatTimerQueue : DispatchQueue?
 
     
     init(droplet:Droplet)
@@ -43,7 +44,8 @@ class ThermostatController : Loggable
         self.repeatTimer?.resume()
         */
         
-        DispatchQueue(label: "ThermostatController.Timer").async { [weak self] in
+        self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
+        self.repeatTimerQueue?.async { [weak self] in
             self?.refresh()
             sleep(60)
         }
