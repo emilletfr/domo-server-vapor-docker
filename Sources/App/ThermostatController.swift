@@ -14,7 +14,7 @@ import HTTP
 
 class ThermostatController : Loggable
 {
-    var thermostatTargetTemperature : Double = 10.0
+    var thermostatTargetTemperature : Double = 20.0
         /*{
         get {let value = UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"); return (value < 10.0 ? 10.0 : value) }
         set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
