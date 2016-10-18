@@ -77,9 +77,9 @@ class ThermostatController
     func refresh()
     {
    //     DispatchQueue(label: "REFRESH").sync {
-
- 
         print("refresh")
+        print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
+
             print("indoorTemperature:\(self.indoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
