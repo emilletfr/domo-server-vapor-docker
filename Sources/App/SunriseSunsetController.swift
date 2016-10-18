@@ -53,7 +53,7 @@ class SunriseSunsetController : Loggable
     
     func retrieveSunriseSunset()
     {
-        log("retrieveSunriseSunset()")
+        log("SunriseSunsetController:retrieveSunriseSunset")
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
          let response = try? self.client.get(urlString)
         guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
