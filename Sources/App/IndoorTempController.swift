@@ -29,7 +29,7 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
     }
     private var client: ClientProtocol.Type!
     var urlSession : URLSession?
-    var repeatTimer: DispatchSourceTimer?
+ //   var repeatTimer: DispatchSourceTimer?
     var urlSessionDataTask : URLSessionDataTask?
     var data : Data?
     var timer : Timer?
@@ -47,23 +47,16 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
         self.repeatTimer?.resume()
  */
         
-        DispatchQueue(label: "IndoorTempController.Timer").async {
+        DispatchQueue(label: "IndoorTempController.Timer").async { // DispatchSourceTimer : 100% cpu
             self.retrieveTemp()
             sleep(10)
         }
- 
-        
-       // self.timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(retrieveTemp), userInfo: nil, repeats: true)
-
- 
+     
     }
     
     
      func retrieveTemp()
     {
-      //  log("15h26")
-        
-
         let urlString = "http://10.0.1.10/status"
         let response = try? self.client.get(urlString)
 

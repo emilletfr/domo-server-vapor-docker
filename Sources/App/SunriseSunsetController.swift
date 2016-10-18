@@ -25,7 +25,7 @@ class SunriseSunsetController : Loggable
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
     private var client: ClientProtocol.Type!
-    var repeatTimer: DispatchSourceTimer?
+ //   var repeatTimer: DispatchSourceTimer?
    // var sunsetTimer : DispatchSourceTimer?
     // var sunriseTimer: DispatchSourceTimer?
   //  var urlSession : URLSession?
@@ -43,12 +43,17 @@ class SunriseSunsetController : Loggable
             guard let sunsetTime = self.sunsetTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunsetTime)
         }
-        
+        /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(3600))
         self.repeatTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
         self.repeatTimer?.resume()
+ */
+        DispatchQueue(label: "SunriseSunsetController.RepeatTimer").async { // DispatchSourceTimer : 100% cpu
+            self.self.retrieveSunriseSunset()
+            sleep(3600)
+        }
     }
     
     func retrieveSunriseSunset()

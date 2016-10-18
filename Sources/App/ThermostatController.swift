@@ -22,7 +22,7 @@ class ThermostatController : Loggable
  
     var thermostatMode = "auto"
     private var client: ClientProtocol.Type!
-    var repeatTimer: DispatchSourceTimer?
+  //  var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
   //  var indoorTemperature : Double = 10.0
