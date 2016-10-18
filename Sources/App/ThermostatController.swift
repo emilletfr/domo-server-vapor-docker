@@ -71,7 +71,7 @@ class ThermostatController : Loggable
     func refresh()
     {
    //     DispatchQueue(label: "REFRESH").sync {
-        log("refresh")
+        log("ThermostatController:refresh")
    //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
             log("indoorTemperature:\(self.indoorTempController.degresValue)")
