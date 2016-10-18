@@ -61,7 +61,6 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
-        return
       //  log("15h26")
         
 
