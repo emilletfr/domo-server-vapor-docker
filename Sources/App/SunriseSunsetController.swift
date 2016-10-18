@@ -11,7 +11,7 @@ import Dispatch
 import Vapor
 import HTTP
 
-class SunriseSunsetController : Loggable
+class SunriseSunsetController
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.SunriseSunsetManager.Internal")
     private var sunriseTimeInternalValue : String?
@@ -32,7 +32,6 @@ class SunriseSunsetController : Loggable
 
     init(droplet:Droplet)
     {
-        super.init()
         self.client = droplet.client
         droplet.get("sunriseTime") { request in
             guard let sunriseTime = self.sunriseTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}

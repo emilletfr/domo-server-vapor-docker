@@ -11,7 +11,7 @@ import Foundation
 import Dispatch
 import HTTP
 
-final class RollingShutterController:Loggable, ResourceRepresentable {
+final class RollingShutterController: ResourceRepresentable {
     typealias Item = RollingShutter
     private var client: ClientProtocol.Type!
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.RollingShutterController.Database")
@@ -19,7 +19,6 @@ final class RollingShutterController:Loggable, ResourceRepresentable {
     
     init(droplet: Droplet)
     {
-        super.init()
         self.client = droplet.client
         sunriseSunsetController = SunriseSunsetController(droplet: droplet)
         do
@@ -141,20 +140,20 @@ final class RollingShutterController:Loggable, ResourceRepresentable {
                                 let stateLocal = openOrClose ? "1" : "0"
                                 let urlString = "http://10.0.1.12/\(stateLocal)"
                                 _ = try? self.client.get(urlString)
-                                self.log("Ouvrir volets : \(state)")
+                                log("Ouvrir volets : \(state)")
                                 sleep(13)
                             }
                             else
                             {
                                 let urlString = "http://10.0.1.200/preset.htm?led\(index)=\(state)"
                                 _ = try? self.client.get(urlString)
-                                self.log("Ouvrir volets : \(state)")
+                                log("Ouvrir volets : \(state)")
                                 sleep(13)
                             }
                         }
                     }
                 }
-                catch {self.log(error)}
+                catch {log(error)}
         }
     }
 }

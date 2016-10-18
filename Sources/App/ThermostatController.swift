@@ -12,7 +12,7 @@ import Dispatch
 import Vapor
 import HTTP
 
-class ThermostatController : Loggable
+class ThermostatController
 {
     var thermostatTargetTemperature : Double = 20.0
         /*{
@@ -33,7 +33,6 @@ class ThermostatController : Loggable
     
     init(droplet:Droplet)
     {
-        super.init()
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
         /*
@@ -64,7 +63,7 @@ class ThermostatController : Loggable
          }
         
         droplet.get("thermostat/targetTemperature", String.self) { request, temperatureString in
-            self.log("targetTemperature : \(temperatureString)")
+            log("targetTemperature : \(temperatureString)")
             let temperature = Double(temperatureString) ?? 10.0
             self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
             self.refresh()
@@ -72,7 +71,7 @@ class ThermostatController : Loggable
         }
         
         droplet.get("thermostat", String.self) { request, mode in
-            self.log(mode) // off / comfort / comfort-minus-two / auto
+            log(mode) // off / comfort / comfort-minus-two / auto
             self.thermostatMode = mode
            // self.refresh()
             return self.thermostatMode

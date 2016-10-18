@@ -1,7 +1,7 @@
 import Vapor
 import HTTP
 
-class SampleMiddleware: Loggable, Middleware
+class SampleMiddleware: Middleware
 {
 	func respond(to request: Request, chainingTo chain: Responder) throws -> Response {
         // You can manipulate the request before calling the handler

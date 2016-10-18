@@ -12,7 +12,7 @@ import Vapor
 import HTTP
 
 
-class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
+class IndoorTempController //: NSObject//, XMLParserDelegate
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager")
     
@@ -38,7 +38,6 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
     
      init(droplet:Droplet)
     {
-        super.init()
         self.client = droplet.client
         /*
         self.repeatTimer?.cancel()
