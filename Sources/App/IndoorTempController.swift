@@ -39,7 +39,8 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
         self.client = droplet.client
         
         self.repeatTimer?.cancel()
-        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+      //  self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "jhgjhgjhgjhjhg"))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
@@ -51,6 +52,7 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
+        return
       //  log("15h26")
         
 
