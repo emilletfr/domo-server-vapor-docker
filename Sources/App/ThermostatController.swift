@@ -25,6 +25,7 @@ class ThermostatController
   //  var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
+    var outdoorTempController : OutdoorTempController!
   //  var indoorTemperature : Double = 10.0
     var heaterOnOrOffMemory = -1
     var pompOnOrOffMemory = -1
@@ -35,6 +36,7 @@ class ThermostatController
     {
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
+        self.outdoorTempController = OutdoorTempController(droplet: droplet)
         /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
@@ -84,7 +86,7 @@ class ThermostatController
         log("ThermostatController:refresh")
    //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
-            log("indoorTemperature : \(self.indoorTempController.degresValue) - humidity : \(self.indoorTempController.humidityValue)")
+            log("indoorTemperature : \(self.indoorTempController.degresValue) - humidity : \(self.indoorTempController.humidityValue) - outdoorTemperature : \(self.outdoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
