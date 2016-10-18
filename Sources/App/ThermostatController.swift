@@ -34,7 +34,7 @@ class ThermostatController : Loggable
     {
         super.init()
         self.client = droplet.client
-        self.indoorTempController = IndoorTempController(droplet: droplet)
+   //     self.indoorTempController = IndoorTempController(droplet: droplet)
         /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
