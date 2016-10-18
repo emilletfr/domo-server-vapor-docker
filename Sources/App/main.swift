@@ -20,7 +20,8 @@ let _ = drop.config["app", "key"]?.string ?? ""
 
 //var outdoorTempController = OutdoorTempController(droplet: drop)
 //var indoorTempController = IndoorTempController(droplet: drop)
-var thermostatController = ThermostatController(droplet: drop)
+_ = ThermostatController()
+_ = RollerShuttersController()
 
 /*
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async

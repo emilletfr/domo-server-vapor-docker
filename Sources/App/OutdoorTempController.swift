@@ -23,9 +23,9 @@ class OutdoorTempController
     private var client: ClientProtocol.Type!
 
     
-    init(droplet:Droplet)
+    init()
     {
-        self.client = droplet.client
+ //       self.client = droplet.client
         DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Timer").async
             {
                 while true
@@ -35,7 +35,7 @@ class OutdoorTempController
                 }
         }
         
-        droplet.get("outdoorTemp") { request in
+        drop.get("outdoorTemp") { request in
           //  guard let degresValue = self.degresValue else { let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: self.degresValue)
         }
@@ -43,12 +43,12 @@ class OutdoorTempController
     
     private func retrieveTemp()
     {
-        DispatchQueue(label: "queuename1", attributes: .concurrent).async
+        DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Retrieve", attributes: .concurrent).async
             {
                 do
                 {
                     let urlString = "http://api.openweathermap.org/data/2.5/weather?zip=54360,fr&APPID=9c44d7610c061d8c3a7873c51da2e885&units=metric"
-                    let response = try self.client.get(urlString)
+                    let response = try drop.client.get(urlString)
                     self.degresValue = response.data["main", "temp"]?.double ?? 0.0
                   //  if let temp = self.degresValue {log( "outdoorTemp : \(temp)")}
                 } catch {

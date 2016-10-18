@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		07C9DC0E1DB61B5000577F05 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C9DC0D1DB61B5000577F05 /* Log.swift */; };
+		07C9DC131DB6BBD200577F05 /* RollerShuttersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C9DC121DB6BBD200577F05 /* RollerShuttersController.swift */; };
 		_LinkFileRef_Auth_via_App /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
 		_LinkFileRef_Auth_via_Vapor /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
 		_LinkFileRef_Auth_via_VaporSQLite /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_Auth" /* Auth.framework */; };
@@ -1883,6 +1884,7 @@
 
 /* Begin PBXFileReference section */
 		07C9DC0D1DB61B5000577F05 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		07C9DC121DB6BBD200577F05 /* RollerShuttersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollerShuttersController.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Config /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = "<group>"; };
 		__PBXFileRef_Database /* Database */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Database; sourceTree = "<group>"; };
 		__PBXFileRef_Localization /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = "<group>"; };
@@ -3942,11 +3944,12 @@
 		"_______Group_App" /* App */ = {
 			isa = PBXGroup;
 			children = (
-				__PBXFileRef_Sources/App/ThermostatController.swift /* ThermostatController.swift */,
-				__PBXFileRef_Sources/App/IndoorTempController.swift /* IndoorTempController.swift */,
-				07C9DC0D1DB61B5000577F05 /* Log.swift */,
 				__PBXFileRef_Sources/App/main.swift /* main.swift */,
+				__PBXFileRef_Sources/App/ThermostatController.swift /* ThermostatController.swift */,
+				07C9DC121DB6BBD200577F05 /* RollerShuttersController.swift */,
+				__PBXFileRef_Sources/App/IndoorTempController.swift /* IndoorTempController.swift */,
 				__PBXFileRef_Sources/App/OutdoorTempController.swift /* OutdoorTempController.swift */,
+				07C9DC0D1DB61B5000577F05 /* Log.swift */,
 				__PBXFileRef_Sources/App/RollingShutter.swift /* RollingShutter.swift */,
 				__PBXFileRef_Sources/App/RollingShutterController.swift /* RollingShutterController.swift */,
 				__PBXFileRef_Sources/App/SunriseSunsetController.swift /* SunriseSunsetController.swift */,
@@ -6592,6 +6595,7 @@
 				__src_cc_ref_Sources/App/SunriseSunsetController.swift /* SunriseSunsetController.swift in Sources */,
 				__src_cc_ref_Sources/App/ThermostatController.swift /* ThermostatController.swift in Sources */,
 				__src_cc_ref_Sources/App/Controllers/TemperatureController.swift /* Controllers/TemperatureController.swift in Sources */,
+				07C9DC131DB6BBD200577F05 /* RollerShuttersController.swift in Sources */,
 				__src_cc_ref_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift in Sources */,
 				__src_cc_ref_Sources/App/Models/Temperature.swift /* Models/Temperature.swift in Sources */,
 			);

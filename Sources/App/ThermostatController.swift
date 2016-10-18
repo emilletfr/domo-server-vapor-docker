@@ -21,7 +21,7 @@ class ThermostatController
         }*/
  
     var thermostatMode = "auto"
-    private var client: ClientProtocol.Type!
+  //  private var client: ClientProtocol.Type!
   //  var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
@@ -32,11 +32,10 @@ class ThermostatController
     var repeatTimerQueue : DispatchQueue?
 
     
-    init(droplet:Droplet)
+    init()
     {
-        self.client = droplet.client
-        self.indoorTempController = IndoorTempController(droplet: droplet)
-        self.outdoorTempController = OutdoorTempController(droplet: droplet)
+        self.indoorTempController = IndoorTempController()
+        self.outdoorTempController = OutdoorTempController()
         /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
@@ -55,7 +54,7 @@ class ThermostatController
             }
         }
         
-        droplet.get("thermostat/status") {  request in
+        drop.get("thermostat/status") {  request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature < 10.0 ? 10.0 :  self.thermostatTargetTemperature,
                 "temperature": self.indoorTempController.degresValue < 10.0 ? 10.0 :  self.indoorTempController.degresValue,
@@ -64,7 +63,7 @@ class ThermostatController
                 ])
          }
         
-        droplet.get("thermostat/targetTemperature", String.self) { request, temperatureString in
+        drop.get("thermostat/targetTemperature", String.self) { request, temperatureString in
             log("targetTemperature : \(temperatureString)")
             let temperature = Double(temperatureString) ?? 10.0
             self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
@@ -72,7 +71,7 @@ class ThermostatController
             return temperatureString
         }
         
-        droplet.get("thermostat", String.self) { request, mode in
+        drop.get("thermostat", String.self) { request, mode in
             log(mode) // off / comfort / comfort-minus-two / auto
             self.thermostatMode = mode
            // self.refresh()
@@ -105,7 +104,7 @@ class ThermostatController
             self.heaterOnOrOffMemory = heaterOnOrOffMemoryLocal
         log("forceHeaterOnOrOff : \((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/0" + (String( self.heaterOnOrOffMemory))
-        _ = try? self.client.get(urlString)
+        _ = try? drop.client.get(urlString)
         }
        // print(response)
         /*
@@ -130,7 +129,7 @@ class ThermostatController
             self.pompOnOrOffMemory = pompOnOrOffMemoryLocal
         log("forcePompOnOrOff : \((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/1" + (String(self.pompOnOrOffMemory))
-        _ = try? self.client.get(urlString)
+        _ = try? drop.client.get(urlString)
         }
       //  print(response)
         /*

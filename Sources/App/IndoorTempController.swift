@@ -27,7 +27,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         get {return serialQueue.sync { internalDegresValue }}
         set (newValue) {serialQueue.sync { internalDegresValue = newValue}}
     }
-    private var client: ClientProtocol.Type!
+  //  private var client: ClientProtocol.Type!
     var urlSession : URLSession?
  //   var repeatTimer: DispatchSourceTimer?
     var urlSessionDataTask : URLSessionDataTask?
@@ -36,9 +36,8 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     var repeatTimerQueue : DispatchQueue?
     
     
-     init(droplet:Droplet)
+     init()
     {
-        self.client = droplet.client
         /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
@@ -64,7 +63,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
      func retrieveTemp()
     {
         let urlString = "http://10.0.1.10/status"
-        let response = try? self.client.get(urlString)
+        let response = try? drop.client.get(urlString)
 
      //   print((response?.json?["temperature"])?.double)
 
