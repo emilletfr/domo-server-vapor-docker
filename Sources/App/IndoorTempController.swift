@@ -45,8 +45,11 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
  */
-        
-       self.retrieveTemp()
+        DispatchQueue(label: "khgfjghjhg").async {
+            self.retrieveTemp()
+            sleep(10)
+        }
+       
  
     }
     
