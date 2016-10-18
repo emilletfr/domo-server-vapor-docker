@@ -32,6 +32,7 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
     var repeatTimer: DispatchSourceTimer?
     var urlSessionDataTask : URLSessionDataTask?
     var data : Data?
+    var timer : Timer?
     
      init(droplet:Droplet)
     {
@@ -45,11 +46,15 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
         self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
  */
-        DispatchQueue(label: "khgfjghjhg").async {
+        
+        DispatchQueue(label: "IndoorTempController.Timer").async {
             self.retrieveTemp()
             sleep(10)
         }
-       
+ 
+        
+       // self.timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(retrieveTemp), userInfo: nil, repeats: true)
+
  
     }
     

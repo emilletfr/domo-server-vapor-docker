@@ -42,7 +42,13 @@ class ThermostatController : Loggable
         self.repeatTimer?.setEventHandler(handler: self.refresh)
         self.repeatTimer?.resume()
         */
-        droplet.get("thermostat/status") { request in
+        
+        DispatchQueue(label: "ThermostatController.Timer").async { [weak self] in
+            self?.refresh()
+            sleep(60)
+        }
+        
+        droplet.get("thermostat/status") {  request in
             return try JSON(node: [
                 "targetTemperature":self.thermostatTargetTemperature,
                 "temperature": self.indoorTempController.degresValue < 10.0 ? 10.0 :  self.indoorTempController.degresValue,

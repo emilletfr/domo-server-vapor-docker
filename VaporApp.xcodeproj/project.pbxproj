@@ -3944,6 +3944,7 @@
 		"_______Group_App" /* App */ = {
 			isa = PBXGroup;
 			children = (
+				__PBXFileRef_Sources/App/ThermostatController.swift /* ThermostatController.swift */,
 				__PBXFileRef_Sources/App/IndoorTempController.swift /* IndoorTempController.swift */,
 				07C9DC0D1DB61B5000577F05 /* Log.swift */,
 				07C9DC101DB638E900577F05 /* Loggable.swift */,
@@ -3952,7 +3953,6 @@
 				__PBXFileRef_Sources/App/RollingShutter.swift /* RollingShutter.swift */,
 				__PBXFileRef_Sources/App/RollingShutterController.swift /* RollingShutterController.swift */,
 				__PBXFileRef_Sources/App/SunriseSunsetController.swift /* SunriseSunsetController.swift */,
-				__PBXFileRef_Sources/App/ThermostatController.swift /* ThermostatController.swift */,
 				__PBXFileRef_Sources/App/Controllers/TemperatureController.swift /* Controllers/TemperatureController.swift */,
 				__PBXFileRef_Sources/App/Middleware/SampleMiddleware.swift /* Middleware/SampleMiddleware.swift */,
 				__PBXFileRef_Sources/App/Models/Temperature.swift /* Models/Temperature.swift */,
