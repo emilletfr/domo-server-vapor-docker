@@ -16,7 +16,7 @@ class ThermostatController
 {
     var thermostatTargetTemperature : Double // = 10.0
         {
-        get {return UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")}
+        get {print(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")); return UserDefaults.standard.double(forKey: "ThermostatTargetTemperature")}
         set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
         }
  
@@ -31,16 +31,11 @@ class ThermostatController
     
     init(droplet:Droplet)
     {
-        
-        
         /*
         let dict:[String:String] = ["key":"Hello"]
         UserDefaults.standard.set(dict, forKey: "dict")
         let result = UserDefaults.standard.value(forKey: "dict")
- */
-        
-        
-        
+         */
         
         print("ThermostatController:init")
         self.client = droplet.client
