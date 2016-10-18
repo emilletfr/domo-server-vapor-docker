@@ -52,7 +52,7 @@ class SunriseSunsetController
     
     func retrieveSunriseSunset()
     {
-        print("retrieveSunriseSunset()")
+        Log.shared.printString(string: "retrieveSunriseSunset()")
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
          let response = try? self.client.get(urlString)
         guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
@@ -67,8 +67,8 @@ class SunriseSunsetController
         localDateformatter.dateFormat = "HH:mm"
         self.sunsetTime = localDateformatter.string(from: sunsetDate)
         self.sunriseTime = localDateformatter.string(from: sunriseDate)
-        if let sunrise = self.sunriseTime {print("sunriseTime : \(sunrise)")}
-        if let sunset = self.sunsetTime {print("sunsetTime : \(sunset)")}
+        if let sunrise = self.sunriseTime {Log.shared.printString(string: "sunriseTime : \(sunrise)")}
+        if let sunset = self.sunsetTime {Log.shared.printString(string: "sunsetTime : \(sunset)")}
         /*
         print("AAA")
         self.sunsetTimer?.cancel()
@@ -142,7 +142,7 @@ class SunriseSunsetController
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
-        print(formatter.string(from: Date(timeIntervalSinceNow: 0 )))
+        Log.shared.printString(string: formatter.string(from: Date(timeIntervalSinceNow: 0 )))
      //   print(self.sunriseTime)
     }
     

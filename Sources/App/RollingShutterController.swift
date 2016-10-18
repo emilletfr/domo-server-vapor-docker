@@ -34,10 +34,10 @@ final class RollingShutterController: ResourceRepresentable {
                 var rollingShutter = try RollingShutter(from: names[order], open: status, order: order, progOrManual: true, progOnSunriseOrFixed: true, progOnSunriseOffset: "0", progOnFixedTime: "08:00", progOffSunsetOrFixed: true, progOffSunsetOffset: "0", progOffFixedTime: "20:00")
                 try rollingShutter?.save()
                 }
-                catch {print(error)}
+                catch {Log.shared.printString(string: String(describing: error))}
             }
         }
-        catch{print(error)}
+        catch{Log.shared.printString(string: String(describing: error))}
     }
     
     
@@ -74,9 +74,9 @@ final class RollingShutterController: ResourceRepresentable {
                 for rs in try RollingShutter.query().filter("order", rollingShutter.order).makeQuery().all()
                 {
                     previousOpenState = rs.open
-                    do {try  rs.delete()} catch {print(error)}
+                    do {try  rs.delete()} catch {Log.shared.printString(string: String(describing: error))}
                 }
-                do {try rollingShutter.save()} catch{print(error)}
+                do {try rollingShutter.save()} catch{Log.shared.printString(string: String(describing: error))}
                 
                 if rollingShutter.open != previousOpenState
                 {
@@ -154,7 +154,7 @@ final class RollingShutterController: ResourceRepresentable {
                         }
                     }
                 }
-                catch {print(error)}
+                catch {Log.shared.printString(string: String(describing: error))}
         }
     }
 }

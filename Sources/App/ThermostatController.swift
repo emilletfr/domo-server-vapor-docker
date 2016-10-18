@@ -33,14 +33,11 @@ class ThermostatController
     
     init(droplet:Droplet)
     {
-        print("ThermostatController:init")
+
         
-        
-        
-     //   UserDefaults.standard.set(25.0, forKey: "ThermostatTargetTemperature2")
-      //  print(UserDefaults.standard.double(forKey: "ThermostatTargetTemperature2"))
-//        self.thermostatTargetTemperature = 20.0
- //       print(self.thermostatTargetTemperature)
+        Log.shared.printString(string: "ThermostatController:init")
+        Log.shared.printString(string: "ThermostatController:init")
+        print(Log.shared.emptyStringArray)
         
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
@@ -79,10 +76,10 @@ class ThermostatController
     func refresh()
     {
    //     DispatchQueue(label: "REFRESH").sync {
-        print("refresh")
+        Log.shared.printString(string: "refresh")
    //     print("thermostatTargetTemperature : \(self.thermostatTargetTemperature)")
 
-            print("indoorTemperature:\(self.indoorTempController.degresValue)")
+            Log.shared.printString(string: "indoorTemperature:\(self.indoorTempController.degresValue)")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }
@@ -99,7 +96,7 @@ class ThermostatController
         if self.heaterOnOrOffMemory == -1 || heaterOnOrOffMemoryLocal != heaterOnOrOffMemory
         {
             self.heaterOnOrOffMemory = heaterOnOrOffMemoryLocal
-        print("forceHeaterOnOrOff:\((self.heaterOnOrOffMemory))")
+        Log.shared.printString(string: "forceHeaterOnOrOff:\((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/0" + (String( self.heaterOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }
@@ -124,7 +121,7 @@ class ThermostatController
         if self.pompOnOrOffMemory == -1 || pompOnOrOffMemoryLocal != pompOnOrOffMemory
         {
             self.pompOnOrOffMemory = pompOnOrOffMemoryLocal
-        print("forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
+        Log.shared.printString(string: "forcePompOnOrOff:\((self.heaterOnOrOffMemory))")
         let urlString = "http://10.0.1.15:8015/1" + (String(self.pompOnOrOffMemory))
         _ = try? self.client.get(urlString)
         }

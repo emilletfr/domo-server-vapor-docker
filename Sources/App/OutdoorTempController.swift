@@ -50,9 +50,9 @@ class OutdoorTempController// : NSObject
                     let urlString = "http://api.openweathermap.org/data/2.5/weather?zip=54360,fr&APPID=9c44d7610c061d8c3a7873c51da2e885&units=metric"
                     let response = try self.client.get(urlString)
                     self.degresValue = response.data["main", "temp"]?.double ?? nil
-                    if let temp = self.degresValue {print("outdoorTemp : \(temp)")}
+                    if let temp = self.degresValue {Log.shared.printString(string: "outdoorTemp : \(temp)")}
                 } catch {
-                    print(error)
+                    Log.shared.printString(string: String(describing: error))
                 }
         }
     }

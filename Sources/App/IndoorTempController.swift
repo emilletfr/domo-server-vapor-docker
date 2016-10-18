@@ -51,7 +51,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
-        print("15h26")
+        Log.shared.printString(string: "15h26")
         
 
         let urlString = "http://10.0.1.10/status"

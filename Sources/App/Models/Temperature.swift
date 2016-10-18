@@ -49,7 +49,7 @@ final class Temperature: Model
 extension Temperature: Preparation {
     static func prepare(_ database: Database) throws {
         
-        print("static func prepare(_ database: Database) throws {")
+        Log.shared.printString(string: "static func prepare(_ database: Database) throws {")
         
         try database.create(entity) { builder in
             builder.id()
