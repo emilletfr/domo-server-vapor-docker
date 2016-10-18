@@ -51,8 +51,11 @@ class IndoorTempController : Loggable //: NSObject//, XMLParserDelegate
         
         self.repeatTimerQueue = DispatchQueue(label: "IndoorTempController.Timer")
         self.repeatTimerQueue?.async { // DispatchSourceTimer : 100% cpu
-            self.retrieveTemp()
-            sleep(10)
+            while (true)
+            {
+                self.retrieveTemp()
+                sleep(10)
+            }
         }
         
      

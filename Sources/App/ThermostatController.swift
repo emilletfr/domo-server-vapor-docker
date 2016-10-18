@@ -46,8 +46,11 @@ class ThermostatController : Loggable
         
         self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
         self.repeatTimerQueue?.async { [weak self] in
-            self?.refresh()
-            sleep(60)
+            while (true)
+            {
+                self?.refresh()
+                sleep(60)
+            }
         }
         
         droplet.get("thermostat/status") {  request in
