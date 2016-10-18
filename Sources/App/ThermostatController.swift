@@ -14,11 +14,13 @@ import HTTP
 
 class ThermostatController
 {
-    var thermostatTargetTemperature : Double
+    var thermostatTargetTemperature : Double = 10.0
+        /*
         {
         get {guard let value = UserDefaults.standard.value(forKey: "ThermostatTargetTemperature") as? Double else {return 10.0}; return value}
         set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
         }
+ */
     var thermostatMode = "auto"
     private var client: ClientProtocol.Type
     var repeatTimer: DispatchSourceTimer?
