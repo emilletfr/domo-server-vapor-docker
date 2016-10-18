@@ -14,7 +14,11 @@ import HTTP
 
 class ThermostatController
 {
-    var thermostatTargetTemperature : Double = 10.0
+    var thermostatTargetTemperature : Double
+        {
+        get {guard let value = UserDefaults.standard.value(forKey: "ThermostatTargetTemperature") as? Double else {return 10.0}; return value}
+        set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
+        }
     var thermostatMode = "auto"
     private var client: ClientProtocol.Type
     var repeatTimer: DispatchSourceTimer?
@@ -26,6 +30,17 @@ class ThermostatController
     
     init(droplet:Droplet)
     {
+        
+        
+        /*
+        let dict:[String:String] = ["key":"Hello"]
+        UserDefaults.standard.set(dict, forKey: "dict")
+        let result = UserDefaults.standard.value(forKey: "dict")
+ */
+        
+        
+        
+        
         print("ThermostatController:init")
         self.client = droplet.client
         self.indoorTempController = IndoorTempController(droplet: droplet)
@@ -66,6 +81,7 @@ class ThermostatController
     func refresh()
     {
    //     DispatchQueue(label: "REFRESH").sync {
+
  
         print("refresh")
             print("indoorTemperature:\(self.indoorTempController.degresValue)")
