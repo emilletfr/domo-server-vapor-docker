@@ -14,7 +14,7 @@ let drop = Droplet()
 let _ = drop.config["app", "key"]?.string ?? ""
 
 
-let rollingShutterController = RollingShutterController(droplet: drop)
+//let rollingShutterController = RollingShutterController(droplet: drop)
 //drop.resource("temperatures", TemperatureController())
 //drop.resource("rollingShutter", rollingShutterController)
 
