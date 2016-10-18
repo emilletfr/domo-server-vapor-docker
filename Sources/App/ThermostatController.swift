@@ -46,6 +46,7 @@ class ThermostatController : Loggable
         
         self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
         self.repeatTimerQueue?.async { [weak self] in
+            sleep(5)
             while (true)
             {
                 self?.refresh()
