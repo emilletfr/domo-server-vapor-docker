@@ -13,6 +13,10 @@ drop.preparations.append(RollingShutter.self)
 try drop.addProvider(VaporSQLite.Provider.self)
 let _ = drop.config["app", "key"]?.string ?? ""
 
+drop.middleware.append(SampleMiddleware())
+let port = drop.config["app", "port"]?.int ?? 80
+drop.run()
+
 let rollingShutterController = RollingShutterController(droplet: drop)
 drop.resource("temperatures", TemperatureController())
 drop.resource("rollingShutter", rollingShutterController)
@@ -64,10 +68,11 @@ drop.get("plaintext") { request in
     return "Hello, World!"
 }
  */
-
+/*
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 drop.run()
+ */
 
 
 /**
