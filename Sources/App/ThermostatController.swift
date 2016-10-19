@@ -14,7 +14,27 @@ import HTTP
 
 class ThermostatController
 {
-    var thermostatTargetTemperature : Double = 20.0
+    private let dataUrl = URL(fileURLWithPath: (drop.workDir + "Public/Settings.plist"))
+    
+    var thermostatTargetTemperature : Double
+        {
+            get {
+                var returnValue : Double = 5.0
+                    guard
+                        let readData = try? Data(contentsOf: dataUrl),
+                        let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Any],
+                        let value = datasourceDictionary?["ThermostatTargetTemperature"] as? Double
+                        else {print("error : getting thermostatTargetTemperature"); return returnValue}
+                        returnValue = value
+                return returnValue
+             }
+            set (newValue) {
+                    let datasourceDictionary = ["ThermostatTargetTemperature":newValue]
+                guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceDictionary, format: .binary, options: 0),
+                    let _ = try? writeData.write(to: dataUrl)
+                    else {print("error : setting thermostatTargetTemperature"); return}
+            }
+    }
     /*{
      get {let value = UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"); return (value < 10.0 ? 10.0 : value) }
      set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
@@ -81,7 +101,8 @@ class ThermostatController
     func refresh()
     {
         log("ThermostatController:refresh")
-        log("indoorTemperature : \(self.indoorTempController.degresValue)° - humidity : \(self.indoorTempController.humidityValue)% - outdoorTemperature : \(Int(self.outdoorTempController.degresValue))°")
+
+        log("targetTemperature : \(self.thermostatTargetTemperature) - indoorTemperature : \(self.indoorTempController.degresValue)° - humidity : \(self.indoorTempController.humidityValue)% - outdoorTemperature : \(Int(self.outdoorTempController.degresValue))°")
         DispatchQueue.global(qos:.background).async {
             self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
         }

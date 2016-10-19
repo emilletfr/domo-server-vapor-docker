@@ -14,6 +14,19 @@ let drop = Droplet()
 let _ = drop.config["app", "key"]?.string ?? ""
 
 
+
+
+//Node().fil
+//print("content:\(content)")
+/*
+try? FileManager.default.files(path: "Public").forEach { name in
+    print(name)
+}
+ */
+
+//let bytes = try! FileManager.re
+
+
 //let rollingShutterController = RollingShutterController(droplet: drop)
 //drop.resource("temperatures", TemperatureController())
 //drop.resource("rollingShutter", rollingShutterController)
