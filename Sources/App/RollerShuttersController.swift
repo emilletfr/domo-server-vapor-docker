@@ -26,9 +26,7 @@ class RollerShuttersController
 
         drop.get("rollershutters", Int.self)
         { request, open in
-            self.actionQueue.sync {
-                self.action(openOrClose: open == 1)
-            }
+            self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: open == 1)}
             return try JSON(node: ["open": open])
         }
         
@@ -62,12 +60,12 @@ class RollerShuttersController
         if let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime
         {
             log("now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
-            if date == "\(sunriseTime):00" {self.action(openOrClose: true)}
-            if date == "\(sunsetTime):00" {self.action(openOrClose: false)}
+            if date == "\(sunriseTime):00" {self.actionForAllRollerShutters(openOrClose: true)}
+            if date == "\(sunsetTime):00" {self.actionForAllRollerShutters(openOrClose: false)}
         }
     }
     
-    func action(openOrClose:Bool)
+    func actionForAllRollerShutters(openOrClose:Bool)
     {
         let state = openOrClose ? "1" : "0"
         do
