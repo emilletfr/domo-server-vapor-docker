@@ -14,7 +14,7 @@ import HTTP
 
 class ThermostatController
 {
-    private let dataUrl = URL(fileURLWithPath: (drop.workDir + "Public/Settings.plist"))
+    private let dataUrl = URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt"))
     
     var thermostatTargetTemperature : Double
         {
