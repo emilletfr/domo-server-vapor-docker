@@ -22,8 +22,8 @@ class ThermostatController
                 var returnValue : Double = 5.0
                     guard
                         let readData = try? Data(contentsOf: dataUrl),
-                        let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Any],
-                        let value = datasourceDictionary?["ThermostatTargetTemperature"] as? Double
+                        let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
+                        let value = datasourceDictionary?["ThermostatTargetTemperature"]
                         else {print("error : getting thermostatTargetTemperature"); return returnValue}
                         returnValue = value
                 return returnValue
