@@ -62,9 +62,9 @@ class ThermostatController
     
     init()
     {
-        if FileManager.default.fileExists(atPath: drop.workDir + ".build/debug/ThermostatTargetTemperature.txt") == false
+        if FileManager.default.fileExists(atPath: (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")) == false
         {
-        try? FileManager.default.copyItem(at: URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt")), to: dataUrl)
+        try? FileManager.default.moveItem(at: URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt")), to: dataUrl)
         }
         self.indoorTempController = IndoorTempController()
         self.outdoorTempController = OutdoorTempController()
