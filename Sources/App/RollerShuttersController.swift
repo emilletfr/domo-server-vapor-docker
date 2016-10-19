@@ -37,7 +37,7 @@ class RollerShuttersController
             {
                 while true
                 {
-                    sleep(1)
+                    usleep(999_000)
                     DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async {
                         let date = Date(timeIntervalSinceNow: 0)
                         let dateFormatter = DateFormatter()
@@ -54,7 +54,7 @@ class RollerShuttersController
     {
         if let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime
         {
-            log("now : \(date) - sunriseTime\(sunriseTime) - sunsetTime\(sunsetTime)")
+            log("now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
             if date == "\(sunriseTime):00" {self.action(openOrClose: true)}
             if date == "\(sunsetTime):00" {self.action(openOrClose: false)}
         }
