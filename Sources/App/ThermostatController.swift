@@ -19,7 +19,7 @@ class ThermostatController
     var thermostatTargetTemperature : Double
         {
             get {
-                var returnValue : Double = 5.0
+                var returnValue : Double = 20.0
                     guard
                         let readData = try? Data(contentsOf: dataUrl), let readString = String(data: readData, encoding: .utf8), let value = Double(readString)
                         /*
