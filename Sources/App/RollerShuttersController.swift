@@ -14,20 +14,26 @@ import HTTP
 class RollerShuttersController
 {
     let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
-    var allOpened = false
+    //var allOpened = false
     let sunriseSunsetController = SunriseSunsetController()
     
     init()
     {
+        
+
+        
+        
+        
         drop.get("rollershutters", "status")
         { request in
-            return self.allOpened ? "1" : "0"
+            return self.checkOpenState(rollerShutterIndex: 0) == true ? "1" : "0"
+         //   return self.allOpened ? "1" : "0"
         }
 
         drop.get("rollershutters", Int.self)
         { request, open in
             self.actionQueue.sync {
-                self.allOpened = open == 1
+            //    self.allOpened = open == 1
                 self.action(openOrClose: open == 1)
             }
             return try JSON(node: ["open": open])
@@ -48,6 +54,14 @@ class RollerShuttersController
                     }
                 }
         }
+    }
+    
+    func checkOpenState(rollerShutterIndex:Int) -> Bool?
+    {
+        let urlString = "http://10.0.1.1\(rollerShutterIndex)/status"
+        let response = try? drop.client.get(urlString)
+        guard let localResponse = response, let json = localResponse.json, let openJson = json["open"], let open = openJson.int else {return nil}
+        return open == 1
     }
     
     func timerSeconde(date:String)
