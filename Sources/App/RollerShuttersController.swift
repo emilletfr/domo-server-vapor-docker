@@ -37,7 +37,7 @@ class RollerShuttersController
             {
                 while true
                 {
-                    usleep(999_000)
+                    sleep(1)
                     DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async {
                         let date = Date(timeIntervalSinceNow: 0)
                         let dateFormatter = DateFormatter()
