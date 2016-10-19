@@ -20,7 +20,7 @@ final class RollingShutterController: ResourceRepresentable {
     init(droplet: Droplet)
     {
         self.client = droplet.client
-        sunriseSunsetController = SunriseSunsetController(droplet: droplet)
+        sunriseSunsetController = SunriseSunsetController()
         do
         {
             for rollingShutter in try RollingShutter.all() {try? rollingShutter.delete()}

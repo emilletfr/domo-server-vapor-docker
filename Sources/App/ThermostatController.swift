@@ -52,6 +52,8 @@ class ThermostatController
                 self?.refresh()
                 sleep(60)
             }
+            
+
         }
         
         drop.get("thermostat/status") {  request in

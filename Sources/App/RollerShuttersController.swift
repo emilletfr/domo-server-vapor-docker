@@ -15,6 +15,7 @@ class RollerShuttersController
 {
     let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
     var allOpened = false
+    let sunriseSunsetController = SunriseSunsetController()
     
     init()
     {
@@ -31,6 +32,33 @@ class RollerShuttersController
             }
             return try JSON(node: ["open": open])
         }
+        
+        DispatchQueue(label: "net.emilletfr.domo.ThermostatController.TimerSeconde").async
+            {
+                while true
+                {
+                    sleep(1)
+                    DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async {
+                        let date = Date(timeIntervalSinceNow: 0)
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.timeZone = TimeZone(abbreviation: "CEST")
+                        dateFormatter.locale = Locale(identifier: "fr_FR")
+                        dateFormatter.dateFormat =  "HH:mm:ss"
+                        self.timerSeconde(date: dateFormatter.string(from: date))
+                    }
+                }
+        }
+    }
+    
+    func timerSeconde(date:String)
+    {
+        log("now : \(date) - sunriseTime\(self.sunriseSunsetController.sunriseTime) - sunsetTime\(self.sunriseSunsetController.sunsetTime)")
+         if let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime
+         {
+         if date == "\(sunriseTime):00" {self.action(openOrClose: true)}
+         if date == "\(sunsetTime):00" {self.action(openOrClose: false)}
+         }
+        
     }
     
     func action(openOrClose:Bool)

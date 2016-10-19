@@ -24,21 +24,21 @@ class SunriseSunsetController
         get {return serialQueue.sync { sunsetTimeInternalValue }}
         set (newValue) {serialQueue.sync { sunsetTimeInternalValue = newValue}}
     }
-    private var client: ClientProtocol.Type!
+  //  private var client: ClientProtocol.Type!
  //   var repeatTimer: DispatchSourceTimer?
    // var sunsetTimer : DispatchSourceTimer?
     // var sunriseTimer: DispatchSourceTimer?
   //  var urlSession : URLSession?
 
-    init(droplet:Droplet)
+    init()
     {
-        self.client = droplet.client
-        droplet.get("sunriseTime") { request in
+   //     self.client = droplet.client
+        drop.get("sunriseTime") { request in
             guard let sunriseTime = self.sunriseTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunriseTime)
         }
         
-        droplet.get("sunsetTime") { request in
+        drop.get("sunsetTime") { request in
             guard let sunsetTime = self.sunsetTime else {let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
             return String(describing: sunsetTime)
         }
@@ -59,7 +59,7 @@ class SunriseSunsetController
     {
         log("SunriseSunsetController:retrieveSunriseSunset")
         let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
-         let response = try? self.client.get(urlString)
+         let response = try? drop.client.get(urlString)
         guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
         guard let sunsetDateStr = response?.data["results", "sunset"]?.string else {return}
         let iso8601DateFormatter = DateFormatter()
