@@ -32,7 +32,6 @@ class ThermostatController
                 return returnValue
              }
             set (newValue) {
-
            //         let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
              //   let datasourceAny = datasourceDictionary as! AnyObject
            //     guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
