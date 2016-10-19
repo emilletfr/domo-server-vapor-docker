@@ -30,8 +30,9 @@ class ThermostatController
              }
             set (newValue) {
                 print(newValue)
-                    let datasourceDictionary = ["ThermostatTargetTemperature":newValue] as! AnyObject
-                guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceDictionary, format: .binary, options: 0),
+                    let datasourceDictionary = ["ThermostatTargetTemperature":newValue]
+                let datasourceAny : AnyObject = datasourceDictionary as AnyObject
+                guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
                     let _ = try? writeData.write(to: dataUrl)
                     else {print("error : setting thermostatTargetTemperature"); return}
             }
