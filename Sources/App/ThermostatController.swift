@@ -92,7 +92,8 @@ class ThermostatController
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
-        do{
+        do
+        {
             log("forceHeaterOnOrOff : \((heaterOnOrOff == true ? "1" : "0"))")
             let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff == true ? "1" : "0")
             _ = try drop.client.get(urlString)

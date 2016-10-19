@@ -20,7 +20,7 @@ class RollerShuttersController
     {
         drop.get("rollershutters", "status")
         { request in
-            guard let open = self.checkOpenState(rollerShutterIndex: 0) else {return "error"}
+            guard let open = self.checkIfOpen(rollerShutterIndex: 0) else {return "error"}
             return open == true ? "1" : "0"
         }
 
@@ -49,7 +49,7 @@ class RollerShuttersController
         }
     }
     
-    func checkOpenState(rollerShutterIndex:Int) -> Bool?
+    func checkIfOpen(rollerShutterIndex:Int) -> Bool?
     {
         let urlString = "http://10.0.1.1\(rollerShutterIndex)/status"
         let response = try? drop.client.get(urlString)
