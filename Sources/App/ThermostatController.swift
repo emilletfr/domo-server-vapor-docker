@@ -14,14 +14,14 @@ import HTTP
 
 class ThermostatController
 {
-    private let dataUrl = URL(fileURLWithPath: (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt"))
+    private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
     
     var thermostatTargetTemperature : Double
         {
             get {
                 var returnValue : Double = 20.0
                     guard
-                        let readData = try? Data(contentsOf: dataUrl), let readString = String(data: readData, encoding: .utf8), let value = Double(readString)
+                        let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)), let readString = String(data: readData, encoding: .utf8), let value = Double(readString)
                         /*
                         let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
                         let value = datasourceDictionary?["ThermostatTargetTemperature"]
@@ -39,7 +39,7 @@ class ThermostatController
                 let newValueString = "\(newValue)"
                 guard
                     let writeData = newValueString.data(using: .utf8),
-                    let _ = try? writeData.write(to: dataUrl)
+                    let _ = try? writeData.write(to: URL(fileURLWithPath: dataPath))
                     else {print("error : setting thermostatTargetTemperature"); return}
             }
     }
@@ -62,9 +62,9 @@ class ThermostatController
     
     init()
     {
-        if FileManager.default.fileExists(atPath: (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")) == false
+        if FileManager.default.fileExists(atPath: self.dataPath) == false
         {
-        try? FileManager.default.moveItem(at: URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt")), to: dataUrl)
+        try? FileManager.default.moveItem(at: URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt")), to: URL(fileURLWithPath:self.dataPath))
         }
         self.indoorTempController = IndoorTempController()
         self.outdoorTempController = OutdoorTempController()
