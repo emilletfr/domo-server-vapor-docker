@@ -68,6 +68,7 @@ class ThermostatController
         }
         self.indoorTempController = IndoorTempController()
         self.outdoorTempController = OutdoorTempController()
+        
         /*
          self.repeatTimer?.cancel()
          self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
