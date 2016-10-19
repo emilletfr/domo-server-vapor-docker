@@ -19,19 +19,23 @@ class ThermostatController
     var thermostatTargetTemperature : Double
         {
             get {
+                /*
+                 let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
+                 let value = datasourceDictionary?["ThermostatTargetTemperature"]
+                 */
                     guard
-                        let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)), let readString = String(data: readData, encoding: .utf8), let value = Double(readString)
-                        /*
-                        let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
-                        let value = datasourceDictionary?["ThermostatTargetTemperature"]
-                         */
+                        let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)),
+                        let readString = String(data: readData, encoding: .utf8),
+                        let value = Double(readString)
                         else {print("error : getting thermostatTargetTemperature"); return 20.0}
                 return value
              }
             set (newValue) {
-           //         let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
-             //   let datasourceAny = datasourceDictionary as! AnyObject
-           //     guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
+                /*
+                let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
+                let datasourceAny = datasourceDictionary as! AnyObject
+                guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
+                 */
                 let newValueString = "\(newValue)"
                 guard
                     let writeData = newValueString.data(using: .utf8),
