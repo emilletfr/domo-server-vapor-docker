@@ -27,8 +27,8 @@ class ThermostatController
     var indoorTempController : IndoorTempController!
     var outdoorTempController : OutdoorTempController!
   //  var indoorTemperature : Double = 10.0
-    var heaterOnOrOffMemory = Bool?
-    var pompOnOrOffMemory = Bool?
+ //   var heaterOnOrOffMemory : Bool?
+  //  var pompOnOrOffMemory : Bool?
     var repeatTimerQueue : DispatchQueue?
 
     
@@ -100,10 +100,12 @@ class ThermostatController
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
+        do{
         log("forceHeaterOnOrOff : \((heaterOnOrOff == true ? "1" : "0"))")
         let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff == true ? "1" : "0")
-        _ = try? drop.client.get(urlString)
+        _ = try drop.client.get(urlString)
         }
+        catch {log("error : unable to forceHeaterOnOrOff(\((heaterOnOrOff == true ? "1" : "0")))")}
        // print(response)
         /*
         let sessionConfiguration = URLSessionConfiguration.default
@@ -121,9 +123,13 @@ class ThermostatController
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
+        do
+        {
         log("forcePompOnOrOff : \((pompOnOrOff == true ? "1" : "0"))")
         let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff == true ? "1" : "0")
-        _ = try? drop.client.get(urlString)
+        _ = try drop.client.get(urlString)
+        }
+        catch {log("error : unable to forcePompOnOrOff(\((pompOnOrOff == true ? "1" : "0")))")}
         /*
         let pompOnOrOffMemoryLocal = pompOnOrOff == true ? 1 : 0
         if self.pompOnOrOffMemory == -1 || pompOnOrOffMemoryLocal != pompOnOrOffMemory
