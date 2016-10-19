@@ -40,7 +40,7 @@ class ThermostatController
                 guard
                     let writeData = newValueString.data(using: .utf8),
                     let _ = try? writeData.write(to: URL(fileURLWithPath: dataPath))
-                    else {print("error : setting thermostatTargetTemperature"); return}
+                    else {print("error : setting thermostatTargetTemperature"); return} 
             }
     }
     /*{
