@@ -21,18 +21,24 @@ class ThermostatController
             get {
                 var returnValue : Double = 5.0
                     guard
-                        let readData = try? Data(contentsOf: dataUrl),
+                        let readData = try? Data(contentsOf: dataUrl), let readString = String(data: readData, encoding: .utf8), let value = Double(readString)
+                        /*
                         let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
                         let value = datasourceDictionary?["ThermostatTargetTemperature"]
+ */
                         else {print("error : getting thermostatTargetTemperature"); return returnValue}
                         returnValue = value
+ 
                 return returnValue
              }
             set (newValue) {
-                print(newValue)
-                    let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
-                let datasourceAny = datasourceDictionary as! AnyObject
-                guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
+
+           //         let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
+             //   let datasourceAny = datasourceDictionary as! AnyObject
+           //     guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
+                let newValueString = "\(newValue)"
+                guard
+                    let writeData = newValueString.data(using: .utf8),
                     let _ = try? writeData.write(to: dataUrl)
                     else {print("error : setting thermostatTargetTemperature"); return}
             }
