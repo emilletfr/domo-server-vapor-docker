@@ -27,7 +27,7 @@ class ThermostatController
                         let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)),
                         let readString = String(data: readData, encoding: .utf8),
                         let value = Double(readString)
-                        else {print("error : getting thermostatTargetTemperature"); return 19.0}
+                        else {print("error : getting thermostatTargetTemperature"); return 20.0}
                 return value
              }
             set (newValue) {
