@@ -14,26 +14,19 @@ import HTTP
 class RollerShuttersController
 {
     let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
-    //var allOpened = false
     let sunriseSunsetController = SunriseSunsetController()
     
     init()
     {
-        
-
-        
-        
-        
         drop.get("rollershutters", "status")
         { request in
-            return self.checkOpenState(rollerShutterIndex: 0) == true ? "1" : "0"
-         //   return self.allOpened ? "1" : "0"
+            guard let open = self.checkOpenState(rollerShutterIndex: 0) else {return "error"}
+            return open == true ? "1" : "0"
         }
 
         drop.get("rollershutters", Int.self)
         { request, open in
             self.actionQueue.sync {
-            //    self.allOpened = open == 1
                 self.action(openOrClose: open == 1)
             }
             return try JSON(node: ["open": open])
