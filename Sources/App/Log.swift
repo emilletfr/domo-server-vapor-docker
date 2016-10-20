@@ -33,7 +33,7 @@ class Log {
     
     func printString(string:String) -> Void
     {
-        emptyStringArray.append(string)
+    //    emptyStringArray.append(string)
         print(string)
     }
     
