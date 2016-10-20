@@ -63,7 +63,7 @@ class RollerShuttersController
           //  log("now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
      //       if date == "\(sunriseTime):00" {self.actionForAllRollerShutters(openOrClose: true)}
      //       if date == "\(sunsetTime):00" {self.actionForAllRollerShutters(openOrClose: false)}
-            if date == "12:20" {
+            if date == "12:18" {
                 log("action!!!")
                 self.actionForAllRollerShutters(openOrClose: false)}
     //    }
