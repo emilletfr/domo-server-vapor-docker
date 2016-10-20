@@ -57,14 +57,14 @@ class RollerShuttersController
     
     func timerSeconde(date:String)
     {
-        print("date : \(date)")
+        log("date : \(date)")
    //     if let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime
   //      {
           //  log("now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
      //       if date == "\(sunriseTime):00" {self.actionForAllRollerShutters(openOrClose: true)}
      //       if date == "\(sunsetTime):00" {self.actionForAllRollerShutters(openOrClose: false)}
-            if date == "12:12" {
-                print("action!!!")
+            if date == "12:20" {
+                log("action!!!")
                 self.actionForAllRollerShutters(openOrClose: false)}
     //    }
     }
