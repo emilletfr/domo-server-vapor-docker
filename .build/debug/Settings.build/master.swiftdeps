@@ -1,0 +1,14 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "1ca93d9c24f2756d2907c2251d390433"
+build_time: [530087820, 803886000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Config+Arguments.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Config+Directory.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Config.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/KeyAccessible+Merge.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/KeyAccessible.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Node+Merge.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Source.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Env/Env.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Env/Node+Env.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Settings/Env/String+Env.swift": [530085860, 0]

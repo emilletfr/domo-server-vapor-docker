@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/HMAC/HMAC.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/HMAC.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/HMAC.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/HMAC~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/HMAC.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/HMAC/Method.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/Method.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/Method.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/Method~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.build/Method.swiftdeps"
+  }
+}

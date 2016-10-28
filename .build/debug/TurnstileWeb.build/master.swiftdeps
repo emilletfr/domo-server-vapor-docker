@@ -1,0 +1,12 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "1218c28f74bf058a4c35da0adc7b1fff"
+build_time: [530087803, 257525000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/AuthorizationCode.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/Facebook.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/Google.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/OAuth2.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/OAuth2Error.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/OAuth2Token.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/URLSession+Turnstile.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/WebMemoryRealm.swift": [530085985, 0]

@@ -1,0 +1,18 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "d683f1235f90353ba221c4b37010c5dd"
+build_time: [530087824, 500710000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/AuthError.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/AuthMiddleware.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/CacheSessionManager.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/ProtectMiddleware.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Request+Subject.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Authenticator/Authenticator.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Authenticator/Realm.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Authenticator/User+Authenticator.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Credentials/Identifier.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Header/Authorization.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Header/Basic.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Header/Bearer.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/Header/Request+Authorization.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Auth/Authentication/User/User.swift": [530085860, 0]

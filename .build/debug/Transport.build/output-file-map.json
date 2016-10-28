@@ -1,0 +1,53 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/FoundationStream.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/FoundationStream.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/FoundationStream.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/FoundationStream~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/FoundationStream.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/Socks+Stream.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Socks+Stream.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/Socks+Stream.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Socks+Stream~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Socks+Stream.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/Stream.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Stream.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/Stream.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Stream~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Stream.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/StreamBuffer.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/StreamBuffer.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/StreamBuffer.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/StreamBuffer~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/StreamBuffer.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/TransferProtocols/TransferProtocols.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/TransferProtocols.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/TransferProtocols/TransferProtocols.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/TransferProtocols~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/TransferProtocols.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/ProgramStream/ClientStream.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ClientStream.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/ProgramStream/ClientStream.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ClientStream~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ClientStream.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/ProgramStream/ProgramStream.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ProgramStream.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/ProgramStream/ProgramStream.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ProgramStream~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ProgramStream.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/ProgramStream/ServerStream.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ServerStream.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/Streams/ProgramStream/ServerStream.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ServerStream~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.build/ServerStream.swiftdeps"
+  }
+}

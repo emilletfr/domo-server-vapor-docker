@@ -66,7 +66,7 @@ class SunriseSunsetController
         iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
         iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          guard var sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
-        sunsetDate = sunsetDate.addingTimeInterval(60*30) // +40mn
+        sunsetDate = sunsetDate.addingTimeInterval(60*00) // +40mn
         let localDateformatter = DateFormatter()
         localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
         localDateformatter.dateFormat = "HH:mm"
@@ -75,7 +75,6 @@ class SunriseSunsetController
         if let sunrise = self.sunriseTime {log("sunriseTime : \(sunrise)")}
         if let sunset = self.sunsetTime {log("sunsetTime : \(sunset)")}
         /*
-        print("AAA")
         self.sunsetTimer?.cancel()
         self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
       //  self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "eee"))

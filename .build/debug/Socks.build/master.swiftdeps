@@ -1,0 +1,9 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "053da02d41b657df18272293ff2d37b1"
+build_time: [530087294, 344090000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/Socks.swift": [530085970, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/SynchronousTCPServer.swift": [530085970, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/SynchronousUDPServer.swift": [530085970, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/TCPClient.swift": [530085970, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/UDPClient.swift": [530085970, 0]

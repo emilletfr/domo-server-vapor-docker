@@ -1,0 +1,9 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "22d04625f4458ebbfdb117e8320006cc"
+build_time: [530087828, 4437000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/HTTPRouting/Request+Routing.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/HTTPRouting/RouteBuilder+HTTP.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/HTTPRouting/Router+HTTP.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/HTTPRouting/Routing+HTTP.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/HTTPRouting/Utilities.swift": [530085860, 0]

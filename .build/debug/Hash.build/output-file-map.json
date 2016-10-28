@@ -1,0 +1,23 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Hash/Hash.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Hash.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Hash.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Hash~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Hash.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Hash/Method.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Method.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Method.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Method~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Method.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Hash/Random.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Random.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Random.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Random~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.build/Random.swiftdeps"
+  }
+}

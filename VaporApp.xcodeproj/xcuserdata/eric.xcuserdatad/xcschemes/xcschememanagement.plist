@@ -17,207 +17,207 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>______Target_App</key>
+		<key>OBJ_1395</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Auth</key>
+		<key>OBJ_1431</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_BCrypt</key>
+		<key>OBJ_1438</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_CLibreSSL</key>
+		<key>OBJ_2061</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Cache</key>
+		<key>OBJ_2077</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Cipher</key>
+		<key>OBJ_2079</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Console</key>
+		<key>OBJ_2080</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Cookies</key>
+		<key>OBJ_2109</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Core</key>
+		<key>OBJ_2128</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Essentials</key>
+		<key>OBJ_2162</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Fluent</key>
+		<key>OBJ_2170</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_FluentSQLite</key>
+		<key>OBJ_2178</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_HMAC</key>
+		<key>OBJ_2210</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_HTTP</key>
+		<key>OBJ_2257</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_HTTPRouting</key>
+		<key>OBJ_2270</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Hash</key>
+		<key>OBJ_2291</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_JSON</key>
+		<key>OBJ_2314</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Jay</key>
+		<key>OBJ_2380</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Leaf</key>
+		<key>OBJ_2382</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Node</key>
+		<key>OBJ_2383</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_PathIndexable</key>
+		<key>OBJ_2512</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Polymorphic</key>
+		<key>OBJ_2562</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Random</key>
+		<key>OBJ_2608</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Routing</key>
+		<key>OBJ_2635</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_SMTP</key>
+		<key>OBJ_2661</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_SQLite</key>
+		<key>OBJ_2682</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Sessions</key>
+		<key>OBJ_2691</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Settings</key>
+		<key>OBJ_2709</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Socks</key>
+		<key>OBJ_2759</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_SocksCore</key>
+		<key>OBJ_2838</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_TLS</key>
+		<key>OBJ_2840</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Transport</key>
+		<key>OBJ_2977</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Turnstile</key>
+		<key>OBJ_3046</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_TurnstileCrypto</key>
+		<key>OBJ_3117</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_TurnstileWeb</key>
+		<key>OBJ_3187</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_TypeSafeRouting</key>
+		<key>OBJ_3259</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_URI</key>
+		<key>OBJ_3328</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Vapor</key>
+		<key>OBJ_3492</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_VaporSQLite</key>
+		<key>OBJ_3503</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_WebSockets</key>
+		<key>OBJ_3525</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_libc</key>
+		<key>OBJ_3610</key>
 		<dict>
 			<key>primary</key>
 			<true/>

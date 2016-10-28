@@ -1,0 +1,17 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "882de829c59f3a4e54c7c97eb4e9fc8d"
+build_time: [530087799, 188714000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/TurnstileError.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Core/Subject.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Core/Turnstile.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Credentials/APIKey.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Credentials/Credentials.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Credentials/CredentialsError.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Credentials/Token.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Credentials/UsernamePassword.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Realm/Account.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Realm/MemoryRealm.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/Realm/Realm.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/SessionManager/MemorySessionManager.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/Turnstile/SessionManager/SessionManager.swift": [530085984, 0]

@@ -1,5 +1,6 @@
 import Vapor
 import HTTP
+import Foundation
 
 class SampleMiddleware: Middleware
 {
@@ -24,8 +25,11 @@ class SampleMiddleware: Middleware
         
         
        // content-type, accept
-       // print(response)
-        
+     //   print(String(data: response.body as! Data, encoding: .utf8))
+   //     print(String
+     //   let requestStartLine = response.startLine
+      //  let responseBody = try? String(bytes: response.body.bytes!)
+     //  print("\(requestStartLine) \(responseBody)")
    //     response.h
 
         // You can also manipulate the response to add headers

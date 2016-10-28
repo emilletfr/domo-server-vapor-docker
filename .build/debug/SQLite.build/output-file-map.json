@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/SQLite-1.0.1/Sources/SQLite/SQLite.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.build/SQLite.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.build/SQLite.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.build/SQLite~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.build/SQLite.swiftdeps"
+  }
+}

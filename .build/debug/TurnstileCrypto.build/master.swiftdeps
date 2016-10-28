@@ -1,0 +1,7 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "96eee1a45f354b0b5f5fc2991b9b65c5"
+build_time: [530087781, 440034000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileCrypto/BCrypt.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileCrypto/Random.swift": [530085984, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileCrypto/URandom.swift": [530085984, 0]

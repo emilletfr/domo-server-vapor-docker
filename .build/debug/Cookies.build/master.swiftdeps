@@ -1,0 +1,15 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "1cf663683489da6aacf17e1ad32c6586"
+build_time: [530087820, 803881000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookie+BytesConvertible.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookie+Parse.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookie+Serialize.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookie.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookies+BytesConvertible.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookies+Literal.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookies+Parse.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookies+Serialize.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Cookies.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Request+Cookies.swift": [530085860, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cookies/Response+Cookies.swift": [530085860, 0]

@@ -1,0 +1,53 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/AuthorizationCode.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/AuthorizationCode.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/AuthorizationCode.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/AuthorizationCode~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/AuthorizationCode.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/Facebook.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Facebook.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Facebook.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Facebook~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Facebook.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/Google.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Google.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Google.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Google~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/Google.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/OAuth2.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/OAuth2Error.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Error.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Error.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Error~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Error.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/OAuth2Token.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Token.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Token.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Token~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/OAuth2Token.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/URLSession+Turnstile.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/URLSession+Turnstile.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/URLSession+Turnstile.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/URLSession+Turnstile~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/URLSession+Turnstile.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Turnstile-1.0.3/Sources/TurnstileWeb/WebMemoryRealm.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/WebMemoryRealm.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/WebMemoryRealm.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/WebMemoryRealm~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TurnstileWeb.build/WebMemoryRealm.swiftdeps"
+  }
+}

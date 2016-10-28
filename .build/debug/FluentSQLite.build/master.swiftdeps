@@ -1,0 +1,6 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "e5c466b6826b475458f41ba8570176cb"
+build_time: [530087797, 686660000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/FluentSQLite-1.0.1/Sources/FluentSQLite/SQLiteDriver.swift": [530085992, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/FluentSQLite-1.0.1/Sources/FluentSQLite/SQLiteSerializer.swift": [530085992, 0]

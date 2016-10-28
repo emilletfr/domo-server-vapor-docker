@@ -1,0 +1,65 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/IndoorTempController.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/IndoorTempController.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/IndoorTempController.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/IndoorTempController~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/IndoorTempController.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/main.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/main.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/main.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/main.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/OutdoorTempController.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/OutdoorTempController.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/OutdoorTempController.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/OutdoorTempController~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/OutdoorTempController.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/RollingShutter.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutter.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutter.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutter~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutter.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/RollingShutterController.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutterController.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutterController.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutterController~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/RollingShutterController.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/SunriseSunsetController.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SunriseSunsetController.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SunriseSunsetController.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SunriseSunsetController~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SunriseSunsetController.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/ThermostatController.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/ThermostatController.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/ThermostatController.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/ThermostatController~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/ThermostatController.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/Controllers/TemperatureController.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/TemperatureController.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/Controllers/TemperatureController.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/TemperatureController~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/TemperatureController.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/Middleware/SampleMiddleware.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SampleMiddleware.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/Middleware/SampleMiddleware.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SampleMiddleware~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/SampleMiddleware.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Sources/App/Models/Temperature.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/Temperature.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/Models/Temperature.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/Temperature~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/App.build/Temperature.swiftdeps"
+  }
+}

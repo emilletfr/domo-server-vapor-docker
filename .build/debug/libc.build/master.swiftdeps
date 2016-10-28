@@ -1,0 +1,5 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "bbad5df1215967e2a80bb4dbfb05ae3a"
+build_time: [530087288, 326623000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Core-1.0.0/Sources/libc/libc.swift": [530085894, 0]

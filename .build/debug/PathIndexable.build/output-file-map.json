@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/PathIndexable-1.0.0/Sources/PathIndexable/PathIndexable+Subscripting.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable+Subscripting.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable+Subscripting.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable+Subscripting~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable+Subscripting.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/PathIndexable-1.0.0/Sources/PathIndexable/PathIndexable.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.build/PathIndexable.swiftdeps"
+  }
+}

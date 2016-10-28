@@ -1,0 +1,18 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "398b8fea265a3cd1d9e71b056768ca2d"
+build_time: [530087819, 160521000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Request+WebSockets.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/WebSocketFormatErrors.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Client/WebSocket+Client.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Communication/WebSocket+ControlFrames.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Communication/WebSocket+Send.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Connection/Headers+WebSockets.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Connection/WebSockets+Hash.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Model/Fragmentation.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Model/Frame.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Model/WebSocket+Error.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Model/WebSocket.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Serialization/FrameDeserializer.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Serialization/FrameSerializer.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/WebSockets/Serialization/WebSockets+Flags.swift": [530085951, 0]

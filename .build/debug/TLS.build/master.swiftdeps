@@ -1,0 +1,11 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "4aefdc21191dddb2922b13f5cb24cb08"
+build_time: [530087795, 130199000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Certificates.swift": [530085967, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Config.swift": [530085967, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Context.swift": [530085967, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Error.swift": [530085967, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Mode.swift": [530085967, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Socket.swift": [530085967, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/TLS-1.0.2/Sources/TLS/Utilities.swift": [530085967, 0]

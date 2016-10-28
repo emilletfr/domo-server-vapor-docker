@@ -1,0 +1,14 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "05b232eb3d320d439242ff33aea4ba5d"
+build_time: [530087810, 889468000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/PercentDecoding.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Model/URI+Byte.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Model/URI+Modification.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Model/URI+Ports.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Model/URI+String.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Model/URI.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Parser/Parser+Components.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Parser/Parser+Public.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Parser/Parser+SubComponents.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/URI/Parser/Parser.swift": [530085951, 0]

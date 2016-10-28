@@ -1,0 +1,404 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "SampleMiddleware"
+provides-nominal:
+- "C3App16SampleMiddleware"
+provides-member:
+- ["C3App16SampleMiddleware", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "Response"
+- "Middleware"
+- !private "=="
+- "AssignmentPrecedence"
+- "SampleMiddleware"
+- !private "BooleanLiteralType"
+- !private "print"
+- "Responder"
+- !private "UnicodeScalarType"
+- "Request"
+- !private "StringLiteralType"
+depends-member:
+- !private ["Ps9AnyObject", "headers"]
+- !private ["Ps9AnyObject", "init"]
+- !private ["Ps9AnyObject", "print"]
+- !private ["Ps9AnyObject", "range"]
+- ["Ps9AnyObject", "respond"]
+- !private ["Ps9AnyObject", "startLine"]
+- ["Ps9AnyObject", ""]
+- !private ["P4HTTP17BodyRepresentable", "init"]
+- !private ["P4HTTP17BodyRepresentable", "range"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- ["Sb", "deinit"]
+- !private ["P4Core16BytesConvertible", "init"]
+- !private ["P4Core16BytesConvertible", "range"]
+- !private ["P4Core18BytesInitializable", "init"]
+- !private ["P4Core18BytesInitializable", "range"]
+- !private ["P4Core18BytesRepresentable", "init"]
+- !private ["P4Core18BytesRepresentable", "range"]
+- !private ["Ps7CVarArg", "init"]
+- !private ["Ps7CVarArg", "range"]
+- !private ["Ps7CVarArg", "subscript"]
+- !private ["Ps10Collection", "Index"]
+- !private ["Ps10Collection", "Iterator"]
+- !private ["Ps10Collection", "SubSequence"]
+- !private ["Ps10Collection", "_Element"]
+- !private ["Ps10Collection", "subscript"]
+- !private ["Ps10Comparable", "init"]
+- !private ["Ps10Comparable", "range"]
+- !private ["P4Node7Context", "subscript"]
+- !private ["P5Vapor9Countable", "init"]
+- !private ["P5Vapor9Countable", "range"]
+- !private ["P5Vapor9Countable", "subscript"]
+- !private ["Ps28CustomDebugStringConvertible", "init"]
+- !private ["Ps28CustomDebugStringConvertible", "isEmpty"]
+- !private ["Ps28CustomDebugStringConvertible", "range"]
+- !private ["Ps28CustomDebugStringConvertible", "subscript"]
+- !private ["Ps29CustomPlaygroundQuickLookable", "_getBuiltinLogicValue"]
+- !private ["Ps29CustomPlaygroundQuickLookable", "init"]
+- !private ["Ps29CustomPlaygroundQuickLookable", "range"]
+- !private ["Ps17CustomReflectable", "_getBuiltinLogicValue"]
+- !private ["Ps17CustomReflectable", "init"]
+- !private ["Ps17CustomReflectable", "isEmpty"]
+- !private ["Ps17CustomReflectable", "range"]
+- !private ["Ps17CustomReflectable", "subscript"]
+- !private ["Ps23CustomStringConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps23CustomStringConvertible", "headers"]
+- !private ["Ps23CustomStringConvertible", "init"]
+- !private ["Ps23CustomStringConvertible", "isEmpty"]
+- !private ["Ps23CustomStringConvertible", "range"]
+- !private ["Ps23CustomStringConvertible", "startLine"]
+- !private ["Ps23CustomStringConvertible", "subscript"]
+- !private ["Vs10Dictionary", "subscript"]
+- !private ["Ps9Equatable", "_getBuiltinLogicValue"]
+- !private ["Ps9Equatable", "init"]
+- !private ["Ps9Equatable", "isEmpty"]
+- !private ["Ps9Equatable", "range"]
+- !private ["Ps27ExpressibleByBooleanLiteral", "_getBuiltinLogicValue"]
+- !private ["Ps30ExpressibleByDictionaryLiteral", "subscript"]
+- !private ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "init"]
+- !private ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "range"]
+- !private ["Ps32ExpressibleByStringInterpolation", "init"]
+- !private ["Ps32ExpressibleByStringInterpolation", "range"]
+- !private ["Ps26ExpressibleByStringLiteral", "init"]
+- !private ["Ps26ExpressibleByStringLiteral", "range"]
+- !private ["Ps33ExpressibleByUnicodeScalarLiteral", "init"]
+- !private ["Ps33ExpressibleByUnicodeScalarLiteral", "range"]
+- !private ["Ps8Hashable", "_getBuiltinLogicValue"]
+- !private ["Ps8Hashable", "init"]
+- !private ["Ps8Hashable", "range"]
+- ["V4HTTP9HeaderKey", "deinit"]
+- !private ["V4HTTP9HeaderKey", "init"]
+- !private ["Ps9Indexable", "Index"]
+- !private ["Ps9Indexable", "Iterator"]
+- !private ["Ps9Indexable", "SubSequence"]
+- !private ["Ps9Indexable", "_Element"]
+- !private ["Ps9Indexable", "subscript"]
+- !private ["Ps13IndexableBase", "Index"]
+- !private ["Ps13IndexableBase", "Iterator"]
+- !private ["Ps13IndexableBase", "SubSequence"]
+- !private ["Ps13IndexableBase", "_Element"]
+- !private ["Ps13IndexableBase", "subscript"]
+- !private ["Vs16IndexingIterator", "Element"]
+- !private ["Ps16IteratorProtocol", "Element"]
+- !private ["P4HTTP13KeyAccessible", "subscript"]
+- !private ["P4Node13KeyAccessible", "subscript"]
+- !private ["P8Settings13KeyAccessible", "subscript"]
+- !private ["Ps25LosslessStringConvertible", "_getBuiltinLogicValue"]
+- !private ["Ps25LosslessStringConvertible", "init"]
+- !private ["Ps25LosslessStringConvertible", "range"]
+- !private ["C4HTTP7Message", "headers"]
+- !private ["C4HTTP7Message", "startLine"]
+- !private ["P4HTTP10Middleware", "print"]
+- ["P4HTTP10Middleware", "respond"]
+- ["P4HTTP10Middleware", ""]
+- !private ["Ps10MirrorPath", "init"]
+- !private ["Ps10MirrorPath", "range"]
+- !private ["PSo8NSCoding", "init"]
+- !private ["PSo8NSCoding", "range"]
+- !private ["PSo9NSCopying", "init"]
+- !private ["PSo9NSCopying", "range"]
+- !private ["PSo16NSMutableCopying", "init"]
+- !private ["PSo16NSMutableCopying", "range"]
+- !private ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "range"]
+- !private ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "range"]
+- !private ["PSo14NSSecureCoding", "init"]
+- !private ["PSo14NSSecureCoding", "range"]
+- !private ["CSo8NSString", "init"]
+- !private ["CSo8NSString", "range"]
+- !private ["P4Node15NodeConvertible", "_getBuiltinLogicValue"]
+- !private ["P4Node15NodeConvertible", "init"]
+- !private ["P4Node15NodeConvertible", "range"]
+- !private ["P4Node17NodeInitializable", "_getBuiltinLogicValue"]
+- !private ["P4Node17NodeInitializable", "init"]
+- !private ["P4Node17NodeInitializable", "range"]
+- !private ["P4Node17NodeRepresentable", "_getBuiltinLogicValue"]
+- !private ["P4Node17NodeRepresentable", "init"]
+- !private ["P4Node17NodeRepresentable", "range"]
+- ["Sq", "deinit"]
+- !private ["P7Routing19ParametersContainer", "startLine"]
+- !private ["P13PathIndexable9PathIndex", "init"]
+- !private ["P13PathIndexable9PathIndex", "range"]
+- !private ["P11Polymorphic11Polymorphic", "_getBuiltinLogicValue"]
+- !private ["P11Polymorphic11Polymorphic", "init"]
+- !private ["P11Polymorphic11Polymorphic", "range"]
+- !private ["P5Vapor24PolymorphicInitializable", "init"]
+- !private ["P5Vapor24PolymorphicInitializable", "range"]
+- ["Vs5Range", "deinit"]
+- !private ["Vs5Range", "isEmpty"]
+- ["C4HTTP7Request", "deinit"]
+- !private ["C4HTTP7Request", "startLine"]
+- !private ["P5Vapor23RequestContentSubscript", "init"]
+- !private ["P5Vapor23RequestContentSubscript", "range"]
+- ["P4HTTP9Responder", "deinit"]
+- !private ["P4HTTP9Responder", "respond"]
+- ["C4HTTP8Response", "deinit"]
+- !private ["C4HTTP8Response", "headers"]
+- !private ["P4HTTP21ResponseRepresentable", "headers"]
+- !private ["P4HTTP21ResponseRepresentable", "init"]
+- !private ["P4HTTP21ResponseRepresentable", "range"]
+- ["C3App16SampleMiddleware", "Request"]
+- ["C3App16SampleMiddleware", "Responder"]
+- ["C3App16SampleMiddleware", "Response"]
+- ["C3App16SampleMiddleware", "deinit"]
+- ["C3App16SampleMiddleware", "init"]
+- !private ["C3App16SampleMiddleware", "print"]
+- ["C3App16SampleMiddleware", "respond"]
+- !private ["Ps8Sequence", "Element"]
+- !private ["Ps8Sequence", "Index"]
+- !private ["Ps8Sequence", "Iterator"]
+- !private ["Ps8Sequence", "SubSequence"]
+- !private ["Ps8Sequence", "_Element"]
+- !private ["Ps8Sequence", "subscript"]
+- !private ["Vs5Slice", "Index"]
+- !private ["Vs5Slice", "Iterator"]
+- !private ["Vs5Slice", "SubSequence"]
+- !private ["Vs5Slice", "_Element"]
+- ["SS", "deinit"]
+- !private ["SS", "init"]
+- !private ["SS", "range"]
+- !private ["P15TypeSafeRouting19StringInitializable", "init"]
+- !private ["P15TypeSafeRouting19StringInitializable", "range"]
+- !private ["Ps16TextOutputStream", "init"]
+- !private ["Ps16TextOutputStream", "range"]
+- !private ["Ps20TextOutputStreamable", "init"]
+- !private ["Ps20TextOutputStreamable", "range"]
+- !private ["P9Transport15TransferMessage", "headers"]
+- !private ["P9Transport15TransferMessage", "startLine"]
+- !private ["P5Vapor11Validatable", "_getBuiltinLogicValue"]
+- !private ["P5Vapor11Validatable", "init"]
+- !private ["P5Vapor11Validatable", "range"]
+- !private ["P5Vapor11Validatable", "subscript"]
+- !private ["Ps35_ExpressibleByBuiltinBooleanLiteral", "_getBuiltinLogicValue"]
+- !private ["Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral", "init"]
+- !private ["Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral", "range"]
+- !private ["Ps34_ExpressibleByBuiltinStringLiteral", "init"]
+- !private ["Ps34_ExpressibleByBuiltinStringLiteral", "range"]
+- !private ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "init"]
+- !private ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "range"]
+- !private ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "init"]
+- !private ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "range"]
+- !private ["Ps35_HasCustomAnyHashableRepresentation", "init"]
+- !private ["Ps35_HasCustomAnyHashableRepresentation", "range"]
+- !private ["Ps9_Hashable", "_getBuiltinLogicValue"]
+- !private ["Ps9_Hashable", "init"]
+- !private ["Ps9_Hashable", "range"]
+- !private ["Ps21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
+- !private ["Ps21_ObjectiveCBridgeable", "init"]
+- !private ["Ps21_ObjectiveCBridgeable", "range"]
+- !private ["Ps21_ObjectiveCBridgeable", "subscript"]
+- !private ["Vs26_OptionalNilComparisonType", "deinit"]
+depends-nominal:
+- "Ps9AnyObject"
+- !private "P4HTTP17BodyRepresentable"
+- "Sb"
+- !private "P4Core16BytesConvertible"
+- !private "P4Core18BytesInitializable"
+- !private "P4Core18BytesRepresentable"
+- !private "Ps7CVarArg"
+- !private "Ps10Collection"
+- !private "Ps10Comparable"
+- !private "P4Node7Context"
+- !private "P5Vapor9Countable"
+- !private "Ps28CustomDebugStringConvertible"
+- !private "Ps29CustomPlaygroundQuickLookable"
+- !private "Ps17CustomReflectable"
+- !private "Ps23CustomStringConvertible"
+- !private "Vs10Dictionary"
+- !private "Ps9Equatable"
+- !private "Ps27ExpressibleByBooleanLiteral"
+- !private "Ps30ExpressibleByDictionaryLiteral"
+- !private "Ps43ExpressibleByExtendedGraphemeClusterLiteral"
+- !private "Ps32ExpressibleByStringInterpolation"
+- !private "Ps26ExpressibleByStringLiteral"
+- !private "Ps33ExpressibleByUnicodeScalarLiteral"
+- !private "Ps8Hashable"
+- "V4HTTP9HeaderKey"
+- !private "Ps9Indexable"
+- !private "Ps13IndexableBase"
+- !private "Vs16IndexingIterator"
+- !private "Ps16IteratorProtocol"
+- !private "P4HTTP13KeyAccessible"
+- !private "P4Node13KeyAccessible"
+- !private "P8Settings13KeyAccessible"
+- !private "Ps25LosslessStringConvertible"
+- !private "C4HTTP7Message"
+- "P4HTTP10Middleware"
+- !private "Ps10MirrorPath"
+- !private "PSo8NSCoding"
+- !private "PSo9NSCopying"
+- !private "PSo16NSMutableCopying"
+- !private "CSo8NSObject"
+- !private "PSo16NSObjectProtocol"
+- !private "PSo14NSSecureCoding"
+- !private "CSo8NSString"
+- !private "P4Node15NodeConvertible"
+- !private "P4Node17NodeInitializable"
+- !private "P4Node17NodeRepresentable"
+- "Sq"
+- !private "P7Routing19ParametersContainer"
+- !private "P13PathIndexable9PathIndex"
+- !private "P11Polymorphic11Polymorphic"
+- !private "P5Vapor24PolymorphicInitializable"
+- "Vs5Range"
+- "C4HTTP7Request"
+- !private "P5Vapor23RequestContentSubscript"
+- "P4HTTP9Responder"
+- "C4HTTP8Response"
+- !private "P4HTTP21ResponseRepresentable"
+- "C3App16SampleMiddleware"
+- !private "Ps8Sequence"
+- !private "Vs5Slice"
+- "SS"
+- !private "P15TypeSafeRouting19StringInitializable"
+- !private "Ps16TextOutputStream"
+- !private "Ps20TextOutputStreamable"
+- !private "P9Transport15TransferMessage"
+- !private "P5Vapor11Validatable"
+- !private "Ps35_ExpressibleByBuiltinBooleanLiteral"
+- !private "Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral"
+- !private "Ps34_ExpressibleByBuiltinStringLiteral"
+- !private "Ps39_ExpressibleByBuiltinUTF16StringLiteral"
+- !private "Ps41_ExpressibleByBuiltinUnicodeScalarLiteral"
+- !private "Ps35_HasCustomAnyHashableRepresentation"
+- !private "Ps9_Hashable"
+- !private "Ps21_ObjectiveCBridgeable"
+- !private "Vs26_OptionalNilComparisonType"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Foundation.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/CLibreSSL.build/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/IOKit.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Vapor.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Cache.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Fluent.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Node.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Polymorphic.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Cipher.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/whrlpool.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ui_compat.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/txt_db.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/x509v3.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/x509.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ts.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/tls.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ripemd.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rc4.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rc2.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rand.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/poly1305.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pkcs12.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/safestack.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/opensslfeatures.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/opensslconf.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ossl_typ.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ocsp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/modes.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/md5.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/md4.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/krb5_asn.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/idea.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/gost.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/lhash.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/err.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ui.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rsa.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/engine.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl3.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/srtp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl23.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/tls1.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/evp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl2.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pem2.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pkcs7.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/x509_vfy.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/sha.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ec.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ecdh.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ecdsa.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/stack.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pem.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/hmac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dtls1.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dso.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dsa.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dh.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/des.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/conf_api.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/conf.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/crypto.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/comp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/cms.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/obj_mac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/objects.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/cmac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/chacha.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/cast.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/camellia.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/buffer.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/blowfish.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/asn1t.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/asn1_mac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/bio.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/bn.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/opensslv.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/asn1.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/aes.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/CLibreSSL.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Core.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/libc.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Essentials.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Console.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HTTP.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SocksCore.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TLS.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/URI.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HTTPRouting.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Routing.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Random.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/JSON.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Jay.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Leaf.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Sessions.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Cookies.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Settings.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TypeSafeRouting.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/WebSockets.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/FluentSQLite.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.swiftmodule"
+interface-hash: "df4fa50df2ca196d9368e17a329bd0d1"

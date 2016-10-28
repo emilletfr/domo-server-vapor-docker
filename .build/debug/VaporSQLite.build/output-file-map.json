@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/VaporSQLite-1.0.0/Sources/VaporSQLite/Provider.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.build/Provider.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.build/Provider.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.build/Provider~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.build/Provider.swiftdeps"
+  }
+}

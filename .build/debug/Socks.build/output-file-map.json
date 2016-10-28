@@ -1,0 +1,35 @@
+{
+  "": {
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/master.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/Socks.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/Socks.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/Socks.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/Socks~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/Socks.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/SynchronousTCPServer.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousTCPServer.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousTCPServer.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousTCPServer~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousTCPServer.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/SynchronousUDPServer.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousUDPServer.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousUDPServer.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousUDPServer~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/SynchronousUDPServer.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/TCPClient.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/TCPClient.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/TCPClient.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/TCPClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/TCPClient.swiftdeps"
+  },
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Socks-1.0.1/Sources/Socks/UDPClient.swift": {
+    "dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/UDPClient.d",
+    "object": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/UDPClient.swift.o",
+    "swiftmodule": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/UDPClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Socks.build/UDPClient.swiftdeps"
+  }
+}

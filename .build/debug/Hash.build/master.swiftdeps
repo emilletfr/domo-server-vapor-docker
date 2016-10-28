@@ -1,0 +1,7 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "0326a9995047ab13bb5aa63a0342adab"
+build_time: [530087808, 175259000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Hash/Hash.swift": [530085889, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Hash/Method.swift": [530085889, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Hash/Random.swift": [530085889, 0]

@@ -1,0 +1,726 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "RollingShutter"
+provides-nominal:
+- "C3App14RollingShutter"
+provides-member:
+- ["C3App14RollingShutter", ""]
+- ["C3App14RollingShutter", "init"]
+provides-dynamic-lookup:
+depends-top-level:
+- "Context"
+- "Int"
+- "Node"
+- "BooleanLiteralType"
+- "Database"
+- "RollingShutter"
+- !private "StringLiteralType"
+- "Preparation"
+- !private "UUID"
+- "AssignmentPrecedence"
+- "Bool"
+- !private "Dictionary"
+- "String"
+- !private "print"
+- "Model"
+depends-member:
+- !private ["Ps9AnyObject", "Node"]
+- !private ["Ps9AnyObject", "UUID"]
+- !private ["Ps9AnyObject", "bool"]
+- !private ["Ps9AnyObject", "create"]
+- ["Ps9AnyObject", "didCreate"]
+- ["Ps9AnyObject", "didDelete"]
+- ["Ps9AnyObject", "didUpdate"]
+- ["Ps9AnyObject", "entity"]
+- ["Ps9AnyObject", "exists"]
+- ["Ps9AnyObject", "id"]
+- ["Ps9AnyObject", "init"]
+- !private ["Ps9AnyObject", "int"]
+- ["Ps9AnyObject", "makeJSON"]
+- ["Ps9AnyObject", "makeNode"]
+- ["Ps9AnyObject", "makeResponse"]
+- ["Ps9AnyObject", "name"]
+- !private ["Ps9AnyObject", "open"]
+- !private ["Ps9AnyObject", "order"]
+- ["Ps9AnyObject", "prepare"]
+- !private ["Ps9AnyObject", "print"]
+- !private ["Ps9AnyObject", "progOffFixedTime"]
+- !private ["Ps9AnyObject", "progOffSunsetOffset"]
+- !private ["Ps9AnyObject", "progOffSunsetOrFixed"]
+- !private ["Ps9AnyObject", "progOnFixedTime"]
+- !private ["Ps9AnyObject", "progOnSunriseOffset"]
+- !private ["Ps9AnyObject", "progOnSunriseOrFixed"]
+- !private ["Ps9AnyObject", "progOrManual"]
+- ["Ps9AnyObject", "revert"]
+- !private ["Ps9AnyObject", "string"]
+- ["Ps9AnyObject", "willCreate"]
+- ["Ps9AnyObject", "willDelete"]
+- ["Ps9AnyObject", "willUpdate"]
+- ["Ps9AnyObject", ""]
+- !private ["Sa", "deinit"]
+- !private ["P4HTTP17BodyRepresentable", "init"]
+- !private ["P4HTTP17BodyRepresentable", "makeNode"]
+- ["Sb", "deinit"]
+- !private ["P4Core16BytesConvertible", "init"]
+- !private ["P4Core16BytesConvertible", "makeNode"]
+- !private ["P4Core18BytesInitializable", "init"]
+- !private ["P4Core18BytesInitializable", "makeNode"]
+- !private ["P4Core18BytesRepresentable", "init"]
+- !private ["P4Core18BytesRepresentable", "makeNode"]
+- !private ["Ps7CVarArg", "Key"]
+- !private ["Ps7CVarArg", "Value"]
+- !private ["Ps7CVarArg", "init"]
+- !private ["Ps7CVarArg", "makeNode"]
+- !private ["Ps10Collection", "Key"]
+- !private ["Ps10Collection", "Value"]
+- !private ["Ps10Comparable", "init"]
+- !private ["Ps10Comparable", "makeNode"]
+- !private ["P4Node7Context", "Key"]
+- !private ["P4Node7Context", "Value"]
+- !private ["P4Node7Context", "extract"]
+- !private ["P4Node7Context", "init"]
+- !private ["P5Vapor9Countable", "Key"]
+- !private ["P5Vapor9Countable", "Value"]
+- !private ["P5Vapor9Countable", "init"]
+- !private ["P5Vapor9Countable", "makeNode"]
+- !private ["CO6Fluent6Schema7Creator", "bool"]
+- !private ["CO6Fluent6Schema7Creator", "deinit"]
+- !private ["CO6Fluent6Schema7Creator", "id"]
+- !private ["CO6Fluent6Schema7Creator", "int"]
+- !private ["CO6Fluent6Schema7Creator", "string"]
+- !private ["Ps28CustomDebugStringConvertible", "Key"]
+- !private ["Ps28CustomDebugStringConvertible", "Value"]
+- !private ["Ps28CustomDebugStringConvertible", "init"]
+- !private ["Ps28CustomDebugStringConvertible", "makeNode"]
+- !private ["Ps28CustomDebugStringConvertible", "uuidString"]
+- !private ["Ps29CustomPlaygroundQuickLookable", "init"]
+- !private ["Ps29CustomPlaygroundQuickLookable", "makeNode"]
+- !private ["Ps17CustomReflectable", "Key"]
+- !private ["Ps17CustomReflectable", "Value"]
+- !private ["Ps17CustomReflectable", "init"]
+- !private ["Ps17CustomReflectable", "makeNode"]
+- !private ["Ps17CustomReflectable", "uuidString"]
+- !private ["Ps23CustomStringConvertible", "Key"]
+- !private ["Ps23CustomStringConvertible", "Value"]
+- !private ["Ps23CustomStringConvertible", "init"]
+- !private ["Ps23CustomStringConvertible", "makeNode"]
+- !private ["Ps23CustomStringConvertible", "uuidString"]
+- !private ["C6Fluent8Database", "create"]
+- ["C6Fluent8Database", "deinit"]
+- !private ["Vs10Dictionary", "Key"]
+- !private ["Vs10Dictionary", "Value"]
+- ["Vs10Dictionary", "deinit"]
+- !private ["P6Fluent6Entity", "Node"]
+- !private ["P6Fluent6Entity", "UUID"]
+- ["P6Fluent6Entity", "didCreate"]
+- ["P6Fluent6Entity", "didDelete"]
+- ["P6Fluent6Entity", "didUpdate"]
+- ["P6Fluent6Entity", "entity"]
+- ["P6Fluent6Entity", "exists"]
+- ["P6Fluent6Entity", "id"]
+- ["P6Fluent6Entity", "init"]
+- ["P6Fluent6Entity", "makeJSON"]
+- ["P6Fluent6Entity", "makeNode"]
+- ["P6Fluent6Entity", "makeResponse"]
+- ["P6Fluent6Entity", "name"]
+- !private ["P6Fluent6Entity", "open"]
+- !private ["P6Fluent6Entity", "order"]
+- ["P6Fluent6Entity", "prepare"]
+- !private ["P6Fluent6Entity", "print"]
+- !private ["P6Fluent6Entity", "progOffFixedTime"]
+- !private ["P6Fluent6Entity", "progOffSunsetOffset"]
+- !private ["P6Fluent6Entity", "progOffSunsetOrFixed"]
+- !private ["P6Fluent6Entity", "progOnFixedTime"]
+- !private ["P6Fluent6Entity", "progOnSunriseOffset"]
+- !private ["P6Fluent6Entity", "progOnSunriseOrFixed"]
+- !private ["P6Fluent6Entity", "progOrManual"]
+- ["P6Fluent6Entity", "revert"]
+- ["P6Fluent6Entity", "willCreate"]
+- ["P6Fluent6Entity", "willDelete"]
+- ["P6Fluent6Entity", "willUpdate"]
+- ["P6Fluent6Entity", ""]
+- !private ["Ps9Equatable", "extract"]
+- !private ["Ps9Equatable", "init"]
+- !private ["Ps9Equatable", "makeNode"]
+- !private ["Ps9Equatable", "uuidString"]
+- !private ["Ps25ExpressibleByArrayLiteral", "extract"]
+- !private ["Ps25ExpressibleByArrayLiteral", "init"]
+- !private ["Ps27ExpressibleByBooleanLiteral", "extract"]
+- !private ["Ps27ExpressibleByBooleanLiteral", "init"]
+- !private ["Ps30ExpressibleByDictionaryLiteral", "Key"]
+- !private ["Ps30ExpressibleByDictionaryLiteral", "Value"]
+- !private ["Ps30ExpressibleByDictionaryLiteral", "extract"]
+- !private ["Ps30ExpressibleByDictionaryLiteral", "init"]
+- !private ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "extract"]
+- !private ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "init"]
+- !private ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "makeNode"]
+- !private ["Ps25ExpressibleByFloatLiteral", "extract"]
+- !private ["Ps25ExpressibleByFloatLiteral", "init"]
+- !private ["Ps27ExpressibleByIntegerLiteral", "extract"]
+- !private ["Ps27ExpressibleByIntegerLiteral", "init"]
+- !private ["Ps23ExpressibleByNilLiteral", "Key"]
+- !private ["Ps23ExpressibleByNilLiteral", "extract"]
+- !private ["Ps23ExpressibleByNilLiteral", "init"]
+- !private ["Ps32ExpressibleByStringInterpolation", "init"]
+- !private ["Ps32ExpressibleByStringInterpolation", "makeNode"]
+- !private ["Ps26ExpressibleByStringLiteral", "extract"]
+- !private ["Ps26ExpressibleByStringLiteral", "init"]
+- !private ["Ps26ExpressibleByStringLiteral", "makeNode"]
+- !private ["Ps33ExpressibleByUnicodeScalarLiteral", "extract"]
+- !private ["Ps33ExpressibleByUnicodeScalarLiteral", "init"]
+- !private ["Ps33ExpressibleByUnicodeScalarLiteral", "makeNode"]
+- !private ["P4Core11Extractable", "Key"]
+- !private ["Ps8Hashable", "init"]
+- !private ["Ps8Hashable", "makeNode"]
+- !private ["Ps8Hashable", "uuidString"]
+- !private ["Ps9Indexable", "Key"]
+- !private ["Ps9Indexable", "Value"]
+- !private ["Ps13IndexableBase", "Key"]
+- !private ["Ps13IndexableBase", "Value"]
+- ["Si", "deinit"]
+- !private ["P4JSON17JSONRepresentable", "Node"]
+- !private ["P4JSON17JSONRepresentable", "UUID"]
+- ["P4JSON17JSONRepresentable", "didCreate"]
+- ["P4JSON17JSONRepresentable", "didDelete"]
+- ["P4JSON17JSONRepresentable", "didUpdate"]
+- ["P4JSON17JSONRepresentable", "entity"]
+- ["P4JSON17JSONRepresentable", "exists"]
+- ["P4JSON17JSONRepresentable", "id"]
+- ["P4JSON17JSONRepresentable", "init"]
+- ["P4JSON17JSONRepresentable", "makeJSON"]
+- ["P4JSON17JSONRepresentable", "makeNode"]
+- ["P4JSON17JSONRepresentable", "makeResponse"]
+- ["P4JSON17JSONRepresentable", "name"]
+- !private ["P4JSON17JSONRepresentable", "open"]
+- !private ["P4JSON17JSONRepresentable", "order"]
+- ["P4JSON17JSONRepresentable", "prepare"]
+- !private ["P4JSON17JSONRepresentable", "print"]
+- !private ["P4JSON17JSONRepresentable", "progOffFixedTime"]
+- !private ["P4JSON17JSONRepresentable", "progOffSunsetOffset"]
+- !private ["P4JSON17JSONRepresentable", "progOffSunsetOrFixed"]
+- !private ["P4JSON17JSONRepresentable", "progOnFixedTime"]
+- !private ["P4JSON17JSONRepresentable", "progOnSunriseOffset"]
+- !private ["P4JSON17JSONRepresentable", "progOnSunriseOrFixed"]
+- !private ["P4JSON17JSONRepresentable", "progOrManual"]
+- ["P4JSON17JSONRepresentable", "revert"]
+- ["P4JSON17JSONRepresentable", "willCreate"]
+- ["P4JSON17JSONRepresentable", "willDelete"]
+- ["P4JSON17JSONRepresentable", "willUpdate"]
+- ["P4JSON17JSONRepresentable", ""]
+- !private ["P4HTTP13KeyAccessible", "Key"]
+- !private ["P4HTTP13KeyAccessible", "Value"]
+- !private ["P4Node13KeyAccessible", "Key"]
+- !private ["P4Node13KeyAccessible", "Value"]
+- !private ["P8Settings13KeyAccessible", "Key"]
+- !private ["P8Settings13KeyAccessible", "Value"]
+- !private ["Ps25LosslessStringConvertible", "init"]
+- !private ["Ps25LosslessStringConvertible", "makeNode"]
+- !private ["Ps10MirrorPath", "init"]
+- !private ["Ps10MirrorPath", "makeNode"]
+- !private ["P5Vapor5Model", "Node"]
+- !private ["P5Vapor5Model", "UUID"]
+- ["P5Vapor5Model", "didCreate"]
+- ["P5Vapor5Model", "didDelete"]
+- ["P5Vapor5Model", "didUpdate"]
+- ["P5Vapor5Model", "entity"]
+- ["P5Vapor5Model", "exists"]
+- ["P5Vapor5Model", "id"]
+- ["P5Vapor5Model", "init"]
+- ["P5Vapor5Model", "makeJSON"]
+- ["P5Vapor5Model", "makeNode"]
+- ["P5Vapor5Model", "makeResponse"]
+- ["P5Vapor5Model", "name"]
+- !private ["P5Vapor5Model", "open"]
+- !private ["P5Vapor5Model", "order"]
+- ["P5Vapor5Model", "prepare"]
+- !private ["P5Vapor5Model", "print"]
+- !private ["P5Vapor5Model", "progOffFixedTime"]
+- !private ["P5Vapor5Model", "progOffSunsetOffset"]
+- !private ["P5Vapor5Model", "progOffSunsetOrFixed"]
+- !private ["P5Vapor5Model", "progOnFixedTime"]
+- !private ["P5Vapor5Model", "progOnSunriseOffset"]
+- !private ["P5Vapor5Model", "progOnSunriseOrFixed"]
+- !private ["P5Vapor5Model", "progOrManual"]
+- ["P5Vapor5Model", "revert"]
+- ["P5Vapor5Model", "willCreate"]
+- ["P5Vapor5Model", "willDelete"]
+- ["P5Vapor5Model", "willUpdate"]
+- ["P5Vapor5Model", ""]
+- !private ["PSo8NSCoding", "init"]
+- !private ["PSo8NSCoding", "makeNode"]
+- !private ["PSo9NSCopying", "init"]
+- !private ["PSo9NSCopying", "makeNode"]
+- !private ["PSo16NSMutableCopying", "init"]
+- !private ["PSo16NSMutableCopying", "makeNode"]
+- !private ["CSo8NSObject", "init"]
+- !private ["CSo8NSObject", "makeNode"]
+- !private ["PSo16NSObjectProtocol", "init"]
+- !private ["PSo16NSObjectProtocol", "makeNode"]
+- !private ["PSo14NSSecureCoding", "init"]
+- !private ["PSo14NSSecureCoding", "makeNode"]
+- !private ["CSo8NSString", "init"]
+- !private ["CSo8NSString", "makeNode"]
+- ["O4Node4Node", "deinit"]
+- !private ["O4Node4Node", "extract"]
+- !private ["O4Node4Node", "init"]
+- !private ["P4Node10NodeBacked", "extract"]
+- !private ["P4Node10NodeBacked", "init"]
+- !private ["P4Node15NodeConvertible", "Node"]
+- !private ["P4Node15NodeConvertible", "UUID"]
+- ["P4Node15NodeConvertible", "didCreate"]
+- ["P4Node15NodeConvertible", "didDelete"]
+- ["P4Node15NodeConvertible", "didUpdate"]
+- ["P4Node15NodeConvertible", "entity"]
+- ["P4Node15NodeConvertible", "exists"]
+- !private ["P4Node15NodeConvertible", "extract"]
+- ["P4Node15NodeConvertible", "id"]
+- ["P4Node15NodeConvertible", "init"]
+- ["P4Node15NodeConvertible", "makeJSON"]
+- ["P4Node15NodeConvertible", "makeNode"]
+- ["P4Node15NodeConvertible", "makeResponse"]
+- ["P4Node15NodeConvertible", "name"]
+- !private ["P4Node15NodeConvertible", "open"]
+- !private ["P4Node15NodeConvertible", "order"]
+- ["P4Node15NodeConvertible", "prepare"]
+- !private ["P4Node15NodeConvertible", "print"]
+- !private ["P4Node15NodeConvertible", "progOffFixedTime"]
+- !private ["P4Node15NodeConvertible", "progOffSunsetOffset"]
+- !private ["P4Node15NodeConvertible", "progOffSunsetOrFixed"]
+- !private ["P4Node15NodeConvertible", "progOnFixedTime"]
+- !private ["P4Node15NodeConvertible", "progOnSunriseOffset"]
+- !private ["P4Node15NodeConvertible", "progOnSunriseOrFixed"]
+- !private ["P4Node15NodeConvertible", "progOrManual"]
+- ["P4Node15NodeConvertible", "revert"]
+- ["P4Node15NodeConvertible", "willCreate"]
+- ["P4Node15NodeConvertible", "willDelete"]
+- ["P4Node15NodeConvertible", "willUpdate"]
+- ["P4Node15NodeConvertible", ""]
+- !private ["P4Node17NodeInitializable", "Node"]
+- !private ["P4Node17NodeInitializable", "UUID"]
+- ["P4Node17NodeInitializable", "didCreate"]
+- ["P4Node17NodeInitializable", "didDelete"]
+- ["P4Node17NodeInitializable", "didUpdate"]
+- ["P4Node17NodeInitializable", "entity"]
+- ["P4Node17NodeInitializable", "exists"]
+- !private ["P4Node17NodeInitializable", "extract"]
+- ["P4Node17NodeInitializable", "id"]
+- ["P4Node17NodeInitializable", "init"]
+- ["P4Node17NodeInitializable", "makeJSON"]
+- ["P4Node17NodeInitializable", "makeNode"]
+- ["P4Node17NodeInitializable", "makeResponse"]
+- ["P4Node17NodeInitializable", "name"]
+- !private ["P4Node17NodeInitializable", "open"]
+- !private ["P4Node17NodeInitializable", "order"]
+- ["P4Node17NodeInitializable", "prepare"]
+- !private ["P4Node17NodeInitializable", "print"]
+- !private ["P4Node17NodeInitializable", "progOffFixedTime"]
+- !private ["P4Node17NodeInitializable", "progOffSunsetOffset"]
+- !private ["P4Node17NodeInitializable", "progOffSunsetOrFixed"]
+- !private ["P4Node17NodeInitializable", "progOnFixedTime"]
+- !private ["P4Node17NodeInitializable", "progOnSunriseOffset"]
+- !private ["P4Node17NodeInitializable", "progOnSunriseOrFixed"]
+- !private ["P4Node17NodeInitializable", "progOrManual"]
+- ["P4Node17NodeInitializable", "revert"]
+- ["P4Node17NodeInitializable", "willCreate"]
+- ["P4Node17NodeInitializable", "willDelete"]
+- ["P4Node17NodeInitializable", "willUpdate"]
+- ["P4Node17NodeInitializable", ""]
+- !private ["P4Node17NodeRepresentable", "Node"]
+- !private ["P4Node17NodeRepresentable", "UUID"]
+- !private ["P4Node17NodeRepresentable", "Value"]
+- !private ["P4Node17NodeRepresentable", "deinit"]
+- ["P4Node17NodeRepresentable", "didCreate"]
+- ["P4Node17NodeRepresentable", "didDelete"]
+- ["P4Node17NodeRepresentable", "didUpdate"]
+- ["P4Node17NodeRepresentable", "entity"]
+- ["P4Node17NodeRepresentable", "exists"]
+- !private ["P4Node17NodeRepresentable", "extract"]
+- ["P4Node17NodeRepresentable", "id"]
+- ["P4Node17NodeRepresentable", "init"]
+- ["P4Node17NodeRepresentable", "makeJSON"]
+- ["P4Node17NodeRepresentable", "makeNode"]
+- ["P4Node17NodeRepresentable", "makeResponse"]
+- ["P4Node17NodeRepresentable", "name"]
+- !private ["P4Node17NodeRepresentable", "open"]
+- !private ["P4Node17NodeRepresentable", "order"]
+- ["P4Node17NodeRepresentable", "prepare"]
+- !private ["P4Node17NodeRepresentable", "print"]
+- !private ["P4Node17NodeRepresentable", "progOffFixedTime"]
+- !private ["P4Node17NodeRepresentable", "progOffSunsetOffset"]
+- !private ["P4Node17NodeRepresentable", "progOffSunsetOrFixed"]
+- !private ["P4Node17NodeRepresentable", "progOnFixedTime"]
+- !private ["P4Node17NodeRepresentable", "progOnSunriseOffset"]
+- !private ["P4Node17NodeRepresentable", "progOnSunriseOrFixed"]
+- !private ["P4Node17NodeRepresentable", "progOrManual"]
+- ["P4Node17NodeRepresentable", "revert"]
+- ["P4Node17NodeRepresentable", "willCreate"]
+- ["P4Node17NodeRepresentable", "willDelete"]
+- ["P4Node17NodeRepresentable", "willUpdate"]
+- ["P4Node17NodeRepresentable", ""]
+- !private ["Sq", "Key"]
+- ["Sq", "deinit"]
+- !private ["P13PathIndexable9PathIndex", "deinit"]
+- !private ["P13PathIndexable9PathIndex", "init"]
+- !private ["P13PathIndexable9PathIndex", "makeNode"]
+- !private ["P13PathIndexable13PathIndexable", "extract"]
+- !private ["P13PathIndexable13PathIndexable", "init"]
+- !private ["P11Polymorphic11Polymorphic", "extract"]
+- !private ["P11Polymorphic11Polymorphic", "init"]
+- !private ["P11Polymorphic11Polymorphic", "makeNode"]
+- !private ["P5Vapor24PolymorphicInitializable", "init"]
+- !private ["P5Vapor24PolymorphicInitializable", "makeNode"]
+- !private ["P6Fluent11Preparation", "Node"]
+- !private ["P6Fluent11Preparation", "UUID"]
+- ["P6Fluent11Preparation", "didCreate"]
+- ["P6Fluent11Preparation", "didDelete"]
+- ["P6Fluent11Preparation", "didUpdate"]
+- ["P6Fluent11Preparation", "entity"]
+- ["P6Fluent11Preparation", "exists"]
+- ["P6Fluent11Preparation", "id"]
+- ["P6Fluent11Preparation", "init"]
+- ["P6Fluent11Preparation", "makeJSON"]
+- ["P6Fluent11Preparation", "makeNode"]
+- ["P6Fluent11Preparation", "makeResponse"]
+- ["P6Fluent11Preparation", "name"]
+- !private ["P6Fluent11Preparation", "open"]
+- !private ["P6Fluent11Preparation", "order"]
+- ["P6Fluent11Preparation", "prepare"]
+- !private ["P6Fluent11Preparation", "print"]
+- !private ["P6Fluent11Preparation", "progOffFixedTime"]
+- !private ["P6Fluent11Preparation", "progOffSunsetOffset"]
+- !private ["P6Fluent11Preparation", "progOffSunsetOrFixed"]
+- !private ["P6Fluent11Preparation", "progOnFixedTime"]
+- !private ["P6Fluent11Preparation", "progOnSunriseOffset"]
+- !private ["P6Fluent11Preparation", "progOnSunriseOrFixed"]
+- !private ["P6Fluent11Preparation", "progOrManual"]
+- ["P6Fluent11Preparation", "revert"]
+- ["P6Fluent11Preparation", "willCreate"]
+- ["P6Fluent11Preparation", "willDelete"]
+- ["P6Fluent11Preparation", "willUpdate"]
+- ["P6Fluent11Preparation", ""]
+- !private ["P10Foundation20ReferenceConvertible", "init"]
+- !private ["P10Foundation20ReferenceConvertible", "uuidString"]
+- !private ["P5Vapor23RequestContentSubscript", "init"]
+- !private ["P5Vapor23RequestContentSubscript", "makeNode"]
+- !private ["P4HTTP21ResponseRepresentable", "Node"]
+- !private ["P4HTTP21ResponseRepresentable", "UUID"]
+- ["P4HTTP21ResponseRepresentable", "didCreate"]
+- ["P4HTTP21ResponseRepresentable", "didDelete"]
+- ["P4HTTP21ResponseRepresentable", "didUpdate"]
+- ["P4HTTP21ResponseRepresentable", "entity"]
+- ["P4HTTP21ResponseRepresentable", "exists"]
+- ["P4HTTP21ResponseRepresentable", "id"]
+- ["P4HTTP21ResponseRepresentable", "init"]
+- ["P4HTTP21ResponseRepresentable", "makeJSON"]
+- ["P4HTTP21ResponseRepresentable", "makeNode"]
+- ["P4HTTP21ResponseRepresentable", "makeResponse"]
+- ["P4HTTP21ResponseRepresentable", "name"]
+- !private ["P4HTTP21ResponseRepresentable", "open"]
+- !private ["P4HTTP21ResponseRepresentable", "order"]
+- ["P4HTTP21ResponseRepresentable", "prepare"]
+- !private ["P4HTTP21ResponseRepresentable", "print"]
+- !private ["P4HTTP21ResponseRepresentable", "progOffFixedTime"]
+- !private ["P4HTTP21ResponseRepresentable", "progOffSunsetOffset"]
+- !private ["P4HTTP21ResponseRepresentable", "progOffSunsetOrFixed"]
+- !private ["P4HTTP21ResponseRepresentable", "progOnFixedTime"]
+- !private ["P4HTTP21ResponseRepresentable", "progOnSunriseOffset"]
+- !private ["P4HTTP21ResponseRepresentable", "progOnSunriseOrFixed"]
+- !private ["P4HTTP21ResponseRepresentable", "progOrManual"]
+- ["P4HTTP21ResponseRepresentable", "revert"]
+- ["P4HTTP21ResponseRepresentable", "willCreate"]
+- ["P4HTTP21ResponseRepresentable", "willDelete"]
+- ["P4HTTP21ResponseRepresentable", "willUpdate"]
+- ["P4HTTP21ResponseRepresentable", ""]
+- ["C3App14RollingShutter", "Bool"]
+- ["C3App14RollingShutter", "Context"]
+- ["C3App14RollingShutter", "Database"]
+- ["C3App14RollingShutter", "Int"]
+- ["C3App14RollingShutter", "Node"]
+- ["C3App14RollingShutter", "String"]
+- !private ["C3App14RollingShutter", "UUID"]
+- ["C3App14RollingShutter", "deinit"]
+- ["C3App14RollingShutter", "didCreate"]
+- ["C3App14RollingShutter", "didDelete"]
+- ["C3App14RollingShutter", "didUpdate"]
+- ["C3App14RollingShutter", "entity"]
+- ["C3App14RollingShutter", "exists"]
+- ["C3App14RollingShutter", "id"]
+- ["C3App14RollingShutter", "init"]
+- ["C3App14RollingShutter", "makeJSON"]
+- ["C3App14RollingShutter", "makeNode"]
+- ["C3App14RollingShutter", "makeResponse"]
+- ["C3App14RollingShutter", "name"]
+- ["C3App14RollingShutter", "open"]
+- ["C3App14RollingShutter", "order"]
+- ["C3App14RollingShutter", "prepare"]
+- !private ["C3App14RollingShutter", "print"]
+- ["C3App14RollingShutter", "progOffFixedTime"]
+- ["C3App14RollingShutter", "progOffSunsetOffset"]
+- ["C3App14RollingShutter", "progOffSunsetOrFixed"]
+- ["C3App14RollingShutter", "progOnFixedTime"]
+- ["C3App14RollingShutter", "progOnSunriseOffset"]
+- ["C3App14RollingShutter", "progOnSunriseOrFixed"]
+- ["C3App14RollingShutter", "progOrManual"]
+- ["C3App14RollingShutter", "revert"]
+- ["C3App14RollingShutter", "willCreate"]
+- ["C3App14RollingShutter", "willDelete"]
+- ["C3App14RollingShutter", "willUpdate"]
+- !private ["Ps8Sequence", "Key"]
+- !private ["Ps8Sequence", "Value"]
+- ["SS", "deinit"]
+- !private ["SS", "init"]
+- !private ["SS", "makeNode"]
+- !private ["P15TypeSafeRouting19StringInitializable", "Node"]
+- !private ["P15TypeSafeRouting19StringInitializable", "UUID"]
+- ["P15TypeSafeRouting19StringInitializable", "didCreate"]
+- ["P15TypeSafeRouting19StringInitializable", "didDelete"]
+- ["P15TypeSafeRouting19StringInitializable", "didUpdate"]
+- ["P15TypeSafeRouting19StringInitializable", "entity"]
+- ["P15TypeSafeRouting19StringInitializable", "exists"]
+- ["P15TypeSafeRouting19StringInitializable", "id"]
+- ["P15TypeSafeRouting19StringInitializable", "init"]
+- ["P15TypeSafeRouting19StringInitializable", "makeJSON"]
+- ["P15TypeSafeRouting19StringInitializable", "makeNode"]
+- ["P15TypeSafeRouting19StringInitializable", "makeResponse"]
+- ["P15TypeSafeRouting19StringInitializable", "name"]
+- !private ["P15TypeSafeRouting19StringInitializable", "open"]
+- !private ["P15TypeSafeRouting19StringInitializable", "order"]
+- ["P15TypeSafeRouting19StringInitializable", "prepare"]
+- !private ["P15TypeSafeRouting19StringInitializable", "print"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOffFixedTime"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOffSunsetOffset"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOffSunsetOrFixed"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOnFixedTime"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOnSunriseOffset"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOnSunriseOrFixed"]
+- !private ["P15TypeSafeRouting19StringInitializable", "progOrManual"]
+- ["P15TypeSafeRouting19StringInitializable", "revert"]
+- ["P15TypeSafeRouting19StringInitializable", "willCreate"]
+- ["P15TypeSafeRouting19StringInitializable", "willDelete"]
+- ["P15TypeSafeRouting19StringInitializable", "willUpdate"]
+- ["P15TypeSafeRouting19StringInitializable", ""]
+- !private ["Ps16TextOutputStream", "init"]
+- !private ["Ps16TextOutputStream", "makeNode"]
+- !private ["Ps20TextOutputStreamable", "init"]
+- !private ["Ps20TextOutputStreamable", "makeNode"]
+- ["V10Foundation4UUID", "deinit"]
+- !private ["V10Foundation4UUID", "init"]
+- !private ["V10Foundation4UUID", "uuidString"]
+- !private ["P5Vapor11Validatable", "Key"]
+- !private ["P5Vapor11Validatable", "Value"]
+- !private ["P5Vapor11Validatable", "init"]
+- !private ["P5Vapor11Validatable", "makeNode"]
+- !private ["Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral", "init"]
+- !private ["Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral", "makeNode"]
+- !private ["Ps34_ExpressibleByBuiltinStringLiteral", "init"]
+- !private ["Ps34_ExpressibleByBuiltinStringLiteral", "makeNode"]
+- !private ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "init"]
+- !private ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "makeNode"]
+- !private ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "init"]
+- !private ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "makeNode"]
+- !private ["Ps35_HasCustomAnyHashableRepresentation", "init"]
+- !private ["Ps35_HasCustomAnyHashableRepresentation", "makeNode"]
+- !private ["Ps9_Hashable", "init"]
+- !private ["Ps9_Hashable", "makeNode"]
+- !private ["Ps9_Hashable", "uuidString"]
+- !private ["Ps21_ObjectiveCBridgeable", "Key"]
+- !private ["Ps21_ObjectiveCBridgeable", "Value"]
+- !private ["Ps21_ObjectiveCBridgeable", "init"]
+- !private ["Ps21_ObjectiveCBridgeable", "makeNode"]
+- !private ["Ps21_ObjectiveCBridgeable", "uuidString"]
+depends-nominal:
+- "Ps9AnyObject"
+- !private "Sa"
+- !private "P4HTTP17BodyRepresentable"
+- "Sb"
+- !private "P4Core16BytesConvertible"
+- !private "P4Core18BytesInitializable"
+- !private "P4Core18BytesRepresentable"
+- !private "Ps7CVarArg"
+- !private "Ps10Collection"
+- !private "Ps10Comparable"
+- !private "P4Node7Context"
+- !private "P5Vapor9Countable"
+- !private "CO6Fluent6Schema7Creator"
+- !private "Ps28CustomDebugStringConvertible"
+- !private "Ps29CustomPlaygroundQuickLookable"
+- !private "Ps17CustomReflectable"
+- !private "Ps23CustomStringConvertible"
+- "C6Fluent8Database"
+- "Vs10Dictionary"
+- "P6Fluent6Entity"
+- !private "Ps9Equatable"
+- !private "Ps25ExpressibleByArrayLiteral"
+- !private "Ps27ExpressibleByBooleanLiteral"
+- !private "Ps30ExpressibleByDictionaryLiteral"
+- !private "Ps43ExpressibleByExtendedGraphemeClusterLiteral"
+- !private "Ps25ExpressibleByFloatLiteral"
+- !private "Ps27ExpressibleByIntegerLiteral"
+- !private "Ps23ExpressibleByNilLiteral"
+- !private "Ps32ExpressibleByStringInterpolation"
+- !private "Ps26ExpressibleByStringLiteral"
+- !private "Ps33ExpressibleByUnicodeScalarLiteral"
+- !private "P4Core11Extractable"
+- !private "Ps8Hashable"
+- !private "Ps9Indexable"
+- !private "Ps13IndexableBase"
+- "Si"
+- "P4JSON17JSONRepresentable"
+- !private "P4HTTP13KeyAccessible"
+- !private "P4Node13KeyAccessible"
+- !private "P8Settings13KeyAccessible"
+- !private "Ps25LosslessStringConvertible"
+- !private "Ps10MirrorPath"
+- "P5Vapor5Model"
+- !private "PSo8NSCoding"
+- !private "PSo9NSCopying"
+- !private "PSo16NSMutableCopying"
+- !private "CSo8NSObject"
+- !private "PSo16NSObjectProtocol"
+- !private "PSo14NSSecureCoding"
+- !private "CSo8NSString"
+- "O4Node4Node"
+- !private "P4Node10NodeBacked"
+- "P4Node15NodeConvertible"
+- "P4Node17NodeInitializable"
+- "P4Node17NodeRepresentable"
+- "Sq"
+- !private "P13PathIndexable9PathIndex"
+- !private "P13PathIndexable13PathIndexable"
+- !private "P11Polymorphic11Polymorphic"
+- !private "P5Vapor24PolymorphicInitializable"
+- "P6Fluent11Preparation"
+- !private "P10Foundation20ReferenceConvertible"
+- !private "P5Vapor23RequestContentSubscript"
+- "P4HTTP21ResponseRepresentable"
+- "C3App14RollingShutter"
+- !private "Ps8Sequence"
+- "SS"
+- "P15TypeSafeRouting19StringInitializable"
+- !private "Ps16TextOutputStream"
+- !private "Ps20TextOutputStreamable"
+- "V10Foundation4UUID"
+- !private "P5Vapor11Validatable"
+- !private "Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral"
+- !private "Ps34_ExpressibleByBuiltinStringLiteral"
+- !private "Ps39_ExpressibleByBuiltinUTF16StringLiteral"
+- !private "Ps41_ExpressibleByBuiltinUnicodeScalarLiteral"
+- !private "Ps35_HasCustomAnyHashableRepresentation"
+- !private "Ps9_Hashable"
+- !private "Ps21_ObjectiveCBridgeable"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Foundation.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/CLibreSSL.build/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/x86_64/IOKit.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Vapor.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Cache.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Fluent.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Node.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/PathIndexable.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Polymorphic.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Cipher.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/whrlpool.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ui_compat.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/txt_db.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/x509v3.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/x509.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ts.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/tls.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ripemd.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rc4.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rc2.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rand.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/poly1305.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pkcs12.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/safestack.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/opensslfeatures.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/opensslconf.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ossl_typ.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ocsp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/modes.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/md5.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/md4.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/krb5_asn.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/idea.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/gost.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/lhash.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/err.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ui.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/rsa.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/engine.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl3.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/srtp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl23.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/tls1.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/evp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ssl2.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pem2.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pkcs7.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/x509_vfy.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/sha.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ec.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ecdh.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/ecdsa.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/stack.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/pem.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/hmac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dtls1.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dso.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dsa.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/dh.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/des.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/conf_api.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/conf.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/crypto.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/comp.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/cms.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/obj_mac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/objects.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/cmac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/chacha.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/cast.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/camellia.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/buffer.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/blowfish.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/asn1t.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/asn1_mac.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/bio.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/bn.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/opensslv.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/asn1.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/aes.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/CLibreSSL.h"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Core.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/libc.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Essentials.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Console.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HMAC.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HTTP.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Transport.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SocksCore.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TLS.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/URI.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/HTTPRouting.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Routing.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Hash.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Random.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/JSON.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Jay.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Leaf.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Sessions.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Cookies.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/Settings.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/TypeSafeRouting.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/WebSockets.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/VaporSQLite.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/FluentSQLite.swiftmodule"
+- "/Users/eric/Desktop/domo/domo-server-vapor/.build/debug/SQLite.swiftmodule"
+interface-hash: "0a9f4766ba062e30cdeb016c04c4ec38"

@@ -48,7 +48,7 @@ class ThermostatController
      set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
      }*/
     
-    var thermostatMode = "auto"
+    //var thermostatMode = "auto"
     //  private var client: ClientProtocol.Type!
     //  var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
@@ -59,6 +59,10 @@ class ThermostatController
     //  var pompOnOrOffMemory : Bool?
     var repeatTimerQueue : DispatchQueue?
     
+    enum HeatingCoolingState: Int { case OFF = 0, HEAT, COOL, AUTO }
+    var currentHeatingCoolingState = HeatingCoolingState.HEAT
+    var targetHeatingCoolingState = HeatingCoolingState.HEAT
+    enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
     
     init()
     {
@@ -66,6 +70,7 @@ class ThermostatController
         {
         try? FileManager.default.moveItem(at: URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt")), to: URL(fileURLWithPath:self.dataPath))
         }
+        
         self.indoorTempController = IndoorTempController()
         self.outdoorTempController = OutdoorTempController()
         
@@ -87,28 +92,84 @@ class ThermostatController
             }
         }
         
-        drop.get("thermostat/status") {  request in
-            return try JSON(node: [
-                "targetTemperature":self.thermostatTargetTemperature < 10.0 ? 10.0 :  self.thermostatTargetTemperature,
-                "temperature": self.indoorTempController.degresValue < 10.0 ? 10.0 :  self.indoorTempController.degresValue,
-                "humidity": self.indoorTempController.humidityValue,
-                "thermostat": self.thermostatMode
-                ])
+        // Required Characteristics
+        
+        //MARK:  CurrentHeatingCoolingState
+        
+        drop.get("thermostat/getCurrentHeatingCoolingState") { request in
+            return try JSON(node: ["value": self.currentHeatingCoolingState.rawValue])
         }
         
-        drop.get("thermostat/targetTemperature", String.self) { request, temperatureString in
-            log("targetTemperature : \(temperatureString)")
-            let temperature = Double(temperatureString) ?? 10.0
-            self.thermostatTargetTemperature = temperature <= 10.0 ? 5.0 : temperature
+        //MARK:  TargetHeatingCoolingState
+        
+        drop.get("thermostat/getTargetHeatingCoolingState") { request in
+            return try JSON(node: ["value": self.targetHeatingCoolingState.rawValue])
+        }
+        
+        drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
+            guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
+            if intValue == HeatingCoolingState.OFF.rawValue { self.thermostatTargetTemperature = 5.0 } // HORS GEL
+            self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
+            self.targetHeatingCoolingState = self.currentHeatingCoolingState
             self.refresh()
-            return temperatureString
+            return try JSON(node: ["value": intValue])
         }
         
-        drop.get("thermostat", String.self) { request, mode in
-            log(mode) // off / comfort / comfort-minus-two / auto
-            self.thermostatMode = mode
-            return self.thermostatMode
+        //MARK:  CurrentTemperature
+        
+        drop.get("thermostat/getCurrentTemperature") { request in
+            try JSON(node: ["value": self.indoorTempController.degresValue])
         }
+        
+        //MARK:  TargetTemperature
+        
+        drop.get("thermostat/getTargetTemperature") { request in
+            let temperature = self.thermostatTargetTemperature < 10.0 ? 10 :  Int(self.thermostatTargetTemperature)
+            return  try JSON(node: ["value": temperature])
+        }
+        
+        drop.get("thermostat/setTargetTemperature", String.self) { request, value in
+            self.thermostatTargetTemperature = Double(value) ?? 10.0
+            self.refresh()
+            return try JSON(node: ["value": self.thermostatTargetTemperature])
+        }
+        
+        //MARK:  TemperatureDisplayUnits
+        
+        drop.get("thermostat/getTemperatureDisplayUnits") { request in
+            try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])
+        }
+        
+        drop.get("thermostat/setTemperatureDisplayUnits", Int.self) { request, value in
+            try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])
+        }
+        
+        drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
+            try JSON(node: ["value": self.indoorTempController.humidityValue])
+            }
+
+        /*
+         
+         // Optional Characteristics
+        
+        drop.get("thermostat/getHeatingThresholdTemperature") { request in
+            try JSON(node: ["value": 20])
+        }
+        
+        drop.get("thermostat/setHeatingThresholdTemperature", Int.self) { request, value in
+            try JSON(node: ["value": 20])
+        }
+
+        
+        drop.get("thermostat/getCoolingThresholdTemperature") { request in
+            try JSON(node: ["value": 20])
+        }
+        
+        drop.get("thermostat/setCoolingThresholdTemperature", Int.self) { request, value in
+            try JSON(node: ["value": 20])
+        }
+        */
+        
     }
     
     func refresh()
@@ -116,11 +177,17 @@ class ThermostatController
         log("ThermostatController:refresh")
 
         log("targetTemperature : \(self.thermostatTargetTemperature) - indoorTemperature : \(self.indoorTempController.degresValue)° - humidity : \(self.indoorTempController.humidityValue)% - outdoorTemperature : \(Int(self.outdoorTempController.degresValue))°")
+        
+        let heating = self.indoorTempController.degresValue < self.thermostatTargetTemperature
+        
+        if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
+        if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
+        
         DispatchQueue.global(qos:.background).async {
-            self.forceHeaterOnOrOff(heaterOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
+            self.forceHeaterOnOrOff(heaterOnOrOff: heating)
         }
         DispatchQueue.global(qos:.background).async {
-            self.forcePompOnOrOff(pompOnOrOff: self.indoorTempController.degresValue < self.thermostatTargetTemperature)
+            self.forcePompOnOrOff(pompOnOrOff: heating)
         }
     }
     
@@ -133,11 +200,12 @@ class ThermostatController
             _ = try drop.client.get(urlString)
         }
         catch {log("error : unable to forceHeaterOnOrOff(\((heaterOnOrOff == true ? "1" : "0")))")}
+ 
     }
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
-        do
+         do
         {
             log("forcePompOnOrOff : \((pompOnOrOff == true ? "1" : "0"))")
             let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff == true ? "1" : "0")

@@ -1,0 +1,5 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "fbaef811937ce77e65af9cb48e88c671"
+build_time: [530087842, 587715000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/VaporSQLite-1.0.0/Sources/VaporSQLite/Provider.swift": [530085990, 0]

@@ -1,0 +1,12 @@
+version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
+options: "1283df708613d32761990b489d47c2b6"
+build_time: [530087810, 889102000]
+inputs:
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/FoundationStream.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/Socks+Stream.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/Stream.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/StreamBuffer.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/TransferProtocols/TransferProtocols.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/ProgramStream/ClientStream.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/ProgramStream/ProgramStream.swift": [530085951, 0]
+  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Engine-1.0.3/Sources/Transport/Streams/ProgramStream/ServerStream.swift": [530085951, 0]
