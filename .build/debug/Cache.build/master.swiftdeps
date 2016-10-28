@@ -1,7 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "6582f34f8a869106007dfc8d2ab35931"
-build_time: [530087820, 803881000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cache/CacheProtocol.swift": [530085860, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cache/FluentCache.swift": [530085860, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/Cache/MemoryCache.swift": [530085860, 0]

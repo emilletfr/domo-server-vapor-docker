@@ -1,5 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "0a14b0272ae84885c9d1122525cd9ee1"
-build_time: [530087808, 174873000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/BCrypt/BCrypt.swift": [530085889, 0]

@@ -1,6 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "fb87b23f9f40e18d6e66463ac9f82900"
-build_time: [530087795, 132268000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Essentials/ByteStream.swift": [530085889, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Essentials/Helpers.swift": [530085889, 0]

@@ -1,7 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "dce60e46a547595b57d0dabf85da294b"
-build_time: [530087828, 684606000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/TypeSafeRouting/Generated.swift": [530085860, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/TypeSafeRouting/StringInitializable.swift": [530085860, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Vapor-1.1.1/Sources/TypeSafeRouting/TypeSafeRoutingError.swift": [530085860, 0]

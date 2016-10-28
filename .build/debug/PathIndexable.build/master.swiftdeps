@@ -1,6 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "115d6d635fdc2bf96c93aa687796736f"
-build_time: [530087288, 326504000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/PathIndexable-1.0.0/Sources/PathIndexable/PathIndexable+Subscripting.swift": [530085945, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/PathIndexable-1.0.0/Sources/PathIndexable/PathIndexable.swift": [530085945, 0]

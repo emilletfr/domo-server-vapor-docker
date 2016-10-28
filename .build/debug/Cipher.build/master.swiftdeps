@@ -1,6 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "abb42fbe1c396f5480874dfe22ff643b"
-build_time: [530087802, 726664000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Cipher/Cipher.swift": [530085889, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/Cipher/Method.swift": [530085889, 0]

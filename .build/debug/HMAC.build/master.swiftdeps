@@ -1,6 +1,0 @@
-version: "Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)"
-options: "f5f48169186b2c0f2521bf4932746b04"
-build_time: [530087808, 177640000]
-inputs:
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/HMAC/HMAC.swift": [530085889, 0]
-  "/Users/eric/Desktop/domo/domo-server-vapor/Packages/Crypto-1.0.0/Sources/HMAC/Method.swift": [530085889, 0]
