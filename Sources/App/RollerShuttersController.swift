@@ -57,20 +57,20 @@ class RollerShuttersController
             return try JSON(node: ["value": position])
         }
 
-        drop.get("window-covering/getCurrentPosition/all")
+        drop.get("windows-covering/getCurrentPosition")
         { request in
         //    guard let open = self.actionCheckIfOpen(rollerShutterIndex: 0) else {return "error"}
             return try JSON(node: ["value": self.rollerShuttersCurrentPositions[0]])
         }
         
-        drop.get("window-covering/getTargetPosition/all")
+        drop.get("windows-covering/getTargetPosition")
         { request in
            // guard let open = self.actionCheckIfOpen(rollerShutterIndex: 0) else {return "error"}
           //  return try JSON(node: ["value": open == true ? 100 : 0])
             return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
         }
         
-        drop.get("window-covering/setTargetPosition/all", Int.self)
+        drop.get("windows-covering/setTargetPosition", Int.self)
         { request, position in
           //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
            // self.actionForAllRollerShutters(openOrClose: position == 100)
