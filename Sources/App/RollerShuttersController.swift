@@ -49,10 +49,9 @@ class RollerShuttersController
         
         drop.get("window-covering/setTargetPosition", Int.self, Int.self)
         { request, index, position in
-            self.internalVarAccessQueue.sync {
+            self.internalVarAccessQueue.async {
                 if self.rollerShuttersTargetPositions[index] != position
                 {
-                    
                     let currentPos = self.rollerShuttersCurrentPositions[index]
                     let targetPos = self.rollerShuttersTargetPositions[index]
                     let isWorking = self.rollerShuttersAreWorking[index]
@@ -90,11 +89,11 @@ class RollerShuttersController
         
         drop.get("window-covering/setTargetPosition/all", Int.self)
         { request, position in
-            self.internalVarAccessQueue.sync {
-            if self.rollerShuttersTargetPositions[0] != position
-            {
-                self.actionAllQueue.async {self.actionForAllRollerShutters(position: position)}
-            }
+            self.internalVarAccessQueue.async {
+                if self.rollerShuttersTargetPositions[0] != position
+                {
+                    self.actionForAllRollerShutters(position: position)
+                }
             }
             return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
         }
