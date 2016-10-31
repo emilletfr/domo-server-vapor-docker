@@ -77,16 +77,15 @@ class RollerShuttersController
           //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
             if self.rollerShuttersCurrentPositions[0] != position
             {
-                self.actionForAllRollerShutters(openOrClose: position == 100)
-                self.rollerShuttersCurrentPositions[0] = position
                 self.rollerShuttersTargetPositions[0] = position
-                self.rollerShuttersCurrentPositions[1] = position
                 self.rollerShuttersTargetPositions[1] = position
-                self.rollerShuttersCurrentPositions[2] = position
                 self.rollerShuttersTargetPositions[2] = position
-                self.rollerShuttersCurrentPositions[3] = position
                 self.rollerShuttersTargetPositions[3] = position
-                
+                self.actionForAllRollerShutters(position: position)
+                self.rollerShuttersCurrentPositions[0] = position
+                self.rollerShuttersCurrentPositions[1] = position
+                self.rollerShuttersCurrentPositions[2] = position
+                self.rollerShuttersCurrentPositions[3] = position
             }
             return try JSON(node: ["value": 100])
         }
@@ -115,20 +114,20 @@ class RollerShuttersController
         if date == "\(sunriseTime):00"
         {
             log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
-            self.actionForAllRollerShutters(openOrClose: true)
+            self.actionForAllRollerShutters(position: 100)
         }
         if date == "\(sunsetTime):00"
         {
             log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
-            self.actionForAllRollerShutters(openOrClose: false)
+            self.actionForAllRollerShutters(position: 0)
         }
     }
     
-    func actionForAllRollerShutters(openOrClose:Bool)
+    func actionForAllRollerShutters(position:Int)
     {
         for index in 0...3
         {
-            self.actionOpen(rollerShutterIndex: index, position: openOrClose ? 100 : 0)
+            self.actionOpen(rollerShutterIndex: index, position:position)
         }
     }
     
