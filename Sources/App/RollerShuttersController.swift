@@ -75,12 +75,16 @@ class RollerShuttersController
         drop.get("windows-covering/setTargetPosition", Int.self)
         { request, position in
           //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
-            if self.rollerShuttersTargetPositions[0] != position
+            if self.rollerShuttersCurrentPositions[0] != position
             {
                 self.actionForAllRollerShutters(openOrClose: position == 100)
+                self.rollerShuttersCurrentPositions[0] = position
                 self.rollerShuttersTargetPositions[0] = position
+                self.rollerShuttersCurrentPositions[1] = position
                 self.rollerShuttersTargetPositions[1] = position
+                self.rollerShuttersCurrentPositions[2] = position
                 self.rollerShuttersTargetPositions[2] = position
+                self.rollerShuttersCurrentPositions[3] = position
                 self.rollerShuttersTargetPositions[3] = position
                 
             }
