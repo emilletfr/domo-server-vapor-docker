@@ -119,18 +119,12 @@ class RollerShuttersController
     
     func actionForAllRollerShutters(position:Int)
     {
-        self.rollerShuttersTargetPositions[0] = position
-        self.rollerShuttersTargetPositions[1] = position
-        self.rollerShuttersTargetPositions[2] = position
-        self.rollerShuttersTargetPositions[3] = position
         for index in 0...3
         {
+            self.rollerShuttersTargetPositions[index] = position
             self.actionOpen(rollerShutterIndex: index, position:position)
+            self.rollerShuttersCurrentPositions[index] = position
         }
-        self.rollerShuttersCurrentPositions[0] = position
-        self.rollerShuttersCurrentPositions[1] = position
-        self.rollerShuttersCurrentPositions[2] = position
-        self.rollerShuttersCurrentPositions[3] = position
     }
     
     func actionOpen(rollerShutterIndex:Int, position:Int)
