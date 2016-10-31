@@ -14,6 +14,7 @@ import HTTP
 class RollerShuttersController
 {
     let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
+    let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
     let sunriseSunsetController = SunriseSunsetController()
     var rollerShuttersCurrentPositions = [0,0,0,0]
     var rollerShuttersTargetPositions = [0,0,0,0]
@@ -77,8 +78,10 @@ class RollerShuttersController
           //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
             if self.rollerShuttersTargetPositions[0] != position
             {
-
-                self.actionForAllRollerShutters(position: position)
+                self.actionAllQueue.async {
+                    self.actionForAllRollerShutters(position: position)
+                }
+                
 
             }
             return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
