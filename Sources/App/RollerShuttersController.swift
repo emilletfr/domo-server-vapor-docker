@@ -14,8 +14,8 @@ import HTTP
 class RollerShuttersController
 {
     let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
-    let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
-    let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
+  //  let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
+   // let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
     let sunriseSunsetController = SunriseSunsetController()
     var rollerShuttersCurrentPositions = [0,0,0,0]
     var rollerShuttersTargetPositions = [0,0,0,0]
@@ -117,16 +117,19 @@ class RollerShuttersController
     
     func timerSeconde(date:String)
     {
-        guard let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime else {return}
-        if date == "\(sunriseTime):00"
-        {
-            log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
-            self.actionForAllRollerShutters(position: 100)
-        }
-        if date == "\(sunsetTime):00"
-        {
-            log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
-            self.actionForAllRollerShutters(position: 0)
+        self.internalVarAccessQueue.async
+            {
+            guard let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime else {return}
+            if date == "\(sunriseTime):00"
+            {
+                log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
+                self.actionForAllRollerShutters(position: 100)
+            }
+            if date == "\(sunsetTime):00"
+            {
+                log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
+                self.actionForAllRollerShutters(position: 0)
+            }
         }
     }
     
