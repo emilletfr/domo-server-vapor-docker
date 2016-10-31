@@ -20,6 +20,7 @@ class RollerShuttersController
     var rollerShuttersCurrentPositions = [0,0,0,0]
     var rollerShuttersTargetPositions = [0,0,0,0]
     var rollerShuttersAreWorking = [false, false, false, false]
+    enum Places: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, count }
     
     init()
     {
@@ -59,8 +60,6 @@ class RollerShuttersController
                 self.actionOpen(rollerShutterIndex: index, position: position )
                 self.rollerShuttersCurrentPositions[index] = position
                 self.rollerShuttersAreWorking[index] = false
-                //   self.rollerShuttersPositions[index] = self.rollerShuttersPositions[index] == 0 ? 0 : 100
-                //    self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 1)}
             }
             return try JSON(node: ["value": position])
         }
@@ -68,7 +67,14 @@ class RollerShuttersController
         drop.get("window-covering/getCurrentPosition/all")
         { request in
             var value = 0
-            self.internalVarAccessQueue.sync {value = self.rollerShuttersCurrentPositions[3]}
+            self.internalVarAccessQueue.sync
+                {
+                    for index in 0..<Places.count.rawValue
+                    {
+                        value += self.rollerShuttersCurrentPositions[index]
+                    }
+                    value = Int(Float(value)/Float(Places.count.rawValue))
+            }
             return try JSON(node: ["value": value])
         }
         
@@ -87,7 +93,6 @@ class RollerShuttersController
             }
             return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
         }
-        
         
         DispatchQueue(label: "net.emilletfr.domo.ThermostatController.TimerSeconde").async
             {
@@ -123,7 +128,7 @@ class RollerShuttersController
     
     func actionForAllRollerShutters(position:Int)
     {
-        for index in 0...3
+        for index in 0..<Places.count.rawValue
         {
             self.rollerShuttersTargetPositions[index] = position
             self.actionOpen(rollerShutterIndex: index, position:position)
