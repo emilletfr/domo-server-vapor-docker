@@ -61,7 +61,7 @@ class RollerShuttersController
         drop.get("window-covering/getCurrentPosition/all")
         { request in
         //    guard let open = self.actionCheckIfOpen(rollerShutterIndex: 0) else {return "error"}
-            return try JSON(node: ["value": self.rollerShuttersCurrentPositions[0]])
+            return try JSON(node: ["value": self.rollerShuttersCurrentPositions[3]])
         //    return try JSON(node: ["value": 100])
         }
         
