@@ -13,7 +13,7 @@ import HTTP
 
 class RollerShuttersController
 {
-    let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
+    
   //  let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
    // let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
     let sunriseSunsetController = SunriseSunsetController()
@@ -27,7 +27,7 @@ class RollerShuttersController
         for  index in 0..<rollerShuttersCurrentPositions.count
         {
             let open = self.actionCheckIfOpen(rollerShutterIndex: index) ?? false
-            self.internalVarAccessQueue.sync {
+            internalVarAccessQueue.sync {
                 self.rollerShuttersCurrentPositions[index] = open ? 100 : 0
                 self.rollerShuttersTargetPositions[index] = open ? 100 : 0
             }
@@ -36,20 +36,20 @@ class RollerShuttersController
         drop.get("window-covering/getCurrentPosition", Int.self)
         { request, index in
             var value = 0
-            self.internalVarAccessQueue.sync {value = self.rollerShuttersCurrentPositions[index]}
+            internalVarAccessQueue.sync {value = self.rollerShuttersCurrentPositions[index]}
             return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/getTargetPosition", Int.self)
         { request, index in
             var value = 0
-            self.internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[index]}
+            internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[index]}
             return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/setTargetPosition", Int.self, Int.self)
         { request, index, position in
-            self.internalVarAccessQueue.async {
+            internalVarAccessQueue.async {
                 if self.rollerShuttersTargetPositions[index] != position
                 {
                     let currentPos = self.rollerShuttersCurrentPositions[index]
@@ -72,7 +72,7 @@ class RollerShuttersController
         drop.get("window-covering/getCurrentPosition/all")
         { request in
             var value = 0
-            self.internalVarAccessQueue.sync
+            internalVarAccessQueue.sync
                 {
                     for index in 0..<Places.count.rawValue {value += self.rollerShuttersCurrentPositions[index]}
                     value = Int(Float(value)/Float(Places.count.rawValue))
@@ -83,13 +83,13 @@ class RollerShuttersController
         drop.get("window-covering/getTargetPosition/all")
         { request in
             var value = 0
-            self.internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[0]}
+            internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[0]}
             return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/setTargetPosition/all", Int.self)
         { request, position in
-            self.internalVarAccessQueue.async {
+            internalVarAccessQueue.async {
                 if self.rollerShuttersTargetPositions[0] != position
                 {
                     self.actionForAllRollerShutters(position: position)
@@ -117,7 +117,7 @@ class RollerShuttersController
     
     func timerSeconde(date:String)
     {
-        self.internalVarAccessQueue.async
+        internalVarAccessQueue.async
             {
             guard let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime else {return}
             if date == "\(sunriseTime):00"

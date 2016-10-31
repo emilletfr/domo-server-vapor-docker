@@ -8,6 +8,7 @@ import Dispatch
 
 //let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
 let drop = Droplet()
+let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
 //drop.preparations.append(Temperature.self)
 //drop.preparations.append(RollingShutter.self)
 //try drop.addProvider(VaporSQLite.Provider.self)

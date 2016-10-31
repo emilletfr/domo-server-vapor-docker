@@ -63,7 +63,7 @@ class ThermostatController
     var currentHeatingCoolingState = HeatingCoolingState.HEAT
     var targetHeatingCoolingState = HeatingCoolingState.HEAT
     enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
-    let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
+   // let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
     
     init()
     {
@@ -99,7 +99,7 @@ class ThermostatController
         
         drop.get("thermostat/getCurrentHeatingCoolingState") { request in
             var value = 0
-            self.internalVarAccessQueue.sync {
+            internalVarAccessQueue.sync {
                 value = self.currentHeatingCoolingState.rawValue
             }
             return try JSON(node: ["value": value])
@@ -109,7 +109,7 @@ class ThermostatController
         
         drop.get("thermostat/getTargetHeatingCoolingState") { request in
             var value = 0
-            self.internalVarAccessQueue.sync {
+            internalVarAccessQueue.sync {
                 value = self.targetHeatingCoolingState.rawValue
             }
             return try JSON(node: ["value": value])
@@ -117,7 +117,7 @@ class ThermostatController
         
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
             guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
-            self.internalVarAccessQueue.async {
+            internalVarAccessQueue.async {
                 if intValue == HeatingCoolingState.OFF.rawValue { self.thermostatTargetTemperature = 5 } // HORS GEL
                 self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
                 self.targetHeatingCoolingState = self.currentHeatingCoolingState
@@ -130,7 +130,7 @@ class ThermostatController
         
         drop.get("thermostat/getCurrentTemperature") { request in
             var value = 0.0
-            self.internalVarAccessQueue.sync {
+            internalVarAccessQueue.sync {
                 value = self.indoorTempController.degresValue
             }
             return try JSON(node: ["value": value])
@@ -140,7 +140,7 @@ class ThermostatController
         
         drop.get("thermostat/getTargetTemperature") { request in
             var value = 0
-            self.internalVarAccessQueue.sync {
+            internalVarAccessQueue.sync {
                 let temperature = self.thermostatTargetTemperature < 10 ? 10 :  Int(self.thermostatTargetTemperature)
                 value = temperature
             }
@@ -148,7 +148,7 @@ class ThermostatController
         }
         
         drop.get("thermostat/setTargetTemperature", String.self) { request, value in
-            self.internalVarAccessQueue.async {
+            internalVarAccessQueue.async {
                 if self.thermostatTargetTemperature != Int(value)
                 {
                     self.thermostatTargetTemperature = Int(value) ?? 10
@@ -170,7 +170,7 @@ class ThermostatController
         
         drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
             var value = 0
-            self.internalVarAccessQueue.sync {
+            internalVarAccessQueue.sync {
                 value = self.indoorTempController.humidityValue
             }
             return try JSON(node: ["value": value])
