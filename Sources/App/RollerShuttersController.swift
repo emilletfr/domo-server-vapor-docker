@@ -77,17 +77,11 @@ class RollerShuttersController
           //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
             if self.rollerShuttersTargetPositions[0] != position
             {
-                self.rollerShuttersTargetPositions[0] = position
-                self.rollerShuttersTargetPositions[1] = position
-                self.rollerShuttersTargetPositions[2] = position
-                self.rollerShuttersTargetPositions[3] = position
+
                 self.actionForAllRollerShutters(position: position)
-                self.rollerShuttersCurrentPositions[0] = position
-                self.rollerShuttersCurrentPositions[1] = position
-                self.rollerShuttersCurrentPositions[2] = position
-                self.rollerShuttersCurrentPositions[3] = position
+
             }
-            return try JSON(node: ["value": 100])
+            return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
         }
         
         
@@ -125,10 +119,18 @@ class RollerShuttersController
     
     func actionForAllRollerShutters(position:Int)
     {
+        self.rollerShuttersTargetPositions[0] = position
+        self.rollerShuttersTargetPositions[1] = position
+        self.rollerShuttersTargetPositions[2] = position
+        self.rollerShuttersTargetPositions[3] = position
         for index in 0...3
         {
             self.actionOpen(rollerShutterIndex: index, position:position)
         }
+        self.rollerShuttersCurrentPositions[0] = position
+        self.rollerShuttersCurrentPositions[1] = position
+        self.rollerShuttersCurrentPositions[2] = position
+        self.rollerShuttersCurrentPositions[3] = position
     }
     
     func actionOpen(rollerShutterIndex:Int, position:Int)
