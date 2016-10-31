@@ -88,7 +88,7 @@ class ThermostatController
             while (true)
             {
                 self?.refresh()
-                sleep(60)
+                sleep(60*3)
             }
         }
         
