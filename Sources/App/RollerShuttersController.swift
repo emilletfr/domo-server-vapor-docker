@@ -49,19 +49,23 @@ class RollerShuttersController
         
         drop.get("window-covering/setTargetPosition", Int.self, Int.self)
         { request, index, position in
-        self.internalVarAccessQueue.sync {
-            let currentPos = self.rollerShuttersCurrentPositions[index]
-            let targetPos = self.rollerShuttersTargetPositions[index]
-            let isWorking = self.rollerShuttersAreWorking[index]
-            let offset = currentPos > position ? currentPos - position : position - currentPos
-            if position != targetPos && isWorking == false && offset > 15
-            {
-                self.rollerShuttersAreWorking[index] = true
-                self.rollerShuttersTargetPositions[index] = position
-                self.actionOpen(rollerShutterIndex: index, position: position )
-                self.rollerShuttersCurrentPositions[index] = position
-                self.rollerShuttersAreWorking[index] = false
-            }
+            self.internalVarAccessQueue.sync {
+                if self.rollerShuttersTargetPositions[index] != position
+                {
+                    
+                    let currentPos = self.rollerShuttersCurrentPositions[index]
+                    let targetPos = self.rollerShuttersTargetPositions[index]
+                    let isWorking = self.rollerShuttersAreWorking[index]
+                    let offset = currentPos > position ? currentPos - position : position - currentPos
+                    if position != targetPos && isWorking == false && offset > 15
+                    {
+                        self.rollerShuttersAreWorking[index] = true
+                        self.rollerShuttersTargetPositions[index] = position
+                        self.actionOpen(rollerShutterIndex: index, position: position )
+                        self.rollerShuttersCurrentPositions[index] = position
+                        self.rollerShuttersAreWorking[index] = false
+                    }
+                }
             }
             return try JSON(node: ["value": position])
         }
