@@ -25,7 +25,6 @@ class OutdoorTempController
     
     init()
     {
- //       self.client = droplet.client
         DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Timer").async
             {
                 while true
@@ -35,9 +34,9 @@ class OutdoorTempController
                 }
         }
         
-        drop.get("outdoorTemp") { request in
+        drop.get("temperature-sensor/getCurrentTemperature") { request in
           //  guard let degresValue = self.degresValue else { let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
-            return String(describing: self.degresValue)
+            return try JSON(node: ["value": self.degresValue])
         }
     }
     

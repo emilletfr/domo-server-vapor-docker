@@ -69,10 +69,7 @@ class RollerShuttersController
             var value = 0
             self.internalVarAccessQueue.sync
                 {
-                    for index in 0..<Places.count.rawValue
-                    {
-                        value += self.rollerShuttersCurrentPositions[index]
-                    }
+                    for index in 0..<Places.count.rawValue {value += self.rollerShuttersCurrentPositions[index]}
                     value = Int(Float(value)/Float(Places.count.rawValue))
             }
             return try JSON(node: ["value": value])
