@@ -162,7 +162,6 @@ class ThermostatController
         drop.get("thermostat/setHeatingThresholdTemperature", Int.self) { request, value in
             try JSON(node: ["value": 20])
         }
-
         
         drop.get("thermostat/getCoolingThresholdTemperature") { request in
             try JSON(node: ["value": 20])
@@ -203,7 +202,6 @@ class ThermostatController
             _ = try drop.client.get(urlString)
         }
         catch {log("error : unable to forceHeaterOnOrOff(\((heaterOnOrOff == true ? "1" : "0")))")}
- 
     }
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
