@@ -73,7 +73,7 @@ class RollerShuttersController
         drop.get("windows-covering/setTargetPosition", Int.self)
         { request, position in
           //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
-           // self.actionForAllRollerShutters(openOrClose: position == 100)
+            self.actionForAllRollerShutters(openOrClose: position == 100)
             return try JSON(node: ["value": position])
         }
         
