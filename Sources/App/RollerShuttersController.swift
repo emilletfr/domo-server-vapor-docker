@@ -13,6 +13,7 @@ import HTTP
 
 class RollerShuttersController
 {
+    let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
     let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
     let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
     let sunriseSunsetController = SunriseSunsetController()
@@ -25,18 +26,24 @@ class RollerShuttersController
         for  index in 0..<rollerShuttersCurrentPositions.count
         {
             let open = self.actionCheckIfOpen(rollerShutterIndex: index) ?? false
-            self.rollerShuttersCurrentPositions[index] = open ? 100 : 0
-            self.rollerShuttersTargetPositions[index] = open ? 100 : 0
+            self.internalVarAccessQueue.sync {
+                self.rollerShuttersCurrentPositions[index] = open ? 100 : 0
+                self.rollerShuttersTargetPositions[index] = open ? 100 : 0
+            }
         }
         
         drop.get("window-covering/getCurrentPosition", Int.self)
         { request, index in
-            return try JSON(node: ["value": self.rollerShuttersCurrentPositions[index]])
+            var value = 0
+            self.internalVarAccessQueue.sync {value = self.rollerShuttersCurrentPositions[index]}
+            return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/getTargetPosition", Int.self)
         { request, index in
-            return try JSON(node: ["value": self.rollerShuttersTargetPositions[index]])
+            var value = 0
+            self.internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[index]}
+            return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/setTargetPosition", Int.self, Int.self)
@@ -60,29 +67,23 @@ class RollerShuttersController
 
         drop.get("window-covering/getCurrentPosition/all")
         { request in
-        //    guard let open = self.actionCheckIfOpen(rollerShutterIndex: 0) else {return "error"}
-            return try JSON(node: ["value": self.rollerShuttersCurrentPositions[3]])
-        //    return try JSON(node: ["value": 100])
+            var value = 0
+            self.internalVarAccessQueue.sync {value = self.rollerShuttersCurrentPositions[3]}
+            return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/getTargetPosition/all")
         { request in
-           // guard let open = self.actionCheckIfOpen(rollerShutterIndex: 0) else {return "error"}
-          //  return try JSON(node: ["value": open == true ? 100 : 0])
-            return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
-         //   return try JSON(node: ["value": 100])
+            var value = 0
+            self.internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[0]}
+            return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/setTargetPosition/all", Int.self)
         { request, position in
-          //  self.actionQueue.sync {self.actionForAllRollerShutters(openOrClose: position == 100)}
             if self.rollerShuttersTargetPositions[0] != position
             {
-                self.actionAllQueue.async {
-                    self.actionForAllRollerShutters(position: position)
-                }
-                
-
+                self.actionAllQueue.async {self.actionForAllRollerShutters(position: position)}
             }
             return try JSON(node: ["value": self.rollerShuttersTargetPositions[0]])
         }
