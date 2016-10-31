@@ -16,7 +16,7 @@ class ThermostatController
 {
     private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
     
-    var thermostatTargetTemperature : Double
+    var thermostatTargetTemperature : Int
         {
             get {
                 /*
@@ -26,8 +26,8 @@ class ThermostatController
                     guard
                         let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)),
                         let readString = String(data: readData, encoding: .utf8),
-                        let value = Double(readString)
-                        else {print("error : getting thermostatTargetTemperature"); return 20.0}
+                        let value = Int(readString)
+                        else {print("error : getting thermostatTargetTemperature"); return 20}
                 return value
              }
             set (newValue) {
@@ -108,7 +108,7 @@ class ThermostatController
         
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
             guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
-            if intValue == HeatingCoolingState.OFF.rawValue { self.thermostatTargetTemperature = 5.0 } // HORS GEL
+            if intValue == HeatingCoolingState.OFF.rawValue { self.thermostatTargetTemperature = 5 } // HORS GEL
             self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
             self.targetHeatingCoolingState = self.currentHeatingCoolingState
             self.refresh()
@@ -124,13 +124,16 @@ class ThermostatController
         //MARK:  TargetTemperature
         
         drop.get("thermostat/getTargetTemperature") { request in
-            let temperature = self.thermostatTargetTemperature < 10.0 ? 10 :  Int(self.thermostatTargetTemperature)
+            let temperature = self.thermostatTargetTemperature < 10 ? 10 :  Int(self.thermostatTargetTemperature)
             return  try JSON(node: ["value": temperature])
         }
         
         drop.get("thermostat/setTargetTemperature", String.self) { request, value in
-            self.thermostatTargetTemperature = Double(value) ?? 10.0
-            self.refresh()
+            if self.thermostatTargetTemperature != Int(value)
+            {
+                self.thermostatTargetTemperature = Int(value) ?? 10
+                self.refresh()
+            }
             return try JSON(node: ["value": self.thermostatTargetTemperature])
         }
         
@@ -178,7 +181,7 @@ class ThermostatController
 
         log("targetTemperature : \(self.thermostatTargetTemperature) - indoorTemperature : \(self.indoorTempController.degresValue)° - humidity : \(self.indoorTempController.humidityValue)% - outdoorTemperature : \(Int(self.outdoorTempController.degresValue))°")
         
-        let heating = self.indoorTempController.degresValue < self.thermostatTargetTemperature
+        let heating = Int(self.indoorTempController.degresValue) < self.thermostatTargetTemperature
         
         if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
         if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
