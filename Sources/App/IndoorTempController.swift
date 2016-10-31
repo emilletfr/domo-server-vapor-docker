@@ -15,18 +15,22 @@ import HTTP
 class IndoorTempController //: NSObject//, XMLParserDelegate
 {
     let serialQueue = DispatchQueue(label: "net.emilletfr.domo.IndoorTempManager")
-    
+    var humidityValue : Int = 50
+    var degresValue : Double = 15.0
+    /*
     private var internalHumidityValue : Int = 50
     var humidityValue : Int {
         get {return serialQueue.sync { internalHumidityValue }}
         set (newValue) {serialQueue.sync { internalHumidityValue = newValue}}
     }
-    
+ */
+    /*
     private var internalDegresValue : Double = 15.0
     var degresValue : Double {
         get {return serialQueue.sync { internalDegresValue }}
         set (newValue) {serialQueue.sync { internalDegresValue = newValue}}
     }
+ */
   //  private var client: ClientProtocol.Type!
     var urlSession : URLSession?
  //   var repeatTimer: DispatchSourceTimer?
