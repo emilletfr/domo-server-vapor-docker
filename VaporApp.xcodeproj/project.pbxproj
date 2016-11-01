@@ -7695,15 +7695,15 @@
 		OBJ_1330 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_1339 /* ThermostatController.swift */,
+				OBJ_1335 /* RollerShuttersController.swift */,
 				OBJ_1331 /* IndoorTempController.swift */,
 				OBJ_1332 /* Log.swift */,
 				OBJ_1333 /* main.swift */,
 				OBJ_1334 /* OutdoorTempController.swift */,
-				OBJ_1335 /* RollerShuttersController.swift */,
 				OBJ_1336 /* RollingShutter.swift */,
 				OBJ_1337 /* RollingShutterController.swift */,
 				OBJ_1338 /* SunriseSunsetController.swift */,
-				OBJ_1339 /* ThermostatController.swift */,
 				OBJ_1340 /* Controllers */,
 				OBJ_1342 /* Middleware */,
 				OBJ_1344 /* Models */,

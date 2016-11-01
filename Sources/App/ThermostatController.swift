@@ -16,13 +16,14 @@ class ThermostatController
 {
     private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
     
-    var thermostatTargetTemperature : Int
+    var thermostatTargetTemperature : Int = 10
+        /*
         {
         get {
-            /*
-             let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
-             let value = datasourceDictionary?["ThermostatTargetTemperature"]
-             */
+            
+            //   let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
+            //  let value = datasourceDictionary?["ThermostatTargetTemperature"]
+            
             guard
                 let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)),
                 let readString = String(data: readData, encoding: .utf8),
@@ -31,11 +32,11 @@ class ThermostatController
             return value
         }
         set (newValue) {
-            /*
-             let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
-             let datasourceAny = datasourceDictionary as! AnyObject
-             guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
-             */
+            
+            //    let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
+            //   let datasourceAny = datasourceDictionary as! AnyObject
+            //  guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
+            
             let newValueString = "\(newValue)"
             guard
                 let writeData = newValueString.data(using: .utf8),
@@ -43,6 +44,7 @@ class ThermostatController
                 else {print("error : setting thermostatTargetTemperature"); return}
         }
     }
+ */
     /*{
      get {let value = UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"); return (value < 10.0 ? 10.0 : value) }
      set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
@@ -89,7 +91,7 @@ class ThermostatController
             while (true)
             {
                 self?.refresh()
-                sleep(60*3)
+                sleep(60*2)
             }
         }
         
@@ -102,6 +104,11 @@ class ThermostatController
             internalVarAccessQueue.sync {
                 value = self.currentHeatingCoolingState.rawValue
             }
+            return try JSON(node: ["value": value])
+        }
+        
+        drop.get("thermostat/setCurrentHeatingCoolingState", Int.self) { request, value in
+            internalVarAccessQueue.sync {}
             return try JSON(node: ["value": value])
         }
         
@@ -136,6 +143,11 @@ class ThermostatController
             return try JSON(node: ["value": value])
         }
         
+        drop.get("thermostat/setCurrentTemperature", Int.self) { request, value in
+            internalVarAccessQueue.sync {}
+            return try JSON(node: ["value": value])
+        }
+        
         //MARK:  TargetTemperature
         
         drop.get("thermostat/getTargetTemperature") { request in
@@ -152,7 +164,7 @@ class ThermostatController
                 if self.thermostatTargetTemperature != Int(value)
                 {
                     self.thermostatTargetTemperature = Int(value) ?? 10
-                    self.refresh()
+                  //  self.refresh()
                 }
             }
             return try JSON(node: ["value": value])
@@ -176,27 +188,10 @@ class ThermostatController
             return try JSON(node: ["value": value])
         }
         
-        /*
-         
-         // Optional Characteristics
-         
-         drop.get("thermostat/getHeatingThresholdTemperature") { request in
-         try JSON(node: ["value": 20])
-         }
-         
-         drop.get("thermostat/setHeatingThresholdTemperature", Int.self) { request, value in
-         try JSON(node: ["value": 20])
-         }
-         
-         drop.get("thermostat/getCoolingThresholdTemperature") { request in
-         try JSON(node: ["value": 20])
-         }
-         
-         drop.get("thermostat/setCoolingThresholdTemperature", Int.self) { request, value in
-         try JSON(node: ["value": 20])
-         }
-         */
-        
+        drop.get("humidity-sensor/setCurrentRelativeHumidity", Int.self) { request, value in
+            internalVarAccessQueue.sync {}
+            return try JSON(node: ["value": value])
+        }
     }
     
     func refresh()

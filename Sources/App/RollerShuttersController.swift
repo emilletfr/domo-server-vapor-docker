@@ -49,7 +49,7 @@ class RollerShuttersController
         
         drop.get("window-covering/setTargetPosition", Int.self, Int.self)
         { request, index, position in
-            internalVarAccessQueue.async {
+            DispatchQueue(label: "net.emillet.domo.RollerShuttersController.\(index)").async {
                 if self.rollerShuttersTargetPositions[index] != position
                 {
                     let currentPos = self.rollerShuttersCurrentPositions[index]
@@ -74,8 +74,9 @@ class RollerShuttersController
             var value = 0
             internalVarAccessQueue.sync
                 {
-                    for index in 0..<Places.count.rawValue {value += self.rollerShuttersCurrentPositions[index]}
-                    value = Int(Float(value)/Float(Places.count.rawValue))
+                //    for index in 0..<Places.count.rawValue {value += self.rollerShuttersCurrentPositions[index]}
+                  //  value = Int(Float(value)/Float(Places.count.rawValue))
+                    value = self.rollerShuttersCurrentPositions[Places.KITCHEN.rawValue]
             }
             return try JSON(node: ["value": value])
         }
@@ -83,14 +84,14 @@ class RollerShuttersController
         drop.get("window-covering/getTargetPosition/all")
         { request in
             var value = 0
-            internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[0]}
+            internalVarAccessQueue.sync {value = self.rollerShuttersTargetPositions[Places.KITCHEN.rawValue]}
             return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/setTargetPosition/all", Int.self)
         { request, position in
-            internalVarAccessQueue.async {
-                if self.rollerShuttersTargetPositions[0] != position
+            DispatchQueue(label: "net.emillet.domo.RollerShuttersController.All").async {
+                if self.rollerShuttersTargetPositions[Places.KITCHEN.rawValue] != position
                 {
                     self.actionForAllRollerShutters(position: position)
                 }
@@ -117,8 +118,6 @@ class RollerShuttersController
     
     func timerSeconde(date:String)
     {
-        internalVarAccessQueue.async
-            {
             guard let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime else {return}
             if date == "\(sunriseTime):00"
             {
@@ -130,7 +129,6 @@ class RollerShuttersController
                 log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
                 self.actionForAllRollerShutters(position: 0)
             }
-        }
     }
     
     func actionForAllRollerShutters(position:Int)

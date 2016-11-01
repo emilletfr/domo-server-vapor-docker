@@ -9,6 +9,7 @@ import Dispatch
 //let drop = Droplet(preparations:[Temperature.self, RollingShutter.self], providers:[VaporSQLite.Provider.self])
 let drop = Droplet()
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
+
 //drop.preparations.append(Temperature.self)
 //drop.preparations.append(RollingShutter.self)
 //try drop.addProvider(VaporSQLite.Provider.self)
@@ -84,7 +85,7 @@ drop.get("plaintext") { request in
 
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
-drop.log.enabled =  [.error, .fatal]
+//drop.log.enabled =  [.error, .fatal]
 drop.run()
 
 
