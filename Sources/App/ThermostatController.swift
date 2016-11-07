@@ -139,6 +139,7 @@ class ThermostatController
             var value = 0.0
             internalVarAccessQueue.sync {
                 value = self.indoorTempController.degresValue
+      //          value = self.indoorTempController.degresValue*10 - 190
             }
             return try JSON(node: ["value": value])
         }
@@ -200,7 +201,7 @@ class ThermostatController
         
         log("targetTemperature : \(self.thermostatTargetTemperature) - indoorTemperature : \(self.indoorTempController.degresValue)° - humidity : \(self.indoorTempController.humidityValue)% - outdoorTemperature : \(Int(self.outdoorTempController.degresValue))°")
         
-        let heating = Int(self.indoorTempController.degresValue) < self.thermostatTargetTemperature
+              let heating = self.indoorTempController.degresValue < Double(self.thermostatTargetTemperature)
         
         if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
         if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
