@@ -33,7 +33,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
  */
   //  private var client: ClientProtocol.Type!
     var urlSession : URLSession?
-    var repeatTimer: DispatchSourceTimer?
+ //   var repeatTimer: DispatchSourceTimer?
     var urlSessionDataTask : URLSessionDataTask?
     var data : Data?
  //   var timer : Timer?
@@ -42,13 +42,13 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      init()
     {
-        
+        /*
         self.repeatTimer?.cancel()
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(10))
-        self.repeatTimer?.setEventHandler(handler: self.repeaterTimer)
+        self.repeatTimer?.setEventHandler(handler: self.retrieveTemp)
         self.repeatTimer?.resume()
- 
+ */
         
         self.repeatTimerQueue = DispatchQueue(label: "IndoorTempController.Timer")
         self.repeatTimerQueue?.async { // DispatchSourceTimer : 100% cpu
@@ -58,12 +58,6 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
                 sleep(10)
             }
         }
-    }
-    
-    
-    func repeaterTimer()
-    {
-        log("repeatTimer(")
     }
     
     
