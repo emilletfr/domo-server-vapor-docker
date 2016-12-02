@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07A2CC161DEC790200D54A90 /* InBedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A2CC151DEC790200D54A90 /* InBedController.swift */; };
 		OBJ_1400 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Array.swift */; };
 		OBJ_1401 /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Bool+String.swift */; };
 		OBJ_1402 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Box.swift */; };
@@ -4857,6 +4858,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07A2CC151DEC790200D54A90 /* InBedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InBedController.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Bool+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
 		OBJ_100 /* bio_lib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bio_lib.c; sourceTree = "<group>"; };
 		OBJ_1000 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
@@ -7698,6 +7700,7 @@
 				OBJ_1339 /* ThermostatController.swift */,
 				OBJ_1335 /* RollerShuttersController.swift */,
 				OBJ_1331 /* IndoorTempController.swift */,
+				07A2CC151DEC790200D54A90 /* InBedController.swift */,
 				OBJ_1332 /* Log.swift */,
 				OBJ_1333 /* main.swift */,
 				OBJ_1334 /* OutdoorTempController.swift */,
@@ -11960,6 +11963,7 @@
 				OBJ_3601 /* RollerShuttersController.swift in Sources */,
 				OBJ_3602 /* RollingShutter.swift in Sources */,
 				OBJ_3603 /* RollingShutterController.swift in Sources */,
+				07A2CC161DEC790200D54A90 /* InBedController.swift in Sources */,
 				OBJ_3604 /* SunriseSunsetController.swift in Sources */,
 				OBJ_3605 /* ThermostatController.swift in Sources */,
 				OBJ_3606 /* TemperatureController.swift in Sources */,

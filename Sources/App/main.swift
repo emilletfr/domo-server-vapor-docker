@@ -16,8 +16,6 @@ let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarA
 let _ = drop.config["app", "key"]?.string ?? ""
 
 
-
-
 //Node().fil
 //print("content:\(content)")
 /*
@@ -35,6 +33,8 @@ try? FileManager.default.files(path: "Public").forEach { name in
 
 //var outdoorTempController = OutdoorTempController(droplet: drop)
 //var indoorTempController = IndoorTempController(droplet: drop)
+let inBedController = InBedController()
+let sunriseSunsetController = SunriseSunsetController()
 _ = ThermostatController()
 _ = RollerShuttersController()
 
@@ -85,7 +85,7 @@ drop.get("plaintext") { request in
 
 drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
-//drop.log.enabled =  [.error, .fatal]
+drop.log.enabled =  [.error, .fatal]
 drop.run()
 
 

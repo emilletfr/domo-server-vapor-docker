@@ -13,14 +13,13 @@ import HTTP
 
 class RollerShuttersController
 {
-    
   //  let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
    // let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
-    let sunriseSunsetController = SunriseSunsetController()
-    var rollerShuttersCurrentPositions = [0,0,0,0]
-    var rollerShuttersTargetPositions = [0,0,0,0]
+    
+    var rollerShuttersCurrentPositions = [0,0,0,0,0]
+    var rollerShuttersTargetPositions = [0,0,0,0,0]
     var rollerShuttersAreWorking = [false, false, false, false]
-    enum Places: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, count }
+    enum Places: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
     
     init()
     {
@@ -118,7 +117,7 @@ class RollerShuttersController
     
     func timerSeconde(date:String)
     {
-            guard let sunriseTime = self.sunriseSunsetController.sunriseTime , let sunsetTime = self.sunriseSunsetController.sunsetTime else {return}
+            guard let sunriseTime = sunriseSunsetController.sunriseTime , let sunsetTime = sunriseSunsetController.sunsetTime else {return}
             if date == "\(sunriseTime):00"
             {
                 log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
@@ -135,9 +134,12 @@ class RollerShuttersController
     {
         for index in 0..<Places.count.rawValue
         {
-            self.rollerShuttersTargetPositions[index] = position
-            self.actionOpen(rollerShutterIndex: index, position:position)
-            self.rollerShuttersCurrentPositions[index] = position
+            if !(index == Places.BEDROOM.rawValue && position == 100)
+            {
+                self.rollerShuttersTargetPositions[index] = position
+                self.actionOpen(rollerShutterIndex: index, position:position)
+                self.rollerShuttersCurrentPositions[index] = position
+            }
         }
     }
     
