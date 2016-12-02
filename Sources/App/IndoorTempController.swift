@@ -63,7 +63,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
     func repeaterTimer()
     {
-        log("repeatTimer()")
+        log("repeatTimer(")
     }
     
     
