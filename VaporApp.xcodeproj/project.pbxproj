@@ -1548,13 +1548,9 @@
 		OBJ_3611 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1340 /* main.swift */; };
 		OBJ_3612 /* OutdoorTempController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1341 /* OutdoorTempController.swift */; };
 		OBJ_3613 /* RollerShuttersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1342 /* RollerShuttersController.swift */; };
-		OBJ_3614 /* RollingShutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1343 /* RollingShutter.swift */; };
-		OBJ_3615 /* RollingShutterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1344 /* RollingShutterController.swift */; };
 		OBJ_3616 /* SunriseSunsetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1345 /* SunriseSunsetController.swift */; };
 		OBJ_3617 /* ThermostatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1346 /* ThermostatController.swift */; };
-		OBJ_3618 /* TemperatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1348 /* TemperatureController.swift */; };
 		OBJ_3619 /* SampleMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1350 /* SampleMiddleware.swift */; };
-		OBJ_3620 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1352 /* Temperature.swift */; };
 		OBJ_3622 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1361 /* libc.framework */; };
 		OBJ_3623 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1360 /* Core.framework */; };
 		OBJ_3624 /* CLibreSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1362 /* CLibreSSL.framework */; };
@@ -5177,14 +5173,10 @@
 		OBJ_1340 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_1341 /* OutdoorTempController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdoorTempController.swift; sourceTree = "<group>"; };
 		OBJ_1342 /* RollerShuttersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerShuttersController.swift; sourceTree = "<group>"; };
-		OBJ_1343 /* RollingShutter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingShutter.swift; sourceTree = "<group>"; };
-		OBJ_1344 /* RollingShutterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingShutterController.swift; sourceTree = "<group>"; };
 		OBJ_1345 /* SunriseSunsetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetController.swift; sourceTree = "<group>"; };
 		OBJ_1346 /* ThermostatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatController.swift; sourceTree = "<group>"; };
-		OBJ_1348 /* TemperatureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureController.swift; sourceTree = "<group>"; };
 		OBJ_135 /* bs_cbs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bs_cbs.c; sourceTree = "<group>"; };
 		OBJ_1350 /* SampleMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMiddleware.swift; sourceTree = "<group>"; };
-		OBJ_1352 /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		OBJ_1354 /* Config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Config; sourceTree = SOURCE_ROOT; };
 		OBJ_1355 /* CoreTeststttt */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CoreTeststttt; sourceTree = SOURCE_ROOT; };
 		OBJ_1356 /* Localization */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Localization; sourceTree = SOURCE_ROOT; };
@@ -7674,31 +7666,19 @@
 		OBJ_1336 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_1340 /* main.swift */,
+				OBJ_1346 /* ThermostatController.swift */,
+				OBJ_1342 /* RollerShuttersController.swift */,
+				OBJ_1345 /* SunriseSunsetController.swift */,
+				OBJ_1341 /* OutdoorTempController.swift */,
 				OBJ_1337 /* InBedController.swift */,
 				OBJ_1338 /* IndoorTempController.swift */,
 				OBJ_1339 /* Log.swift */,
-				OBJ_1340 /* main.swift */,
-				OBJ_1341 /* OutdoorTempController.swift */,
-				OBJ_1342 /* RollerShuttersController.swift */,
-				OBJ_1343 /* RollingShutter.swift */,
-				OBJ_1344 /* RollingShutterController.swift */,
-				OBJ_1345 /* SunriseSunsetController.swift */,
-				OBJ_1346 /* ThermostatController.swift */,
-				OBJ_1347 /* Controllers */,
 				OBJ_1349 /* Middleware */,
-				OBJ_1351 /* Models */,
 			);
 			name = App;
 			path = Sources/App;
 			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_1347 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_1348 /* TemperatureController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
 		};
 		OBJ_1349 /* Middleware */ = {
 			isa = PBXGroup;
@@ -7706,14 +7686,6 @@
 				OBJ_1350 /* SampleMiddleware.swift */,
 			);
 			path = Middleware;
-			sourceTree = "<group>";
-		};
-		OBJ_1351 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_1352 /* Temperature.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		OBJ_1353 /* Tests */ = {
@@ -8419,7 +8391,7 @@
 			path = "Packages/CLibreSSL-1.0.0/Sources/CLibreSSL";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				0769D0ED1DF3278900E01D2D /* Dockerfile */,
@@ -8434,7 +8406,6 @@
 				OBJ_1358 /* Resources */,
 				OBJ_1359 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_657 /* include */ = {
@@ -10521,7 +10492,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1359 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -11983,13 +11954,9 @@
 				OBJ_3611 /* main.swift in Sources */,
 				OBJ_3612 /* OutdoorTempController.swift in Sources */,
 				OBJ_3613 /* RollerShuttersController.swift in Sources */,
-				OBJ_3614 /* RollingShutter.swift in Sources */,
-				OBJ_3615 /* RollingShutterController.swift in Sources */,
 				OBJ_3616 /* SunriseSunsetController.swift in Sources */,
 				OBJ_3617 /* ThermostatController.swift in Sources */,
-				OBJ_3618 /* TemperatureController.swift in Sources */,
 				OBJ_3619 /* SampleMiddleware.swift in Sources */,
-				OBJ_3620 /* Temperature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

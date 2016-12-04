@@ -54,7 +54,7 @@ class ThermostatController
     
     //var thermostatMode = "auto"
     //  private var client: ClientProtocol.Type!
-    //  var repeatTimer: DispatchSourceTimer?
+      var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
     var outdoorTempController : OutdoorTempController!
@@ -64,11 +64,18 @@ class ThermostatController
     //  var pompOnOrOffMemory : Bool?
     var repeatTimerQueue : DispatchQueue?
     
+   //var repeatTimer : Timer?
+    
     enum HeatingCoolingState: Int { case OFF = 0, HEAT, COOL, AUTO }
     var currentHeatingCoolingState = HeatingCoolingState.HEAT
     var targetHeatingCoolingState = HeatingCoolingState.HEAT
     enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
    // let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
+    
+    func test()
+    {
+        log("test")
+    }
     
     init()
     {
@@ -81,14 +88,27 @@ class ThermostatController
         self.outdoorTempController = OutdoorTempController()
        // self.inBedController = InBedController()
         
-        /*
-         self.repeatTimer?.cancel()
-         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
-         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(60))
-         self.repeatTimer?.setEventHandler(handler: self.refresh)
-         self.repeatTimer?.resume()
-         */
         
+         self.repeatTimer?.cancel()
+     //    self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
+        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
+        
+      //  DispatchQueue.global(qos:.background).async
+         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(1))
+         self.repeatTimer?.setEventHandler(handler: self.test)
+         self.repeatTimer?.resume()
+        
+        
+     //   self.repeatTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(test()), userInfo: nil, repeats: true)
+        /*
+        if #available(OSX 10.12, *) {
+            self.repeatTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer : Timer) in
+                log("timer")
+            })
+        } else {
+            // Fallback on earlier versions
+        }
+        */
         self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
         self.repeatTimerQueue?.async { [weak self] in
             sleep(5)
@@ -201,32 +221,21 @@ class ThermostatController
     
     func refresh()
     {
-        
-        // https://sheets.googleapis.com/v4/spreadsheets/1BVicUXfqFM--1V_RobrPuzTStGLADThq925pg_wCzF4/values:batchGet?key=AIzaSyBLwktsWtqrmc_0FQMDTPvfQQc5Gfv08gU
-        
-        self.inBedOffsetTemperature = inBedController.isInBed ? -2 : 0;
-       // log("ThermostatController:refresh")
+         self.inBedOffsetTemperature = inBedController.isInBed ? -2 : 0;
+        let heating = self.indoorTempController.degresValue < Double(self.thermostatTargetTemperature + self.inBedOffsetTemperature)
+        if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
+        if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
         
         var logString = ""
-        
         logString += "targetTemp : \(self.thermostatTargetTemperature)"
         logString += " - inBed : \((inBedController.isInBed == true ? "1" : "0"))"
         logString += " - inTemp : \(self.indoorTempController.degresValue)°"
         logString += " - humidity : \(self.indoorTempController.humidityValue)%"
         logString += " - outTemp : \(Int(self.outdoorTempController.degresValue))°"
-
-        
-        let heating = self.indoorTempController.degresValue < Double(self.thermostatTargetTemperature + self.inBedOffsetTemperature)
-        
-        if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
-        if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
-        
         logString += " - heaterOn : \((heating == true ? "1" : "0"))"
         logString += " - pompOn : \((heating == true ? "1" : "0"))"
         logString += " - sunrise : \(sunriseSunsetController.sunriseTime ?? "nil")"
         logString += " - sunset : \(sunriseSunsetController.sunsetTime ?? "nil")"
-        
-      //  let sunriseTime = sunriseSunsetController.sunriseTime , let sunsetTime = sunriseSunsetController.sunsetTime
         
         
         DispatchQueue.global(qos:.background).async {
