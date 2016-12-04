@@ -54,7 +54,7 @@ class ThermostatController
     
     //var thermostatMode = "auto"
     //  private var client: ClientProtocol.Type!
-      var repeatTimer: DispatchSourceTimer?
+   //   var repeatTimer: DispatchSourceTimer?
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
     var outdoorTempController : OutdoorTempController!
@@ -72,11 +72,6 @@ class ThermostatController
     enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
    // let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
     
-    func test()
-    {
-        log("test")
-    }
-    
     init()
     {
         if FileManager.default.fileExists(atPath: self.dataPath) == false
@@ -88,27 +83,16 @@ class ThermostatController
         self.outdoorTempController = OutdoorTempController()
        // self.inBedController = InBedController()
         
-        
+        /*
          self.repeatTimer?.cancel()
      //    self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
         self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
-        
       //  DispatchQueue.global(qos:.background).async
          self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(1))
          self.repeatTimer?.setEventHandler(handler: self.test)
          self.repeatTimer?.resume()
-        
-        
-     //   self.repeatTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(test()), userInfo: nil, repeats: true)
-        /*
-        if #available(OSX 10.12, *) {
-            self.repeatTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer : Timer) in
-                log("timer")
-            })
-        } else {
-            // Fallback on earlier versions
-        }
         */
+        
         self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
         self.repeatTimerQueue?.async { [weak self] in
             sleep(5)
