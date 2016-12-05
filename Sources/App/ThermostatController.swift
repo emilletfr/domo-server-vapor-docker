@@ -216,16 +216,16 @@ class ThermostatController
         if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
         
         var logString = ""
-        logString += "trgtTemp : \(self.thermostatTargetTemperature)"
-        logString += ", computTrgtTemp : \(self.computedThermostatTargetTemperature)"
-        logString += ", inBed : \((inBedController.isInBed == true ? "1" : "0"))"
-        logString += ", inTemp : \(self.indoorTempController.degresValue)°"
-        logString += ", humidity : \(self.indoorTempController.humidityValue)%"
-        logString += ", outTemp : \(Int(self.outdoorTempController.degresValue))°"
-        logString += ", heaterOn : \((heating == true ? "1" : "0"))"
-        logString += ", pompOn : \((heating == true ? "1" : "0"))"
-        logString += ", sunrise : \(sunriseSunsetController.sunriseTime ?? "nil")"
-        logString += ", sunset : \(sunriseSunsetController.sunsetTime ?? "nil")"
+        logString += "trgtTemp: \(self.thermostatTargetTemperature)"
+        logString += ", computTrgtTemp: \(self.computedThermostatTargetTemperature)"
+        logString += ", inBed: \((inBedController.isInBed == true ? "1" : "0"))"
+        logString += ", inTemp: \(self.indoorTempController.degresValue)"
+        logString += ", humid: \(self.indoorTempController.humidityValue)%"
+        logString += ", outTemp: \(Int(self.outdoorTempController.degresValue))"
+        logString += ", heaterOn: \((heating == true ? "1" : "0"))"
+        logString += ", pompOn: \((heating == true ? "1" : "0"))"
+        logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
+        logString += ", snset: \(sunriseSunsetController.sunsetTime ?? "nil")"
         log(logString)
         
         DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
