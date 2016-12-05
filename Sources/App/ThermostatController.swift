@@ -15,9 +15,9 @@ import HTTP
 class ThermostatController
 {
     private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
-    
     var thermostatTargetTemperature : Int = 20
-    var inBedOffsetTemperature : Int = 0
+    var computedThermostatTargetTemperature : Int = 20
+ //   var inBedOffsetTemperature : Int = 0
    // var realThermostatTargetTemperature : Int = 10
         /*
         {
@@ -133,10 +133,11 @@ class ThermostatController
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
             guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
             internalVarAccessQueue.async {
-                if intValue == HeatingCoolingState.OFF.rawValue { self.thermostatTargetTemperature = 5 } // HORS GEL
+         //       if intValue == HeatingCoolingState.OFF.rawValue { self.computedThermostatTargetTemperature = 7 } // HORS GEL
+          //      if intValue == HeatingCoolingState.AUTO.rawValue { self.computedThermostatTargetTemperature = self.thermostatTargetTemperature }
                 self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
                 self.targetHeatingCoolingState = self.currentHeatingCoolingState
-                self.refresh()
+            //    self.refresh()
             }
             return try JSON(node: ["value": value])
         }
@@ -147,7 +148,6 @@ class ThermostatController
             var value = 0.0
             internalVarAccessQueue.sync {
                 value = self.indoorTempController.degresValue
-      //          value = self.indoorTempController.degresValue*10 - 190
             }
             return try JSON(node: ["value": value])
         }
@@ -162,7 +162,7 @@ class ThermostatController
         drop.get("thermostat/getTargetTemperature") { request in
             var value = 0
             internalVarAccessQueue.sync {
-                let temperature = (self.thermostatTargetTemperature + self.inBedOffsetTemperature) < 10 ? 10 :  Int(self.thermostatTargetTemperature + self.inBedOffsetTemperature)
+                let temperature = (self.computedThermostatTargetTemperature) < 10 ? 10 :  Int(self.computedThermostatTargetTemperature)
                 value = temperature
             }
             return  try JSON(node: ["value": value])
@@ -205,34 +205,31 @@ class ThermostatController
     
     func refresh()
     {
-         self.inBedOffsetTemperature = inBedController.isInBed ? -2 : 0;
-        let heating = self.indoorTempController.degresValue < Double(self.thermostatTargetTemperature + self.inBedOffsetTemperature)
+    //    self.inBedOffsetTemperature = inBedController.isInBed ? -2 : 0;
+        if self.currentHeatingCoolingState == .OFF {self.computedThermostatTargetTemperature = 5}
+        else
+        {
+            self.computedThermostatTargetTemperature = self.thermostatTargetTemperature + (inBedController.isInBed ? -2 : 0)
+        }
+        let heating = self.indoorTempController.degresValue < Double(self.computedThermostatTargetTemperature)
         if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
         if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
         
         var logString = ""
-        logString += "targetTemp : \(self.thermostatTargetTemperature)"
-        logString += " - inBed : \((inBedController.isInBed == true ? "1" : "0"))"
-        logString += " - inTemp : \(self.indoorTempController.degresValue)°"
-        logString += " - humidity : \(self.indoorTempController.humidityValue)%"
-        logString += " - outTemp : \(Int(self.outdoorTempController.degresValue))°"
-        logString += " - heaterOn : \((heating == true ? "1" : "0"))"
-        logString += " - pompOn : \((heating == true ? "1" : "0"))"
-        logString += " - sunrise : \(sunriseSunsetController.sunriseTime ?? "nil")"
-        logString += " - sunset : \(sunriseSunsetController.sunsetTime ?? "nil")"
-        
-        
-        DispatchQueue.global(qos:.background).async {
-            
-            self.forceHeaterOnOrOff(heaterOnOrOff: heating)
-            
-        }
-        DispatchQueue.global(qos:.background).async {
-            
-            self.forcePompOnOrOff(pompOnOrOff: heating)
-        }
-        
+        logString += "trgtTemp : \(self.thermostatTargetTemperature)"
+        logString += ", computTrgtTemp : \(self.computedThermostatTargetTemperature)"
+        logString += ", inBed : \((inBedController.isInBed == true ? "1" : "0"))"
+        logString += ", inTemp : \(self.indoorTempController.degresValue)°"
+        logString += ", humidity : \(self.indoorTempController.humidityValue)%"
+        logString += ", outTemp : \(Int(self.outdoorTempController.degresValue))°"
+        logString += ", heaterOn : \((heating == true ? "1" : "0"))"
+        logString += ", pompOn : \((heating == true ? "1" : "0"))"
+        logString += ", sunrise : \(sunriseSunsetController.sunriseTime ?? "nil")"
+        logString += ", sunset : \(sunriseSunsetController.sunsetTime ?? "nil")"
         log(logString)
+        
+        DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
+        DispatchQueue.global(qos:.background).async {self.forcePompOnOrOff(pompOnOrOff: heating)}
     }
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
