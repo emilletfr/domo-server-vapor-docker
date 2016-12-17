@@ -14,57 +14,13 @@ import HTTP
 
 class ThermostatController
 {
+    var dataStore = DataModelStore.shared
+    
     private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
     var thermostatTargetTemperature : Int = 20
     var computedThermostatTargetTemperature : Int = 20
- //   var inBedOffsetTemperature : Int = 0
-   // var realThermostatTargetTemperature : Int = 10
-        /*
-        {
-        get {
-            
-            //   let datasourceDictionary = try? PropertyListSerialization.propertyList(from:readData, options: [], format: nil) as? [String:Double],
-            //  let value = datasourceDictionary?["ThermostatTargetTemperature"]
-            
-            guard
-                let readData = try? Data(contentsOf: URL(fileURLWithPath: dataPath)),
-                let readString = String(data: readData, encoding: .utf8),
-                let value = Int(readString)
-                else {print("error : getting thermostatTargetTemperature"); return 20}
-            return value
-        }
-        set (newValue) {
-            
-            //    let datasourceDictionary = ["ThermostatTargetTemperature":"10"]
-            //   let datasourceAny = datasourceDictionary as! AnyObject
-            //  guard let writeData = try? PropertyListSerialization.data(fromPropertyList: datasourceAny, format: .binary, options: 0),
-            
-            let newValueString = "\(newValue)"
-            guard
-                let writeData = newValueString.data(using: .utf8),
-                let _ = try? writeData.write(to: URL(fileURLWithPath: dataPath))
-                else {print("error : setting thermostatTargetTemperature"); return}
-        }
-    }
- */
-    /*{
-     get {let value = UserDefaults.standard.double(forKey: "ThermostatTargetTemperature"); return (value < 10.0 ? 10.0 : value) }
-     set (newValue) {UserDefaults.standard.set(newValue, forKey: "ThermostatTargetTemperature")}
-     }*/
-    
-    //var thermostatMode = "auto"
-    //  private var client: ClientProtocol.Type!
-   //   var repeatTimer: DispatchSourceTimer?
-    //var urlSession : URLSession?
-    var indoorTempController : IndoorTempController!
-    var outdoorTempController : OutdoorTempController!
-    
-    //  var indoorTemperature : Double = 10.0
-    //   var heaterOnOrOffMemory : Bool?
-    //  var pompOnOrOffMemory : Bool?
     var repeatTimerQueue : DispatchQueue?
-    
-   //var repeatTimer : Timer?
+
     
     enum HeatingCoolingState: Int { case OFF = 0, HEAT, COOL, AUTO }
     var currentHeatingCoolingState = HeatingCoolingState.HEAT
@@ -72,27 +28,10 @@ class ThermostatController
     enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
    // let internalVarAccessQueue = DispatchQueue(label: "RollerShuttersController.Internal")
     
+
+    
     init()
-    {
-        if FileManager.default.fileExists(atPath: self.dataPath) == false
-        {
-            try? FileManager.default.moveItem(at: URL(fileURLWithPath: (drop.workDir + "Public/ThermostatTargetTemperature.txt")), to: URL(fileURLWithPath:self.dataPath))
-        }
-        
-        self.indoorTempController = IndoorTempController()
-        self.outdoorTempController = OutdoorTempController()
-       // self.inBedController = InBedController()
-        
-        /*
-         self.repeatTimer?.cancel()
-     //    self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue(label: "ThermostatController.RepeatTimer"))
-        self.repeatTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
-      //  DispatchQueue.global(qos:.background).async
-         self.repeatTimer?.scheduleRepeating(deadline: DispatchTime.init(secondsFromNow:1), interval: DispatchTimeInterval.seconds(1))
-         self.repeatTimer?.setEventHandler(handler: self.test)
-         self.repeatTimer?.resume()
-        */
-        
+    {        
         self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
         self.repeatTimerQueue?.async { [weak self] in
             sleep(5)
@@ -147,7 +86,8 @@ class ThermostatController
         drop.get("thermostat/getCurrentTemperature") { request in
             var value = 0.0
             internalVarAccessQueue.sync {
-                value = self.indoorTempController.degresValue
+            //    value = self.indoorTempController.degresValue
+                value = self.dataStore.data.indoorTemperature
             }
             return try JSON(node: ["value": value])
         }
@@ -192,7 +132,8 @@ class ThermostatController
         drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
             var value = 0
             internalVarAccessQueue.sync {
-                value = self.indoorTempController.humidityValue
+          //      value = self.indoorTempController.humidityValue
+                value = self.dataStore.data.indoorHumidity
             }
             return try JSON(node: ["value": value])
         }
@@ -209,25 +150,25 @@ class ThermostatController
         if self.currentHeatingCoolingState == .OFF {self.computedThermostatTargetTemperature = 5}
         else
         {
-            self.computedThermostatTargetTemperature = self.thermostatTargetTemperature + (inBedController.isInBed ? -2 : 0)
+            self.computedThermostatTargetTemperature = self.thermostatTargetTemperature + (dataStore.data.isInBed ? -2 : 0)
         }
-        let heating = self.indoorTempController.degresValue < Double(self.computedThermostatTargetTemperature)
+        let heating = self.dataStore.data.indoorTemperature < Double(self.computedThermostatTargetTemperature)
         if self.currentHeatingCoolingState != .OFF {self.currentHeatingCoolingState = heating ? .HEAT : .COOL}
         if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
-        
+        /*
         var logString = ""
         logString += "trgtTemp: \(self.thermostatTargetTemperature)"
         logString += ", computTrgtTemp: \(self.computedThermostatTargetTemperature)"
-        logString += ", inBed: \((inBedController.isInBed == true ? "1" : "0"))"
+        logString += ", inBed: \((dataStore.data.isInBed == true ? "1" : "0"))"
         logString += ", inTemp: \(self.indoorTempController.degresValue)"
         logString += ", humid: \(self.indoorTempController.humidityValue)%"
-        logString += ", outTemp: \(Int(self.outdoorTempController.degresValue))"
+        logString += ", outTemp: \(Int(self.dataStore.outdoor.degresValue))"
         logString += ", heaterOn: \((heating == true ? "1" : "0"))"
         logString += ", pompOn: \((heating == true ? "1" : "0"))"
         logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
         logString += ", snset: \(sunriseSunsetController.sunsetTime ?? "nil")"
         log(logString)
-        
+        */
         DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
         DispatchQueue.global(qos:.background).async {self.forcePompOnOrOff(pompOnOrOff: heating)}
     }

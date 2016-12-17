@@ -4,29 +4,20 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : 9223372036854775807,
-    "CEB2E85BAD5A62B0D123EC0B10F5265A329CEEBA" : 9223372036854775807,
-    "9099ACC60FDF825D6E7028867B6118FFA3A7530B" : 9223372036854775807,
     "8AC6B1E3A4A611BAD8EF686C2AA75FC0A580148A" : 9223372036854775807,
-    "6400345F86F53D4096DD633F09AAE772FA6A202B" : 9223372036854775807
+    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : 9223372036854775807,
+    "9099ACC60FDF825D6E7028867B6118FFA3A7530B" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "65C1682E-6AB7-47A0-8BA7-956325345FB7",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "20086108-6C35-4E39-B4B6-D3AAD3F4BE51",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "domo-server-vapor\/Packages\/Jay-1.0.0\/",
-    "CEB2E85BAD5A62B0D123EC0B10F5265A329CEEBA" : "domo-server-vapor\/Packages\/SQLite-1.0.2\/",
-    "9099ACC60FDF825D6E7028867B6118FFA3A7530B" : "domo-server-vapor\/",
     "8AC6B1E3A4A611BAD8EF686C2AA75FC0A580148A" : "",
-    "6400345F86F53D4096DD633F09AAE772FA6A202B" : "domo-server-vapor\/Packages\/Leaf-1.0.2\/"
+    "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC" : "domo-server-vapor-docker\/Packages\/Jay-1.0.1\/",
+    "9099ACC60FDF825D6E7028867B6118FFA3A7530B" : "domo-server-vapor-docker\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "VaporApp",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "VaporApp.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/leaf.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6400345F86F53D4096DD633F09AAE772FA6A202B"
-    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emilletfr\/domo.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
@@ -38,14 +29,9 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8FE2B4BB55A3C9D7B3B78FD1E2302636E924BDDC"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emilletfr\/domo-server-vapor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emilletfr\/domo-server-vapor-docker.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9099ACC60FDF825D6E7028867B6118FFA3A7530B"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vapor\/sqlite.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CEB2E85BAD5A62B0D123EC0B10F5265A329CEEBA"
     }
   ]
 }
