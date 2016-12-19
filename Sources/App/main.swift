@@ -1,7 +1,23 @@
+/*
+ import Vapor
+ 
+ let drop = Droplet()
+ 
+ drop.get { req in
+ return try drop.view.make("welcome", [
+ "message": drop.localization[req.lang, "welcome", "title"]
+ ])
+ }
+ 
+ drop.resource("posts", PostController())
+ 
+ drop.run()
+ 
+ */
+
 import Vapor
 import HTTP
 import Fluent
-import VaporSQLite
 import Foundation
 import Dispatch
 
@@ -13,7 +29,7 @@ let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarA
 //drop.preparations.append(Temperature.self)
 //drop.preparations.append(RollingShutter.self)
 //try drop.addProvider(VaporSQLite.Provider.self)
-let _ = drop.config["app", "key"]?.string ?? ""
+//let _ = drop.config["app", "key"]?.string ?? ""
 
 
 //Node().fil
@@ -83,9 +99,9 @@ drop.get("plaintext") { request in
 }
  */
 
-drop.middleware.append(SampleMiddleware())
-let port = drop.config["app", "port"]?.int ?? 80
-drop.log.enabled =  [.error, .fatal]
+//drop.middleware.append(SampleMiddleware())
+//let port = drop.config["app", "port"]?.int ?? 80
+//drop.log.enabled =  [.error, .fatal]
 drop.run()
 
 

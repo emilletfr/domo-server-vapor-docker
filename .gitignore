@@ -1,3 +1,6 @@
-/Packages
-/.build
+Packages
+.build
+xcuserdata
+*.xcodeproj
+Config/secrets
 
