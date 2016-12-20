@@ -228,7 +228,6 @@ class ThermostatController
         logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
         logString += ", snset: \(sunriseSunsetController.sunsetTime ?? "nil")"
         
-        print(self.refreshCounter)
         if self.refreshCounter <= 0
         {
             self.refreshCounter = 5
