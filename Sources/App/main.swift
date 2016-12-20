@@ -101,7 +101,7 @@ drop.get("plaintext") { request in
 
 //drop.middleware.append(SampleMiddleware())
 //let port = drop.config["app", "port"]?.int ?? 80
-//drop.log.enabled =  [.error, .fatal]
+drop.log.enabled =  [.error, .fatal]
 drop.run()
 
 

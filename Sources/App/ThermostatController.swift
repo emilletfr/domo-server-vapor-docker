@@ -17,6 +17,7 @@ class ThermostatController
     private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
     var thermostatTargetTemperature : Int = 20
     var computedThermostatTargetTemperature : Int = 20
+    var refreshCounter = 0
  //   var inBedOffsetTemperature : Int = 0
    // var realThermostatTargetTemperature : Int = 10
         /*
@@ -226,7 +227,14 @@ class ThermostatController
         logString += ", pompOn: \((heating == true ? "1" : "0"))"
         logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
         logString += ", snset: \(sunriseSunsetController.sunsetTime ?? "nil")"
-        log(logString)
+        
+        print(self.refreshCounter)
+        if self.refreshCounter <= 0
+        {
+            self.refreshCounter = 5
+            log(logString)
+        }
+        self.refreshCounter = self.refreshCounter - 1
         
         DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
         DispatchQueue.global(qos:.background).async {self.forcePompOnOrOff(pompOnOrOff: heating)}
