@@ -54,6 +54,20 @@ let sunriseSunsetController = SunriseSunsetController()
 _ = ThermostatController()
 _ = RollerShuttersController()
 
+
+let delayQueue = DispatchQueue(label: "com.appcoda.delayqueue", qos: .userInitiated)
+
+print("-----------------1----------------")
+
+let additionalTime: DispatchTimeInterval = .seconds(60)
+
+
+delayQueue.asyncAfter(deadline: .now() + additionalTime) {
+    print("----------------2-----------------")
+
+}
+
+
 /*
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
     {
