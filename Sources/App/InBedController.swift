@@ -23,7 +23,7 @@ class InBedController
             {
           //      self.retrieveValue()
                 log("func retrieveValue()")
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     let urlString = "http://10.0.1.24/status"
                     let response = try? drop.client.get(urlString)
                     log("response:\(response)")
