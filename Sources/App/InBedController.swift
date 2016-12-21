@@ -30,11 +30,15 @@ class InBedController
     func retrieveValue()
     {   log("func retrieveValue()")
         let urlString = "http://10.0.1.24/status"
-        let response = try? drop.client.get(urlString)
-        log("response:\(response as Any)")
-        guard let inBed = response?.json?["inBed"]?.int else {self.isInBed = false; log("return"); return}
-        log("self.isInBed: \(inBed == 1)")
-        self.isInBed = inBed == 1
+        do
+        {
+            let response = try drop.client.get(urlString)
+            log("response:\(response)")
+            guard let inBed = response.json?["inBed"]?.int else {self.isInBed = false; log("return"); return}
+            log("self.isInBed: \(inBed == 1)")
+            self.isInBed = inBed == 1
+        }
+        catch {print(error)}
     }
 
 }
