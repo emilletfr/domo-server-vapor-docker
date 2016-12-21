@@ -59,6 +59,7 @@ class ThermostatController
     //var urlSession : URLSession?
     var indoorTempController : IndoorTempController!
     var outdoorTempController : OutdoorTempController!
+    var inBedController : InBedController!
     
     //  var indoorTemperature : Double = 10.0
     //   var heaterOnOrOffMemory : Bool?
@@ -82,7 +83,7 @@ class ThermostatController
         
         self.indoorTempController = IndoorTempController()
         self.outdoorTempController = OutdoorTempController()
-       // self.inBedController = InBedController()
+        self.inBedController = InBedController()
         
         /*
          self.repeatTimer?.cancel()

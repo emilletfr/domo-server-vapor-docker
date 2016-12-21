@@ -49,7 +49,7 @@ try? FileManager.default.files(path: "Public").forEach { name in
 
 //var outdoorTempController = OutdoorTempController(droplet: drop)
 //var indoorTempController = IndoorTempController(droplet: drop)
-let inBedController = InBedController()
+
 let sunriseSunsetController = SunriseSunsetController()
 _ = ThermostatController()
 _ = RollerShuttersController()
