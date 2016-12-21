@@ -55,8 +55,7 @@ _ = ThermostatController()
 _ = RollerShuttersController()
 
 
-let delayQueue = DispatchQueue(label: "com.appcoda.delayqueue2", qos: .background)
-
+let delayQueue = DispatchQueue.global(qos: .background)
 print("-----------------1----------------")
 
 let additionalTime: DispatchTimeInterval = .seconds(60)
