@@ -68,6 +68,15 @@ delayQueue.asyncAfter(deadline: .now() + additionalTime) {
 }
 
 
+let timer = DispatchSource.makeTimerSource(flags: [], queue: delayQueue)
+timer.scheduleRepeating(deadline: .now() + .milliseconds(1), interval: .milliseconds(5), leeway: .milliseconds(1))
+timer.setEventHandler {
+   // DispatchQueue.main.async(execute: closure)
+    print("repeater")
+}
+timer.resume()
+
+
 /*
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
     {
