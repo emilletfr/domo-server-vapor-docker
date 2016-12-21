@@ -56,7 +56,7 @@ _ = RollerShuttersController()
 
 
 let delayQueue = DispatchQueue(label: "com.appcoda.delayqueue", qos: .background)
-/*
+
 print("-----------------1----------------")
 
 let additionalTime: DispatchTimeInterval = .seconds(60)
@@ -66,8 +66,8 @@ delayQueue.asyncAfter(deadline: .now() + additionalTime) {
     print("----------------2-----------------")
 
 }
-*/
 
+/*
 let timer = DispatchSource.makeTimerSource(flags: [], queue: delayQueue)
 timer.scheduleRepeating(deadline: .now() + .milliseconds(1), interval: .seconds(1), leeway: .milliseconds(1))
 timer.setEventHandler {
@@ -75,7 +75,7 @@ timer.setEventHandler {
     log("repeater")
 }
 timer.resume()
-
+*/
 
 /*
 DispatchQueue(label: "net.emilletfr.domo.Main.TimerSeconde").async
