@@ -145,6 +145,7 @@ class RollerShuttersController
     
     func actionOpen(rollerShutterIndex:Int, position:Int)
     {
+        DispatchQueue.global().sync {
         do
         {
             let currentPos = self.rollerShuttersCurrentPositions[rollerShutterIndex]
@@ -160,13 +161,18 @@ class RollerShuttersController
             sleep(2)
         }
         catch {log(error)}
+        }
     }
     
     func actionCheckIfOpen(rollerShutterIndex:Int) -> Bool?
     {
+        var openToReturn : Bool? = nil
+        DispatchQueue.global().sync {
         let urlString = "http://10.0.1.1\(rollerShutterIndex)/status"
         let response = try? drop.client.get(urlString)
-        guard let localResponse = response, let json = localResponse.json, let openJson = json["open"], let open = openJson.int else {return nil}
-        return open == 1
+        guard let localResponse = response, let json = localResponse.json, let openJson = json["open"], let open = openJson.int else {return}
+        openToReturn = open == 1
+        }
+        return openToReturn
     }
 }

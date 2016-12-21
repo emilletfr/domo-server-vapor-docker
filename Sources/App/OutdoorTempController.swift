@@ -52,8 +52,8 @@ class OutdoorTempController
     
     private func retrieveTemp()
     {
-        DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Retrieve", attributes: .concurrent).async
-            {
+   //     DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Retrieve", attributes: .concurrent).async
+    //        {
                 do
                 {
                    let urlString = "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
@@ -63,7 +63,7 @@ class OutdoorTempController
                 } catch {
                     log(error)
                 }
-        }
+     //   }
     }
 }
 
