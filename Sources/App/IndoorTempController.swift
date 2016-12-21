@@ -55,8 +55,6 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
             while (true)
             {
                 DispatchQueue.global().sync {self.retrieveTemp()}
-             
-                
                 sleep(10)
             }
         }
@@ -76,7 +74,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
       
    //     print(self.degresValue)
     //    print(self.humidityValue)
-     //   log("\(temperature)° - \(humidity)%")
+        log("\(temperature)° - \(humidity)%")
         /*
         do
             {

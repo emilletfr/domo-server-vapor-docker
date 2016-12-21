@@ -64,7 +64,7 @@ class ThermostatController
     //  var indoorTemperature : Double = 10.0
     //   var heaterOnOrOffMemory : Bool?
     //  var pompOnOrOffMemory : Bool?
-    var repeatTimerQueue : DispatchQueue?
+   // var repeatTimerQueue : DispatchQueue?
     
    //var repeatTimer : Timer?
     
@@ -95,15 +95,27 @@ class ThermostatController
          self.repeatTimer?.resume()
         */
         
-        self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
-        self.repeatTimerQueue?.async { [weak self] in
+     //   self.repeatTimerQueue = DispatchQueue(label: "ThermostatController.Timer")
+      //  self.repeatTimerQueue?.async { [weak self] in
+        DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
+            while (true)
+            {
+                DispatchQueue.global().sync {self?.refresh()}
+                sleep(60)
+            }
+        }
+
+        
+        /*
             sleep(5)
             while (true)
             {
                 self?.refresh()
                 sleep(60) //60*2
             }
-        }
+  */
+     //   }
+
         
         // Required Characteristics
         

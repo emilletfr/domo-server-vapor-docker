@@ -25,6 +25,15 @@ class OutdoorTempController
     
     init()
     {
+        
+        DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
+            while (true)
+            {
+                DispatchQueue.global().sync {self?.retrieveTemp()}
+                sleep(3600)
+            }
+        }
+        /*
         DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Timer").async
             {
                 while true
@@ -33,6 +42,7 @@ class OutdoorTempController
                     sleep(3600)
                 }
         }
+ */
         
         drop.get("temperature-sensor/getCurrentTemperature") { request in
           //  guard let degresValue = self.degresValue else { let res = try Response(status: .badRequest, json:  JSON(node:[])); return res}
