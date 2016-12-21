@@ -21,28 +21,28 @@ class InBedController
         DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
             while (true)
             {
-          //      self.retrieveValue()
-                log("func retrieveValue()")
-                DispatchQueue.global().sync {
-                    let urlString = "http://10.0.1.24/status"
-                    let response = try? drop.client.get(urlString)
-                    log("response:\(response)")
-                    guard let inBed = response?.json?["inBed"]?.int else {self?.isInBed = false; log("return"); return}
-                    log("self.isInBed: \(inBed == 1)")
-                    self?.isInBed = inBed == 1
-                }
+                DispatchQueue.global().sync {   self?.retrieveValue() }
+
+                
                 sleep(10)
             }
         }
     }
     
     func retrieveValue()
-    {   log("func retrieveValue()")
+    {
+        //        log("func retrieveValue()")
+        
+            let urlString = "http://10.0.1.24/status"
+            let response = try? drop.client.get(urlString)
+            //         log("response:\(response)")
+            guard let inBed = response?.json?["inBed"]?.int else {self.isInBed = false; log("return"); return}
+            log("self.isInBed: \(inBed == 1)")
+            self.isInBed = inBed == 1
         
 
-
-
-
     }
+
+
 
 }
