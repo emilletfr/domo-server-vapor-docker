@@ -29,7 +29,7 @@ class OutdoorTempController
         DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
             while (true)
             {
-                DispatchQueue.global().sync {self?.retrieveTemp()}
+                DispatchQueue.global().async {self?.retrieveTemp()}
                 sleep(3600)
             }
         }

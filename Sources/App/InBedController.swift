@@ -21,7 +21,7 @@ class InBedController
         DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
             while (true)
             {
-                DispatchQueue.global().sync {   self?.retrieveValue() }
+                DispatchQueue.global().async {   self?.retrieveValue() }
 
                 
                 sleep(10)

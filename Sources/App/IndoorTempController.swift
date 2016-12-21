@@ -54,7 +54,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         DispatchQueue.global(qos: .background).async { // DispatchSourceTimer : 100% cpu
             while (true)
             {
-                DispatchQueue.global().sync {self.retrieveTemp()}
+                DispatchQueue.global().async {self.retrieveTemp()}
                 sleep(10)
             }
         }

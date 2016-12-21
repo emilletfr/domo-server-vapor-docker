@@ -60,7 +60,7 @@ class SunriseSunsetController
         DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
             while (true)
             {
-                DispatchQueue.global().sync {self?.retrieveSunriseSunset()}
+                DispatchQueue.global().async {self?.retrieveSunriseSunset()}
                 
                 
                 sleep(3600)
