@@ -69,10 +69,10 @@ delayQueue.asyncAfter(deadline: .now() + additionalTime) {
 
 
 let timer = DispatchSource.makeTimerSource(flags: [], queue: delayQueue)
-timer.scheduleRepeating(deadline: .now() + .milliseconds(1), interval: .milliseconds(5), leeway: .milliseconds(1))
+timer.scheduleRepeating(deadline: .now() + .milliseconds(1), interval: .seconds(1), leeway: .milliseconds(1))
 timer.setEventHandler {
    // DispatchQueue.main.async(execute: closure)
-    print("repeater")
+    log("repeater")
 }
 timer.resume()
 
