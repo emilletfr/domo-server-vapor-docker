@@ -14,16 +14,16 @@ import HTTP
 class InBedController
 {
     var isInBed = false
-    var repeatTimerQueue = DispatchQueue.global(qos: .background)
+  //  var repeatTimerQueue = DispatchQueue.global(qos: .background)
     
     init() {
     //    self.repeatTimerQueue = DispatchQueue(label: "InBedController.Timer")
-        self.repeatTimerQueue.async { [weak self] in // DispatchSourceTimer : 100% cpu
+        DispatchQueue.global(qos: .background).async { [weak self] in // DispatchSourceTimer : 100% cpu
             while (true)
             {
           //      self.retrieveValue()
                 log("func retrieveValue()")
-                DispatchQueue.global().async {
+                DispatchQueue.global().sync {
                     let urlString = "http://10.0.1.24/status"
                     let response = try? drop.client.get(urlString)
                     log("response:\(response)")

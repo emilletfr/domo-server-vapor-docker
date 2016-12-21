@@ -32,12 +32,12 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     }
  */
   //  private var client: ClientProtocol.Type!
-    var urlSession : URLSession?
+ //   var urlSession : URLSession?
  //   var repeatTimer: DispatchSourceTimer?
-    var urlSessionDataTask : URLSessionDataTask?
-    var data : Data?
+   // var urlSessionDataTask : URLSessionDataTask?
+  //  var data : Data?
  //   var timer : Timer?
-    var repeatTimerQueue : DispatchQueue?
+  //  var repeatTimerQueue : DispatchQueue?
     
     
      init()
@@ -50,11 +50,13 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
         self.repeatTimer?.resume()
  */
         
-        self.repeatTimerQueue = DispatchQueue(label: "IndoorTempController.Timer")
-        self.repeatTimerQueue?.async { // DispatchSourceTimer : 100% cpu
+     //   self.repeatTimerQueue = DispatchQueue(label: "IndoorTempController.Timer")
+        DispatchQueue.global(qos: .background).async { // DispatchSourceTimer : 100% cpu
             while (true)
             {
-                self.retrieveTemp()
+                DispatchQueue.global().sync {self.retrieveTemp()}
+             
+                
                 sleep(10)
             }
         }

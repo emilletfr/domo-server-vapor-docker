@@ -54,7 +54,7 @@ let sunriseSunsetController = SunriseSunsetController()
 _ = ThermostatController()
 _ = RollerShuttersController()
 
-
+/*
 let delayQueue = DispatchQueue.global(qos: .background)
 print("-----------------1----------------")
 
@@ -65,7 +65,7 @@ delayQueue.asyncAfter(deadline: .now() + additionalTime) {
     print("----------------2-----------------")
 
 }
-
+*/
 /*
 let timer = DispatchSource.makeTimerSource(flags: [], queue: delayQueue)
 timer.scheduleRepeating(deadline: .now() + .milliseconds(1), interval: .seconds(1), leeway: .milliseconds(1))

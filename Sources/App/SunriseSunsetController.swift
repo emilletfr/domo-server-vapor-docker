@@ -49,10 +49,24 @@ class SunriseSunsetController
         self.repeatTimer?.setEventHandler(handler: self.retrieveSunriseSunset)
         self.repeatTimer?.resume()
  */
+     //   var repeatTimerQueue = DispatchQueue.global(qos: .background)
+        /*
         DispatchQueue(label: "SunriseSunsetController.RepeatTimer").async { // DispatchSourceTimer : 100% cpu
             self.self.retrieveSunriseSunset()
             sleep(3600)
         }
+ */
+        
+        DispatchQueue.global(qos: .background).async { // DispatchSourceTimer : 100% cpu
+            while (true)
+            {
+                DispatchQueue.global().sync {self.retrieveSunriseSunset()}
+                
+                
+                sleep(3600)
+            }
+        }
+
     }
     
     func retrieveSunriseSunset()
