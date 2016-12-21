@@ -14,14 +14,23 @@ import HTTP
 class InBedController
 {
     var isInBed = false
-    var repeatTimerQueue : DispatchQueue?
+    var repeatTimerQueue = DispatchQueue.global(qos: .background)
     
     init() {
-        self.repeatTimerQueue = DispatchQueue(label: "InBedController.Timer")
-        self.repeatTimerQueue?.async { // DispatchSourceTimer : 100% cpu
+    //    self.repeatTimerQueue = DispatchQueue(label: "InBedController.Timer")
+        self.repeatTimerQueue.async { [weak self] in // DispatchSourceTimer : 100% cpu
             while (true)
             {
-                self.retrieveValue()
+          //      self.retrieveValue()
+                log("func retrieveValue()")
+                DispatchQueue.main.sync {
+                    let urlString = "http://10.0.1.24/status"
+                    let response = try? drop.client.get(urlString)
+                    log("response:\(response)")
+                    guard let inBed = response?.json?["inBed"]?.int else {self?.isInBed = false; log("return"); return}
+                    log("self.isInBed: \(inBed == 1)")
+                    self?.isInBed = inBed == 1
+                }
                 sleep(10)
             }
         }
@@ -29,16 +38,11 @@ class InBedController
     
     func retrieveValue()
     {   log("func retrieveValue()")
-        let urlString = "http://10.0.1.24/status"
-        do
-        {
-            let response = try drop.client.get(urlString)
-            log("response:\(response)")
-            guard let inBed = response.json?["inBed"]?.int else {self.isInBed = false; log("return"); return}
-            log("self.isInBed: \(inBed == 1)")
-            self.isInBed = inBed == 1
-        }
-        catch {print(error)}
+        
+
+
+
+
     }
 
 }
