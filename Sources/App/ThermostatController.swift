@@ -248,25 +248,24 @@ class ThermostatController
         }
         self.refreshCounter = self.refreshCounter - 1
         
-        DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
-        DispatchQueue.global(qos:.background).async {self.forcePompOnOrOff(pompOnOrOff: heating)}
+    //    DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
+        self.forceHeaterOnOrOff(heaterOnOrOff: heating)
+     //   DispatchQueue.global(qos:.background).async {self.forcePompOnOrOff(pompOnOrOff: heating)}
+        self.forcePompOnOrOff(pompOnOrOff: heating)
     }
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)
     {
-    //    DispatchQueue.global().sync {
         do
         {
             let urlString = "http://10.0.1.15:8015/0" + (heaterOnOrOff == true ? "1" : "0")
             _ = try drop.client.get(urlString)
         }
         catch {log("error : unable to forceHeaterOnOrOff(\((heaterOnOrOff == true ? "1" : "0")))")}
-   //     }
     }
     
     func forcePompOnOrOff(pompOnOrOff:Bool)
     {
-//        DispatchQueue.global().sync {
         do
         {
             let urlString = "http://10.0.1.15:8015/1" + (pompOnOrOff == true ? "1" : "0")
@@ -274,5 +273,4 @@ class ThermostatController
         }
         catch {log("error : unable to forcePompOnOrOff(\((pompOnOrOff == true ? "1" : "0")))")}
         }
-  //  }
 }

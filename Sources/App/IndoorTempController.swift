@@ -74,7 +74,7 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
       
    //     print(self.degresValue)
     //    print(self.humidityValue)
-        log("\(temperature)° - \(humidity)%")
+      //  log("\(temperature)° - \(humidity)%")
         /*
         do
             {

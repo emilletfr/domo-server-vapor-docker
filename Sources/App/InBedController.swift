@@ -37,7 +37,7 @@ class InBedController
             let response = try? drop.client.get(urlString)
             //         log("response:\(response)")
             guard let inBed = response?.json?["inBed"]?.int else {self.isInBed = false; log("return"); return}
-            log("self.isInBed: \(inBed == 1)")
+      //      log("self.isInBed: \(inBed == 1)")
             self.isInBed = inBed == 1
         
 

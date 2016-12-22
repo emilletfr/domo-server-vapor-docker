@@ -61,8 +61,6 @@ class SunriseSunsetController
             while (true)
             {
                 DispatchQueue.global().async {self?.retrieveSunriseSunset()}
-                
-                
                 sleep(3600)
             }
         }
