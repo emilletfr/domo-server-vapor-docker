@@ -26,11 +26,6 @@ import Dispatch
 let drop = Droplet()
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
 
-if #available(OSX 10.12, *) {
-    dispatchPrecondition(condition: .onQueue(DispatchQueue.global()))
-} else {
-    // Fallback on earlier versions
-}
 
 //drop.preparations.append(Temperature.self)
 //drop.preparations.append(RollingShutter.self)
