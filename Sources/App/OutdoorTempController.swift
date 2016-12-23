@@ -52,18 +52,17 @@ class OutdoorTempController
     
     private func retrieveTemp()
     {
-   //     DispatchQueue(label: "net.emilletfr.domo.OutdoorTempManager.Retrieve", attributes: .concurrent).async
-    //        {
                 do
                 {
                    let urlString = "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
                     let response = try drop.client.get(urlString)
-                    self.degresValue = response.data["current", "temp_c"]?.double ?? 0.0
-                  //  if let temp = self.degresValue {log( "outdoorTemp : \(temp)")}
-                } catch {
-                    log(error)
-                }
-     //   }
+                     guard let degres = response.data["current", "temp_c"]?.double else
+                     {
+                        log("ERROR - OutdoorTempController:retrieveTemp:guard:response: \(response)")
+                        return
+                    }
+                    self.degresValue = degres
+                } catch {log("ERROR - OutdoorTempController:retrieveTemp:catch:error: \(error)")}
     }
 }
 

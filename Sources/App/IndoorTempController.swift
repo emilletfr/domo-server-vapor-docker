@@ -63,14 +63,23 @@ class IndoorTempController //: NSObject//, XMLParserDelegate
     
      func retrieveTemp()
     {
+        do
+        {
         let urlString = "http://10.0.1.10/status"
-        let response = try? drop.client.get(urlString)
+        let response = try drop.client.get(urlString)
 
      //   print((response?.json?["temperature"])?.double)
 
-        guard let temperature = response?.json?["temperature"]?.double, let humidity = response?.json?["humidity"]?.double else {return}
+        guard let temperature = response.json?["temperature"]?.double, let humidity = response.json?["humidity"]?.double else
+        {
+             log("ERROR - IndoorTempController:retrieveTemp:guard:response: \(response)")
+                
+            return
+            }
         self.degresValue = temperature - 0.2 //etallonage
         self.humidityValue = Int(humidity)
+        }
+        catch {log("ERROR - IndoorTempController:retrieveTemp:catch:error: \(error)") }
       
    //     print(self.degresValue)
     //    print(self.humidityValue)

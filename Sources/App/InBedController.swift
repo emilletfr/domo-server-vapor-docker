@@ -22,8 +22,6 @@ class InBedController
             while (true)
             {
                 DispatchQueue.global().async {   self?.retrieveValue() }
-
-                
                 sleep(10)
             }
         }
@@ -31,16 +29,19 @@ class InBedController
     
     func retrieveValue()
     {
-        //        log("func retrieveValue()")
-        
+        do
+        {
             let urlString = "http://10.0.1.24/status"
-            let response = try? drop.client.get(urlString)
-            //         log("response:\(response)")
-            guard let inBed = response?.json?["inBed"]?.int else {self.isInBed = false; log("return"); return}
-      //      log("self.isInBed: \(inBed == 1)")
+            let response = try drop.client.get(urlString)
+            guard let inBed = response.json?["inBed"]?.int else
+            {
+                log("ERROR - InBedController:retrieveValue:guard:response: \(response)")
+                self.isInBed = false
+                return
+            }
             self.isInBed = inBed == 1
-        
-
+        }
+        catch {log("ERROR - InBedController:retrieveValue:catch:error: \(error)")}
     }
 
 

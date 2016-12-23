@@ -69,23 +69,32 @@ class SunriseSunsetController
     
     func retrieveSunriseSunset()
     {
-        log("SunriseSunsetController:retrieveSunriseSunset")
-        let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
-         let response = try? drop.client.get(urlString)
-        guard let sunriseDateStr = response?.data["results", "sunrise"]?.string else {return}
-        guard let sunsetDateStr = response?.data["results", "sunset"]?.string else {return}
-        let iso8601DateFormatter = DateFormatter()
-        iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
-        iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-         guard var sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
-        sunsetDate = sunsetDate.addingTimeInterval(60*00) // +40mn
-        let localDateformatter = DateFormatter()
-        localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
-        localDateformatter.dateFormat = "HH:mm"
-        self.sunsetTime = localDateformatter.string(from: sunsetDate)
-        self.sunriseTime = localDateformatter.string(from: sunriseDate)
-        if let sunrise = self.sunriseTime {log("sunriseTime : \(sunrise)")}
-        if let sunset = self.sunsetTime {log("sunsetTime : \(sunset)")}
+      //  log("SunriseSunsetController:retrieveSunriseSunset")
+        do
+        {
+            let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
+            let response = try drop.client.get(urlString)
+            guard let sunriseDateStr = response.data["results", "sunrise"]?.string, let sunsetDateStr = response.data["results", "sunset"]?.string else
+            {
+                log("ERROR - SunriseSunsetController:retrieveSunriseSunset:guard:response: \(response)")
+                return
+            }
+            
+            let iso8601DateFormatter = DateFormatter()
+            iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
+            iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            guard var sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else {return}
+            sunsetDate = sunsetDate.addingTimeInterval(60*00) // +40mn
+            let localDateformatter = DateFormatter()
+            localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
+            localDateformatter.dateFormat = "HH:mm"
+            self.sunsetTime = localDateformatter.string(from: sunsetDate)
+            self.sunriseTime = localDateformatter.string(from: sunriseDate)
+            //  if let sunrise = self.sunriseTime {log("sunriseTime : \(sunrise)")}
+            // if let sunset = self.sunsetTime {log("sunsetTime : \(sunset)")}
+        }
+        catch {log("ERROR - SunriseSunsetController:retrieveSunriseSunset:catch:error: \(error)")}
+        
         /*
         self.sunsetTimer?.cancel()
         self.sunsetTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.global(qos:.background))
