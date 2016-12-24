@@ -22,7 +22,7 @@ class InBedController
             while (true)
             {
                 DispatchQueue.global().async {   self?.retrieveValue() }
-                sleep(10)
+                sleep(60)
             }
         }
     }
