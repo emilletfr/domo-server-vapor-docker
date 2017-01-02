@@ -1,19 +1,24 @@
 //
-//  CoreTeststttt.swift
-//  CoreTeststttt
+//  RollerShuttersViewModelTests.swift
+//  VaporApp
 //
-//  Created by Eric on 03/10/2016.
+//  Created by Eric on 24/12/2016.
 //
 //
 
 import XCTest
 
+class Compare
+{
+    var value = 2
+}
 
-class CoreTeststttt: XCTestCase {
+class RollerShuttersViewModelTests: XCTestCase {
+    
+    
     
     override func setUp() {
         super.setUp()
-        
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -23,8 +28,16 @@ class CoreTeststttt: XCTestCase {
     }
     
     func testExample() {
+        
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+   /*
+        _ = self.expectation(description: "Handler called")
+        let indoorTempService = IndoorTempService(degres: 10, humidity: 50)
+        _ = DataModelStore(inDoorTempService: indoorTempService)
+
+        self.waitForExpectations(timeout: 2000) { (error:Error?) in print(error as Any)}
+ */
     }
     
     func testPerformanceExample() {

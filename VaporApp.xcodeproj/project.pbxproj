@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0744EAFB1E097F7E001FDEDF /* RollerShuttersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744EAFA1E097F7E001FDEDF /* RollerShuttersView.swift */; };
+		0744EAFC1E097F7E001FDEDF /* RollerShuttersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744EAFA1E097F7E001FDEDF /* RollerShuttersView.swift */; };
+		0744EAFE1E097FAF001FDEDF /* RollerShuttersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744EAFD1E097FAF001FDEDF /* RollerShuttersViewModel.swift */; };
+		0744EAFF1E097FAF001FDEDF /* RollerShuttersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0744EAFD1E097FAF001FDEDF /* RollerShuttersViewModel.swift */; };
+		075393851E11373500588933 /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1343 /* InBedService.swift */; };
+		0755092C1E0EE846003BA3D4 /* RollerShuttersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755092B1E0EE846003BA3D4 /* RollerShuttersViewModelTests.swift */; };
+		07558A301E11FDF800F5A585 /* HttpToJsonClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07558A2F1E11FDF800F5A585 /* HttpToJsonClient.swift */; };
+		07558A311E11FDF800F5A585 /* HttpToJsonClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07558A2F1E11FDF800F5A585 /* HttpToJsonClient.swift */; };
 		07B9C3171E042B30002C40B8 /* SampleMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1357 /* SampleMiddleware.swift */; };
 		07B9C31C1E042E3A002C40B8 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1345 /* Log.swift */; };
 		07B9C31E1E043B53002C40B8 /* InBedServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B9C31D1E043B53002C40B8 /* InBedServiceTests.swift */; };
 		07B9C3201E043C1F002C40B8 /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1350 /* RepeatTimer.swift */; };
 		07B9C3211E043C34002C40B8 /* MinuteRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1347 /* MinuteRepeatTimer.swift */; };
 		07B9C3241E044F75002C40B8 /* RollerShutterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1352 /* RollerShutterService.swift */; };
-		07B9C3271E0500ED002C40B8 /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1343 /* InBedService.swift */; };
 		07B9C32A1E0511B2002C40B8 /* SunriseSunsetServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B9C3291E0511B2002C40B8 /* SunriseSunsetServiceTests.swift */; };
 		07B9C32B1E0511BE002C40B8 /* SunriseSunsetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1354 /* SunriseSunsetService.swift */; };
 		07B9C32D1E051217002C40B8 /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B9C32C1E051217002C40B8 /* global.swift */; };
@@ -1526,7 +1533,6 @@
 		OBJ_3487 /* Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1398 /* Auth.framework */; };
 		OBJ_3488 /* Sessions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1401 /* Sessions.framework */; };
 		OBJ_3489 /* Settings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1402 /* Settings.framework */; };
-		OBJ_3532 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1342 /* DataStore.swift */; };
 		OBJ_3533 /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1343 /* InBedService.swift */; };
 		OBJ_3535 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1345 /* Log.swift */; };
 		OBJ_3536 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1346 /* main.swift */; };
@@ -4869,6 +4875,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0744EAFA1E097F7E001FDEDF /* RollerShuttersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollerShuttersView.swift; sourceTree = "<group>"; };
+		0744EAFD1E097FAF001FDEDF /* RollerShuttersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollerShuttersViewModel.swift; sourceTree = "<group>"; };
+		0755092B1E0EE846003BA3D4 /* RollerShuttersViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollerShuttersViewModelTests.swift; sourceTree = "<group>"; };
+		07558A2F1E11FDF800F5A585 /* HttpToJsonClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpToJsonClient.swift; sourceTree = "<group>"; };
 		07B9C31D1E043B53002C40B8 /* InBedServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InBedServiceTests.swift; sourceTree = "<group>"; };
 		07B9C3291E0511B2002C40B8 /* SunriseSunsetServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseSunsetServiceTests.swift; sourceTree = "<group>"; };
 		07B9C32C1E051217002C40B8 /* global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
@@ -5185,7 +5195,7 @@
 		OBJ_1338 /* ViewRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRenderer.swift; sourceTree = "<group>"; };
 		OBJ_134 /* bs_cbb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bs_cbb.c; sourceTree = "<group>"; };
 		OBJ_1340 /* WebSockets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSockets.swift; sourceTree = "<group>"; };
-		OBJ_1342 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		OBJ_1342 /* DataModelStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelStore.swift; sourceTree = "<group>"; };
 		OBJ_1343 /* InBedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBedService.swift; sourceTree = "<group>"; };
 		OBJ_1344 /* IndoorTempService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorTempService.swift; sourceTree = "<group>"; };
 		OBJ_1345 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -6872,15 +6882,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0744EB001E0A0F71001FDEDF /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				0755092B1E0EE846003BA3D4 /* RollerShuttersViewModelTests.swift */,
+			);
+			name = ViewModelTests;
+			sourceTree = "<group>";
+		};
 		07B9C3281E050258002C40B8 /* ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
 				07B9C32C1E051217002C40B8 /* global.swift */,
 				07B9C31D1E043B53002C40B8 /* InBedServiceTests.swift */,
-				OBJ_1360 /* RollerShutterServiceTests.swift */,
-				07B9C3291E0511B2002C40B8 /* SunriseSunsetServiceTests.swift */,
-				07B9C32E1E05718C002C40B8 /* OutdoorTempServiceTests.swift */,
 				07B9C3311E057D76002C40B8 /* IndoorTempServiceTests.swift */,
+				07B9C3291E0511B2002C40B8 /* SunriseSunsetServiceTests.swift */,
+				OBJ_1360 /* RollerShutterServiceTests.swift */,
+				07B9C32E1E05718C002C40B8 /* OutdoorTempServiceTests.swift */,
 			);
 			name = ServicesTests;
 			sourceTree = "<group>";
@@ -6888,11 +6906,12 @@
 		07B9C3351E0585EA002C40B8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_1343 /* InBedService.swift */,
-				OBJ_1352 /* RollerShutterService.swift */,
+				07558A2F1E11FDF800F5A585 /* HttpToJsonClient.swift */,
 				OBJ_1344 /* IndoorTempService.swift */,
-				OBJ_1349 /* OutdoorTempService.swift */,
+				OBJ_1343 /* InBedService.swift */,
 				OBJ_1354 /* SunriseSunsetService.swift */,
+				OBJ_1352 /* RollerShutterService.swift */,
+				OBJ_1349 /* OutdoorTempService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -6907,7 +6926,8 @@
 		07B9C3371E05862A002C40B8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_1342 /* DataStore.swift */,
+				0744EAFD1E097FAF001FDEDF /* RollerShuttersViewModel.swift */,
+				OBJ_1342 /* DataModelStore.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -6917,6 +6937,7 @@
 			children = (
 				OBJ_1347 /* MinuteRepeatTimer.swift */,
 				OBJ_1350 /* RepeatTimer.swift */,
+				0744EAFA1E097F7E001FDEDF /* RollerShuttersView.swift */,
 				OBJ_1345 /* Log.swift */,
 			);
 			name = Util;
@@ -7780,6 +7801,7 @@
 			isa = PBXGroup;
 			children = (
 				07B9C3281E050258002C40B8 /* ServicesTests */,
+				0744EB001E0A0F71001FDEDF /* ViewModelTests */,
 			);
 			name = AppUnitTests;
 			path = Tests/AppUnitTests;
@@ -8480,7 +8502,7 @@
 			path = "Packages/CLibreSSL-1.0.0/Sources/CLibreSSL";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -8493,7 +8515,6 @@
 				OBJ_1364 /* Resources */,
 				OBJ_1365 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_657 /* include */ = {
@@ -10535,7 +10556,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1365 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -11983,13 +12004,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_3532 /* DataStore.swift in Sources */,
+				0744EAFE1E097FAF001FDEDF /* RollerShuttersViewModel.swift in Sources */,
 				OBJ_3533 /* InBedService.swift in Sources */,
 				OBJ_3535 /* Log.swift in Sources */,
 				OBJ_3536 /* main.swift in Sources */,
 				OBJ_3537 /* MinuteRepeatTimer.swift in Sources */,
 				OBJ_3539 /* OutdoorTempService.swift in Sources */,
+				0744EAFB1E097F7E001FDEDF /* RollerShuttersView.swift in Sources */,
 				OBJ_3540 /* RepeatTimer.swift in Sources */,
+				07558A301E11FDF800F5A585 /* HttpToJsonClient.swift in Sources */,
 				OBJ_3541 /* RollerShuttersController.swift in Sources */,
 				OBJ_3542 /* RollerShutterService.swift in Sources */,
 				07B9C3331E057DA4002C40B8 /* IndoorTempService.swift in Sources */,
@@ -12003,20 +12026,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				0744EAFC1E097F7E001FDEDF /* RollerShuttersView.swift in Sources */,
 				07B9C3321E057D76002C40B8 /* IndoorTempServiceTests.swift in Sources */,
-				07B9C3271E0500ED002C40B8 /* InBedService.swift in Sources */,
+				0744EAFF1E097FAF001FDEDF /* RollerShuttersViewModel.swift in Sources */,
 				07B9C3341E057DA4002C40B8 /* IndoorTempService.swift in Sources */,
 				OBJ_3629 /* RollerShutterServiceTests.swift in Sources */,
 				07B9C3171E042B30002C40B8 /* SampleMiddleware.swift in Sources */,
 				07B9C32B1E0511BE002C40B8 /* SunriseSunsetService.swift in Sources */,
+				0755092C1E0EE846003BA3D4 /* RollerShuttersViewModelTests.swift in Sources */,
 				07B9C31C1E042E3A002C40B8 /* Log.swift in Sources */,
 				07B9C32A1E0511B2002C40B8 /* SunriseSunsetServiceTests.swift in Sources */,
 				07B9C31E1E043B53002C40B8 /* InBedServiceTests.swift in Sources */,
 				07B9C3211E043C34002C40B8 /* MinuteRepeatTimer.swift in Sources */,
 				07B9C3301E0578D9002C40B8 /* OutdoorTempService.swift in Sources */,
+				075393851E11373500588933 /* InBedService.swift in Sources */,
 				07B9C32D1E051217002C40B8 /* global.swift in Sources */,
 				07B9C3241E044F75002C40B8 /* RollerShutterService.swift in Sources */,
 				07B9C32F1E05718C002C40B8 /* OutdoorTempServiceTests.swift in Sources */,
+				07558A311E11FDF800F5A585 /* HttpToJsonClient.swift in Sources */,
 				07B9C3201E043C1F002C40B8 /* RepeatTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

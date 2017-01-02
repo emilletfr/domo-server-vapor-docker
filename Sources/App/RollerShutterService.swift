@@ -21,7 +21,7 @@ class RollerShutterService
         self.rollerShutterIndex = rollerShutterIndex
     }
     
-    func retrieveStatus(statusOnCompletion : @escaping ((Bool?) -> Void))
+     func retrieveStatus(statusOnCompletion : @escaping ((Bool?) -> Void))
     {
         self.statusOnCompletion = statusOnCompletion
         do
@@ -38,15 +38,18 @@ class RollerShutterService
         }
     }
     
-    func moveToPosition(targetPosition : Int, targetPositionCompletion:@escaping ((Void) -> Void) )
+      func moveToPosition( targetPosition : Int, targetPositionCompletion:  @escaping ((Void) -> Void) )
     {
         self.targetPositionCompletion = targetPositionCompletion
-        DispatchQueue.global(qos:.default).async {
+        let currentPosition = self.currentPosition
+      //  DispatchQueue.global(qos:.default).async(execute: @escaping DispatchWorkItem)
+     //   var selfCopy = self
+        DispatchQueue.global(qos:.default).async{
             do
             {
                 //    let currentPos = self.rollerShuttersCurrentPositions[rollerShutterIndex]
                 //   let targetPos = self.rollerShuttersTargetPositions[rollerShutterIndex]
-                let open = targetPosition > self.currentPosition ? "1" : "0"
+                let open = targetPosition > currentPosition ? "1" : "0"
                 let urlString = "http://10.0.1.1\(self.rollerShutterIndex)/\(open)"
                 _ = try drop.client.get(urlString)
                 let offset = self.currentPosition > targetPosition ? self.currentPosition - targetPosition : targetPosition - self.currentPosition
@@ -59,6 +62,7 @@ class RollerShutterService
             }
             catch {log(error)}
             targetPositionCompletion()
+ 
         }
     }
 }

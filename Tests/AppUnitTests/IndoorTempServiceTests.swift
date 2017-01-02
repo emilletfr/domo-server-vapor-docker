@@ -8,26 +8,25 @@
 
 import XCTest
 
-class IndoorTempServiceTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testRetrieveTemperatureAndHumidity() {
+class IndoorTempServiceTests: XCTestCase
+{
+    /*
+    func testRetrieveTemperatureAndHumidity()
+    {
+        var fullfillCount = 2
         let expectation = self.expectation(description: "Handler called")
-        _ = IndoorTempService(completion: { (degres:Double?, humidity:Int?) in
-            XCTAssertNotNil(degres)
-            XCTAssertNotNil(humidity)
-            print("Indoor temp: \(degres as Any), humidity:  \(humidity as Any)")
-            expectation.fulfill()
+        let indoorTempService = IndoorTempService<HttpToJsonClient>()
+        indoorTempService.subscribe(degresDidChange: {
+            XCTAssertNotNil(indoorTempService.degres)
+            fullfillCount -= 1
+            if fullfillCount == 0  {expectation.fulfill()}
+        }, humidityDidChange: {
+            XCTAssertNotNil(indoorTempService.humidity)
+            fullfillCount -= 1
+            if fullfillCount == 0  {expectation.fulfill()}
         })
+     
         self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
     }
+ */
 }

@@ -14,7 +14,7 @@ import HTTP
 
 class ThermostatController
 {
-    var dataStore = DataModelStore.shared
+  //  var dataStore = DataModelStore.shared
     
     private let dataPath = (drop.workDir + ".build/debug/ThermostatTargetTemperature.txt")
     var thermostatTargetTemperature : Int = 20
@@ -87,7 +87,7 @@ class ThermostatController
             var value = 0.0
             internalVarAccessQueue.sync {
             //    value = self.indoorTempController.degresValue
-                value = self.dataStore.data.indoorTemperature
+     //           value = self.dataStore.data.indoorTemperature
             }
             return try JSON(node: ["value": value])
         }
@@ -133,7 +133,7 @@ class ThermostatController
             var value = 0
             internalVarAccessQueue.sync {
           //      value = self.indoorTempController.humidityValue
-                value = self.dataStore.data.indoorHumidity
+   //             value = self.dataStore.data.indoorHumidity
             }
             return try JSON(node: ["value": value])
         }
@@ -146,6 +146,7 @@ class ThermostatController
     
     func refresh()
     {
+        /*
     //    self.inBedOffsetTemperature = inBedController.isInBed ? -2 : 0;
         if self.currentHeatingCoolingState == .OFF {self.computedThermostatTargetTemperature = 5}
         else
@@ -171,6 +172,7 @@ class ThermostatController
         */
         DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
         DispatchQueue.global(qos:.background).async {self.forcePompOnOrOff(pompOnOrOff: heating)}
+ */
     }
     
     func forceHeaterOnOrOff(heaterOnOrOff:Bool)

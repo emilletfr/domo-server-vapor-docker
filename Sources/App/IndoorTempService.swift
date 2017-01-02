@@ -11,24 +11,50 @@ import Dispatch
 import Vapor
 import HTTP
 
+typealias Callback = ((Void) -> Void)
 
-class IndoorTempService : MinuteRepeatTimer
+protocol IndoorTempServiceable
 {
-    var completion : ((_ degresValue: Double?, _ humidityValue: Int?) -> Void)?
-    init(completion : ((_ degresValue: Double?, _ humidityValue: Int?) -> Void)?)
+    
+    var degres : Double? {get}
+    var humidity : Int? {get}
+    func subscribe(degresDidChange:@escaping Callback, humidityDidChange:@escaping Callback)
+}
+
+final class IndoorTempService<T:HttpToJsonClientable> : MinuteRepeatTimer, IndoorTempServiceable
+{
+    
+    private var degresDidChangeForRegisteredOnes = [Callback]()
+    private var humidityDidChangeForRegisteredOnes = [Callback]()
+    var degres : Double? {didSet{if oldValue != degres {for r in degresDidChangeForRegisteredOnes {r()}}}}
+    var humidity : Int? { didSet {if oldValue != humidity  {for r in humidityDidChangeForRegisteredOnes {r()}}}}
+    var httpToJsonClient : T!
+    var subscribedIndex = 0
+    
+    func subscribe(degresDidChange: @escaping Callback, humidityDidChange: @escaping Callback)
     {
-        self.completion = completion
+        degresDidChangeForRegisteredOnes += degresDidChange
+        humidityDidChangeForRegisteredOnes += humidityDidChange
+        subscribedIndex += 1
+    }
+    
+    init()
+    {
+  //      httpToJsonClient = T()
+    }
+    /*
+    init(httpToJsonClient:HttpToJsonClientable = HttpToJsonClient())
+    {
+        self.httpToJsonClient = httpToJsonClient
         self.startMinuteRepeatTimer()
     }
+ */
     
     func minuteRepeatTimerFired()
     {
-        let urlString = "http://10.0.1.10/status"
-        let response = try? drop.client.get(urlString)
-        guard let temperature = response?.json?["temperature"]?.double, let humidity = response?.json?["humidity"]?.double else {self.completion?(nil, nil); return}
-     //   self.degresValue = temperature - 0.2 //etallonage
-      //  self.humidityValue = Int(humidity)
-        self.completion?(temperature - 0.2, Int(humidity))
+        let itemsResp = self.httpToJsonClient.fetch(url: "http://10.0.1.10/status", jsonPaths: "temperature", "humidity")
+        guard let items = itemsResp, let degres = Double(items[0]), let humidity = Double(items[1]) else {return}
+        self.degres = degres - 0.2
+        self.humidity = Int(humidity)
     }
-
 }

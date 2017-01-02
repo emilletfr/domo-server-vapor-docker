@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MinuteRepeatTimer: class, RepeatTimer
+protocol MinuteRepeatTimer: RepeatTimer
 {
     func startMinuteRepeatTimer()
     func minuteRepeatTimerFired()
@@ -16,14 +16,14 @@ protocol MinuteRepeatTimer: class, RepeatTimer
 
 extension MinuteRepeatTimer
 {
-    func repeatTimerFired()
+     func repeatTimerFired()
     {
         self.minuteRepeatTimerFired()
     }
     
     func startMinuteRepeatTimer()
     {
-        startRepeatTimerWithRepeatDelay(delay: 60)
+        startRepeatTimerWithRepeatDelay(delay: 5)
     }
  }
 

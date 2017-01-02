@@ -16,7 +16,7 @@ protocol RepeatTimer
 
 extension RepeatTimer
 {
-    func startRepeatTimerWithRepeatDelay(delay:Int)
+     func startRepeatTimerWithRepeatDelay(delay:Int)
     {
         DispatchQueue.global(qos:.default).async {
             while (true)

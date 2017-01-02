@@ -15,7 +15,7 @@ class RollerShuttersController
 {
   //  let actionQueue = DispatchQueue(label: "RollerShuttersController.Action")
    // let actionAllQueue = DispatchQueue(label: "RollerShuttersController.ActionAll")
-    var dataStore = DataModelStore.shared
+   // var dataStore = DataModelStore.shared
     var rollerShuttersCurrentPositions = [0,0,0,0,0]
     var rollerShuttersTargetPositions = [0,0,0,0,0]
     var rollerShuttersAreWorking = [false, false, false, false, false]
@@ -117,6 +117,7 @@ class RollerShuttersController
     
     func timerSeconde(date:String)
     {
+        /*
        //     guard let sunriseTime = dataStore.data.sunriseTime , let sunsetTime = dataStore.data.sunsetTime else {return}
         let sunriseTime = dataStore.data.sunriseTime
         let sunsetTime = dataStore.data.sunsetTime
@@ -130,6 +131,7 @@ class RollerShuttersController
                 log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
                 self.actionForAllRollerShutters(position: 0)
             }
+ */
     }
     
     func actionForAllRollerShutters(position:Int)

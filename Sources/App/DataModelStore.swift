@@ -11,14 +11,15 @@ import Vapor
 
 class ViewModelStore {
 
-    
+    /*
     let dataStore : DataModelStore
     var data : DataModel {didSet{   }}
     var viewModel = ViewModel()
+ */
     
     init(dataStore: DataModelStore) {
-        self.dataStore = dataStore
-        self.data = dataStore.data
+      //  self.dataStore = dataStore
+     //   self.data = dataStore.data
         
     }
     
@@ -73,29 +74,35 @@ protocol DataProtocol
  */
 
 
-final class DataModelStore
+ class DataModelStore
 {
-    static let shared : DataModelStore = DataModelStore()
+   // static let shared : DataModelStore = DataModelStore()
+     /*
     var data = DataModel() {didSet{print(data)/*; dataChanged?(data)*/}}
- //   var dataChanged : ((DataModel) -> Void)?
- 
-    // private (reducer)
+
+    var outdoorTempService : OutdoorTempService?
+    var sunriseSunsetService : SunriseSunsetService?
     
-    private var inBedService : InBedService?
-    private var outdoorTempService : OutdoorTempService?
-    private var sunriseSunsetService : SunriseSunsetService?
-    private var indoorTempService : IndoorTempService?
-    private var rollerShutters = [RollerShutterService]()
-    
-    private init()
+    var rollerShutters = [RollerShutterService]()
+    var indoorTempService : IndoorTempServiceable
+   
+    var degresDidChange = { (degres:Double) in
+        print(degres)
+    }
+    var humidityDidChange = {(humidity:Int) in
+        print(humidity)
+    }
+    */
+    init(inDoorTempService:IndoorTempServiceable)
     {
-        inBedService = InBedService { [weak self] (inBed:Bool?) in
-            if let inBed = inBed {self?.data.isInBed = inBed}
-        
-        }
+      //  self.indoorTempService = inDoorTempService
+       // self.indoorTempService.degresDidChange = {print(self.indoorTempService.degres)}
+/*
         outdoorTempService = OutdoorTempService(completion: { [weak self] (temp:Double?) in
             if let temp = temp {self?.data.outdoorTemperature = temp}
             })
+ */
+        /*
         sunriseSunsetService = SunriseSunsetService{ [weak self] (sunrise:String?, sunset:String?) in
             if let sunrise = sunrise, let sunset = sunset
             {
@@ -103,22 +110,28 @@ final class DataModelStore
             self?.data.sunsetTime = sunset
             }
         }
-        indoorTempService = IndoorTempService(completion: { [weak self] (temperature:Double?, humidity:Int?) in
-            if let temperature = temperature, let humidity = humidity
+ */
+        
+        /*
+        if let temperature = temperature, let humidity = humidity
             {
                 self?.data.indoorTemperature = temperature
                 self?.data.indoorHumidity = humidity
             }
         })
+
+        
         for shutterIndex in 0...4
         {
             self.rollerShutters.append(RollerShutterService(rollerShutterIndex: shutterIndex))
         }
+ */
         
-        
+         /*
         self.rollerShutters[0].moveToPosition(targetPosition: 50) {
             print("50")
         }
+ */
 
     }
 }
