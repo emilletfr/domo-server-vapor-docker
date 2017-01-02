@@ -1,23 +1,36 @@
 import Vapor
 import HTTP
 import Fluent
-import Foundation
+//import Foundation
 import Dispatch
 import RxSwift
-import RxBlocking
+
 
 
 
 let drop = Droplet()
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
-/*
-var timer: Observable<NSInteger>!
-//create the timer
-timer = Observable<NSInteger>.interval(0.1, scheduler: MainScheduler.instance)
-timer.subscribeNext({ msecs -> Void in
-print("\(msecs)00ms")
-})//.addDisposableTo(bag)
- */
+
+//let mainCTrl = MainController()
+
+
+    
+    let interval = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+    
+    _ = interval
+        .subscribe(onNext: {
+            print("Subscription: 1, Event: \($0)") })
+    /*
+     delay(5) {
+     _ = interval
+     .subscribe(onNext: { print("Subscription: 2, Event: \($0)") })
+     }
+     */
+
+
+//Thread.sleep(forTimeInterval: 2.0)
+
+//subscription.dispose()
 
 //let sunriseSunsetController = SunriseSunsetController()
 //_ = ThermostatController()

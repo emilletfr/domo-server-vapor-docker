@@ -19,6 +19,7 @@
 		0731491E1E1AA93900656C68 /* RollerShuttersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1613 /* RollerShuttersView.swift */; };
 		0731491F1E1AA93900656C68 /* RollerShuttersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1614 /* RollerShuttersViewModel.swift */; };
 		073149201E1AA93900656C68 /* SunriseSunsetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1615 /* SunriseSunsetService.swift */; };
+		073149231E1AB45100656C68 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073149221E1AB45100656C68 /* MainController.swift */; };
 		OBJ_1682 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Array.swift */; };
 		OBJ_1683 /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Bool+String.swift */; };
 		OBJ_1684 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Box.swift */; };
@@ -5220,6 +5221,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		073149221E1AB45100656C68 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Bool+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
 		OBJ_100 /* bio_lib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bio_lib.c; sourceTree = "<group>"; };
 		OBJ_1000 /* FrameSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameSerializer.swift; sourceTree = "<group>"; };
@@ -8658,6 +8660,7 @@
 				OBJ_1605 /* IndoorTempService.swift */,
 				OBJ_1606 /* Log.swift */,
 				OBJ_1607 /* main.swift */,
+				073149221E1AB45100656C68 /* MainController.swift */,
 				OBJ_1608 /* MinuteRepeatTimer.swift */,
 				OBJ_1609 /* OutdoorTempService.swift */,
 				OBJ_1610 /* RepeatTimer.swift */,
@@ -13283,6 +13286,7 @@
 				OBJ_4088 /* Log.swift in Sources */,
 				OBJ_4089 /* main.swift in Sources */,
 				OBJ_4090 /* MinuteRepeatTimer.swift in Sources */,
+				073149231E1AB45100656C68 /* MainController.swift in Sources */,
 				OBJ_4091 /* OutdoorTempService.swift in Sources */,
 				OBJ_4092 /* RepeatTimer.swift in Sources */,
 				OBJ_4093 /* RollerShuttersController.swift in Sources */,
