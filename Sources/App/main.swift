@@ -16,10 +16,21 @@ let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarA
 
     
     let interval = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+_ = interval
+    .subscribe(onNext: {
+        print("Subscription: 1, Event: \($0)") })
+
+
+    let disposeBag = DisposeBag()
     
-    _ = interval
-        .subscribe(onNext: {
-            print("Subscription: 1, Event: \($0)") })
+    Observable.of("🐶", "🐱", "🐭", "🐹")
+        .subscribe(onNext: { element in
+            print(element)
+        })
+        .addDisposableTo(disposeBag)
+
+
+
     /*
      delay(5) {
      _ = interval
