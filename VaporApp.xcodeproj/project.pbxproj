@@ -1627,7 +1627,7 @@
 		OBJ_3913 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1674 /* RxSwift.framework */; };
 		OBJ_3914 /* RxCocoaRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1673 /* RxCocoaRuntime.framework */; };
 		OBJ_3923 /* _RX.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1445 /* _RX.m */; };
-		OBJ_3924 /* _RXDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1446 /* _RXDelegateProxy.m */; };
+		OBJ_3924 /* _RXDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1446 /* _RXDelegateProxy.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		OBJ_3925 /* _RXKVOObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1447 /* _RXKVOObserver.m */; };
 		OBJ_3926 /* _RXObjCRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1448 /* _RXObjCRuntime.m */; };
 		OBJ_3928 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1674 /* RxSwift.framework */; };

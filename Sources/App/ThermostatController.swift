@@ -84,7 +84,7 @@ class ThermostatController
         //MARK:  CurrentTemperature
         
         drop.get("thermostat/getCurrentTemperature") { request in
-            var value = 0.0
+            let value = 0.0
             internalVarAccessQueue.sync {
             //    value = self.indoorTempController.degresValue
      //           value = self.dataStore.data.indoorTemperature
@@ -130,7 +130,7 @@ class ThermostatController
         }
         
         drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
-            var value = 0
+            let value = 0
             internalVarAccessQueue.sync {
           //      value = self.indoorTempController.humidityValue
    //             value = self.dataStore.data.indoorHumidity

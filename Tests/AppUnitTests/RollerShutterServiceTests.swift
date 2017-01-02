@@ -26,7 +26,7 @@ class RollerShutterServiceTest: XCTestCase {
     func testRetrieveIsOpen()
     {
         let expectation = self.expectation(description: "Handler called")
-        var rollerShutterService = RollerShutterService(rollerShutterIndex: 0)
+        let rollerShutterService = RollerShutterService(rollerShutterIndex: 0)
         rollerShutterService.retrieveStatus(statusOnCompletion: { (open:Bool?) in
             print("isOpen : \(open)")
             XCTAssertNotNil(open)
@@ -40,7 +40,7 @@ class RollerShutterServiceTest: XCTestCase {
     func _testCloseRullerShutters()
     {
         let expectation = self.expectation(description: "Handler called")
-        var rollerShutterService = RollerShutterService(rollerShutterIndex: 0)
+        let rollerShutterService = RollerShutterService(rollerShutterIndex: 0)
         rollerShutterService.moveToPosition(targetPosition: 5) { (Void) in
             print("rollerShutterService.currentPosition: \(rollerShutterService.currentPosition)")
             expectation.fulfill()
