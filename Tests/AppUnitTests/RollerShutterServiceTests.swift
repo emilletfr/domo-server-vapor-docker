@@ -37,7 +37,7 @@ class RollerShutterServiceTest: XCTestCase {
     }
     
     
-    func testCloseRullerShutters()
+    func _testCloseRullerShutters()
     {
         let expectation = self.expectation(description: "Handler called")
         var rollerShutterService = RollerShutterService(rollerShutterIndex: 0)

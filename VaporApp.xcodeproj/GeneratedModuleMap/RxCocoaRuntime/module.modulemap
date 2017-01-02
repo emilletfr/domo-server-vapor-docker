@@ -1,0 +1,5 @@
+module RxCocoaRuntime {
+    umbrella header "/Users/eric/Desktop/domo/domo-server-vapor-docker/Packages/RxSwift-3.1.0/Sources/RxCocoaRuntime/include/RxCocoaRuntime.h"
+    link "RxCocoaRuntime"
+    export *
+}
