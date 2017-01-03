@@ -1,6 +1,6 @@
 import Vapor
-import HTTP
-import Fluent
+//import HTTP
+//import Fluent
 //import Foundation
 import Dispatch
 import RxSwift
@@ -11,32 +11,11 @@ import RxSwift
 let drop = Droplet()
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
 
-//let mainCTrl = MainController()
 
-
-    
-    let interval = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-_ = interval
-    .subscribe(onNext: {
-        print("Subscription: 1, Event: \($0)") })
-
-
-    let disposeBag = DisposeBag()
-    
-    Observable.of("🐶", "🐱", "🐭", "🐹")
-        .subscribe(onNext: { element in
-            print(element)
-        })
-        .addDisposableTo(disposeBag)
-
-
-
-    /*
-     delay(5) {
-     _ = interval
-     .subscribe(onNext: { print("Subscription: 2, Event: \($0)") })
-     }
-     */
+let interval = Observable<Int>.interval(1, scheduler: ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global()))
+_ = interval.subscribe(onNext: {
+    print("Subscription: 1, Event: \($0)")
+})
 
 
 //Thread.sleep(forTimeInterval: 2.0)
@@ -47,5 +26,5 @@ _ = interval
 //_ = ThermostatController()
 //_ = RollerShuttersController()
 
-drop.log.enabled =  [.error, .fatal]
+//drop.log.enabled =  [.error, .fatal]
 drop.run()
