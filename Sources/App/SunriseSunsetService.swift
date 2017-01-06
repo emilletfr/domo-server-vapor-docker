@@ -19,7 +19,7 @@ protocol SunriseSunsetServiceable
     var sunsetTimeDidChange : ((Void) -> Void)? {get}
 }
 
-class SunriseSunsetService : RepeatTimer, SunriseSunsetServiceable
+class SunriseSunsetService : /*RepeatTimer,*/ SunriseSunsetServiceable
 {
     var sunriseTime : String? {didSet{sunriseTimeDidChange?()}}
     var sunsetTime : String? {didSet{sunsetTimeDidChange?()}}
@@ -29,7 +29,10 @@ class SunriseSunsetService : RepeatTimer, SunriseSunsetServiceable
     private var subscribedIndex = 0
     
     // Can't init is singleton
-    private init() { self.startRepeatTimerWithRepeatDelay(delay: 3600)}
+    private init()
+    {
+    //    self.startRepeatTimerWithRepeatDelay(delay: 3600)
+    }
     
     //MARK: Shared Instance
     static let shared: SunriseSunsetServiceable = SunriseSunsetService()

@@ -93,8 +93,8 @@ protocol DataProtocol
         print(humidity)
     }
     */
-    init(inDoorTempService:IndoorTempServiceable)
-    {
+ //   init(inDoorTempService:IndoorTempServiceable)
+   // {
       //  self.indoorTempService = inDoorTempService
        // self.indoorTempService.degresDidChange = {print(self.indoorTempService.degres)}
 /*
@@ -133,7 +133,7 @@ protocol DataProtocol
         }
  */
 
-    }
+ //   }
 }
 /*
 extension DataModelStore

@@ -31,7 +31,7 @@ func ==<T:InbedServiceable>(lhs: T, rhs: T) -> Bool {
     return lhsisInBed == rhsisInBed && lhsIsBusy == rhsIsBusy
 }
 
-class InbedService<HttpToJsonClientableClass:HttpToJsonClientable>: InbedServiceable , MinuteRepeatTimer
+class InbedService<HttpToJsonClientableClass:HttpToJsonClientable>: InbedServiceable// , MinuteRepeatTimer
 {
     var isInBed : Bool? {didSet {if oldValue != isInBed {for callback in isInBedDidChangeForRegisteredOnes{callback()}}}}
     var isBusy : Bool? {didSet {if oldValue != isInBed { for callback in isBusyDidChangeForRegisteredOnes {callback()}}}}
@@ -43,7 +43,7 @@ class InbedService<HttpToJsonClientableClass:HttpToJsonClientable>: InbedService
     
     init()
     {
-        startMinuteRepeatTimer()
+       // startMinuteRepeatTimer()
     }
 
     func subscribe(isInBedDidChange:@escaping ((Void) -> Void), isBusyDidChange:@escaping ((Void) -> Void))

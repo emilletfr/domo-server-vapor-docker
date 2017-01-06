@@ -8,7 +8,7 @@
 
 import Foundation
 import Dispatch
-
+/*
 protocol MinuteRepeatTimer: RepeatTimer
 {
     func startMinuteRepeatTimer()
@@ -28,4 +28,4 @@ extension MinuteRepeatTimer
     }
  }
 
-
+*/

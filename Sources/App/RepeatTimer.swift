@@ -9,22 +9,46 @@
 import Foundation
 import Dispatch
 
-protocol RepeatTimer
+
+
+protocol RepeatTimerable
 {
-  //  func startRepeatTimerWithRepeatDelay(delay:Int)
-    func repeatTimerFired()
+    var delay : UInt32 {get}
+   // var didFire : (Void) -> () {get set}
+    init()
 }
 
-extension RepeatTimer
+extension RepeatTimerable
 {
-     func startRepeatTimerWithRepeatDelay(delay:Int)
+    init(didFireBlock: @escaping ((Void) -> ()))
     {
+        self.init()
+        let delay = UInt32(self.delay)
         DispatchQueue.global(qos:.default).async {
             while (true)
             {
-                self.repeatTimerFired()
-                sleep(UInt32(delay))
+                didFireBlock()
+                sleep(delay)
             }
         }
     }
+
+}
+
+class HourRepeatTimer : RepeatTimerable
+{
+    var delay: UInt32 = 60*60
+    required init() {}
+}
+
+class MinuteRepeatTimer : RepeatTimerable
+{
+    var delay: UInt32 = 60
+    required init() {}
+}
+
+class SecondRepeatTimer : RepeatTimerable
+{
+    var delay: UInt32 = 1
+    required init() {}
 }

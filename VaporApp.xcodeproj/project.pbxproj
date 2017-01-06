@@ -8654,15 +8654,15 @@
 		OBJ_1601 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_1602 /* DataModelStore.swift */,
 				OBJ_1603 /* HttpToJsonClient.swift */,
 				OBJ_1604 /* InBedService.swift */,
 				OBJ_1605 /* IndoorTempService.swift */,
+				OBJ_1609 /* OutdoorTempService.swift */,
+				OBJ_1602 /* DataModelStore.swift */,
 				OBJ_1606 /* Log.swift */,
 				OBJ_1607 /* main.swift */,
 				073149221E1AB45100656C68 /* MainController.swift */,
 				OBJ_1608 /* MinuteRepeatTimer.swift */,
-				OBJ_1609 /* OutdoorTempService.swift */,
 				OBJ_1610 /* RepeatTimer.swift */,
 				OBJ_1611 /* RollerShuttersController.swift */,
 				OBJ_1612 /* RollerShutterService.swift */,
@@ -9406,12 +9406,12 @@
 			path = "Packages/CLibreSSL-1.0.0/Sources/CLibreSSL";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
-				OBJ_1619 /* Tests */,
 				OBJ_1601 /* App */,
+				OBJ_1619 /* Tests */,
 				OBJ_7 /* Sources */,
 				OBJ_1628 /* Config */,
 				OBJ_1629 /* Localization */,
@@ -9419,7 +9419,6 @@
 				OBJ_1631 /* Resources */,
 				OBJ_1632 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_657 /* include */ = {
@@ -11542,7 +11541,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1632 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

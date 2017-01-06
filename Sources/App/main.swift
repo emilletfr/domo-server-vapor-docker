@@ -6,17 +6,31 @@ import Dispatch
 import RxSwift
 
 
+    
+
 
 
 let drop = Droplet()
+
+
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
 
 
-let interval = Observable<Int>.interval(1, scheduler: ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global(qos: .userInteractive)))
+
+
+DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(30)) {
+    print("finished")
+}
+
+/*
+//let interval = Observable<Int>.interval(1, scheduler: ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global(qos: .userInteractive)))
+    let interval = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
 _ = interval.subscribe(onNext: {
     print("Subscription: 1, Event: \($0)")
 })
 
+    }
+ */
 
 //Thread.sleep(forTimeInterval: 2.0)
 
@@ -28,3 +42,5 @@ _ = interval.subscribe(onNext: {
 
 //drop.log.enabled =  [.error, .fatal]
 drop.run()
+
+

@@ -6,55 +6,46 @@
 //
 //
 
-import Foundation
+//import Foundation
 import Dispatch
 import Vapor
 import HTTP
+import RxSwift
 
-typealias Callback = ((Void) -> Void)
 
-protocol IndoorTempServiceable
+
+
+protocol IndoorTempServiceable //: Equatable
 {
-    
-    var degres : Double? {get}
-    var humidity : Int? {get}
-    func subscribe(degresDidChange:@escaping Callback, humidityDidChange:@escaping Callback)
+    var degres : Observable<Double> {get}
+    var humidity : Observable<Int> {get}
+    init()
 }
 
-final class IndoorTempService<T:HttpToJsonClientable> : MinuteRepeatTimer, IndoorTempServiceable
+/*
+func ==<T:IndoorTempServiceable>(lhs: T, rhs: T) -> Bool {
+    return lhs.degres == rhs.degres && lhs.humidity == rhs.humidity
+}
+*/
+
+final class IndoorTempService<HttpToJsonClientClass:HttpToJsonClientable, RepeatTimerClass:RepeatTimerable> : IndoorTempServiceable, Error
 {
-    
-    private var degresDidChangeForRegisteredOnes = [Callback]()
-    private var humidityDidChangeForRegisteredOnes = [Callback]()
-    var degres : Double? {didSet{if oldValue != degres {for r in degresDidChangeForRegisteredOnes {r()}}}}
-    var humidity : Int? { didSet {if oldValue != humidity  {for r in humidityDidChangeForRegisteredOnes {r()}}}}
-    var httpToJsonClient : T!
-    var subscribedIndex = 0
-    
-    func subscribe(degresDidChange: @escaping Callback, humidityDidChange: @escaping Callback)
-    {
-        degresDidChangeForRegisteredOnes += degresDidChange
-        humidityDidChangeForRegisteredOnes += humidityDidChange
-        subscribedIndex += 1
-    }
+    var degres : Observable<Double> {return degresSubject.asObservable()}
+    var humidity : Observable<Int> {return humiditySubject.asObservable()}
+    var degresSubject  = PublishSubject<Double>()
+    var humiditySubject = PublishSubject<Int>()
+    var httpToJsonClient = HttpToJsonClientClass()
+    var autoRepeatTimer : RepeatTimerClass!
     
     init()
     {
-  //      httpToJsonClient = T()
-    }
-    /*
-    init(httpToJsonClient:HttpToJsonClientable = HttpToJsonClient())
-    {
-        self.httpToJsonClient = httpToJsonClient
-        self.startMinuteRepeatTimer()
-    }
- */
-    
-    func minuteRepeatTimerFired()
-    {
-        let itemsResp = self.httpToJsonClient.fetch(url: "http://10.0.1.10/status", jsonPaths: "temperature", "humidity")
-        guard let items = itemsResp, let degres = Double(items[0]), let humidity = Double(items[1]) else {return}
-        self.degres = degres - 0.2
-        self.humidity = Int(humidity)
+        autoRepeatTimer = RepeatTimerClass(didFireBlock:
+            { [weak self] in
+            let itemsResp = self?.httpToJsonClient.fetch(url: "http://10.0.1.10/status", jsonPaths: "temperature", "humidity")
+            guard let items = itemsResp, let degres = Double(items[0]), let humidity = Double(items[1]) else
+            { self?.humiditySubject.onError(self!); self?.degresSubject.onError(self!); return}
+            self?.degresSubject.onNext(degres - 0.2)
+            self?.humiditySubject.onNext(Int(humidity))
+        })
     }
 }

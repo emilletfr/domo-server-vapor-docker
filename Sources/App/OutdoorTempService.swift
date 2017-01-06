@@ -10,17 +10,22 @@ import Vapor
 import Foundation
 import Dispatch
 import HTTP
+import RxSwift
 
-
-class OutdoorTempService : RepeatTimer
+protocol OutdoorTempServiceable
 {
-    
-    var completion : ((Double?) -> Void)?
+    var degres : Observable<Double> {get}
+    init()
+}
 
-    init(completion: ((Double?) -> Void)?)
+class OutdoorTempService : OutdoorTempServiceable//, RepeatTimer
+{
+    var degres: Observable<Double> {return degresSubject.asObservable()}
+    var degresSubject = PublishSubject<Double>()
+
+    required init()
     {
-        self.completion = completion
-        self.startRepeatTimerWithRepeatDelay(delay: 3600)
+  //      self.startRepeatTimerWithRepeatDelay(delay: 3600)
     }
     
     func repeatTimerFired()
@@ -31,13 +36,13 @@ class OutdoorTempService : RepeatTimer
                     let response = try drop.client.get(urlString)
                     guard let degres = response.data["current", "temp_c"]?.double else
                     {
-                        self.completion?(nil)
+                   //     self.completion?(nil)
                         log("error getting outdoor temp from ws")
                         return}
                     
-                    log("error getting outdoor temp from ws");
-                    self.completion?(degres)
-                } catch {self.completion?(nil); log(error)}
+                    self.degresSubject.onNext(degres)
+                   // self.completion?(degres)
+                } catch {/*self.completion?(nil);*/ log(error)}
         }
 }
 
