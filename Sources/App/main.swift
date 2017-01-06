@@ -19,8 +19,9 @@ let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarA
 
 
 DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + .seconds(30)) {
-    print("finished")
+    print("asyncAfter finished")
 }
+print("MainThread")
 
 /*
 //let interval = Observable<Int>.interval(1, scheduler: ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global(qos: .userInteractive)))
