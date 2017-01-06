@@ -25,10 +25,10 @@ DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds
  */
 DispatchQueue.global(qos: .userInitiated).async{
     print("asyncAfter finished")
-    for i in 1...1000 {print("D")}
+    for i in 1...10 {print("D")}
 }
 print("MainThread")
- for i in 1...1000 {print("M")}
+ for i in 1...10 {print("M")}
 
 /*
 //let interval = Observable<Int>.interval(1, scheduler: ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global(qos: .userInteractive)))
