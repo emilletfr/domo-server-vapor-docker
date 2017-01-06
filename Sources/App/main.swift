@@ -26,8 +26,6 @@ DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds
 DispatchQueue.global(qos: .userInitiated).async{
     print("asyncAfter finished")
     for i in 1...1000 {print("D")}
-    
-    
 }
 print("MainThread")
  for i in 1...1000 {print("M")}

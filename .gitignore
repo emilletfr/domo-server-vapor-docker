@@ -1,4 +1,4 @@
 Packages
 .build
 Config/secrets
-xcuserdata
+*.xcuserstate
