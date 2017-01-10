@@ -44,7 +44,7 @@ class SunriseSunsetService : /*RepeatTimer,*/ SunriseSunsetServiceable
         {
             let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
             let response = try drop.client.get(urlString)
-            guard let sunsetDateStr = response.data["results", "sunset"]?.string, let sunriseDateStr = response.data["results", "sunrise"]?.string else
+            guard let sunsetDateStr = response.data["results", "civil_twilight_end"]?.string, let sunriseDateStr = response.data["results", "sunrise"]?.string else
             {
                 log("ERROR - SunriseSunsetService:repeatTimerFired:guard:response: \(response)")
                 return
