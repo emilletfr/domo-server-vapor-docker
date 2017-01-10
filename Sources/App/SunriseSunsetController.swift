@@ -74,7 +74,7 @@ class SunriseSunsetController
         {
             let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
             let response = try drop.client.get(urlString)
-            guard let sunriseDateStr = response.data["results", "sunrise"]?.string, let sunsetDateStr = response.data["results", "sunset"]?.string else
+            guard let sunriseDateStr = response.data["results", "sunrise"]?.string, let sunsetDateStr = response.data["results", "civil_twilight_end"]?.string else
             {
                 log("ERROR - SunriseSunsetController:retrieveSunriseSunset:guard:response: \(response)")
                 return
