@@ -236,21 +236,21 @@ class ThermostatController
         logString = logString.appendingFormat(", computTrgtTemp: %02d", self.computedThermostatTargetTemperature)
         logString += ", inBed: \((inBedController.isInBed == true ? "1" : "0"))"
      //   logString += ", inTemp: \(self.indoorTempController.degresValue)"
-        logString = logString.appendingFormat(", inTemp: %02d", self.indoorTempController.degresValue)
+        logString = logString.appendingFormat(", inTemp: %+05.1f", self.indoorTempController.degresValue)
        // logString += ", humid: \(self.indoorTempController.humidityValue)%"
          logString = logString.appendingFormat(", humid: %02d", self.indoorTempController.humidityValue)
      //   logString += ", outTemp: \(Int(self.outdoorTempController.degresValue))"
-        logString = logString.appendingFormat(", outTemp: %+05.1f", self.outdoorTempController.degresValue)
+        logString = logString.appendingFormat(", outTemp: %+03d", (Int(self.outdoorTempController.degresValue)))
         logString += ", heaterOn: \((heating == true ? "1" : "0"))"
         logString += ", pompOn: \((heating == true ? "1" : "0"))"
         logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
         logString += ", snset: \(sunriseSunsetController.sunsetTime ?? "nil")"
         
-        if self.refreshCounter <= 0
-        {
+     //   if self.refreshCounter <= 0
+      //  {
             self.refreshCounter = 5
             log(logString)
-        }
+       // }
         self.refreshCounter = self.refreshCounter - 1
         
     //    DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
