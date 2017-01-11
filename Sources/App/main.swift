@@ -17,7 +17,7 @@ let drop = Droplet()
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
 
 
-print(Thread.callStackSymbols)
+print(#file)
 /*
 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(30)) {
     print("asyncAfter finished")
