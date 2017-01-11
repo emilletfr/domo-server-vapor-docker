@@ -246,11 +246,11 @@ class ThermostatController
         logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
         logString += ", snset: \(sunriseSunsetController.sunsetTime ?? "nil")"
         
-     //   if self.refreshCounter <= 0
-      //  {
+        if self.refreshCounter <= 0
+        {
             self.refreshCounter = 5
             log(logString)
-       // }
+        }
         self.refreshCounter = self.refreshCounter - 1
         
     //    DispatchQueue.global(qos:.background).async {self.forceHeaterOnOrOff(heaterOnOrOff: heating)}
