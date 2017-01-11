@@ -120,12 +120,12 @@ class RollerShuttersController
             guard let sunriseTime = sunriseSunsetController.sunriseTime , let sunsetTime = sunriseSunsetController.sunsetTime else {return}
             if date == "\(sunriseTime):00"
             {
-                log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
+             //   log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
                 self.actionForAllRollerShutters(position: 100)
             }
             if date == "\(sunsetTime):00"
             {
-                log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
+              //  log("RollerShuttersController:actionForAllRollerShutters() - now : \(date) - sunriseTime : \(sunriseTime) - sunsetTime : \(sunsetTime)")
                 self.actionForAllRollerShutters(position: 0)
             }
     }

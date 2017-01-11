@@ -230,12 +230,17 @@ class ThermostatController
         if self.targetHeatingCoolingState != .OFF {self.targetHeatingCoolingState = heating ? .HEAT : .COOL}
         
         var logString = ""
-        logString += "trgtTemp: \(self.thermostatTargetTemperature)"
-        logString += ", computTrgtTemp: \(self.computedThermostatTargetTemperature)"
+            //    logString +=  "trgtTemp: \(self.thermostatTargetTemperature)"
+        logString = logString.appendingFormat("trgtTemp: %02d", self.thermostatTargetTemperature)
+      //  logString += ", computTrgtTemp: \(self.computedThermostatTargetTemperature)"
+        logString = logString.appendingFormat(", computTrgtTemp: %02d", self.computedThermostatTargetTemperature)
         logString += ", inBed: \((inBedController.isInBed == true ? "1" : "0"))"
-        logString += ", inTemp: \(self.indoorTempController.degresValue)"
-        logString += ", humid: \(self.indoorTempController.humidityValue)%"
-        logString += ", outTemp: \(Int(self.outdoorTempController.degresValue))"
+     //   logString += ", inTemp: \(self.indoorTempController.degresValue)"
+        logString = logString.appendingFormat(", inTemp: %02d", self.indoorTempController.degresValue)
+       // logString += ", humid: \(self.indoorTempController.humidityValue)%"
+         logString = logString.appendingFormat(", humid: %02d", self.indoorTempController.humidityValue)
+     //   logString += ", outTemp: \(Int(self.outdoorTempController.degresValue))"
+        logString = logString.appendingFormat(", outTemp: %+05.1f", self.outdoorTempController.degresValue)
         logString += ", heaterOn: \((heating == true ? "1" : "0"))"
         logString += ", pompOn: \((heating == true ? "1" : "0"))"
         logString += ", snrise: \(sunriseSunsetController.sunriseTime ?? "nil")"
