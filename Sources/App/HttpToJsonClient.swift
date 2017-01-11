@@ -8,49 +8,18 @@
 
 import Foundation
 
-protocol HttpToJsonClientable : Equatable
+protocol HttpToJsonClientable// : Equatable
 {
     var items:[String]? {get}
     func fetch(url:String, jsonPaths:String...) -> [String]?
-   // func `init`()
-    init()
 }
-/*
-extension HttpToJsonClientable : Equatable
-{
-    
-}
-*/
-
-func ==<T: HttpToJsonClientable>(lhs: T, rhs: T) -> Bool
-{
-return lhs.items! == rhs.items!
-}
-
-/*
-extension HttpToJsonClientable
-{
-
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
-       return lhs.items! == rhs.items!
-    }
-}
-*/
 
 
 class HttpToJsonClient : HttpToJsonClientable
 {
-
-
-
-   required init() {
-        
-    }
- 
-
-    
     var items:[String]?
-    func fetch(url:String, jsonPaths:String...) -> [String]?
+    
+    func fetch(url:String, jsonPaths:String...) -> [String]? // print("\(#file)  \(#line)  \(#column)  \(#function)")
     {
         self.items = [String]()
         do
@@ -59,7 +28,7 @@ class HttpToJsonClient : HttpToJsonClientable
             for path in jsonPaths {
                 guard let item = response.json?[path]?.string else
                 {
-                    log("ERROR - Service:minuteRepeatTimerFired:guard:response: \(response)")
+                    log("ERROR - HttpToJsonClientable:guard:response: \(response)  from \(Thread.callStackSymbols)")
                     self.items = nil
                     return self.items
                 }
@@ -68,7 +37,7 @@ class HttpToJsonClient : HttpToJsonClientable
         }
         catch
         {
-            log("ERROR - Service:minuteRepeatTimerFired:catch:error: \(error)");
+            log("ERROR - HttpToJsonClientable:catch:error: \(error)  from \(Thread.callStackSymbols)");
             self.items = nil
         }
         return self.items

@@ -11,7 +11,6 @@ import Dispatch
 import Vapor
 import HTTP
 
-//let ff   = InbedService()
 
 class InbedServiceDefault
 {
@@ -37,7 +36,7 @@ class InbedService<HttpToJsonClientableClass:HttpToJsonClientable>: InbedService
     var isBusy : Bool? {didSet {if oldValue != isInBed { for callback in isBusyDidChangeForRegisteredOnes {callback()}}}}
     private var isInBedDidChangeForRegisteredOnes = [((Void) -> Void)]()
     private var isBusyDidChangeForRegisteredOnes = [((Void) -> Void)]()
-    let httpToJsonClient = HttpToJsonClientableClass()
+//    let httpToJsonClient = HttpToJsonClientableClass()
 
     private var subscribedIndex = 0
     
@@ -54,9 +53,10 @@ class InbedService<HttpToJsonClientableClass:HttpToJsonClientable>: InbedService
     }
     
     func minuteRepeatTimerFired()
-    {
+    {/*
         let items = httpToJsonClient.fetch(url: "http://10.0.1.24/status", jsonPaths: "inBed")
         guard let item = items?[0] else {return}
         self.isInBed = Int(item) == 1
+ */
     }
 }

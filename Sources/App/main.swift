@@ -1,9 +1,10 @@
 import Vapor
 //import HTTP
 //import Fluent
-//import Foundation
+import Foundation
 import Dispatch
 import RxSwift
+
 
 
     
@@ -16,23 +17,23 @@ let drop = Droplet()
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
 
 
-
+print(Thread.callStackSymbols)
 /*
 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(30)) {
     print("asyncAfter finished")
     for i in 1...1000 {print("M")}
 }
  */
+
+//print("\(#file)  \(#line)  \(#column)  \(#function)")
+/*
+let sem  = DispatchSemaphore(value: 0)
 DispatchQueue.global(qos: .userInitiated).async{
     print("asyncAfter finished")
     for i in 1...20 {print("D")}
 }
-DispatchQueue.global(qos: .userInitiated).async{
-    print("asyncAfter finished")
-    for i in 1...20 {print("D2")}
-}
-print("MainThread")
- for i in 1...20 {print("M")}
+ */
+
 
 /*
 //let interval = Observable<Int>.interval(1, scheduler: ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global(qos: .userInteractive)))

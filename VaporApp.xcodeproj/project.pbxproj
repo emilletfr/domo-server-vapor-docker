@@ -12,7 +12,6 @@
 		073149151E1AA93900656C68 /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1604 /* InBedService.swift */; };
 		073149161E1AA93900656C68 /* IndoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1605 /* IndoorTempService.swift */; };
 		073149171E1AA93900656C68 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1606 /* Log.swift */; };
-		073149191E1AA93900656C68 /* MinuteRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1608 /* MinuteRepeatTimer.swift */; };
 		0731491A1E1AA93900656C68 /* OutdoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1609 /* OutdoorTempService.swift */; };
 		0731491B1E1AA93900656C68 /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1610 /* RepeatTimer.swift */; };
 		0731491D1E1AA93900656C68 /* RollerShutterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1612 /* RollerShutterService.swift */; };
@@ -1782,7 +1781,6 @@
 		OBJ_4087 /* IndoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1605 /* IndoorTempService.swift */; };
 		OBJ_4088 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1606 /* Log.swift */; };
 		OBJ_4089 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1607 /* main.swift */; };
-		OBJ_4090 /* MinuteRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1608 /* MinuteRepeatTimer.swift */; };
 		OBJ_4091 /* OutdoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1609 /* OutdoorTempService.swift */; };
 		OBJ_4092 /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1610 /* RepeatTimer.swift */; };
 		OBJ_4093 /* RollerShuttersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1611 /* RollerShuttersController.swift */; };
@@ -5822,7 +5820,6 @@
 		OBJ_1605 /* IndoorTempService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorTempService.swift; sourceTree = "<group>"; };
 		OBJ_1606 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		OBJ_1607 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		OBJ_1608 /* MinuteRepeatTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinuteRepeatTimer.swift; sourceTree = "<group>"; };
 		OBJ_1609 /* OutdoorTempService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdoorTempService.swift; sourceTree = "<group>"; };
 		OBJ_161 /* camellia.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = camellia.c; sourceTree = "<group>"; };
 		OBJ_1610 /* RepeatTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTimer.swift; sourceTree = "<group>"; };
@@ -8662,7 +8659,6 @@
 				OBJ_1606 /* Log.swift */,
 				OBJ_1607 /* main.swift */,
 				073149221E1AB45100656C68 /* MainController.swift */,
-				OBJ_1608 /* MinuteRepeatTimer.swift */,
 				OBJ_1610 /* RepeatTimer.swift */,
 				OBJ_1611 /* RollerShuttersController.swift */,
 				OBJ_1612 /* RollerShutterService.swift */,
@@ -13284,7 +13280,6 @@
 				OBJ_4087 /* IndoorTempService.swift in Sources */,
 				OBJ_4088 /* Log.swift in Sources */,
 				OBJ_4089 /* main.swift in Sources */,
-				OBJ_4090 /* MinuteRepeatTimer.swift in Sources */,
 				073149231E1AB45100656C68 /* MainController.swift in Sources */,
 				OBJ_4091 /* OutdoorTempService.swift in Sources */,
 				OBJ_4092 /* RepeatTimer.swift in Sources */,
@@ -13317,7 +13312,6 @@
 				073149201E1AA93900656C68 /* SunriseSunsetService.swift in Sources */,
 				OBJ_4195 /* RollerShuttersViewModelTests.swift in Sources */,
 				OBJ_4196 /* SunriseSunsetServiceTests.swift in Sources */,
-				073149191E1AA93900656C68 /* MinuteRepeatTimer.swift in Sources */,
 				0731491B1E1AA93900656C68 /* RepeatTimer.swift in Sources */,
 				073149131E1AA93900656C68 /* DataModelStore.swift in Sources */,
 				0731491E1E1AA93900656C68 /* RollerShuttersView.swift in Sources */,

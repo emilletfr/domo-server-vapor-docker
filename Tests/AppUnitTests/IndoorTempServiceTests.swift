@@ -15,10 +15,9 @@ class IndoorTempServiceTests: XCTestCase
 {
     func testRetrieveTemperatureAndHumidity()
     {
-  //  obser
         let expectation = self.expectation(description: "Handler called")
         
-        let indoorTempService = IndoorTempService<HttpToJsonClient, HourRepeatTimer>()
+        let indoorTempService = IndoorTempService()
         
         _ = Observable.zip(indoorTempService.degres, indoorTempService.humidity)
         { degres, humidity in

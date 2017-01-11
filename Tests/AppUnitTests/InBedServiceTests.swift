@@ -13,7 +13,6 @@ class InBedServiceTest: XCTestCase
     
     func testRetrieveIsInBed()
     {
-        
         let expectation = self.expectation(description: "Handler called")
         let inbedService = InbedService<HttpToJsonClient>()
         inbedService.subscribe(isInBedDidChange:
