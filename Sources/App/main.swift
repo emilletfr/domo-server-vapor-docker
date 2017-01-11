@@ -18,6 +18,7 @@ let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarA
 
 
 print(#file)
+print("AAA")
 /*
 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(30)) {
     print("asyncAfter finished")
