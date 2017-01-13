@@ -12,18 +12,16 @@ import Dispatch
 
 protocol ThermostatViewModelable
 {
-    var indoorTemperature : Observable<Int> {get}
-    var targetTemperature : Observable<Int> {get}
+    var targetTemperatureObserver : PublishSubject<Int> {get}
+    var indoorTemperatureObserver : PublishSubject<Int> {get}
     
     init(indoorTempService:IndoorTempServiceable, inBedService:InBedServicable)
 }
 
 class ThermostatViewModel : ThermostatViewModelable
 {
-    var targetTemperature: Observable<Int> {return targetTemperatureSubject.asObservable()}
-    var targetTemperatureSubject = PublishSubject<Int>()
-    var indoorTemperature: Observable<Int> {return indoorTemperatureSubject.asObservable()}
-    var indoorTemperatureSubject = PublishSubject<Int>()
+    var targetTemperatureObserver = PublishSubject<Int>()
+    var indoorTemperatureObserver = PublishSubject<Int>()
     
     
     var indoorTempService : IndoorTempServiceable!
@@ -36,9 +34,20 @@ class ThermostatViewModel : ThermostatViewModelable
         self.inBedService = inBedService
         self.servicesLatestObserver = Observable.combineLatest(indoorTempService.degres, inBedService.isInBed) { (degres, isInBed) in
             return (degres, isInBed)}.distinctUntilChanged({ (degres:Double, isInbed:Bool) in return "\(degres)\(isInbed)"
-            }).debounce(10, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).subscribe(onNext: { (degres:Double, isInBed:Bool) in
+            }).throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).subscribe(onNext: { (degres:Double, isInBed:Bool) in
                 print(degres); print(isInBed)
             })
+        
+        _ = Observable.combineLatest(indoorTempService.degres, inBedService.isInBed) { (degres, isInBed) in
+            return (degres, isInBed)}.distinctUntilChanged({ (degres:Double, isInbed:Bool) in return "\(degres)\(isInbed)"
+            }).subscribe({ event in
+                print("B:\(event)")
+            })
+        
+            _ = Observable.combineLatest(indoorTempService.degres, inBedService.isInBed) { (degres, isInBed) in
+                return (degres, isInBed)}.subscribe({ event in
+                    print("A:\(event)")
+                })
         
         
     }
