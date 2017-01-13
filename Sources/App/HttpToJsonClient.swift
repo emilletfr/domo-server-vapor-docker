@@ -8,18 +8,24 @@
 
 import Foundation
 
-protocol HttpToJsonClientable// : Equatable
+protocol HttpToJsonClientable
 {
     var items:[String]? {get}
-    func fetch(url:String, jsonPaths:String...) -> [String]?
+    func internalFetch(url:String, jsonPaths:[String], fromFile: String) -> [String]?
+    
 }
-
+extension HttpToJsonClientable
+{
+    func fetch(url:String, jsonPaths:String...,fromFile: String = #file) -> [String]?
+    {
+        return internalFetch(url: url, jsonPaths: jsonPaths, fromFile: fromFile)
+    }
+}
 
 class HttpToJsonClient : HttpToJsonClientable
 {
     var items:[String]?
-    
-    func fetch(url:String, jsonPaths:String...) -> [String]? // print("\(#file)  \(#line)  \(#column)  \(#function)")
+    func internalFetch(url:String, jsonPaths:[String], fromFile: String) -> [String]? // print("\(#file)  \(#line)  \(#column)  \(#function)")
     {
         self.items = [String]()
         do
@@ -28,7 +34,7 @@ class HttpToJsonClient : HttpToJsonClientable
             for path in jsonPaths {
                 guard let item = response.json?[path]?.string else
                 {
-                    log("ERROR - HttpToJsonClientable:guard:response: \(response)  from \(Thread.callStackSymbols)")
+                    log("ERROR - HttpToJsonClientable:guard:response: \(response)  from \(fromFile)")
                     self.items = nil
                     return self.items
                 }
@@ -37,7 +43,7 @@ class HttpToJsonClient : HttpToJsonClientable
         }
         catch
         {
-            log("ERROR - HttpToJsonClientable:catch:error: \(error)  from \(Thread.callStackSymbols)");
+            log("ERROR - HttpToJsonClientable:catch:error: \(error)  from \(fromFile)");
             self.items = nil
         }
         return self.items

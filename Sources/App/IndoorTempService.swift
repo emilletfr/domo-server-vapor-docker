@@ -20,7 +20,6 @@ protocol IndoorTempServiceable
     init(httpToJsonClient:HttpToJsonClientable, repeatTimer: RepeatTimer)
 }
 
-
 final class IndoorTempService : IndoorTempServiceable, Error
 {
     var degres : Observable<Double> {return degresSubject.asObservable()}
@@ -30,7 +29,7 @@ final class IndoorTempService : IndoorTempServiceable, Error
     var httpToJsonClient : HttpToJsonClientable!
     var autoRepeatTimer : RepeatTimer!
     
-    init(httpToJsonClient:HttpToJsonClientable = HttpToJsonClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
+    init(httpToJsonClient:HttpToJsonClientable = HttpToJsonClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:20))
     {
         self.httpToJsonClient = httpToJsonClient
         self.autoRepeatTimer = repeatTimer
