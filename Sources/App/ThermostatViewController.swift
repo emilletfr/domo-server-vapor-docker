@@ -16,6 +16,7 @@ class ThermostatViewController
     init(thermostatViewModel:ThermostatViewModelable = ThermostatViewModel())
     {
         self.thermostatViewModel = thermostatViewModel
+
         // Required Characteristics
         
         //MARK:  CurrentHeatingCoolingState
