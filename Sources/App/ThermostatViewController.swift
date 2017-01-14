@@ -8,38 +8,34 @@
 
 import Foundation
 import Vapor
+import RxSwift
 
 class ThermostatViewController
 {
     var thermostatViewModel : ThermostatViewModelable!
     
-    init(thermostatViewModel:ThermostatViewModelable = ThermostatViewModel())
+    init(viewModel:ThermostatViewModelable = ThermostatViewModel())
     {
-        self.thermostatViewModel = thermostatViewModel
-
-        // Required Characteristics
+        self.thermostatViewModel = viewModel
+        viewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
+        viewModel.targetTemperaturePublisher.onNext(20)
         
         //MARK:  CurrentHeatingCoolingState
         
-        drop.get("thermostat/getCurrentHeatingCoolingState") { request in
-            var value = 0
-       //     internalVarAccessQueue.sync {
-          //      value = self.currentHeatingCoolingState.rawValue
-          //  }
-            return try JSON(node: ["value": value])
-        }
+        var currentHeatingCoolingState = HeatingCoolingState.OFF
+        _ = viewModel.currentHeatingCoolingStateObserver.subscribe(onNext: { (state:HeatingCoolingState) in currentHeatingCoolingState = state})
+        drop.get("thermostat/getCurrentHeatingCoolingState") { request in return try JSON(node: ["value": currentHeatingCoolingState.rawValue])}
         
         drop.get("thermostat/setCurrentHeatingCoolingState", Int.self) { request, value in
-            internalVarAccessQueue.sync {}
-            return try JSON(node: ["value": value])
-        }
+            if let state = HeatingCoolingState(rawValue: value) {_ = viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
+            return try JSON(node: ["value": value])}
         
         //MARK:  TargetHeatingCoolingState
         
         drop.get("thermostat/getTargetHeatingCoolingState") { request in
             var value = 0
             internalVarAccessQueue.sync {
-            //    value = self.targetHeatingCoolingState.rawValue
+                //    value = self.targetHeatingCoolingState.rawValue
             }
             return try JSON(node: ["value": value])
         }
@@ -47,8 +43,8 @@ class ThermostatViewController
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
             guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
             internalVarAccessQueue.async {
-            //    self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
-         //       self.targetHeatingCoolingState = self.currentHeatingCoolingState
+                //    self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
+                //       self.targetHeatingCoolingState = self.currentHeatingCoolingState
                 //    self.refresh()
             }
             return try JSON(node: ["value": value])
@@ -75,23 +71,23 @@ class ThermostatViewController
         drop.get("thermostat/getTargetTemperature") { request in
             var value = 0
             internalVarAccessQueue.sync {
-          //      let temperature = (self.computedThermostatTargetTemperature) < 10 ? 10 :  Int(self.computedThermostatTargetTemperature)
-        //        value = temperature
+                //      let temperature = (self.computedThermostatTargetTemperature) < 10 ? 10 :  Int(self.computedThermostatTargetTemperature)
+                //        value = temperature
             }
             return  try JSON(node: ["value": value])
         }
         
         drop.get("thermostat/setTargetTemperature", String.self) { request, value in
             /*
-            internalVarAccessQueue.async {
-                
-                if self.thermostatTargetTemperature != Int(value)
-                {
-                    self.thermostatTargetTemperature = Int(value) ?? 10
-                    //  self.refresh()
-                }
-            }
- */
+             internalVarAccessQueue.async {
+             
+             if self.thermostatTargetTemperature != Int(value)
+             {
+             self.thermostatTargetTemperature = Int(value) ?? 10
+             //  self.refresh()
+             }
+             }
+             */
             return try JSON(node: ["value": value])
         }
         
@@ -121,6 +117,6 @@ class ThermostatViewController
             return try JSON(node: ["value": value])
         }
     }
-
-    }
+    
+}
 

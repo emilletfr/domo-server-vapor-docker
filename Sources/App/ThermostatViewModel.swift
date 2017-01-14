@@ -14,61 +14,52 @@ enum HeatingCoolingState: Int { case OFF = 0, HEAT, COOL, AUTO }
 
 protocol ThermostatViewModelable
 {
-    var currentOutdoorTemperatureObserver : BehaviorSubject<Int> {get}
-    var currentIndoorTemperatureObserver : BehaviorSubject<Int> {get}
-    var targetIndoorTemperatureObserver : BehaviorSubject<Int> {get}
-    var currentHeatingCoolingStateObserver : BehaviorSubject<HeatingCoolingState> {get}
-    var targetHeatingCoolingStateObserver : BehaviorSubject<HeatingCoolingState> {get}
+    var currentOutdoorTemperatureObserver : PublishSubject<Int> {get}
+    var currentIndoorHumidityObserver : PublishSubject<Int> {get}
+    var currentIndoorTemperatureObserver : PublishSubject<Int> {get}
+    var targetIndoorTemperatureObserver : PublishSubject<Int> {get}
+    var currentHeatingCoolingStateObserver : PublishSubject<HeatingCoolingState> {get}
+    var targetHeatingCoolingStateObserver : PublishSubject<HeatingCoolingState> {get}
     
-    var targetTemperaturePublisher : BehaviorSubject<Int> {get}
-    var targetHeatingCoolingStatePublisher : BehaviorSubject<HeatingCoolingState> {get}
+    var targetTemperaturePublisher : PublishSubject<Int> {get}
+    var targetHeatingCoolingStatePublisher : PublishSubject<HeatingCoolingState> {get}
     
     init(indoorTempService:IndoorTempServiceable, inBedService:InBedServicable)
 }
 
 class ThermostatViewModel : ThermostatViewModelable
 {
-    var currentOutdoorTemperatureObserver = BehaviorSubject<Int>(value:20)
-    var currentHeatingCoolingStateObserver = BehaviorSubject<HeatingCoolingState>(value: .OFF)
-    var targetHeatingCoolingStateObserver = BehaviorSubject<HeatingCoolingState>(value: .OFF)
-    var currentIndoorTemperatureObserver = BehaviorSubject<Int>(value:20)
-    var targetIndoorTemperatureObserver = BehaviorSubject<Int>(value: 20)
+    var currentOutdoorTemperatureObserver = PublishSubject<Int>()
+    var currentIndoorHumidityObserver = PublishSubject<Int>()
+    var currentIndoorTemperatureObserver = PublishSubject<Int>()
+    var targetIndoorTemperatureObserver = PublishSubject<Int>()
+    var currentHeatingCoolingStateObserver = PublishSubject<HeatingCoolingState>()
+    var targetHeatingCoolingStateObserver = PublishSubject<HeatingCoolingState>()
     
-    var targetTemperaturePublisher = BehaviorSubject<Int>(value:20)
-    var targetHeatingCoolingStatePublisher = BehaviorSubject<HeatingCoolingState>(value:.OFF)
+    var targetTemperaturePublisher = PublishSubject<Int>()
+    var targetHeatingCoolingStatePublisher = PublishSubject<HeatingCoolingState>()
     
     var indoorTempService : IndoorTempServiceable!
     var inBedService : InBedServicable!
+    
+    typealias InputData = (indoorTemp:Double, indoorHumidity:Int, isInbed:Bool, targetTemp:Int, targetHeatingCoolingState:HeatingCoolingState)
     
     required init(indoorTempService:IndoorTempServiceable = IndoorTempService(), inBedService:InBedServicable = InBedService())
     {
         self.indoorTempService = indoorTempService
         self.inBedService = inBedService
-        
-        let servicesObservable = Observable.combineLatest(indoorTempService.degres, inBedService.isInBed) { (indoorDeg, isInBed) in return (indoorDeg, isInBed)}
-        let publishObservable = Observable.combineLatest(targetTemperaturePublisher, targetHeatingCoolingStatePublisher) { (targetTemperature, targetHeatingCoolingState) in return (targetTemperature, targetHeatingCoolingState)}
-        let overallObservable = Observable.combineLatest(servicesObservable, publishObservable) { (a, b) in return (a.0,a.1,b.0,b.1)}
-        let overallFilteredObservable = overallObservable.distinctUntilChanged({ (old: (Double, Bool, Int, HeatingCoolingState), new: (Double, Bool, Int, HeatingCoolingState)) -> Bool in old == new
-        }).throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
-        
-        _ = overallFilteredObservable.subscribe(onNext: { (indoorDegres:Double, isInbed:Bool, targetTemp:Int, targetHeatingCoolingState:HeatingCoolingState) in
-            print(indoorDegres)
-            self.currentIndoorTemperatureObserver.onNext(Int(indoorDegres >= 0 ? indoorDegres : 0))
-            if targetHeatingCoolingState == .OFF
-            {
-                self.targetIndoorTemperatureObserver.onNext(10)
-            }
-            else if isInbed == true
-            {
-                let tempMinusTwo = targetTemp - 2
-                self.targetIndoorTemperatureObserver.onNext(tempMinusTwo >= 10 ? tempMinusTwo : 10)
-            }
-            else
-            {
-                self.targetIndoorTemperatureObserver.onNext(targetTemp >= 10 ? targetTemp : 10)
-            }
-            self.currentHeatingCoolingStateObserver.onNext(targetHeatingCoolingState != .AUTO ? targetHeatingCoolingState : .HEAT)
-            self.targetHeatingCoolingStateObserver.onNext(targetHeatingCoolingState != .AUTO ? targetHeatingCoolingState : .HEAT)
+        let inputsObservable = Observable.combineLatest(indoorTempService.degresObserver, indoorTempService.humidityObserver, inBedService.isInBedObserver, targetTemperaturePublisher, targetHeatingCoolingStatePublisher){$0} as Observable<InputData>
+        _ = inputsObservable.distinctUntilChanged({$0 == $1}).throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).subscribe(onNext: { data in
+            print(data)
+            self.currentIndoorTemperatureObserver.onNext(Int(data.indoorTemp >= 0 ? data.indoorTemp : 0))
+            var computedTargetTemp = data.targetTemp
+            if data.isInbed == true {computedTargetTemp = data.targetTemp - 2}
+            if data.targetHeatingCoolingState == .OFF {computedTargetTemp = 7}
+            
+            self.targetIndoorTemperatureObserver.onNext(computedTargetTemp >= 10 ? computedTargetTemp : 10)
+            let itsCold = data.indoorTemp < Double(computedTargetTemp)
+            self.currentHeatingCoolingStateObserver.onNext(data.targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL))
+            self.targetHeatingCoolingStateObserver.onNext(data.targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL))
         })
     }
 }

@@ -16,7 +16,7 @@ class InBedServiceTest: XCTestCase
     {
         let expectation = self.expectation(description: "Handler called")
         let inbedService = InBedService()
-        _  = inbedService.isInBed.subscribe { (event:Event<Bool>) in
+        _  = inbedService.isInBedObserver.subscribe { (event:Event<Bool>) in
             print(event)
             XCTAssertNil(event.error)
             expectation.fulfill()

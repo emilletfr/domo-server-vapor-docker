@@ -14,6 +14,7 @@ protocol HttpToJsonClientable
     func internalFetch(url:String, jsonPaths:[String], fromFile: String) -> [String]?
     
 }
+
 extension HttpToJsonClientable
 {
     func fetch(url:String, jsonPaths:String...,fromFile: String = #file) -> [String]?

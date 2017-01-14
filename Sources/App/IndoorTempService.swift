@@ -15,17 +15,15 @@ import RxSwift
 
 protocol IndoorTempServiceable
 {
-    var degres : Observable<Double> {get}
-    var humidity : Observable<Int> {get}
+    var degresObserver : PublishSubject<Double> {get}
+    var humidityObserver : PublishSubject<Int> {get}
     init(httpToJsonClient:HttpToJsonClientable, repeatTimer: RepeatTimer)
 }
 
 final class IndoorTempService : IndoorTempServiceable, Error
 {
-    var degres : Observable<Double> {return degresSubject.asObservable()}
-    var humidity : Observable<Int> {return humiditySubject.asObservable()}
-    var degresSubject  = PublishSubject<Double>()
-    var humiditySubject = PublishSubject<Int>()
+    var degresObserver  = PublishSubject<Double>()
+    var humidityObserver = PublishSubject<Int>()
     var httpToJsonClient : HttpToJsonClientable!
     var autoRepeatTimer : RepeatTimer!
     
@@ -36,9 +34,9 @@ final class IndoorTempService : IndoorTempServiceable, Error
         repeatTimer.didFireBlock = { [weak self] in
             let itemsResp = self?.httpToJsonClient.fetch(url: "http://10.0.1.10/status", jsonPaths: "temperature", "humidity")
             guard let items = itemsResp, let degres = Double(items[0]), let humidity = Double(items[1]) else
-            { self?.humiditySubject.onError(self!); self?.degresSubject.onError(self!); return}
-            self?.degresSubject.onNext(degres - 0.2)
-            self?.humiditySubject.onNext(Int(humidity))
+            { self?.humidityObserver.onError(self!); self?.degresObserver.onError(self!); return}
+            self?.degresObserver.onNext(degres - 0.2)
+            self?.humidityObserver.onNext(Int(humidity))
         }
     }
 }

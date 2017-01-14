@@ -14,14 +14,13 @@ import RxSwift
 
 protocol InBedServicable
 {
-    var isInBed : Observable<Bool> {get}
+    var isInBedObserver : PublishSubject<Bool> {get}
     init(httpToJsonClient:HttpToJsonClientable, repeatTimer: RepeatTimer)
 }
 
 class InBedService : InBedServicable, Error
 {
-    var isInBed: Observable<Bool> {return isInBedSubject.asObservable()}
-    var isInBedSubject = PublishSubject<Bool>()
+    var isInBedObserver = PublishSubject<Bool>()
     var httpToJsonClient : HttpToJsonClientable!
     var repeatTimer : RepeatTimer!
     
@@ -31,8 +30,8 @@ class InBedService : InBedServicable, Error
         self.repeatTimer = repeatTimer
         repeatTimer.didFireBlock = { [weak self] in
             let items = httpToJsonClient.fetch(url: "http://10.0.1.24/status", jsonPaths: "inBed")
-            guard let item = items?[0] else {self?.isInBedSubject.onError(self!); return}
-            self?.isInBedSubject.onNext(Int(item) == 1)
+            guard let item = items?[0] else {self?.isInBedObserver.onError(self!); return}
+            self?.isInBedObserver.onNext(Int(item) == 1)
         }
     }
 }
