@@ -53,7 +53,7 @@ class RollerShuttersViewModel : RollerShuttersViewModelable
             if index < wakeUpSequence.count && (wakeUpSequence[index] == value || ( index > 8 && index < 12 ))  {return index + 1}
             return 0
         }).subscribe(onNext: { (value:Int) in
-            print("wakeup : \(value == wakeUpSequence.count)")
+            log("wakeup : \(value == wakeUpSequence.count)")
         })
 
     }
