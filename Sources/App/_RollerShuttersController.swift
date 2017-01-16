@@ -19,7 +19,7 @@ class RollerShuttersController
     var rollerShuttersCurrentPositions = [0,0,0,0,0]
     var rollerShuttersTargetPositions = [0,0,0,0,0]
     var rollerShuttersAreWorking = [false, false, false, false, false]
-    enum Places: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
+  //  enum Places: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
     
     init()
     {

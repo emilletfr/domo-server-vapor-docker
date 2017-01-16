@@ -14,7 +14,7 @@ import HTTP
 
 class InbedServiceDefault
 {
-    static let shared  = InbedService<HttpToJsonClient>()
+    static let shared  = InbedService<HttpClient>()
     private init() {} //This prevents others from using the default '()' initializer for this class.
 }
 
@@ -30,13 +30,13 @@ func ==<T:InbedServiceable>(lhs: T, rhs: T) -> Bool {
     return lhsisInBed == rhsisInBed && lhsIsBusy == rhsIsBusy
 }
 
-class InbedService<HttpToJsonClientableClass:HttpToJsonClientable>: InbedServiceable// , MinuteRepeatTimer
+class InbedService<HttpClientableClass:HttpClientable>: InbedServiceable// , MinuteRepeatTimer
 {
     var isInBed : Bool? {didSet {if oldValue != isInBed {for callback in isInBedDidChangeForRegisteredOnes{callback()}}}}
     var isBusy : Bool? {didSet {if oldValue != isInBed { for callback in isBusyDidChangeForRegisteredOnes {callback()}}}}
     private var isInBedDidChangeForRegisteredOnes = [((Void) -> Void)]()
     private var isBusyDidChangeForRegisteredOnes = [((Void) -> Void)]()
-//    let httpToJsonClient = HttpToJsonClientableClass()
+//    let httpClient = HttpClientableClass()
 
     private var subscribedIndex = 0
     

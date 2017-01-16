@@ -22,18 +22,21 @@ class ThermostatViewController
         
         //MARK:  CurrentHeatingCoolingState
         
+   //     _ = viewModel.currentOutdoorTemperatureObserver.subscribe {print($0)}
+    //    _ = viewModel.currentIndoorTemperatureObserver.subscribe {print($0)}
+        
         var currentHeatingCoolingState = HeatingCoolingState.OFF
         _ = viewModel.currentHeatingCoolingStateObserver.subscribe(onNext: { (state:HeatingCoolingState) in currentHeatingCoolingState = state})
         drop.get("thermostat/getCurrentHeatingCoolingState") { request in return try JSON(node: ["value": currentHeatingCoolingState.rawValue])}
-        
+        /*
         drop.get("thermostat/setCurrentHeatingCoolingState", Int.self) { request, value in
             if let state = HeatingCoolingState(rawValue: value) {_ = viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
             return try JSON(node: ["value": value])}
-        
+        */
         //MARK:  TargetHeatingCoolingState
         
         drop.get("thermostat/getTargetHeatingCoolingState") { request in
-            var value = 0
+            let value = 0
             internalVarAccessQueue.sync {
                 //    value = self.targetHeatingCoolingState.rawValue
             }
@@ -41,7 +44,7 @@ class ThermostatViewController
         }
         
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
-            guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
+        //    guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
             internalVarAccessQueue.async {
                 //    self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
                 //       self.targetHeatingCoolingState = self.currentHeatingCoolingState
@@ -69,7 +72,7 @@ class ThermostatViewController
         //MARK:  TargetTemperature
         
         drop.get("thermostat/getTargetTemperature") { request in
-            var value = 0
+            let value = 0
             internalVarAccessQueue.sync {
                 //      let temperature = (self.computedThermostatTargetTemperature) < 10 ? 10 :  Int(self.computedThermostatTargetTemperature)
                 //        value = temperature

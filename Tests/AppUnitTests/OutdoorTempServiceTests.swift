@@ -7,29 +7,22 @@
 //
 
 import XCTest
+import RxSwift
 
 class OutdoorTempServiceTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
     func testRetrieveTemp() {
-        /*
-        let expectation = self.expectation(description: "Handler called")
-        _ = OutdoorTempService(completion: { (degres:Double?) in
-            XCTAssertNotNil(degres)
-            print("Outdoor temp: \(degres as Any)")
-            expectation.fulfill()
-        })
-        self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
- */
+        
+            let expectation = self.expectation(description: "Handler called")
+            let outdoorTempService = OutdoorTempService()
+            _  = outdoorTempService.temperatureObserver.subscribe { (event) in
+                print(event)
+                XCTAssertNil(event.error)
+                expectation.fulfill()
+            }
+            self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
+    
+    
     }
     
     

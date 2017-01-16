@@ -7,47 +7,44 @@
 //
 
 import Foundation
+import HTTP
 
-protocol HttpToJsonClientable
+protocol HttpClientable
 {
-    var items:[String]? {get}
-    func internalFetch(url:String, jsonPaths:[String], fromFile: String) -> [String]?
+    func sendGet(url:String) -> Self?
+    func parseToStringFrom(path:[String]) -> String?
+    func parseToDoubleFrom(path:[String]) -> Double?
+    func parseToIntFrom(path:[String]) -> Int?
+}
+
+class HttpClient : HttpClientable
+{
+    var response : Response?
     
-}
-
-extension HttpToJsonClientable
-{
-    func fetch(url:String, jsonPaths:String...,fromFile: String = #file) -> [String]?
+    func sendGet(url:String) -> Self? // print("\(#file)  \(#line)  \(#column)  \(#function)")
     {
-        return internalFetch(url: url, jsonPaths: jsonPaths, fromFile: fromFile)
+        self.response = nil
+        do {self.response = try drop.client.get(url)}
+        catch {log("ERROR - \(self):\(#function) \(error) \(url)");}
+        return self
     }
-}
-
-class HttpToJsonClient : HttpToJsonClientable
-{
-    var items:[String]?
-    func internalFetch(url:String, jsonPaths:[String], fromFile: String) -> [String]? // print("\(#file)  \(#line)  \(#column)  \(#function)")
+    
+    func parseToStringFrom(path:[String]) -> String?
     {
-        self.items = [String]()
-        do
-        {
-            let response = try drop.client.get(url)
-            for path in jsonPaths {
-                guard let item = response.json?[path]?.string else
-                {
-                    log("ERROR - HttpToJsonClientable:guard:response: \(response)  from \(fromFile)")
-                    self.items = nil
-                    return self.items
-                }
-                self.items? += [item]
-            }
-        }
-        catch
-        {
-            log("ERROR - HttpToJsonClientable:catch:error: \(error)  from \(fromFile)");
-            self.items = nil
-        }
-        return self.items
+        guard let response = self.response?.json?[path]?.string else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        return response
+    }
+    
+    func parseToDoubleFrom(path:[String]) -> Double?
+    {
+        guard let response = self.response?.json?[path]?.double else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        return response
+    }
+    
+     func parseToIntFrom(path:[String]) -> Int?
+     {
+        guard let response = self.response?.json?[path]?.int else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        return response
     }
 }
 

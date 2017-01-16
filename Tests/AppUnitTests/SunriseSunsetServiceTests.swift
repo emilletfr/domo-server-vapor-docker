@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RxSwift
 
 class SunriseSunsetServiceTests: XCTestCase {
 
@@ -22,24 +23,16 @@ class SunriseSunsetServiceTests: XCTestCase {
 
     func testRetrieveSunriseAndSunset()
     {
-        /*
-        var fullfillCount = 2
         let expectation = self.expectation(description: "Handler called")
         let sunriseSunsetService = SunriseSunsetService()
-        sunriseSunsetService.sunriseTimeDidChange =
-            {
-                XCTAssertNotNil(sunriseSunsetService.sunriseTime)
-                fullfillCount -= 1
-                if fullfillCount == 0  {expectation.fulfill()}
+        
+        let zipObservable = Observable.zip(sunriseSunsetService.sunriseTimeObserver, sunriseSunsetService.sunsetTimeObserver, resultSelector: {($0, $1)})
+
+        _  = zipObservable.subscribe { (event) in
+            print(event)
+            XCTAssertNil(event.error)
+            expectation.fulfill()
         }
-        sunriseSunsetService.sunsetTimeDidChange =
-            {
-                XCTAssertNotNil(sunriseSunsetService.sunsetTime)
-                fullfillCount -= 1
-                if fullfillCount == 0  {expectation.fulfill()}
-        }
-        self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
- */
-    }
+        self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}    }
 
 }

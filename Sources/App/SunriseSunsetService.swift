@@ -10,63 +10,52 @@ import Foundation
 import Dispatch
 import Vapor
 import HTTP
+import RxSwift
 
 protocol SunriseSunsetServiceable
 {
-    var sunriseTime : String? {get}
-    var sunriseTimeDidChange : ((Void) -> Void)? {get}
-    var sunsetTime : String? {get}
-    var sunsetTimeDidChange : ((Void) -> Void)? {get}
+    var sunriseTimeObserver : PublishSubject<String> {get}
+    var sunsetTimeObserver : PublishSubject<String> {get}
+    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
 
-class SunriseSunsetService : /*RepeatTimer,*/ SunriseSunsetServiceable
+class SunriseSunsetService : SunriseSunsetServiceable, Error
 {
-    var sunriseTime : String? {didSet{sunriseTimeDidChange?()}}
-    var sunsetTime : String? {didSet{sunsetTimeDidChange?()}}
-    var sunriseTimeDidChange : ((Void) -> Void)?
-    var sunsetTimeDidChange : ((Void) -> Void)?
-
-    private var subscribedIndex = 0
+    var sunriseTimeObserver = PublishSubject<String>()
+    var sunsetTimeObserver = PublishSubject<String>()
     
-    // Can't init is singleton
-    private init()
+    var httpClient : HttpClientable!
+    var autoRepeatTimer : RepeatTimer!
+    
+    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60*60))
     {
-    //    self.startRepeatTimerWithRepeatDelay(delay: 3600)
-    }
-    
-    //MARK: Shared Instance
-    static let shared: SunriseSunsetServiceable = SunriseSunsetService()
-    
-
-    func repeatTimerFired()
-    {
-        do
-        {
-            let urlString = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
-            let response = try drop.client.get(urlString)
-            guard let sunsetDateStr = response.data["results", "civil_twilight_end"]?.string, let sunriseDateStr = response.data["results", "sunrise"]?.string else
+        self.httpClient = httpClient
+        self.autoRepeatTimer = repeatTimer
+        repeatTimer.didFireBlock = { [weak self] in
+            guard let response = httpClient.sendGet(url: "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0") else {return}
+            guard let sunsetDateStr = response.parseToStringFrom(path: ["results", "civil_twilight_end"]), let sunriseDateStr =  response.parseToStringFrom(path: ["results", "sunrise"]) else
             {
-                log("ERROR - SunriseSunsetService:repeatTimerFired:guard:response: \(response)")
+                self?.sunriseTimeObserver.onError(self!)
+                self?.sunsetTimeObserver.onError(self!)
                 return
             }
             let iso8601DateFormatter = DateFormatter()
             iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
             iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-            guard var sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else
+            guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else
             {
                 log("ERROR - SunriseSunsetService:repeatTimerFired:guard:iso8601DateFormatter: \(sunriseDateStr)  \(sunsetDateStr)")
+                self?.sunriseTimeObserver.onError(self!)
+                self?.sunsetTimeObserver.onError(self!)
                 return
             }
-            sunsetDate = sunsetDate.addingTimeInterval(60*00) // +40mn
+            //  sunsetDate = sunsetDate.addingTimeInterval(60*00) // +40mn
             let localDateformatter = DateFormatter()
             localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"
             localDateformatter.dateFormat = "HH:mm"
-            let sunsetTime = localDateformatter.string(from: sunsetDate)
-            let sunriseTime = localDateformatter.string(from: sunriseDate)
-            self.sunsetTime = sunsetTime
-            self.sunriseTime = sunriseTime
+            self?.sunriseTimeObserver.onNext(localDateformatter.string(from: sunriseDate))
+            self?.sunsetTimeObserver.onNext(localDateformatter.string(from: sunsetDate))
         }
-        catch {log("ERROR - SunriseSunsetService:repeatTimerFired:catch:error: \(error)")}
     }
 }
- 
+

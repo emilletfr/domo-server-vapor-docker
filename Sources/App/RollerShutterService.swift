@@ -9,6 +9,8 @@
 import Foundation
 import Dispatch
 
+enum Places: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
+
 class RollerShutterService
 {
     var targetPositionCompletion : ((Void) -> Void)?
@@ -16,9 +18,10 @@ class RollerShutterService
     var rollerShutterIndex = 0
    // var completionStatus : (((idle:Bool , currentPosition:Int)?) -> Void)
     var statusOnCompletion : ((Bool?) -> Void)?
-
-    init(rollerShutterIndex : Int) {
-        self.rollerShutterIndex = rollerShutterIndex
+    
+    
+    init(_ rollerShutterIndex : Places) {
+        self.rollerShutterIndex = rollerShutterIndex.rawValue
     }
     
      func retrieveStatus(statusOnCompletion : @escaping ((Bool?) -> Void))

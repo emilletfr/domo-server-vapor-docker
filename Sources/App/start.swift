@@ -10,12 +10,9 @@ let drop = Droplet()
 
 
 let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarAccessQueue")
+/*
 
-//let ff  = OutdoorTempService()
-
-
-let thermostatViewController = ThermostatViewController()
-let rollerShuttersViewController = RollerShuttersViewController()
+    let rr = ThermostatViewController()
 
 /*
 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(30)) {
@@ -55,4 +52,4 @@ _ = interval.subscribe(onNext: {
 //drop.log.enabled =  [.error, .fatal]
 drop.run()
 
-
+*/

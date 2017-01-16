@@ -22,11 +22,11 @@ class RollerShutterServiceTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+    /*
     func testRetrieveIsOpen()
     {
         let expectation = self.expectation(description: "Handler called")
-        let rollerShutterService = RollerShutterService(rollerShutterIndex: 0)
+        let rollerShutterService = RollerShutterService(0)
         rollerShutterService.retrieveStatus(statusOnCompletion: { (open:Bool?) in
             print("isOpen : \(open)")
             XCTAssertNotNil(open)
@@ -40,7 +40,7 @@ class RollerShutterServiceTest: XCTestCase {
     func _testCloseRullerShutters()
     {
         let expectation = self.expectation(description: "Handler called")
-        let rollerShutterService = RollerShutterService(rollerShutterIndex: 0)
+        let rollerShutterService = RollerShutterService(0)
         rollerShutterService.moveToPosition(targetPosition: 5) { (Void) in
             print("rollerShutterService.currentPosition: \(rollerShutterService.currentPosition)")
             expectation.fulfill()
@@ -50,6 +50,6 @@ class RollerShutterServiceTest: XCTestCase {
         print("rollerShutterService.currentPosition: \(rollerShutterService.currentPosition)")
     }
  
-    
+    */
     
 }

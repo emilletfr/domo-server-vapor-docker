@@ -8,24 +8,45 @@
 
 import Foundation
 import Dispatch
-
+import RxSwift
 
 class RepeatTimer
 {
     var didFireBlock : (Void) -> () = {}
+    let repeatSubject = BehaviorSubject<Bool>(value:true)
+    
     init(delay:UInt32)
     {
+        /*
+        sleep(1)
+        self.didFireBlock()
+        _ = repeatSubject.asObservable().debounce(delay, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).subscribe {[weak self] event in
+            print("HIT")
+            defer{self?.repeatSubject.onNext(true)}
+            self?.didFireBlock()
+        }
+        */
         DispatchQueue.global(qos:.default).async {
-            sleep(1)
+            usleep(10_000)
             self.didFireBlock()
             while (true)
             {
                 sleep(delay)
                 self.didFireBlock()
             }
+ 
         }
     }
 }
+
+/*
+ let ee = BehaviorSubject<Bool>(value:true)
+ _ = ee.asObservable().throttle(2, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).subscribe { event in
+ defer{ee.onNext(true)}
+ print(event)
+ 
+ }
+ */
 
 /*
 protocol RepeatTimerable

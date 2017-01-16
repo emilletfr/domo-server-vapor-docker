@@ -11,27 +11,27 @@ import Vapor
 import HTTP
 import RxSwift
 
-
 protocol InBedServicable
 {
     var isInBedObserver : PublishSubject<Bool> {get}
-    init(httpToJsonClient:HttpToJsonClientable, repeatTimer: RepeatTimer)
+    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
 
 class InBedService : InBedServicable, Error
 {
     var isInBedObserver = PublishSubject<Bool>()
-    var httpToJsonClient : HttpToJsonClientable!
+    var httpClient : HttpClientable!
     var repeatTimer : RepeatTimer!
     
-    required init(httpToJsonClient: HttpToJsonClientable = HttpToJsonClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
+    required init(httpClient: HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
     {
-        self.httpToJsonClient = httpToJsonClient
+        self.httpClient = httpClient
         self.repeatTimer = repeatTimer
         repeatTimer.didFireBlock = { [weak self] in
-            let items = httpToJsonClient.fetch(url: "http://10.0.1.24/status", jsonPaths: "inBed")
-            guard let item = items?[0] else {self?.isInBedObserver.onError(self!); return}
-            self?.isInBedObserver.onNext(Int(item) == 1)
+            let url = "http://10.0.1.24/status"
+            guard let response = httpClient.sendGet(url:url), let isInBed = response.parseToIntFrom(path: ["inBed"])
+                else {self?.isInBedObserver.onError(self!); return}
+            self?.isInBedObserver.onNext(Int(isInBed) == 1)
         }
     }
 }

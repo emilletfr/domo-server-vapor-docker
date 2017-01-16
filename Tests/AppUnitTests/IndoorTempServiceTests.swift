@@ -19,7 +19,7 @@ class IndoorTempServiceTests: XCTestCase
         
         let indoorTempService = IndoorTempService()
         
-        _ = Observable.zip(indoorTempService.degresObserver, indoorTempService.humidityObserver)
+        _ = Observable.zip(indoorTempService.temperatureObserver, indoorTempService.humidityObserver)
         { degres, humidity in
             return (degres, humidity)
             }.retry(3).subscribe({ (event) in

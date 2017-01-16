@@ -7,34 +7,59 @@
 //
 
 import Foundation
-
-struct RollerShuttersViewModel : RollerShuttersViewModelable
-{
-    var rollerShuttersCurrentPositions =  [0,0,0,0,0]
-    var rollerShuttersTargetPositions = [0,0,0,0,0]
-    
-    init() {
-        
-    }
-    
-    mutating func changeTarget(shutterIndex: Int, position: Int) {
-        self.rollerShuttersTargetPositions = [1]
-    }
-    
-    mutating func changeAllTarget(position: Int)
-    {
-        
-    }
-}
-
+import RxSwift
+import Dispatch
 
 protocol RollerShuttersViewModelable
 {
-    var rollerShuttersCurrentPositions : [Int] {get}
-    var rollerShuttersTargetPositions : [Int] {get}
+        //MARK: Subscriptions
+    var currentPositionObserver : [PublishSubject<Int>] {get}
+    var currentAllPositionObserver : PublishSubject<Int> {get}
+    var targetPositionObserver : [PublishSubject<Int>] {get}
+    var targetAllPositionObserver : PublishSubject<Int> {get}
+        //MARK: Actions
+    var targetPositionPublisher : [PublishSubject<Int>] {get}
+    var targetAllPositionPublisher : PublishSubject<Int> {get}
     
-    mutating func changeTarget(shutterIndex: Int, position: Int)
-    mutating func changeAllTarget(position: Int)
+    init(rollerShuttersServices:[RollerShutterService], inBedService:InBedService)
 }
+
+class RollerShuttersViewModel : RollerShuttersViewModelable
+{
+        //MARK: Subscriptions
+    var currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(),PublishSubject<Int>()]
+    var currentAllPositionObserver = PublishSubject<Int>()
+    var targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(),PublishSubject<Int>()]
+    var targetAllPositionObserver = PublishSubject<Int>()
+        //MARK: Actions
+    var targetPositionPublisher  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(),PublishSubject<Int>()]
+    var targetAllPositionPublisher = PublishSubject<Int>()
+        //MARK: Services
+    let rollerShuttersServices : [RollerShutterService]
+    let inBedService: InBedService
+    
+    required init(rollerShuttersServices: [RollerShutterService] = [RollerShutterService(.LIVING_ROOM), RollerShutterService(.DINING_ROOM) ,RollerShutterService(.OFFICE) ,RollerShutterService(.KITCHEN), RollerShutterService(.BEDROOM)] , inBedService: InBedService = InBedService())
+    {
+        self.rollerShuttersServices = rollerShuttersServices
+        self.inBedService = inBedService
+        self.reduce()
+     }
+    
+    //MARK: Reducer
+    func reduce()
+    {
+        let wakeUpSequence = [false, false, true, true]
+        _ = inBedService.isInBedObserver.throttle(10*60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).scan(0, accumulator: { (index:Int, value:Bool) -> Int in
+            if index < wakeUpSequence.count && wakeUpSequence[index] == value {return index + 1}
+            return 0
+        }).subscribe(onNext: { (value:Int) in
+            print(value == wakeUpSequence.count)
+        })
+
+    }
+}
+
+
+
 
 

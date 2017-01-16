@@ -15,28 +15,34 @@ import RxSwift
 
 protocol IndoorTempServiceable
 {
-    var degresObserver : PublishSubject<Double> {get}
+    var temperatureObserver : PublishSubject<Double> {get}
     var humidityObserver : PublishSubject<Int> {get}
-    init(httpToJsonClient:HttpToJsonClientable, repeatTimer: RepeatTimer)
+    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
 
 final class IndoorTempService : IndoorTempServiceable, Error
 {
-    var degresObserver  = PublishSubject<Double>()
+    var temperatureObserver  = PublishSubject<Double>()
     var humidityObserver = PublishSubject<Int>()
-    var httpToJsonClient : HttpToJsonClientable!
+    var httpClient : HttpClientable!
     var autoRepeatTimer : RepeatTimer!
     
-    init(httpToJsonClient:HttpToJsonClientable = HttpToJsonClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:20))
+    init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:20))
     {
-        self.httpToJsonClient = httpToJsonClient
+        self.httpClient = httpClient
         self.autoRepeatTimer = repeatTimer
         repeatTimer.didFireBlock = { [weak self] in
-            let itemsResp = self?.httpToJsonClient.fetch(url: "http://10.0.1.10/status", jsonPaths: "temperature", "humidity")
-            guard let items = itemsResp, let degres = Double(items[0]), let humidity = Double(items[1]) else
-            { self?.humidityObserver.onError(self!); self?.degresObserver.onError(self!); return}
-            self?.degresObserver.onNext(degres - 0.2)
-            self?.humidityObserver.onNext(Int(humidity))
+            guard let response = httpClient.sendGet(url: "http://10.0.1.10/status"),
+                let temperature = response.parseToDoubleFrom(path: ["temperature"]),
+                let humidity = response.parseToIntFrom(path: ["humidity"])
+            else
+            {
+                self?.temperatureObserver.onError(self!)
+                self?.humidityObserver.onError(self!)
+                return
+            }
+            self?.temperatureObserver.onNext(temperature)
+            self?.humidityObserver.onNext(humidity)
         }
     }
 }
