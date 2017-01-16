@@ -53,7 +53,15 @@ class RollerShuttersViewModel : RollerShuttersViewModelable
             if index < wakeUpSequence.count && (wakeUpSequence[index] == value || ( index > 8 && index < 12 ))  {return index + 1}
             return 0
         }).subscribe(onNext: { (value:Int) in
+            
             log("wakeup : \(value == wakeUpSequence.count)")
+            
+            if Int(wakeUpSequence.count) == value
+            {
+                let urlString = "http://10.0.1.14/1"
+                _ = try? drop.client.get(urlString)
+            }
+            
         })
 
     }
