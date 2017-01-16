@@ -67,7 +67,7 @@ class ThermostatViewModel : ThermostatViewModelable
         let combineReducer  = Observable
             .combineLatest(outdoorTempService.temperatureObserver, indoorTempReducer, indoorTempService.humidityObserver, targetHeatingCoolingStatePublisher, targetTempReducer){$0}
             .distinctUntilChanged({$0 == $1})
-           // .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
+            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
         typealias Data = (outdoorTemp:Double, computedIndoorTemp:Double, indoorHumidity:Int, targetHeatingCoolingState:HeatingCoolingState, computedTargetTemp:Int)
         
