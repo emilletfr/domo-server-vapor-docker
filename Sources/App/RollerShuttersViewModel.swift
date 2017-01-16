@@ -49,7 +49,7 @@ class RollerShuttersViewModel : RollerShuttersViewModelable
     func reduce()
     {
         let wakeUpSequence = [false, false, true, true]
-        _ = inBedService.isInBedObserver.throttle(10*60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).scan(0, accumulator: { (index:Int, value:Bool) -> Int in
+        _ = inBedService.isInBedObserver.throttle(/*10**/60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).scan(0, accumulator: { (index:Int, value:Bool) -> Int in
             if index < wakeUpSequence.count && wakeUpSequence[index] == value {return index + 1}
             return 0
         }).subscribe(onNext: { (value:Int) in

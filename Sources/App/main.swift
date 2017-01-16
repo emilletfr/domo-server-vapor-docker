@@ -15,7 +15,7 @@ let internalVarAccessQueue = DispatchQueue(label: "net.emillet.domo.internalVarA
 
 
 let thermostatViewController = ThermostatViewController()
-//let rollerShuttersViewController = RollerShuttersViewController()
+let rollerShuttersViewController = RollerShuttersViewController()
 
 /*
 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(30)) {
