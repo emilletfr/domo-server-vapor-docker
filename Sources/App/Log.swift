@@ -12,7 +12,7 @@ func log(_ items:Any...)
 {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .short
-    dateFormatter.timeStyle = .short
+    dateFormatter.timeStyle = .medium
     dateFormatter.timeZone = TimeZone(abbreviation: "CEST")
     dateFormatter.locale = Locale(identifier: "fr_FR")
     Log.shared.printString(string:"\(dateFormatter.string(from: Date(timeIntervalSinceNow: 0))) : \(items)")
