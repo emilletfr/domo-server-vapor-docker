@@ -93,7 +93,7 @@ final class RollerShutterService : RollerShutterServicable
         
         //  Wrap to Update AllRollingShutter position
         _  = Observable.combineLatest(self.currentPositionObserver, {$0.reduce(0, { (result:Int, value:Int) in return result+value })/$0.count })
-            .filter{$0 == 0 || $0 == 100}
+        //    .filter{$0 == 0 || $0 == 100}
             .subscribe(self.currentAllPositionObserver)
     }
 }
