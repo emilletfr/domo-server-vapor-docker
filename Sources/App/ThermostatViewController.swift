@@ -16,88 +16,74 @@ final class ThermostatViewController
     init(viewModel:ThermostatViewModelable = ThermostatViewModel())
     {
         self.thermostatViewModel = viewModel
+        
+        // Set Initial Values
+        
         viewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
         viewModel.targetTemperaturePublisher.onNext(20)
         
-        //    viewModel.currentIndoorHumidityObserver.subscribe{print(":::::\($0)")}
+        //MARK:  Current Heating Cooling State
         
-        //MARK:  CurrentHeatingCoolingState
-        
-        //     _ = viewModel.currentOutdoorTemperatureObserver.subscribe {print($0)}
-        //    _ = viewModel.currentIndoorTemperatureObserver.subscribe {print($0)}
-        
-        var currentHeatingCoolingState = HeatingCoolingState.OFF
-        _ = viewModel.currentHeatingCoolingStateObserver.subscribe(onNext: { (state:HeatingCoolingState) in currentHeatingCoolingState = state})
+         var currentHeatingCoolingState = HeatingCoolingState.OFF
+        _ = viewModel.currentHeatingCoolingStateObserver.subscribe(onNext: { currentHeatingCoolingState = $0})
         drop.get("thermostat/getCurrentHeatingCoolingState") { request in return try JSON(node: ["value": currentHeatingCoolingState.rawValue])}
+        
         /*
          drop.get("thermostat/setCurrentHeatingCoolingState", Int.self) { request, value in
          if let state = HeatingCoolingState(rawValue: value) {_ = viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
          return try JSON(node: ["value": value])}
          */
-        //MARK:  TargetHeatingCoolingState
         
+        //MARK:  Target Heating Cooling State
+        
+        var targetHeatingCoolingState = HeatingCoolingState.HEAT
+        _ = viewModel.targetHeatingCoolingStateObserver.subscribe(onNext: { targetHeatingCoolingState = $0 })
         drop.get("thermostat/getTargetHeatingCoolingState") { request in
-            let value = 0
-            //   internalVarAccessQueue.sync {
-            //    value = self.targetHeatingCoolingState.rawValue
-            //      }
-            return try JSON(node: ["value": value])
+            return try JSON(node: ["value": targetHeatingCoolingState.rawValue])
         }
         
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
-            //    guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
-            //      internalVarAccessQueue.async {
-            //    self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
-            //       self.targetHeatingCoolingState = self.currentHeatingCoolingState
-            //    self.refresh()
-            //    }
-            return try JSON(node: ["value": value])
+            if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
+             return try JSON(node: ["value": value])
         }
         
-        //MARK:  CurrentTemperature
+        //MARK:  Current Indoor Temperature
         
+        var indoorTemperature = 20
+        _ = viewModel.currentOutdoorTemperatureObserver.subscribe(onNext: { indoorTemperature = $0 })
         drop.get("thermostat/getCurrentTemperature") { request in
-            let value = 0.0
-            //     internalVarAccessQueue.sync {
-            //    value = self.indoorTempController.degresValue
-            //           value = self.dataStore.data.indoorTemperature
-            //    }
-            return try JSON(node: ["value": value])
+            return try JSON(node: ["value": indoorTemperature])
         }
         
+        /*
         drop.get("thermostat/setCurrentTemperature", Int.self) { request, value in
-            //     internalVarAccessQueue.sync {}
             return try JSON(node: ["value": value])
         }
+ */
         
-        //MARK:  TargetTemperature
-        
+        //MARK:  Target Indoor Temperature
+        var targetTemperature = 20
+        _ = viewModel.targetIndoorTemperatureObserver.subscribe(onNext: { targetTemperature = $0 })
         drop.get("thermostat/getTargetTemperature") { request in
-            let value = 0
-            //      internalVarAccessQueue.sync {
-            //      let temperature = (self.computedThermostatTargetTemperature) < 10 ? 10 :  Int(self.computedThermostatTargetTemperature)
-            //        value = temperature
-            //      }
-            return  try JSON(node: ["value": value])
+            return  try JSON(node: ["value": targetTemperature])
         }
         
         drop.get("thermostat/setTargetTemperature", String.self) { request, value in
-            /*
-             internalVarAccessQueue.async {
-             
-             if self.thermostatTargetTemperature != Int(value)
-             {
-             self.thermostatTargetTemperature = Int(value) ?? 10
-             //  self.refresh()
-             }
-             }
-             */
+            if let intValue = Int(value) {viewModel.targetTemperaturePublisher.onNext(intValue)}
             return try JSON(node: ["value": value])
         }
         
-        enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
+        //MARK:  Current Outdoor Temperature
         
-        //MARK:  TemperatureDisplayUnits
+        var outdoorTemperature = 0
+        _ = viewModel.currentOutdoorTemperatureObserver.subscribe(onNext: { outdoorTemperature = $0 })
+        drop.get("temperature-sensor/getCurrentTemperature") { request in
+            return try JSON(node: ["value": outdoorTemperature])
+        }
+        
+        //MARK:  Temperature Display Units
+        
+        enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
         
         drop.get("thermostat/getTemperatureDisplayUnits") { request in
             try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])
@@ -107,20 +93,18 @@ final class ThermostatViewController
             try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])
         }
         
-        drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
-            let value = 0
-            //     internalVarAccessQueue.sync {
-            //      value = self.indoorTempController.humidityValue
-            //             value = self.dataStore.data.indoorHumidity
-            //     }
-            return try JSON(node: ["value": value])
-        }
+        //MARK:  Indoor Humidity
         
+        var indoorHumidity = 50
+        _ = viewModel.currentIndoorHumidityObserver.subscribe(onNext: { indoorHumidity = $0 })
+        drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
+            return try JSON(node: ["value": indoorHumidity])
+        }
+        /*
         drop.get("humidity-sensor/setCurrentRelativeHumidity", Int.self) { request, value in
-            //        internalVarAccessQueue.sync {}
             return try JSON(node: ["value": value])
         }
+ */
     }
-    
 }
 
