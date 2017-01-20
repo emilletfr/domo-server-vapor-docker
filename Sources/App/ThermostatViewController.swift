@@ -6,11 +6,10 @@
 //
 //
 
-import Foundation
 import Vapor
-import RxSwift
 
-class ThermostatViewController
+
+final class ThermostatViewController
 {
     var thermostatViewModel : ThermostatViewModelable!
     
@@ -19,6 +18,8 @@ class ThermostatViewController
         self.thermostatViewModel = viewModel
         viewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
         viewModel.targetTemperaturePublisher.onNext(20)
+        
+    //    viewModel.currentIndoorHumidityObserver.subscribe{print(":::::\($0)")}
         
         //MARK:  CurrentHeatingCoolingState
         
@@ -37,19 +38,19 @@ class ThermostatViewController
         
         drop.get("thermostat/getTargetHeatingCoolingState") { request in
             let value = 0
-            internalVarAccessQueue.sync {
+         //   internalVarAccessQueue.sync {
                 //    value = self.targetHeatingCoolingState.rawValue
-            }
+      //      }
             return try JSON(node: ["value": value])
         }
         
         drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
         //    guard let intValue = Int(value) else {return try JSON(node: ["value": 0])}
-            internalVarAccessQueue.async {
+      //      internalVarAccessQueue.async {
                 //    self.currentHeatingCoolingState = HeatingCoolingState(rawValue: intValue != HeatingCoolingState.AUTO.rawValue ? intValue : HeatingCoolingState.HEAT.rawValue)!
                 //       self.targetHeatingCoolingState = self.currentHeatingCoolingState
                 //    self.refresh()
-            }
+        //    }
             return try JSON(node: ["value": value])
         }
         
@@ -57,15 +58,15 @@ class ThermostatViewController
         
         drop.get("thermostat/getCurrentTemperature") { request in
             let value = 0.0
-            internalVarAccessQueue.sync {
+       //     internalVarAccessQueue.sync {
                 //    value = self.indoorTempController.degresValue
                 //           value = self.dataStore.data.indoorTemperature
-            }
+        //    }
             return try JSON(node: ["value": value])
         }
         
         drop.get("thermostat/setCurrentTemperature", Int.self) { request, value in
-            internalVarAccessQueue.sync {}
+       //     internalVarAccessQueue.sync {}
             return try JSON(node: ["value": value])
         }
         
@@ -73,10 +74,10 @@ class ThermostatViewController
         
         drop.get("thermostat/getTargetTemperature") { request in
             let value = 0
-            internalVarAccessQueue.sync {
+      //      internalVarAccessQueue.sync {
                 //      let temperature = (self.computedThermostatTargetTemperature) < 10 ? 10 :  Int(self.computedThermostatTargetTemperature)
                 //        value = temperature
-            }
+      //      }
             return  try JSON(node: ["value": value])
         }
         
@@ -108,15 +109,15 @@ class ThermostatViewController
         
         drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
             let value = 0
-            internalVarAccessQueue.sync {
+       //     internalVarAccessQueue.sync {
                 //      value = self.indoorTempController.humidityValue
                 //             value = self.dataStore.data.indoorHumidity
-            }
+       //     }
             return try JSON(node: ["value": value])
         }
         
         drop.get("humidity-sensor/setCurrentRelativeHumidity", Int.self) { request, value in
-            internalVarAccessQueue.sync {}
+    //        internalVarAccessQueue.sync {}
             return try JSON(node: ["value": value])
         }
     }

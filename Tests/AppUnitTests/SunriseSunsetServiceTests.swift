@@ -26,7 +26,7 @@ class SunriseSunsetServiceTests: XCTestCase {
         let expectation = self.expectation(description: "Handler called")
         let sunriseSunsetService = SunriseSunsetService()
         
-        let zipObservable = Observable.zip(sunriseSunsetService.sunriseTimeObserver, sunriseSunsetService.sunsetTimeObserver, resultSelector: {($0, $1)})
+        let zipObservable = Observable.zip(sunriseSunsetService.sunriseTimeObserver, sunriseSunsetService.sunsetTimeObserver, resultSelector: { ($0, $1) })
 
         _  = zipObservable.subscribe { (event) in
             print(event)

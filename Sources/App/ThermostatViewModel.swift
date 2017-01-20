@@ -6,9 +6,8 @@
 //
 //
 
-import Foundation
 import RxSwift
-import Dispatch
+
 
 enum HeatingCoolingState: Int { case OFF = 0, HEAT, COOL, AUTO }
 
@@ -25,10 +24,11 @@ protocol ThermostatViewModelable
     var targetTemperaturePublisher : PublishSubject<Int> {get}
     var targetHeatingCoolingStatePublisher : PublishSubject<HeatingCoolingState> {get}
     //MARK: Dispatcher
-    init(outdoorTempService:OutdoorTempServiceable, indoorTempService:IndoorTempServiceable, inBedService:InBedServicable, boilerService:BoilerServicable)
+    init(outdoorTempService:OutdoorTempServicable, indoorTempService:IndoorTempServicable, inBedService:InBedServicable, boilerService:BoilerServicable)
 }
 
-class ThermostatViewModel : ThermostatViewModelable
+
+final class ThermostatViewModel : ThermostatViewModelable
 {
     //MARK: Subscribers
     let currentOutdoorTemperatureObserver = PublishSubject<Int>()
@@ -41,13 +41,13 @@ class ThermostatViewModel : ThermostatViewModelable
     let targetTemperaturePublisher = PublishSubject<Int>()
     let targetHeatingCoolingStatePublisher = PublishSubject<HeatingCoolingState>()
     //MARK: Dependencies
-    let outdoorTempService : OutdoorTempServiceable
-    let indoorTempService : IndoorTempServiceable
+    let outdoorTempService : OutdoorTempServicable
+    let indoorTempService : IndoorTempServicable
     let inBedService : InBedServicable
     let boilerService : BoilerServicable
     
     //MARK: Dispatcher
-     required init(outdoorTempService:OutdoorTempServiceable = OutdoorTempService(), indoorTempService:IndoorTempServiceable = IndoorTempService(), inBedService:InBedServicable = InBedService(), boilerService:BoilerServicable = BoilerService())
+    required init(outdoorTempService:OutdoorTempServicable = OutdoorTempService(), indoorTempService:IndoorTempServicable = IndoorTempService(), inBedService:InBedServicable = InBedService(), boilerService:BoilerServicable = BoilerService())
     {
         self.outdoorTempService = outdoorTempService
         self.indoorTempService = indoorTempService
@@ -59,39 +59,52 @@ class ThermostatViewModel : ThermostatViewModelable
     //MARK: Reducer
     func reduce()
     {
-        let indoorTempReducer = indoorTempService.temperatureObserver.map {$0 - 0.2}
+        // Adjust indoor temperature offset
+        let indoorTempReducer = indoorTempService.temperatureObserver.map{$0 - 0.2}
+        
+        // Compute target temp following isInBed, target cooling state
         let targetTempReducer = Observable.combineLatest(inBedService.isInBedObserver, targetTemperaturePublisher, targetHeatingCoolingStatePublisher, resultSelector: { (isInbed:Bool, targetTemp:Int, targetHeatingCoolingState:HeatingCoolingState) -> Int in
             if isInbed == true {return targetTemp - 2}
             if targetHeatingCoolingState == .OFF {return 7}
             return targetTemp})
+        
+        // Combine latest, distinct until changed and thottle all inputs
         let combineReducer  = Observable
             .combineLatest(outdoorTempService.temperatureObserver, indoorTempReducer, indoorTempService.humidityObserver, targetHeatingCoolingStatePublisher, targetTempReducer){$0}
-            .distinctUntilChanged({$0 == $1})
+            .distinctUntilChanged{$0 == $1}
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
         typealias Data = (outdoorTemp:Double, computedIndoorTemp:Double, indoorHumidity:Int, targetHeatingCoolingState:HeatingCoolingState, computedTargetTemp:Int)
         
+        // Wrap Outdoor Temperature (HomeKit do not support temperature < 0°C from temperature sensors)
         _ = combineReducer.map {
-            Int(($0 as Data).outdoorTemp) }.debug().subscribe(self.currentOutdoorTemperatureObserver)
+            Int(($0 as Data).outdoorTemp >= 0 ? ($0 as Data).outdoorTemp:0)}.subscribe(self.currentOutdoorTemperatureObserver)
+        
+        // Wrap Indoor temperature (HomeKit do not support temperature < 0°C from temperature sensors)
         _ = combineReducer.map {
-            Int(($0 as Data).computedIndoorTemp >= 0 ? ($0 as Data).computedIndoorTemp:0) }.debug().subscribe(self.currentIndoorTemperatureObserver)
+            Int(($0 as Data).computedIndoorTemp >= 0 ? ($0 as Data).computedIndoorTemp:0)}.subscribe(self.currentIndoorTemperatureObserver)
+        
+        // Wrap Indoor Humidity
+        _ = combineReducer.map {Int(($0 as Data).indoorHumidity) }.subscribe(self.currentIndoorHumidityObserver)
+        
+        // Wrap Thermostat Temperature (HomeKit do not support thermostat target temperature < 10)
         _ = combineReducer.map {
-            Int(($0 as Data).indoorHumidity) }.debug().subscribe(self.currentIndoorHumidityObserver)
-        _ = combineReducer.map {
-            ($0 as Data).computedIndoorTemp >= 10 ? Int(($0 as Data).computedIndoorTemp):10}.debug().subscribe(self.currentIndoorTemperatureObserver)
-        _ = combineReducer.map {
-            ($0 as Data).computedTargetTemp >= 10 ? ($0 as Data).computedTargetTemp:10}.debug().subscribe(self.targetIndoorTemperatureObserver)
+            ($0 as Data).computedTargetTemp >= 10 ? ($0 as Data).computedTargetTemp:10}.subscribe(self.targetIndoorTemperatureObserver)
+        
+        // Wrap Thermostat Current State
         _ = combineReducer.map {
             let itsCold = ($0 as Data).computedIndoorTemp < Double(($0 as Data).computedTargetTemp)
             return ($0 as Data).targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL)
-            }.debug().subscribe(self.currentHeatingCoolingStateObserver)
+            }.subscribe(self.currentHeatingCoolingStateObserver)
+        
+        // Wrap Thermostat Target State
         _ = combineReducer.map {
             let itsCold = ($0 as Data).computedIndoorTemp < Double(($0 as Data).computedTargetTemp)
             //        self?.boilerService.forceHeater(OnOrOff: itsCold)
             //       self?.boilerService.forcePomp(OnOrOff: itsCold)
             return ($0 as Data).targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL)
-            }.debug().subscribe(self.targetHeatingCoolingStateObserver)
- 
+            }.subscribe(self.targetHeatingCoolingStateObserver)
+        
         
         /*
          .subscribe(onNext: {[weak self] (data:(outdoorTemp:Double, computedIndoorTemp:Double, indoorHumidity:Int, targetHeatingCoolingState:HeatingCoolingState, computedTargetTemp:Int)) in

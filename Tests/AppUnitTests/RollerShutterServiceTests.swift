@@ -7,49 +7,56 @@
 //
 
 import XCTest
+import Foundation
+import Dispatch
+import Vapor
+import HTTP
+import RxSwift
 
 class RollerShutterServiceTest: XCTestCase {
     
-    // var rollerShutterService : RollerShutterService?
-    
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    /*
+    let rollerShutterService = RollerShutterService()
     func testRetrieveIsOpen()
     {
         let expectation = self.expectation(description: "Handler called")
-        let rollerShutterService = RollerShutterService(0)
-        rollerShutterService.retrieveStatus(statusOnCompletion: { (open:Bool?) in
-            print("isOpen : \(open)")
-            XCTAssertNotNil(open)
-            expectation.fulfill()
-        })
         
-         self.waitForExpectations(timeout: 5) { (error:Error?) in print(error as Any)}
-    }
-    
-    
-    func _testCloseRullerShutters()
-    {
-        let expectation = self.expectation(description: "Handler called")
-        let rollerShutterService = RollerShutterService(0)
-        rollerShutterService.moveToPosition(targetPosition: 5) { (Void) in
-            print("rollerShutterService.currentPosition: \(rollerShutterService.currentPosition)")
+        _  = rollerShutterService.currentPositionObserver[Place.LIVING_ROOM.rawValue].subscribe { (event) in
+            print(event)
+            XCTAssertNil(event.error)
             expectation.fulfill()
         }
-        
-        self.waitForExpectations(timeout: 30) { (error:Error?) in print("wait")}
-        print("rollerShutterService.currentPosition: \(rollerShutterService.currentPosition)")
-    }
+        self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
  
-    */
+    }
     
+//let rollerShutterService = RollerShutterService(.LIVING_ROOM)
+    
+    func _testClose()
+    {
+   //     let targetPos = 100
+      //  let expectation = self.expectation(description: "Handler called")
+     //   var initStatePassed = false
+        
+       // rollerShutterService.targetPositionPublisher[3].onNext(0)
+        
+    //    _ = self.rollerShutterService.currentPositionObserver[Place.LIVING_ROOM.rawValue].map({$0 < 50 ? 100 : 0}).take(2).subscribe(rollerShutterService.targetPositionPublisher[Place.LIVING_ROOM.rawValue])
+        
+        /*
+        self.rollerShutterService.targetPositionPublisher.onNext(targetPos)
+        _ = self.rollerShutterService.currentPositionObserver.subscribe(onNext:
+            {
+                if initStatePassed == true {XCTAssertEqual($0, targetPos);expectation.fulfill()}
+                initStatePassed = true
+        } )
+ */
+
+  //  self.waitForExpectations(timeout: 50) { (error:Error?) in print(error as Any)}
+    }
+
+
 }
+
+
+
+
+

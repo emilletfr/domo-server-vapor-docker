@@ -6,11 +6,10 @@
 //
 //
 
-import Foundation
 import Vapor
-import RxSwift
 
-class RollerShuttersViewController
+
+final class RollerShuttersViewController
 {
     var viewModel : RollerShuttersViewModelable!
     
@@ -18,6 +17,7 @@ class RollerShuttersViewController
     {
         self.viewModel = viewModel
         
+     //   viewModel.currentPositionObserver.
         drop.get("window-covering/getCurrentPosition", Int.self)
         { request, index in
             let value = 0

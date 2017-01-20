@@ -6,21 +6,19 @@
 //
 //
 
-//import Foundation
 import Dispatch
-import Vapor
-import HTTP
 import RxSwift
 
 
-protocol IndoorTempServiceable
+protocol IndoorTempServicable
 {
     var temperatureObserver : PublishSubject<Double> {get}
     var humidityObserver : PublishSubject<Int> {get}
     init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
 
-final class IndoorTempService : IndoorTempServiceable, Error
+
+final class IndoorTempService : IndoorTempServicable
 {
     var temperatureObserver  = PublishSubject<Double>()
     var humidityObserver = PublishSubject<Int>()
@@ -32,13 +30,13 @@ final class IndoorTempService : IndoorTempServiceable, Error
         self.httpClient = httpClient
         self.autoRepeatTimer = repeatTimer
         repeatTimer.didFireBlock = { [weak self] in
-            guard let response = httpClient.sendGet(url: "http://10.0.1.10/status"),
+            guard let response = httpClient.sendGet("http://10.0.1.10/status"),
                 let temperature = response.parseToDoubleFrom(path: ["temperature"]),
                 let humidity = response.parseToIntFrom(path: ["humidity"])
             else
             {
-                self?.temperatureObserver.onError(self!)
-                self?.humidityObserver.onError(self!)
+           //     self?.temperatureObserver.onError(self!)
+            //    self?.humidityObserver.onError(self!)
                 return
             }
             self?.temperatureObserver.onNext(temperature)

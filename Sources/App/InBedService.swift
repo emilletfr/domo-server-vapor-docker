@@ -6,10 +6,8 @@
 //
 //
 
-import Dispatch
-import Vapor
-import HTTP
 import RxSwift
+
 
 protocol InBedServicable
 {
@@ -17,11 +15,12 @@ protocol InBedServicable
     init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
 
-class InBedService : InBedServicable, Error
+
+class InBedService : InBedServicable
 {
-    var isInBedObserver = PublishSubject<Bool>()
-    var httpClient : HttpClientable!
-    var repeatTimer : RepeatTimer!
+    let isInBedObserver = PublishSubject<Bool>()
+    let httpClient : HttpClientable
+    let repeatTimer : RepeatTimer
     
     required init(httpClient: HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
     {
@@ -29,8 +28,12 @@ class InBedService : InBedServicable, Error
         self.repeatTimer = repeatTimer
         repeatTimer.didFireBlock = { [weak self] in
             let url = "http://10.0.1.24/status"
-            guard let response = httpClient.sendGet(url:url), let isInBed = response.parseToIntFrom(path: ["inBed"])
-                else {self?.isInBedObserver.onError(self!); return}
+            guard let response = httpClient.sendGet(url), let isInBed = response.parseToIntFrom(path: ["inBed"])
+                else
+            {
+              //  self?.isInBedObserver.onError(self!);
+                return
+            }
             self?.isInBedObserver.onNext(Int(isInBed) == 1)
         }
     }

@@ -8,7 +8,6 @@
 
 import XCTest
 import RxSwift
-//import RxTest
 
 
 class IndoorTempServiceTests: XCTestCase

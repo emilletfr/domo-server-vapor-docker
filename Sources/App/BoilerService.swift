@@ -6,11 +6,8 @@
 //
 //
 
-import Vapor
-import Foundation
-import Dispatch
-import HTTP
 import RxSwift
+
 
 protocol BoilerServicable
 {
@@ -19,9 +16,9 @@ protocol BoilerServicable
     init(httpClient:HttpClientable)
 }
 
+
 class BoilerService : BoilerServicable
 {
-    
     var httpClient : HttpClientable!
     
     required init(httpClient:HttpClientable = HttpClient())
@@ -31,12 +28,12 @@ class BoilerService : BoilerServicable
     
     func forceHeater(OnOrOff:Bool)
     {
-           _ = self.httpClient.sendGet(url: "http://10.0.1.15:8015/0" + (OnOrOff == true ? "1" : "0"))
+           _ = self.httpClient.sendGet("http://10.0.1.15:8015/0" + (OnOrOff == true ? "1" : "0"))
     }
     
     func forcePomp(OnOrOff:Bool)
     {
-        _ = self.httpClient.sendGet(url: "http://10.0.1.15:8015/1" + (OnOrOff == true ? "1" : "0"))
+        _ = self.httpClient.sendGet("http://10.0.1.15:8015/1" + (OnOrOff == true ? "1" : "0"))
      }
 
 }

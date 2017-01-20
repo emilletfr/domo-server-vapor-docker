@@ -6,22 +6,24 @@
 //
 //
 
-import Foundation
 import HTTP
+import Vapor
+
 
 protocol HttpClientable
 {
-    func sendGet(url:String) -> Self?
+    func sendGet(_ url:String) -> Self?
     func parseToStringFrom(path:[String]) -> String?
     func parseToDoubleFrom(path:[String]) -> Double?
     func parseToIntFrom(path:[String]) -> Int?
 }
 
+
 class HttpClient : HttpClientable
 {
     var response : Response?
     
-    func sendGet(url:String) -> Self? // print("\(#file)  \(#line)  \(#column)  \(#function)")
+    func sendGet(_ url:String) -> Self? // print("\(#file)  \(#line)  \(#column)  \(#function)")
     {
         self.response = nil
         do {self.response = try drop.client.get(url)}

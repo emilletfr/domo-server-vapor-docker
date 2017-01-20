@@ -7,37 +7,30 @@
 //
 
 import XCTest
+import Foundation
+import Dispatch
+import Vapor
+import HTTP
+import RxSwift
 
-class Compare
-{
-    var value = 2
-}
 
 class RollerShuttersViewModelTests: XCTestCase {
     
     
+let rollerShuttersViewModel = RollerShuttersViewModel()
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-   /*
-        _ = self.expectation(description: "Handler called")
-        let indoorTempService = IndoorTempService(degres: 10, humidity: 50)
-        _ = DataModelStore(inDoorTempService: indoorTempService)
-
-        self.waitForExpectations(timeout: 2000) { (error:Error?) in print(error as Any)}
+    func _testExample()
+    {
+      //  let expectation = self.expectation(description: "Handler called")
+/*
+        _ = rollerShuttersViewModel.currentAllPositionObserver.debug("P")
+            .map({$0 == 0 ? 100 : 0}).debug("Q")
+            .subscribe(rollerShuttersViewModel.targetAllPositionPublisher)
+        sleep(10)
+        _ = Observable.combineLatest(rollerShuttersViewModel.currentAllPositionObserver, rollerShuttersViewModel.targetAllPositionObserver, resultSelector: {$0 == $1}).filter({$0 == true}).subscribe(onNext: { ok in expectation.fulfill() })
  */
+     //   rollerShuttersViewModel.targetAllPositionPublisher.onNext(0)
+      //  self.waitForExpectations(timeout: 600) { (error:Error?) in print(error as Any)}
     }
     
     
