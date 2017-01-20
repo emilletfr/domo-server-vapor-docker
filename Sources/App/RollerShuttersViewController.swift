@@ -11,13 +11,13 @@ import Vapor
 
 final class RollerShuttersViewController
 {
-    var viewModel : RollerShuttersViewModelable!
+    var viewModel : RollerShuttersViewModelable
     
     init(viewModel:RollerShuttersViewModelable = RollerShuttersViewModel())
     {
         self.viewModel = viewModel
         
-     //   viewModel.currentPositionObserver.
+        //   viewModel.currentPositionObserver.
         drop.get("window-covering/getCurrentPosition", Int.self)
         { request, index in
             let value = 0
@@ -38,7 +38,7 @@ final class RollerShuttersViewController
         drop.get("window-covering/getCurrentPosition/all")
         { request in
             let value = 0
-               return try JSON(node: ["value": value])
+            return try JSON(node: ["value": value])
         }
         
         drop.get("window-covering/getTargetPosition/all")
@@ -52,7 +52,7 @@ final class RollerShuttersViewController
             
             return try JSON(node: ["value": position])
         }
-
+        
         
     }
 }

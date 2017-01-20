@@ -43,8 +43,8 @@ class HttpClient : HttpClientable
         return response
     }
     
-     func parseToIntFrom(path:[String]) -> Int?
-     {
+    func parseToIntFrom(path:[String]) -> Int?
+    {
         guard let response = self.response?.json?[path]?.int else {log("ERROR - \(self):\(#function):\(path)");return nil}
         return response
     }

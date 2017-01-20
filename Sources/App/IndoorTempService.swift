@@ -20,10 +20,10 @@ protocol IndoorTempServicable
 
 final class IndoorTempService : IndoorTempServicable
 {
-    var temperatureObserver  = PublishSubject<Double>()
-    var humidityObserver = PublishSubject<Int>()
-    var httpClient : HttpClientable!
-    var autoRepeatTimer : RepeatTimer!
+    let temperatureObserver  = PublishSubject<Double>()
+    let humidityObserver = PublishSubject<Int>()
+    let httpClient : HttpClientable
+    let autoRepeatTimer : RepeatTimer
     
     init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:20))
     {
@@ -33,10 +33,10 @@ final class IndoorTempService : IndoorTempServicable
             guard let response = httpClient.sendGet("http://10.0.1.10/status"),
                 let temperature = response.parseToDoubleFrom(path: ["temperature"]),
                 let humidity = response.parseToIntFrom(path: ["humidity"])
-            else
+                else
             {
-           //     self?.temperatureObserver.onError(self!)
-            //    self?.humidityObserver.onError(self!)
+                //     self?.temperatureObserver.onError(self!)
+                //    self?.humidityObserver.onError(self!)
                 return
             }
             self?.temperatureObserver.onNext(temperature)

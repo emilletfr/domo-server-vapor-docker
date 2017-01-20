@@ -31,7 +31,7 @@ class InBedService : InBedServicable
             guard let response = httpClient.sendGet(url), let isInBed = response.parseToIntFrom(path: ["inBed"])
                 else
             {
-              //  self?.isInBedObserver.onError(self!);
+                //  self?.isInBedObserver.onError(self!);
                 return
             }
             self?.isInBedObserver.onNext(Int(isInBed) == 1)

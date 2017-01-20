@@ -52,8 +52,8 @@ final class RollerShutterService : RollerShutterServicable
                 {
                     guard let response = self.httpClient.sendGet("http://10.0.1.1\(placeIndex)/status"), let position = response.parseToIntFrom(path:["open"]) else
                     {
-                     //   self.currentPositionObserver[placeIndex].onError(self)
-                      //  self.targetPositionObserver[placeIndex].onError(self)
+                        //   self.currentPositionObserver[placeIndex].onError(self)
+                        //  self.targetPositionObserver[placeIndex].onError(self)
                         return
                     }
                     self.currentPositionObserver[placeIndex].onNext(position*100)
@@ -82,18 +82,16 @@ final class RollerShutterService : RollerShutterServicable
             
             let emptyPublisher = PublishSubject<Int>()
             
-            // Wrap to Multiple command (Activate One by One)
+            // Wrap to All command (Activate One by One)
             _  = Observable.combineLatest(self.targetAllPositionPublisher, self.currentPositionObserver[placeIndex],
                                           resultSelector: {(($0 == $1), $0)})
                 .filter{$0.0 == true}
                 .map({$0.1})
                 .subscribe(placeIndex + 1 >= Place.count.rawValue ? emptyPublisher : self.targetPositionPublisher[placeIndex + 1])
         }
-        
-    //    _ = self.targetAllPositionPublisher.subscribe(self.targetAllPositionObserver)
         _ = self.targetAllPositionPublisher.subscribe(self.targetPositionPublisher[Place.LIVING_ROOM.rawValue])
         
-        // Update AllRollingShutters position
+        //  Wrap to Update AllRollingShutter position
         _  = Observable.combineLatest(self.currentPositionObserver, {$0.reduce(0, { (result:Int, value:Int) in return result+value })/$0.count })
             .filter{$0 == 0 || $0 == 100}
             .subscribe(self.currentAllPositionObserver)

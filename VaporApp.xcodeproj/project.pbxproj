@@ -7524,8 +7524,8 @@
 		076027CB1E31B86A00FFD8A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				075574E71E28D7A900394573 /* ThermostatViewController.swift */,
 				07AEB24F1E2BC680007241B3 /* RollerShuttersViewController.swift */,
+				075574E71E28D7A900394573 /* ThermostatViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -7533,8 +7533,8 @@
 		076027CC1E31B87500FFD8A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				075574E91E28D9FA00394573 /* ThermostatViewModel.swift */,
 				OBJ_1614 /* RollerShuttersViewModel.swift */,
+				075574E91E28D9FA00394573 /* ThermostatViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";

@@ -19,11 +19,11 @@ protocol SunriseSunsetServicable
 
 final class SunriseSunsetService : SunriseSunsetServicable
 {
-    var sunriseTimeObserver = PublishSubject<String>()
-    var sunsetTimeObserver = PublishSubject<String>()
+    let sunriseTimeObserver = PublishSubject<String>()
+    let sunsetTimeObserver = PublishSubject<String>()
     
-    var httpClient : HttpClientable!
-    var autoRepeatTimer : RepeatTimer!
+    let httpClient : HttpClientable
+    let autoRepeatTimer : RepeatTimer
     
     required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60*60))
     {
@@ -33,8 +33,8 @@ final class SunriseSunsetService : SunriseSunsetServicable
             guard let response = httpClient.sendGet("http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0") else {return}
             guard let sunsetDateStr = response.parseToStringFrom(path: ["results", "civil_twilight_end"]), let sunriseDateStr =  response.parseToStringFrom(path: ["results", "sunrise"]) else
             {
-           //     self?.sunriseTimeObserver.onError(self!)
-            //    self?.sunsetTimeObserver.onError(self!)
+                //     self?.sunriseTimeObserver.onError(self!)
+                //    self?.sunsetTimeObserver.onError(self!)
                 return
             }
             let iso8601DateFormatter = DateFormatter()
@@ -43,8 +43,8 @@ final class SunriseSunsetService : SunriseSunsetServicable
             guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else
             {
                 log("ERROR - SunriseSunsetService:repeatTimerFired:guard:iso8601DateFormatter: \(sunriseDateStr)  \(sunsetDateStr)")
-            //    self?.sunriseTimeObserver.onError(self!)
-             //   self?.sunsetTimeObserver.onError(self!)
+                //    self?.sunriseTimeObserver.onError(self!)
+                //   self?.sunsetTimeObserver.onError(self!)
                 return
             }
             let localDateformatter = DateFormatter()

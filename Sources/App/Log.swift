@@ -19,7 +19,7 @@ func log(_ items:Any...)
 }
 
 class Log {
-
+    
     // Can't init is singleton
     private init() { }
     
@@ -33,7 +33,7 @@ class Log {
     
     func printString(string:String) -> Void
     {
-    //    emptyStringArray.append(string)
+        //    emptyStringArray.append(string)
         print(string)
     }
     

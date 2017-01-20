@@ -18,9 +18,9 @@ protocol OutdoorTempServicable
 
 class OutdoorTempService : OutdoorTempServicable
 {
-    var temperatureObserver  = PublishSubject<Double>()
-    var httpClient : HttpClientable!
-    var autoRepeatTimer : RepeatTimer!
+    let temperatureObserver  = PublishSubject<Double>()
+    let httpClient : HttpClientable
+    let autoRepeatTimer : RepeatTimer
     
     required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60*60))
     {
