@@ -98,11 +98,12 @@ final class ThermostatViewModel : ThermostatViewModelable
             }.subscribe(self.currentHeatingCoolingStateObserver)
         
         // Wrap Thermostat Target State
-        _ = combineReducer.map {
-            let itsCold = ($0 as Data).computedIndoorTemp < Double(($0 as Data).computedTargetTemp)
-            //        self?.boilerService.forceHeater(OnOrOff: itsCold)
-            //       self?.boilerService.forcePomp(OnOrOff: itsCold)
-            return ($0 as Data).targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL)
+        _ = combineReducer.map
+            {
+                let itsCold = ($0 as Data).computedIndoorTemp < Double(($0 as Data).computedTargetTemp)
+                self.boilerService.forceHeater(OnOrOff: itsCold)
+                self.boilerService.forcePomp(OnOrOff: itsCold)
+                return ($0 as Data).targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL)
             }.subscribe(self.targetHeatingCoolingStateObserver)
         
         
