@@ -50,7 +50,7 @@ final class ThermostatViewController
         //MARK:  Current Indoor Temperature
         
         var indoorTemperature = 20
-        _ = viewModel.currentOutdoorTemperatureObserver.subscribe(onNext: { indoorTemperature = $0 })
+        _ = viewModel.currentIndoorTemperatureObserver.subscribe(onNext: { indoorTemperature = $0 })
         drop.get("thermostat/getCurrentTemperature") { request in
             return try JSON(node: ["value": indoorTemperature])
         }
