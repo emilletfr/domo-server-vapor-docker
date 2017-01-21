@@ -26,11 +26,11 @@ protocol RollerShutterServicable
 
 final class RollerShutterService : RollerShutterServicable
 {
-    let currentPositionObserver = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
-    let targetPositionObserver = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+    let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    let targetPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     
-    let targetPositionPublisher = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
-
+    let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    
     let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.RollerShutterService")
     let httpClient : HttpClientable
     
@@ -67,9 +67,9 @@ final class RollerShutterService : RollerShutterServicable
     
     func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
     {
-        self.actionSerialQueue.sync
+        DispatchQueue.global().async
             {
-                DispatchQueue.global().async
+                self.actionSerialQueue.sync
                     {
                         self.targetPositionObserver[placeIndex].onNext(targetPosition)
                         let open = targetPosition > currentPosition ? "1" : "0"

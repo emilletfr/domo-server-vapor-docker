@@ -30,12 +30,13 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
 {
     static let shared = RollerShuttersViewModel()
     //MARK: Subscriptions
-    let currentPositionObserver = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+    let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     let currentAllPositionObserver = PublishSubject<Int>()
-    let targetPositionObserver  = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+    let targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     let targetAllPositionObserver = PublishSubject<Int>()
     //MARK: Actions
-    let targetPositionPublisher  = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+
+    let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     let targetAllPositionPublisher = PublishSubject<Int>()
     //MARK: Services
     let rollerShuttersService : RollerShutterServicable
@@ -65,7 +66,10 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         
         for placeIndex in 0..<Place.count.rawValue
         {
-            _ = serviceTargetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+            _ = self.serviceTargetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+            _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
+            _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
+            _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
         }
         
         // Open AllRollingShutters at sunrise
@@ -79,7 +83,7 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .subscribe(serviceTargetAllPublisher)
         
         // Multiple Rolling Shutter command
-        
+       
         _ = self.targetAllPositionPublisher
             .map{pos in return Array(repeatElement(pos > 50 ? 100 :0, count: Place.count.rawValue))}
             .subscribe(serviceTargetAllPublisher)
@@ -91,14 +95,6 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         _ = Observable.combineLatest(self.rollerShuttersService.targetPositionObserver, {
             (positions:[Int]) -> Int in return positions.dropLast().reduce(0, {(result:Int, value:Int) in  return value + result })/(Place.count.rawValue - 1)})
             .subscribe(self.targetAllPositionObserver)
-        
-        // Single Rolling Shutter command
-        for placeIndex in 0..<Place.count.rawValue
-        {
-            _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
-            _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
-            _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
-        }
     }
     
     func timePublisher() -> Observable<String>
