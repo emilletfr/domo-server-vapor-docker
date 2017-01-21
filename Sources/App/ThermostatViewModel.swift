@@ -68,59 +68,42 @@ final class ThermostatViewModel : ThermostatViewModelable
             if targetHeatingCoolingState == .OFF {return 7}
             return targetTemp})
         
-        // Combine latest, distinct until changed and thottle all inputs
-        let combineReducer  = Observable
-            .combineLatest(outdoorTempService.temperatureObserver, indoorTempReducer, indoorTempService.humidityObserver, targetHeatingCoolingStatePublisher, targetTempReducer){$0}
-            .distinctUntilChanged{$0 == $1}
-            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
-        
-        typealias Data = (outdoorTemp:Double, computedIndoorTemp:Double, indoorHumidity:Int, targetHeatingCoolingState:HeatingCoolingState, computedTargetTemp:Int)
-        
         // Wrap Outdoor Temperature (HomeKit do not support temperature < 0°C from temperature sensors)
-        _ = combineReducer.map {
-            Int(($0 as Data).outdoorTemp >= 0 ? ($0 as Data).outdoorTemp:0)}.subscribe(self.currentOutdoorTemperatureObserver)
+        _ = outdoorTempService.temperatureObserver
+            .map{Int($0 < 0 ? 0 : $0)}
+            .subscribe(self.currentOutdoorTemperatureObserver)
         
         // Wrap Indoor temperature (HomeKit do not support temperature < 0°C from temperature sensors)
-        _ = combineReducer.map {
-            Int(($0 as Data).computedIndoorTemp >= 0 ? ($0 as Data).computedIndoorTemp:0)}.subscribe(self.currentIndoorTemperatureObserver)
+        _ = indoorTempReducer
+            .map{Int($0 < 0 ? 0 : $0)}
+            .subscribe(self.currentIndoorTemperatureObserver)
         
         // Wrap Indoor Humidity
-        _ = combineReducer.map {Int(($0 as Data).indoorHumidity) }.subscribe(self.currentIndoorHumidityObserver)
+        _ = indoorTempService.humidityObserver
+            .map{Int($0)}
+            .subscribe(self.currentIndoorHumidityObserver)
         
         // Wrap Thermostat Temperature (HomeKit do not support thermostat target temperature < 10)
-        _ = combineReducer.map {
-            ($0 as Data).computedTargetTemp >= 10 ? ($0 as Data).computedTargetTemp:10}.subscribe(self.targetIndoorTemperatureObserver)
+        _ = targetTempReducer
+            .map {Int($0 < 0 ? 0 : $0)}
+            .subscribe(self.targetIndoorTemperatureObserver)
         
-        // Wrap Thermostat Current State
-        _ = combineReducer.map {
-            let itsCold = ($0 as Data).computedIndoorTemp < Double(($0 as Data).computedTargetTemp)
-            return ($0 as Data).targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL)
-            }.subscribe(self.currentHeatingCoolingStateObserver)
+        // Compare current temperature and target temperature
+        let heatingOrCoolingReducer = Observable<Bool>.combineLatest(indoorTempReducer, targetTempReducer) {$0 < Double($1)}
         
-        // Wrap Thermostat Target State
-        _ = combineReducer.map
-            {
-                let itsCold = ($0 as Data).computedIndoorTemp < Double(($0 as Data).computedTargetTemp)
-                self.boilerService.forceHeater(OnOrOff: itsCold)
-                self.boilerService.forcePomp(OnOrOff: itsCold)
-                return ($0 as Data).targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL)
-            }.subscribe(self.targetHeatingCoolingStateObserver)
+        // Activate Boiler
+        _ = heatingOrCoolingReducer
+            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
+            .subscribe(onNext:
+                { (heatingOrCooling:Bool) in
+                    self.boilerService.forceHeater(OnOrOff: heatingOrCooling)
+                    self.boilerService.forcePomp(OnOrOff: heatingOrCooling)
+            })
         
-        
-        /*
-         .subscribe(onNext: {[weak self] (data:(outdoorTemp:Double, computedIndoorTemp:Double, indoorHumidity:Int, targetHeatingCoolingState:HeatingCoolingState, computedTargetTemp:Int)) in
-         // print(data)
-         self?.currentIndoorHumidityObserver.onNext(data.indoorHumidity)
-         self?.currentIndoorTemperatureObserver.onNext(Int(data.computedIndoorTemp >= 0 ? data.computedIndoorTemp : 0))
-         self?.targetIndoorTemperatureObserver.onNext(data.computedTargetTemp >= 10 ? data.computedTargetTemp : 10)
-         let itsCold = data.computedIndoorTemp < Double(data.computedTargetTemp)
-         self?.currentHeatingCoolingStateObserver.onNext(data.targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL))
-         self?.targetHeatingCoolingStateObserver.onNext(data.targetHeatingCoolingState == .OFF ? .OFF : (itsCold == true ? .HEAT : .COOL))
-         //        self?.boilerService.forceHeater(OnOrOff: itsCold)
-         //       self?.boilerService.forcePomp(OnOrOff: itsCold)
-         })
-         */
+        // Wrap HomeKit Heating Cooling State
+        let heatingCoolingStateReducer = Observable<HeatingCoolingState>.combineLatest(targetHeatingCoolingStatePublisher, heatingOrCoolingReducer)
+        {$0 == .OFF ? .OFF : ($1 == true ? .HEAT : .COOL)}
+        _ = heatingCoolingStateReducer.subscribe(self.currentHeatingCoolingStateObserver)
+        _ = heatingCoolingStateReducer.subscribe(self.targetHeatingCoolingStateObserver)
     }
 }
-
-

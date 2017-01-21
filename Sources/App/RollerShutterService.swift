@@ -12,28 +12,32 @@ import Foundation
 
 enum Place: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
 
+
+
 protocol RollerShutterServicable
 {
     var currentPositionObserver : [PublishSubject<Int>] {get}
     var targetPositionObserver : [PublishSubject<Int>] {get}
-    var currentAllPositionObserver : PublishSubject<Int> {get}
-    var targetAllPositionObserver : PublishSubject<Int> {get}
+    //   var currentAllPositionObserver : PublishSubject<(diningLivingOfficeKitchen: Bool, bedRoom: Bool)>{get} //diningLivingOfficeKitchen
+    //  var targetAllPositionObserver : PublishSubject<(diningLivingOfficeKitchen: Bool, bedRoom: Bool)>{get}
     
     var targetPositionPublisher : [PublishSubject<Int>] {get}
-    var targetAllPositionPublisher : PublishSubject<Int>{get}
+    //   var targetAllPositionPublisher : PublishSubject<(diningLivingOfficeKitchen:Bool, bedRoom:Bool)>{get}
     
     init(_ httpClient : HttpClientable)
 }
 
 final class RollerShutterService : RollerShutterServicable
 {
-    let currentPositionObserver = [PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>()]
-    let targetPositionObserver = [PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>()]
-    let currentAllPositionObserver = PublishSubject<Int>()
-    let targetAllPositionObserver = PublishSubject<Int>()
+    let currentPositionObserver = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+    let targetPositionObserver = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+    // let currentAllPositionObserver = PublishSubject<(diningLivingOfficeKitchen:Bool, bedRoom:Bool)>()
+    //let targetAllPositionObserver = PublishSubject<(diningLivingOfficeKitchen:Bool, bedRoom:Bool)>()
     
-    let targetPositionPublisher = [PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>(),PublishSubject<Int>()]
-    let targetAllPositionPublisher = PublishSubject<Int>()
+    let targetPositionPublisher = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
+    //    let targetAllPositionPublisher = PublishSubject<(diningLivingOfficeKitchen:Bool, bedRoom:Bool)>()
+    
+    let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.RollerShutterService")
     
     let httpClient : HttpClientable
     
@@ -64,39 +68,54 @@ final class RollerShutterService : RollerShutterServicable
             _ = Observable.combineLatest(currentPositionObserver[placeIndex], targetPositionObserver[placeIndex], targetPositionPublisher[placeIndex].debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)), resultSelector: {(currentObs:$0, targetObs:$1, targetPub:$2)})
                 .distinctUntilChanged({($0.2 == $1.2)})
                 .filter({$0.0 == $0.1})
-                .subscribe(onNext: { (currentObs: Int, targetObs: Int, targetPub:Int) in
-                    DispatchQueue.global().async
-                        {
-                            self.targetPositionObserver[placeIndex].onNext(targetPub)
-                            let open = targetPub > currentObs ? "1" : "0"
-                            let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
-                            _ = self.httpClient.sendGet(urlString)
-                            let offset = currentObs > targetPub ? currentObs - targetPub : targetPub - currentObs
-                            var delay = 140000*(offset)
-                            if targetPub == 0 || targetPub == 100 {delay = 14_000_000}
-                            usleep(useconds_t(delay))
-                            _ = self.httpClient.sendGet(urlString)
-                            self.currentPositionObserver[placeIndex].onNext(targetPub)
-                    }
-                })
+                .subscribe(onNext: { (currentObs: Int, targetObs: Int, targetPub:Int) in self.action(placeIndex, currentObs, targetPub)})
             
-            let emptyPublisher = PublishSubject<Int>()
+            //    let emptyPublisher = PublishSubject<Int>()
             
             // Wrap to All command (Activate One by One)
-            _  = Observable.combineLatest(self.targetAllPositionPublisher, self.currentPositionObserver[placeIndex],
-                                          resultSelector: {(($0 == $1), $0)})
-                .filter{$0.0 == true}
-                .map({$0.1})
-                .subscribe(placeIndex + 1 >= Place.count.rawValue ? emptyPublisher : self.targetPositionPublisher[placeIndex + 1])
+            /*
+             _  = Observable.combineLatest(self.targetAllPositionPublisher, self.currentPositionObserver[placeIndex],
+             resultSelector: {(($0 == $1), $0)})
+             .filter{$0.0 == true}
+             .map({$0.1})
+             .subscribe(placeIndex + 1 >= Place.count.rawValue ? emptyPublisher : self.targetPositionPublisher[placeIndex + 1])
+             */
         }
-        _ = self.targetAllPositionPublisher.subscribe(self.targetPositionPublisher[Place.LIVING_ROOM.rawValue])
+        
+        //   _ = self.targetAllPositionPublisher.subscribe(self.targetPositionPublisher[Place.LIVING_ROOM.rawValue])
         
         //  Wrap to Update AllRollingShutter position
-        _  = Observable.combineLatest(self.currentPositionObserver, {$0.reduce(0, { (result:Int, value:Int) in return result+value })/$0.count })
-        //    .filter{$0 == 0 || $0 == 100}
-            .subscribe(self.currentAllPositionObserver)
+        /*
+         _  = Observable
+         .combineLatest(self.currentPositionObserver, {$0.reduce(0, {(result:Int, value:Int) in return result+value })/$0.count })
+         //    .filter{$0 == 0 || $0 == 100}
+         .subscribe(self.currentAllPositionObserver)
+         */
+    }
+    
+    func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
+    {
+        DispatchQueue.global().async
+            {
+                self.actionSerialQueue.sync
+                    {
+                    self.targetPositionObserver[placeIndex].onNext(targetPosition)
+                    let open = targetPosition > currentPosition ? "1" : "0"
+                    let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
+                    _ = self.httpClient.sendGet(urlString)
+                    let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
+                    var delay = 140000*(offset)
+                    if targetPosition == 0 || targetPosition == 100 {delay = 14_000_000}
+                    usleep(useconds_t(delay))
+                    _ = self.httpClient.sendGet(urlString)
+                    self.currentPositionObserver[placeIndex].onNext(targetPosition)
+                }
+        }
+        
     }
 }
+
+
 
 
 

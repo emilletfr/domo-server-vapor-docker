@@ -23,7 +23,7 @@ class HttpClient : HttpClientable
 {
     var response : Response?
     
-    func sendGet(_ url:String) -> Self? // print("\(#file)  \(#line)  \(#column)  \(#function)")
+    func sendGet(_ url:String) -> Self?
     {
         self.response = nil
         do {self.response = try drop.client.get(url)}

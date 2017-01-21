@@ -30,12 +30,12 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
 {
     static let shared = RollerShuttersViewModel()
     //MARK: Subscriptions
-    let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(),PublishSubject<Int>()]
+    let currentPositionObserver = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
     let currentAllPositionObserver = PublishSubject<Int>()
-    let targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(),PublishSubject<Int>()]
+    let targetPositionObserver  = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
     let targetAllPositionObserver = PublishSubject<Int>()
     //MARK: Actions
-    let targetPositionPublisher  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(),PublishSubject<Int>()]
+    let targetPositionPublisher  = Array(repeating: PublishSubject<Int>(), count: Place.count.rawValue)
     let targetAllPositionPublisher = PublishSubject<Int>()
     //MARK: Services
     let rollerShuttersService : RollerShutterServicable
@@ -50,6 +50,8 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         self.reduce()
     }
     
+    let allPublisher = PublishSubject<[Int]>()
+    
     //MARK: Reducer
     func reduce()
     {
@@ -61,20 +63,33 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .filter({$0 == wakeUpSequence}).map{a in return 100}
             .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
         
+        for placeIndex in 0..<Place.count.rawValue
+        {
+            _ = allPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+        }
+        
         // Open AllRollingShutters at sunrise
         _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunriseTimeObserver, resultSelector: {($0 == $1)})
-            .filter{$0 == true}.map{ok in return 100}
-            .subscribe(self.rollerShuttersService.targetAllPositionPublisher)
+            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue)).dropLast() + [100]}
+            .subscribe(allPublisher)
         
         // Close AllRollingShutters at sunset
         _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunsetTimeObserver, resultSelector: {($0 == $1)})
-            .filter{$0 == true}.map{ok in return 0}
-            .subscribe(self.rollerShuttersService.targetAllPositionPublisher)
+            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
+            .subscribe(allPublisher)
         
         // Multiple Rolling Shutter command
-        _ = self.targetAllPositionPublisher.subscribe(self.rollerShuttersService.targetAllPositionPublisher)
-        _ = self.rollerShuttersService.currentAllPositionObserver.subscribe(self.currentAllPositionObserver)
-        _ = self.rollerShuttersService.targetAllPositionObserver.subscribe(self.targetAllPositionObserver)
+        _ = self.targetAllPositionPublisher
+            .map{pos in return Array(repeatElement(pos > 50 ? 100 :0, count: Place.count.rawValue))}
+            .subscribe(allPublisher)
+        
+        _ = Observable.combineLatest(self.rollerShuttersService.currentPositionObserver, {
+            (positions:[Int]) -> Int in return positions.dropLast().reduce(0, {(result:Int, value:Int) in  return value + result })/(Place.count.rawValue - 1)})
+            .subscribe(self.currentAllPositionObserver)
+        
+        _ = Observable.combineLatest(self.rollerShuttersService.targetPositionObserver, {
+            (positions:[Int]) -> Int in return positions.dropLast().reduce(0, {(result:Int, value:Int) in  return value + result })/(Place.count.rawValue - 1)})
+            .subscribe(self.targetAllPositionObserver)
         
         // Single Rolling Shutter command
         for placeIndex in 0..<Place.count.rawValue
@@ -103,8 +118,3 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         }
     }
 }
-
-
-
-
-
