@@ -85,7 +85,7 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         // Wrap Thermostat Temperature (HomeKit do not support thermostat target temperature < 10)
         _ = targetTempReducer
-            .map {Int($0 < 0 ? 0 : $0)}
+            .map {Int($0 < 10 ? 10 : $0)}
             .subscribe(self.targetIndoorTemperatureObserver)
         
         // Compare current temperature and target temperature
