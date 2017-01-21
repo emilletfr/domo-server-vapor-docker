@@ -71,7 +71,7 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
             _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
         }
-        /*
+        
         // Open AllRollingShutters at sunrise
         _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunriseTimeObserver, resultSelector: {($0 == $1)})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue)).dropLast() + [100]}
@@ -81,7 +81,7 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunsetTimeObserver, resultSelector: {($0 == $1)})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
             .subscribe(serviceTargetAllPublisher)
-        */
+        
         // Multiple Rolling Shutter command
        
         _ = self.targetAllPositionPublisher
@@ -96,7 +96,7 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             (positions:[Int]) -> Int in return positions.dropLast().reduce(0, {(result:Int, value:Int) in  return value + result })/(Place.count.rawValue - 1)})
             .subscribe(self.targetAllPositionObserver)
     }
-    /*
+    
     func timePublisher() -> Observable<String>
     {
         return PublishSubject<String>.create { (obs:AnyObserver<String>) -> Disposable in
@@ -114,5 +114,4 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             return Disposables.create()
         }
     }
- */
 }
