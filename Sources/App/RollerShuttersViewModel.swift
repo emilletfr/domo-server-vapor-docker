@@ -57,12 +57,15 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
     func reduce()
     {
         // Open bedroom rollershutter after getting out of bed for 15mn
+        /*
         let wakeUpSequence = [true] + Array(repeating: false, count: 15)
-        _ = inBedService.isInBedObserver.throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
+        _ = inBedService.isInBedObserver
+            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .scan([false], accumulator: { (isInBedAccu:[Bool], isInBed:Bool) -> [Bool] in
                 return isInBedAccu.count >= wakeUpSequence.count ? Array(isInBedAccu.dropFirst()) + [isInBed] : isInBedAccu + [isInBed] })
             .filter({$0 == wakeUpSequence}).map{a in return 100}
             .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
+ */
         
         for placeIndex in 0..<Place.count.rawValue
         {
