@@ -58,20 +58,22 @@ final class RollerShutterService : RollerShutterServicable
             }
             
             // Wrap to Single command
-            _ = Observable.combineLatest(currentPositionObserver[placeIndex], targetPositionObserver[placeIndex], targetPositionPublisher[placeIndex].debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)), resultSelector: {(currentObs:$0, targetObs:$1, targetPub:$2)})
-                .distinctUntilChanged({($0.2 == $1.2)})
-                .filter({$0.0 == $0.1})
-                .subscribe(onNext: { (currentObs: Int, targetObs: Int, targetPub:Int) in self.action(placeIndex, currentObs, targetPub)})
+            _ = Observable.combineLatest(currentPositionObserver[placeIndex], targetPositionObserver[placeIndex], targetPositionPublisher[placeIndex].debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)), resultSelector: {(currentObs:$0, targetObs:$1, targetPub:$2)}).debug("AAA")
+                .filter({$0.0 != $0.2 && $0.1 != $0.2})
+                .subscribe(onNext: { (currentObs: Int, targetObs: Int, targetPub:Int) in
+                    self.targetPositionObserver[placeIndex].onNext(targetPub)
+                    self.action(placeIndex, currentObs, targetPub)
+                })
         }
     }
     
     func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
     {
+    //    self.targetPositionObserver[placeIndex].onNext(targetPosition)
         DispatchQueue.global().async
             {
                 self.actionSerialQueue.sync
                     {
-                        self.targetPositionObserver[placeIndex].onNext(targetPosition)
                         let open = targetPosition > currentPosition ? "1" : "0"
                         let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
                         _ = self.httpClient.sendGet(urlString)
@@ -86,8 +88,3 @@ final class RollerShutterService : RollerShutterServicable
         
     }
 }
-
-
-
-
-

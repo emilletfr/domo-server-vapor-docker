@@ -93,7 +93,7 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         // Activate Boiler
         _ = heatingOrCoolingReducer
-            .distinctUntilChanged()
+        //    .distinctUntilChanged()
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .subscribe(onNext:
                 { (heatingOrCooling:Bool) in
