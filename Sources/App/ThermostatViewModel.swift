@@ -74,8 +74,8 @@ final class ThermostatViewModel : ThermostatViewModelable
             .subscribe(self.currentOutdoorTemperatureObserver)
         
         // Wrap Indoor temperature (HomeKit do not support temperature < 0°C from temperature sensors)
-        _ = indoorTempReducer
-            .map{Int($0 < 0 ? 0 : $0)}
+        _ = indoorTempReducer.debug()
+            .map{Int($0 < 0 ? 0 : $0)}//.debug("indoorTempReducer")
             .subscribe(self.currentIndoorTemperatureObserver)
         
         // Wrap Indoor Humidity
@@ -85,21 +85,18 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         // Wrap Thermostat Temperature (HomeKit do not support thermostat target temperature < 10)
         _ = targetTempReducer
-            .map {Int($0 < 10 ? 10 : $0)}
+            .map {Int($0 < 10 ? 10 : $0)}//.debug("targetTempReducer")
             .subscribe(self.targetIndoorTemperatureObserver)
         
         // Compare current temperature and target temperature
-        let heatingOrCoolingReducer = Observable<Bool>.combineLatest(indoorTempReducer, targetTempReducer) {$0 < Double($1)}
+        let heatingOrCoolingReducer = Observable<Bool>
+            .combineLatest(indoorTempReducer, targetTempReducer) {$0 < Double($1)}
+            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
+            .distinctUntilChanged()
         
         // Activate Boiler
-        _ = heatingOrCoolingReducer.debug()
-         //   .distinctUntilChanged()
-            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
-            .subscribe(onNext:
-                { (heatingOrCooling:Bool) in
-                    self.boilerService.forceHeater(OnOrOff: heatingOrCooling)
-                    self.boilerService.forcePomp(OnOrOff: heatingOrCooling)
-            })
+        _ = heatingOrCoolingReducer.debug().subscribe(boilerService.heaterPublisher)
+        _ = heatingOrCoolingReducer.subscribe(boilerService.pompPublisher)
         
         // Wrap HomeKit Heating Cooling State
         let heatingCoolingStateReducer = Observable<HeatingCoolingState>.combineLatest(targetHeatingCoolingStatePublisher, heatingOrCoolingReducer)

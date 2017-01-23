@@ -16,6 +16,7 @@ protocol HttpClientable
     func parseToStringFrom(path:[String]) -> String?
     func parseToDoubleFrom(path:[String]) -> Double?
     func parseToIntFrom(path:[String]) -> Int?
+    func parseToJSONFrom(path:[String]) -> JSON?
 }
 
 
@@ -46,6 +47,12 @@ class HttpClient : HttpClientable
     func parseToIntFrom(path:[String]) -> Int?
     {
         guard let response = self.response?.json?[path]?.int else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        return response
+    }
+    
+    func parseToJSONFrom(path:[String]) -> JSON?
+    {
+        guard let response = self.response?.json else {log("ERROR - \(self):\(#function):\(path)");return nil}
         return response
     }
 }

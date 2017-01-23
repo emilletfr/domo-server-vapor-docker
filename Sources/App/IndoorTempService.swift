@@ -25,7 +25,7 @@ final class IndoorTempService : IndoorTempServicable
     let httpClient : HttpClientable
     let autoRepeatTimer : RepeatTimer
     
-    init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
+    init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:20))
     {
         self.httpClient = httpClient
         self.autoRepeatTimer = repeatTimer
