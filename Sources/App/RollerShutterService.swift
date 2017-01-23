@@ -85,6 +85,5 @@ final class RollerShutterService : RollerShutterServicable
                         self.currentPositionObserver[placeIndex].onNext(targetPosition)
                 }
         }
-        
     }
 }

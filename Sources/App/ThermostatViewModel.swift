@@ -20,9 +20,11 @@ protocol ThermostatViewModelable
     var targetIndoorTemperatureObserver : PublishSubject<Int> {get}
     var currentHeatingCoolingStateObserver : PublishSubject<HeatingCoolingState> {get}
     var targetHeatingCoolingStateObserver : PublishSubject<HeatingCoolingState> {get}
+    var hotWaterObserver : PublishSubject<Int> {get}
     //MARK: Actions
     var targetTemperaturePublisher : PublishSubject<Int> {get}
     var targetHeatingCoolingStatePublisher : PublishSubject<HeatingCoolingState> {get}
+    var hotWaterPublisher : PublishSubject<Int> {get}
     //MARK: Dispatcher
     init(outdoorTempService:OutdoorTempServicable, indoorTempService:IndoorTempServicable, inBedService:InBedServicable, boilerService:BoilerServicable)
 }
@@ -37,9 +39,11 @@ final class ThermostatViewModel : ThermostatViewModelable
     let targetIndoorTemperatureObserver = PublishSubject<Int>()
     let currentHeatingCoolingStateObserver = PublishSubject<HeatingCoolingState>()
     let targetHeatingCoolingStateObserver = PublishSubject<HeatingCoolingState>()
+    let hotWaterObserver = PublishSubject<Int>()
     //MARK: Actions
     let targetTemperaturePublisher = PublishSubject<Int>()
     let targetHeatingCoolingStatePublisher = PublishSubject<HeatingCoolingState>()
+    var hotWaterPublisher = PublishSubject<Int>()
     //MARK: Dependencies
     let outdoorTempService : OutdoorTempServicable
     let indoorTempService : IndoorTempServicable
@@ -80,8 +84,6 @@ final class ThermostatViewModel : ThermostatViewModelable
             .map{Int($0 < 0 ? 0 : $0)}
             .subscribe(self.currentIndoorTemperatureObserver)
         
-      //  _ = indoorTempReducer.distinctUntilChanged().debug("indoorTemp")
-        
         // Wrap Indoor Humidity
         _ = indoorTempService.humidityObserver
             .map{Int($0)}
@@ -98,13 +100,18 @@ final class ThermostatViewModel : ThermostatViewModelable
             .distinctUntilChanged()
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
-        // Activate Boiler
+        // Wrap Hot Water Observer
+        _ = hotWaterPublisher.debug("forceHotWaterPublisher").subscribe(hotWaterObserver)
         
-        _ = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, targetTempReducer) {
-            !($0 == .OFF || $1 > Double($2))}
+        // Wrap Heater Boiler
+        _ = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, targetTempReducer, hotWaterPublisher) { (targetHeatingCooling:HeatingCoolingState, outdoorTemp:Double, targetTemp:Int, hotWater:Int ) in
+            if hotWater == 1 {return true}
+            else {return !(targetHeatingCooling == .OFF || outdoorTemp > Double(targetTemp))}
+            }
             .distinctUntilChanged().debug("heaterPublisher")
             .subscribe(boilerService.heaterPublisher)
         
+        // Wrap Pomp Boiler
         _ = heatingOrCoolingReducer.debug("pompPublisher")
             .subscribe(boilerService.pompPublisher)
         
