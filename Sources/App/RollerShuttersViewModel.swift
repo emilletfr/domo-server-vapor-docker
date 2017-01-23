@@ -63,6 +63,7 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .scan([false], accumulator: { (isInBedAccu:[Bool], isInBed:Bool) -> [Bool] in
                 return isInBedAccu.count >= wakeUpSequence.count ? Array(isInBedAccu.dropFirst()) + [isInBed] : isInBedAccu + [isInBed] })
             .filter({$0 == wakeUpSequence}).map{a in return 100}
+            .debug("OutOfBed")
             .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
         
         for placeIndex in 0..<Place.count.rawValue
@@ -76,11 +77,13 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         // Open AllRollingShutters at sunrise
         _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunriseTimeObserver, resultSelector: {($0 == $1)})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue)).dropLast() + [100]}
+            .debug("sunrise")
             .subscribe(serviceTargetAllPublisher)
         
         // Close AllRollingShutters at sunset
         _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunsetTimeObserver, resultSelector: {($0 == $1)})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
+            .debug("sunset")
             .subscribe(serviceTargetAllPublisher)
         
         // Multiple Rolling Shutter command
