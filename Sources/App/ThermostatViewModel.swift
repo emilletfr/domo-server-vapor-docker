@@ -74,9 +74,11 @@ final class ThermostatViewModel : ThermostatViewModelable
             .subscribe(self.currentOutdoorTemperatureObserver)
         
         // Wrap Indoor temperature (HomeKit do not support temperature < 0°C from temperature sensors)
-        _ = indoorTempReducer.debug("indoorTemp")
+        _ = indoorTempReducer
             .map{Int($0 < 0 ? 0 : $0)}//.debug("indoorTempReducer")
             .subscribe(self.currentIndoorTemperatureObserver)
+        
+        _ = indoorTempReducer.distinctUntilChanged().debug("indoorTemp")
         
         // Wrap Indoor Humidity
         _ = indoorTempService.humidityObserver
@@ -95,8 +97,10 @@ final class ThermostatViewModel : ThermostatViewModelable
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
         // Activate Boiler
-      //  _ = heatingOrCoolingReducer.debug("heaterPublisher").subscribe(boilerService.heaterPublisher)
-        _ = boilerService.heaterPublisher.onNext(true)
+        
+        _ = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, targetTempReducer) {
+            !($0 == .OFF || $1 > Double($2))}.debug("heaterPublisher").subscribe(boilerService.heaterPublisher)
+        
         _ = heatingOrCoolingReducer.debug("pompPublisher").subscribe(boilerService.pompPublisher)
         
         // Wrap HomeKit Heating Cooling State
