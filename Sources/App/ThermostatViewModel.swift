@@ -91,8 +91,8 @@ final class ThermostatViewModel : ThermostatViewModelable
         // Compare current temperature and target temperature
         let heatingOrCoolingReducer = Observable<Bool>
             .combineLatest(indoorTempReducer, targetTempReducer) {$0 < Double($1)}
-            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .distinctUntilChanged()
+            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
         // Activate Boiler
       //  _ = heatingOrCoolingReducer.debug("heaterPublisher").subscribe(boilerService.heaterPublisher)
