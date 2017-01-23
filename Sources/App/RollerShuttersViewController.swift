@@ -18,8 +18,6 @@ final class RollerShuttersViewController
     {
         self.viewModel = viewModel
         
-        //MARK: Single Rolling Shutter
-        
         var currentPositions = Array(repeating: 0, count: Place.count.rawValue)
         for placeIndex in 0..<Place.count.rawValue
         {
@@ -43,28 +41,6 @@ final class RollerShuttersViewController
         drop.get("window-covering/setTargetPosition", Int.self, Int.self)
         { request, index, position in
             viewModel.targetPositionPublisher[index].onNext(position)
-            return try JSON(node: ["value": position])
-        }
-        
-        //MARK: All Rolling Shutters
-        
-        var currentAllPosition = 0
-        _ = viewModel.currentAllPositionObserver.subscribe(onNext: { currentAllPosition = $0 })
-        drop.get("window-covering/getCurrentPosition/all")
-        { request in
-            return try JSON(node: ["value": currentAllPosition])
-        }
-        
-        var targetAllPosition = 0
-        _ = viewModel.targetAllPositionObserver.subscribe(onNext: { targetAllPosition = $0 })
-        drop.get("window-covering/getTargetPosition/all")
-        { request in
-            return try JSON(node: ["value": targetAllPosition])
-        }
-        
-        drop.get("window-covering/setTargetPosition/all", Int.self)
-        { request, position in
-            viewModel.targetAllPositionPublisher.onNext(position)
             return try JSON(node: ["value": position])
         }
     }

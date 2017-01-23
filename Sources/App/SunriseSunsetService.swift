@@ -42,7 +42,7 @@ final class SunriseSunsetService : SunriseSunsetServicable
             iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else
             {
-                log("ERROR - SunriseSunsetService:repeatTimerFired:guard:iso8601DateFormatter: \(sunriseDateStr)  \(sunsetDateStr)")
+                print("ERROR - SunriseSunsetService:repeatTimerFired:guard:iso8601DateFormatter: \(sunriseDateStr)  \(sunsetDateStr)")
                 //    self?.sunriseTimeObserver.onError(self!)
                 //   self?.sunsetTimeObserver.onError(self!)
                 return

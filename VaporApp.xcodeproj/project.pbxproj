@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		073149141E1AA93900656C68 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1603 /* HttpClient.swift */; };
 		073149161E1AA93900656C68 /* IndoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1605 /* IndoorTempService.swift */; };
-		073149171E1AA93900656C68 /* _Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1606 /* _Log.swift */; };
 		0731491A1E1AA93900656C68 /* OutdoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1609 /* OutdoorTempService.swift */; };
 		0731491B1E1AA93900656C68 /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1610 /* RepeatTimer.swift */; };
 		0731491D1E1AA93900656C68 /* RollerShutterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1612 /* RollerShutterService.swift */; };
@@ -1780,14 +1779,12 @@
 		OBJ_4077 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1600 /* Zip.swift */; };
 		OBJ_4085 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1603 /* HttpClient.swift */; };
 		OBJ_4087 /* IndoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1605 /* IndoorTempService.swift */; };
-		OBJ_4088 /* _Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1606 /* _Log.swift */; };
 		OBJ_4089 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1607 /* main.swift */; };
 		OBJ_4091 /* OutdoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1609 /* OutdoorTempService.swift */; };
 		OBJ_4092 /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1610 /* RepeatTimer.swift */; };
 		OBJ_4094 /* RollerShutterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1612 /* RollerShutterService.swift */; };
 		OBJ_4096 /* RollerShuttersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1614 /* RollerShuttersViewModel.swift */; };
 		OBJ_4097 /* SunriseSunsetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1615 /* SunriseSunsetService.swift */; };
-		OBJ_4099 /* SampleMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1618 /* SampleMiddleware.swift */; };
 		OBJ_4101 /* libc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1634 /* libc.framework */; };
 		OBJ_4102 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1633 /* Core.framework */; };
 		OBJ_4103 /* CLibreSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_1635 /* CLibreSSL.framework */; };
@@ -5818,7 +5815,6 @@
 		OBJ_1600 /* Zip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zip.swift; sourceTree = "<group>"; };
 		OBJ_1603 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		OBJ_1605 /* IndoorTempService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorTempService.swift; sourceTree = "<group>"; };
-		OBJ_1606 /* _Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Log.swift; sourceTree = "<group>"; };
 		OBJ_1607 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_1609 /* OutdoorTempService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdoorTempService.swift; sourceTree = "<group>"; };
 		OBJ_161 /* camellia.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = camellia.c; sourceTree = "<group>"; };
@@ -5826,7 +5822,6 @@
 		OBJ_1612 /* RollerShutterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerShutterService.swift; sourceTree = "<group>"; };
 		OBJ_1614 /* RollerShuttersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerShuttersViewModel.swift; sourceTree = "<group>"; };
 		OBJ_1615 /* SunriseSunsetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetService.swift; sourceTree = "<group>"; };
-		OBJ_1618 /* SampleMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SampleMiddleware.swift; path = Middleware/SampleMiddleware.swift; sourceTree = "<group>"; };
 		OBJ_162 /* cbc128.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cbc128.c; sourceTree = "<group>"; };
 		OBJ_1621 /* global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
 		OBJ_1622 /* InBedServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBedServiceTests.swift; sourceTree = "<group>"; };
@@ -7550,8 +7545,6 @@
 				07AEB24C1E2B9EEB007241B3 /* BoilerService.swift */,
 				OBJ_1603 /* HttpClient.swift */,
 				OBJ_1610 /* RepeatTimer.swift */,
-				OBJ_1606 /* _Log.swift */,
-				OBJ_1618 /* SampleMiddleware.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -13288,7 +13281,6 @@
 			files = (
 				OBJ_4085 /* HttpClient.swift in Sources */,
 				OBJ_4087 /* IndoorTempService.swift in Sources */,
-				OBJ_4088 /* _Log.swift in Sources */,
 				OBJ_4089 /* main.swift in Sources */,
 				07AEB2501E2BC680007241B3 /* RollerShuttersViewController.swift in Sources */,
 				075574EA1E28D9FA00394573 /* ThermostatViewModel.swift in Sources */,
@@ -13300,7 +13292,6 @@
 				OBJ_4096 /* RollerShuttersViewModel.swift in Sources */,
 				OBJ_4097 /* SunriseSunsetService.swift in Sources */,
 				075574E81E28D7A900394573 /* ThermostatViewController.swift in Sources */,
-				OBJ_4099 /* SampleMiddleware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13311,7 +13302,6 @@
 				OBJ_4190 /* global.swift in Sources */,
 				0731491A1E1AA93900656C68 /* OutdoorTempService.swift in Sources */,
 				073149141E1AA93900656C68 /* HttpClient.swift in Sources */,
-				073149171E1AA93900656C68 /* _Log.swift in Sources */,
 				OBJ_4191 /* InBedServiceTests.swift in Sources */,
 				OBJ_4192 /* IndoorTempServiceTests.swift in Sources */,
 				OBJ_4193 /* OutdoorTempServiceTests.swift in Sources */,

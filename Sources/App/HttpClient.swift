@@ -28,31 +28,31 @@ class HttpClient : HttpClientable
     {
         self.response = nil
         do {self.response = try drop.client.get(url)}
-        catch {log("ERROR - \(self):\(#function) \(error) \(url)");}
+        catch {print("ERROR - \(self):\(#function) \(error) \(url)");}
         return self
     }
     
     func parseToStringFrom(path:[String]) -> String?
     {
-        guard let response = self.response?.json?[path]?.string else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        guard let response = self.response?.json?[path]?.string else {print("ERROR - \(self):\(#function):\(path)");return nil}
         return response
     }
     
     func parseToDoubleFrom(path:[String]) -> Double?
     {
-        guard let response = self.response?.json?[path]?.double else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        guard let response = self.response?.json?[path]?.double else {print("ERROR - \(self):\(#function):\(path)");return nil}
         return response
     }
     
     func parseToIntFrom(path:[String]) -> Int?
     {
-        guard let response = self.response?.json?[path]?.int else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        guard let response = self.response?.json?[path]?.int else {print("ERROR - \(self):\(#function):\(path)");return nil}
         return response
     }
     
     func parseToJSONFrom(path:[String]) -> JSON?
     {
-        guard let response = self.response?.json else {log("ERROR - \(self):\(#function):\(path)");return nil}
+        guard let response = self.response?.json else {print("ERROR - \(self):\(#function):\(path)");return nil}
         return response
     }
 }

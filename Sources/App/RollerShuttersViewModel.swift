@@ -15,12 +15,10 @@ protocol RollerShuttersViewModelable
 {
     //MARK: Subscriptions
     var currentPositionObserver : [PublishSubject<Int>] {get}
-    var currentAllPositionObserver : PublishSubject<Int> {get}
     var targetPositionObserver : [PublishSubject<Int>] {get}
-    var targetAllPositionObserver : PublishSubject<Int> {get}
+    
     //MARK: Actions
     var targetPositionPublisher : [PublishSubject<Int>] {get}
-    var targetAllPositionPublisher : PublishSubject<Int> {get}
     
     init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService : SunriseSunsetServicable)
 }
@@ -85,20 +83,6 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
             .debug("sunset")
             .subscribe(serviceTargetAllPublisher)
-        
-        // Multiple Rolling Shutter command
-       
-        _ = self.targetAllPositionPublisher
-            .map{pos in return Array(repeatElement(pos > 50 ? 100 :0, count: Place.count.rawValue))}
-            .subscribe(serviceTargetAllPublisher)
-        
-        _ = Observable.combineLatest(self.rollerShuttersService.currentPositionObserver, {
-            (positions:[Int]) -> Int in return positions.dropLast().reduce(0, {(result:Int, value:Int) in  return value + result })/(Place.count.rawValue - 1)})
-            .subscribe(self.currentAllPositionObserver)
-        
-        _ = Observable.combineLatest(self.rollerShuttersService.targetPositionObserver, {
-            (positions:[Int]) -> Int in return positions.dropLast().reduce(0, {(result:Int, value:Int) in  return value + result })/(Place.count.rawValue - 1)})
-            .subscribe(self.targetAllPositionObserver)
     }
     
     func timePublisher() -> Observable<String>

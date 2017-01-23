@@ -69,7 +69,6 @@ final class RollerShutterService : RollerShutterServicable
     
     func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
     {
-    //    self.targetPositionObserver[placeIndex].onNext(targetPosition)
         DispatchQueue.global().async
             {
                 self.actionSerialQueue.sync

@@ -100,10 +100,11 @@ final class ThermostatViewModel : ThermostatViewModelable
             .distinctUntilChanged()
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
-        // Wrap Hot Water Observer
-        _ = hotWaterPublisher.debug("forceHotWaterPublisher").subscribe(hotWaterObserver)
+        // Wrap Force Hot Water Observer
+        _ = hotWaterPublisher.debug("forceHotWaterPublisher")
+            .subscribe(hotWaterObserver)
         
-        // Wrap Heater Boiler
+        // Wrap Heater's Boiler
         _ = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, targetTempReducer, hotWaterPublisher) { (targetHeatingCooling:HeatingCoolingState, outdoorTemp:Double, targetTemp:Int, hotWater:Int ) in
             if hotWater == 1 {return true}
             else {return !(targetHeatingCooling == .OFF || outdoorTemp > Double(targetTemp))}
@@ -111,7 +112,7 @@ final class ThermostatViewModel : ThermostatViewModelable
             .distinctUntilChanged().debug("heaterPublisher")
             .subscribe(boilerService.heaterPublisher)
         
-        // Wrap Pomp Boiler
+        // Wrap Pomp's Boiler
         _ = heatingOrCoolingReducer.debug("pompPublisher")
             .subscribe(boilerService.pompPublisher)
         
