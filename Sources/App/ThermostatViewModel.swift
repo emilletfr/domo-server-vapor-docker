@@ -95,7 +95,8 @@ final class ThermostatViewModel : ThermostatViewModelable
             .distinctUntilChanged()
         
         // Activate Boiler
-        _ = heatingOrCoolingReducer.debug("heaterPublisher").subscribe(boilerService.heaterPublisher)
+      //  _ = heatingOrCoolingReducer.debug("heaterPublisher").subscribe(boilerService.heaterPublisher)
+        _ = boilerService.heaterPublisher.onNext(true)
         _ = heatingOrCoolingReducer.debug("pompPublisher").subscribe(boilerService.pompPublisher)
         
         // Wrap HomeKit Heating Cooling State
