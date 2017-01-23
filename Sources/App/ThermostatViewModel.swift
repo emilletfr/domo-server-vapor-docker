@@ -67,6 +67,7 @@ final class ThermostatViewModel : ThermostatViewModelable
             if isInbed == true {return targetTemp - 2}
             if targetHeatingCoolingState == .OFF {return 7}
             return targetTemp})
+            .distinctUntilChanged()
         
         // Wrap Outdoor Temperature (HomeKit do not support temperature < 0°C from temperature sensors)
         _ = outdoorTempService.temperatureObserver
@@ -75,10 +76,11 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         // Wrap Indoor temperature (HomeKit do not support temperature < 0°C from temperature sensors)
         _ = indoorTempReducer
+            .distinctUntilChanged().debug("indoorTemp")
             .map{Int($0 < 0 ? 0 : $0)}//.debug("indoorTempReducer")
             .subscribe(self.currentIndoorTemperatureObserver)
         
-        _ = indoorTempReducer.distinctUntilChanged().debug("indoorTemp")
+      //  _ = indoorTempReducer.distinctUntilChanged().debug("indoorTemp")
         
         // Wrap Indoor Humidity
         _ = indoorTempService.humidityObserver
@@ -87,13 +89,14 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         // Wrap Thermostat Temperature (HomeKit do not support thermostat target temperature < 10)
         _ = targetTempReducer
-            .map {Int($0 < 10 ? 10 : $0)}//.debug("targetTempReducer")
+            .debug("targetTempReducer")
+            .map {Int($0 < 10 ? 10 : $0)}
             .subscribe(self.targetIndoorTemperatureObserver)
         
         // Compare current temperature and target temperature
         let heatingOrCoolingReducer = Observable<Bool>
             .combineLatest(indoorTempReducer, targetTempReducer) {$0 < Double($1)}
-            .distinctUntilChanged()
+        //    .distinctUntilChanged()
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
         
         // Activate Boiler
