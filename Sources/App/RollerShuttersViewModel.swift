@@ -75,13 +75,13 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         }
         
         // Open AllRollingShutters at sunrise
-        _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunriseTimeObserver, resultSelector: {($0 == $1)})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue)).dropLast() + [100]}
+        _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), resultSelector: {($0 == $1)})
+            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue)).dropLast() + [0]}
             .debug("sunrise")
             .subscribe(serviceTargetAllPublisher)
         
         // Close AllRollingShutters at sunset
-        _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunsetTimeObserver, resultSelector: {($0 == $1)})
+        _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), resultSelector: {($0 == $1)})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
             .debug("sunset")
             .subscribe(serviceTargetAllPublisher)

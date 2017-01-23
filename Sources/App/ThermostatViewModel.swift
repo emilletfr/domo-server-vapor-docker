@@ -76,8 +76,8 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         // Wrap Indoor temperature (HomeKit do not support temperature < 0°C from temperature sensors)
         _ = indoorTempReducer
-            .distinctUntilChanged().debug("indoorTemp")
-            .map{Int($0 < 0 ? 0 : $0)}//.debug("indoorTempReducer")
+            .distinctUntilChanged().debug("computedIndoorTemperature")
+            .map{Int($0 < 0 ? 0 : $0)}
             .subscribe(self.currentIndoorTemperatureObserver)
         
       //  _ = indoorTempReducer.distinctUntilChanged().debug("indoorTemp")
@@ -88,8 +88,7 @@ final class ThermostatViewModel : ThermostatViewModelable
             .subscribe(self.currentIndoorHumidityObserver)
         
         // Wrap Thermostat Temperature (HomeKit do not support thermostat target temperature < 10)
-        _ = targetTempReducer
-            .debug("targetTempReducer")
+        _ = targetTempReducer.debug("computedTargetTemperature")
             .map {Int($0 < 10 ? 10 : $0)}
             .subscribe(self.targetIndoorTemperatureObserver)
         
@@ -102,11 +101,12 @@ final class ThermostatViewModel : ThermostatViewModelable
         // Activate Boiler
         
         _ = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, targetTempReducer) {
-            !($0 == .OFF || $1 > Double($2))}.distinctUntilChanged().debug("heaterPublisher").subscribe(boilerService.heaterPublisher)
+            !($0 == .OFF || $1 > Double($2))}
+            .distinctUntilChanged().debug("heaterPublisher")
+            .subscribe(boilerService.heaterPublisher)
         
-      //  _ = boilerService.heaterPublisher
-        
-        _ = heatingOrCoolingReducer.debug("pompPublisher").subscribe(boilerService.pompPublisher)
+        _ = heatingOrCoolingReducer.debug("pompPublisher")
+            .subscribe(boilerService.pompPublisher)
         
         // Wrap HomeKit Heating Cooling State
         let heatingCoolingStateReducer = Observable<HeatingCoolingState>.combineLatest(targetHeatingCoolingStatePublisher, heatingOrCoolingReducer)
