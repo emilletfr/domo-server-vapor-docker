@@ -109,7 +109,8 @@ final class ThermostatViewModel : ThermostatViewModelable
             if hotWater == 1 {return true}
             else {return !(targetHeatingCooling == .OFF || outdoorTemp > Double(targetTemp))}
             }
-            .distinctUntilChanged().debug("heaterPublisher")
+            .distinctUntilChanged()
+            .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)).debug("heaterPublisher")
             .subscribe(boilerService.heaterPublisher)
         
         // Wrap Pomp's Boiler
