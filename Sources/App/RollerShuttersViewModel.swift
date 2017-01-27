@@ -19,7 +19,7 @@ protocol RollerShuttersViewModelable
     //MARK: Actions
     var targetPositionPublisher : [PublishSubject<Int>] {get}
     
-    init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService : SunriseSunsetServicable)
+    init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService:SunriseSunsetServicable, _ timePublisher:Observable<String>)
 }
 
 
@@ -27,22 +27,22 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
 {
     //MARK: Subscriptions
     let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
-    let currentAllPositionObserver = PublishSubject<Int>()
     let targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
-    let targetAllPositionObserver = PublishSubject<Int>()
     //MARK: Actions
     let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
-    let targetAllPositionPublisher = PublishSubject<Int>()
     //MARK: Services
     let rollerShuttersService : RollerShutterServicable
     let inBedService: InBedServicable
     let sunriseSunsetService : SunriseSunsetServicable
+    let timePublisher : Observable<String>
+
     
-    required init(_ rollerShuttersService: RollerShutterServicable = RollerShutterService(), _ inBedService: InBedServicable = InBedService(), _ sunriseSunsetService : SunriseSunsetServicable = SunriseSunsetService())
+    required init(_ rollerShuttersService: RollerShutterServicable = RollerShutterService(), _ inBedService: InBedServicable = InBedService(), _ sunriseSunsetService : SunriseSunsetServicable = SunriseSunsetService(), _ timePublisher:Observable<String> = RepeatTimer.timePublisher().distinctUntilChanged())
     {
         self.rollerShuttersService = rollerShuttersService
         self.inBedService = inBedService
         self.sunriseSunsetService = sunriseSunsetService
+        self.timePublisher = timePublisher
         self.reduce()
     }
     
@@ -55,50 +55,40 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .throttle(60, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
             .scan([false], accumulator: { (isInBedAccu:[Bool], isInBed:Bool) -> [Bool] in
                 return isInBedAccu.count >= wakeUpSequence.count ? Array(isInBedAccu.dropFirst()) + [isInBed] : isInBedAccu + [isInBed] })
-            .filter({$0 == wakeUpSequence}).map{a in return 100}
+            .filter{$0 == wakeUpSequence}
+            .map{isInBedSequence in return 100}
             .debug("OutOfBed")
             .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
         
         //Command All roller shutters
         let targetAllPublisher = PublishSubject<[Int]>()
+        let targetAllExceptBedRoomPublisher = PublishSubject<[Int]>()
         
         //Wrap observers and targetAllPublisher
         for placeIndex in 0..<Place.count.rawValue
         {
-            _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
             _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
             _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
             _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
+            _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+            if placeIndex != Place.BEDROOM.rawValue
+            {
+                _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+            }
         }
         
         // Open AllRollingShutters at sunrise
-        _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), resultSelector: {($0 == $1)})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue)).dropLast() + [0]}
+        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), resultSelector: {($0 == $1)})
+            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue - 1))}
             .debug("sunrise")
-            .subscribe(targetAllPublisher)
+            .subscribe(targetAllExceptBedRoomPublisher)
         
         // Close AllRollingShutters at sunset
-        _ = Observable.combineLatest(self.timePublisher(), sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), resultSelector: {($0 == $1)})
+        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), resultSelector: {($0 == $1)})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
             .debug("sunset")
             .subscribe(targetAllPublisher)
     }
-    
-    func timePublisher() -> Observable<String>
-    {
-        return PublishSubject<String>.create { (obs:AnyObserver<String>) -> Disposable in
-            DispatchQueue.global().async {
-                while true {
-                    let date = Date(timeIntervalSinceNow: 0)
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.timeZone = TimeZone(abbreviation: "CEST")
-                    dateFormatter.locale = Locale(identifier: "fr_FR")
-                    dateFormatter.dateFormat =  "HH:mm"
-                    obs.onNext(dateFormatter.string(from: date))
-                    sleep(55)
-                }
-            }
-            return Disposables.create()
-        }
-    }
 }
+
+

@@ -39,7 +39,7 @@ final class IndoorTempService : IndoorTempServicable
                 //    self?.humidityObserver.onError(self!)
                 return
             }
-            self?.temperatureObserver.onNext(temperature)
+            self?.temperatureObserver.onNext(temperature - 0.2)
             self?.humidityObserver.onNext(humidity)
         }
     }

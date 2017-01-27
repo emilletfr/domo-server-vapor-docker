@@ -21,17 +21,24 @@ final class ThermostatViewController
         
         viewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
         viewModel.targetTemperaturePublisher.onNext(20)
-        viewModel.hotWaterPublisher.onNext(0)
+        viewModel.forcingWaterHeaterPublisher.onNext(0)
+        
+        //MARK: Boiler Heating Level
+        
+        var boilerHeatingLevel = 0
+        _ = viewModel.boilerHeatingLevelObserver.subscribe(onNext: { boilerHeatingLevel = $0 })
+        drop.get("boiler-heating-level/getCurrentRelativeHumidity") { request in
+            return  try JSON(node: ["value": boilerHeatingLevel])}
         
         //MARK:  Force Hot Water
         
         var forceHotWater = 0
-        _ = viewModel.hotWaterObserver.subscribe(onNext: { forceHotWater = $0 })
+        _ = viewModel.forcingWaterHeaterObserver.subscribe(onNext: { forceHotWater = $0 })
         drop.get("force-hot-water/getOn") { request in
             return  try JSON(node: ["value": forceHotWater])}
         
         drop.get("force-hot-water/setOn", Int.self) { request, value in
-            viewModel.hotWaterPublisher.onNext(value)
+            viewModel.forcingWaterHeaterPublisher.onNext(value)
             return try JSON(node: ["value": value])}
         
         //MARK:  Current Heating Cooling State

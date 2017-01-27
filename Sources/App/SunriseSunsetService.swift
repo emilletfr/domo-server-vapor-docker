@@ -10,12 +10,14 @@ import Foundation
 import Dispatch
 import RxSwift
 
+
 protocol SunriseSunsetServicable
 {
     var sunriseTimeObserver : PublishSubject<String> {get}
     var sunsetTimeObserver : PublishSubject<String> {get}
     init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
+
 
 final class SunriseSunsetService : SunriseSunsetServicable
 {

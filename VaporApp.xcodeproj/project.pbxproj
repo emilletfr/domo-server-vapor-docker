@@ -18,6 +18,9 @@
 		075574EA1E28D9FA00394573 /* ThermostatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075574E91E28D9FA00394573 /* ThermostatViewModel.swift */; };
 		075574EC1E28E20600394573 /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075574EB1E28E20600394573 /* InBedService.swift */; };
 		075574ED1E28E67400394573 /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075574EB1E28E20600394573 /* InBedService.swift */; };
+		0771B0B01E37E23400D6A8D6 /* ThermostatViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771B0AF1E37E23400D6A8D6 /* ThermostatViewModelTests.swift */; };
+		0771B0B11E3A00C400D6A8D6 /* ThermostatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075574E91E28D9FA00394573 /* ThermostatViewModel.swift */; };
+		0771B0B31E3AD36200D6A8D6 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771B0B21E3AD36200D6A8D6 /* Mocks.swift */; };
 		07AEB24D1E2B9EEB007241B3 /* BoilerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AEB24C1E2B9EEB007241B3 /* BoilerService.swift */; };
 		07AEB24E1E2B9EEB007241B3 /* BoilerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AEB24C1E2B9EEB007241B3 /* BoilerService.swift */; };
 		07AEB2501E2BC680007241B3 /* RollerShuttersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AEB24F1E2BC680007241B3 /* RollerShuttersViewController.swift */; };
@@ -5217,6 +5220,8 @@
 		075574E71E28D7A900394573 /* ThermostatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatViewController.swift; sourceTree = "<group>"; };
 		075574E91E28D9FA00394573 /* ThermostatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatViewModel.swift; sourceTree = "<group>"; };
 		075574EB1E28E20600394573 /* InBedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InBedService.swift; sourceTree = "<group>"; };
+		0771B0AF1E37E23400D6A8D6 /* ThermostatViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThermostatViewModelTests.swift; sourceTree = "<group>"; };
+		0771B0B21E3AD36200D6A8D6 /* Mocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		07AEB24C1E2B9EEB007241B3 /* BoilerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoilerService.swift; sourceTree = "<group>"; };
 		07AEB24F1E2BC680007241B3 /* RollerShuttersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollerShuttersViewController.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Bool+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+String.swift"; sourceTree = "<group>"; };
@@ -8696,6 +8701,7 @@
 		OBJ_1620 /* AppUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				0771B0B21E3AD36200D6A8D6 /* Mocks.swift */,
 				OBJ_1621 /* global.swift */,
 				OBJ_1623 /* IndoorTempServiceTests.swift */,
 				OBJ_1622 /* InBedServiceTests.swift */,
@@ -8703,6 +8709,7 @@
 				OBJ_1627 /* SunriseSunsetServiceTests.swift */,
 				OBJ_1625 /* RollerShutterServiceTests.swift */,
 				OBJ_1626 /* RollerShuttersViewModelTests.swift */,
+				0771B0AF1E37E23400D6A8D6 /* ThermostatViewModelTests.swift */,
 			);
 			name = AppUnitTests;
 			path = Tests/AppUnitTests;
@@ -13303,8 +13310,11 @@
 				0731491A1E1AA93900656C68 /* OutdoorTempService.swift in Sources */,
 				073149141E1AA93900656C68 /* HttpClient.swift in Sources */,
 				OBJ_4191 /* InBedServiceTests.swift in Sources */,
+				0771B0B01E37E23400D6A8D6 /* ThermostatViewModelTests.swift in Sources */,
 				OBJ_4192 /* IndoorTempServiceTests.swift in Sources */,
+				0771B0B31E3AD36200D6A8D6 /* Mocks.swift in Sources */,
 				OBJ_4193 /* OutdoorTempServiceTests.swift in Sources */,
+				0771B0B11E3A00C400D6A8D6 /* ThermostatViewModel.swift in Sources */,
 				OBJ_4194 /* RollerShutterServiceTests.swift in Sources */,
 				07AEB24E1E2B9EEB007241B3 /* BoilerService.swift in Sources */,
 				0731491F1E1AA93900656C68 /* RollerShuttersViewModel.swift in Sources */,

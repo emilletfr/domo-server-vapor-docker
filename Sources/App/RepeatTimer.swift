@@ -10,11 +10,36 @@ import Foundation
 import Dispatch
 import RxSwift
 
-class RepeatTimer
+
+protocol RepeatTimerable
+{
+    static func timePublisher() -> Observable<String>
+}
+
+
+class RepeatTimer : RepeatTimerable
 {
     var didFireBlock : (Void) -> () = {}
     let repeatSubject = BehaviorSubject<Bool>(value:true)
     
+    static func timePublisher() -> Observable<String>
+    {
+        return PublishSubject<String>.create { (obs:AnyObserver<String>) -> Disposable in
+            DispatchQueue.global().async {
+                while true {
+                    let date = Date(timeIntervalSinceNow: 0)
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.timeZone = TimeZone(abbreviation: "CEST")
+                    dateFormatter.locale = Locale(identifier: "fr_FR")
+                    dateFormatter.dateFormat =  "HH:mm"
+                    obs.onNext(dateFormatter.string(from: date))
+                    sleep(55)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+
     init(delay:UInt32)
     {
         /*
