@@ -12,6 +12,7 @@ import Dispatch
 import Vapor
 import HTTP
 import RxSwift
+//@testable import VaporApp
 
 
 class RollerShuttersViewModelTests: XCTestCase {
@@ -27,8 +28,8 @@ class RollerShuttersViewModelTests: XCTestCase {
         let mockSunriseSunsetService = MockSunriseSunsetService()
         let mockTimePublisher = PublishSubject<String>()
         // Init view model
-        _ = RollerShuttersViewModel(mockRollerShutterService, mockInBedService, mockSunriseSunsetService, mockTimePublisher)
-        
+        let viewModel = RollerShuttersViewModel(mockRollerShutterService, mockInBedService, mockSunriseSunsetService, mockTimePublisher)
+        _ = viewModel.manualAutomaticModePublisher.onNext(0)
         let shuttersObservable = Observable.of(
             mockRollerShutterService.targetPositionPublisher[Place.LIVING_ROOM.rawValue].map{(0,$0)},
             mockRollerShutterService.targetPositionPublisher[Place.DINING_ROOM.rawValue].map{(1,$0)},

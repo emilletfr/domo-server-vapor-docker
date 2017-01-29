@@ -12,6 +12,7 @@ import Dispatch
 import Vapor
 import HTTP
 import RxSwift
+//@testable import VaporApp
 
 
 class ThermostatViewModelTests: XCTestCase

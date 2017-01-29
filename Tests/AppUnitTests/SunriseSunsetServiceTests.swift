@@ -9,6 +9,7 @@
 import XCTest
 import RxSwift
 import Foundation
+//@testable import VaporApp
 
 class SunriseSunsetServiceTests: XCTestCase {
     

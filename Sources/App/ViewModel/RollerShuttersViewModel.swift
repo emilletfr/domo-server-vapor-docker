@@ -16,8 +16,10 @@ protocol RollerShuttersViewModelable
     //MARK: Subscriptions
     var currentPositionObserver : [PublishSubject<Int>] {get}
     var targetPositionObserver : [PublishSubject<Int>] {get}
+    var manualAutomaticModeObserver : PublishSubject<Int> {get}
     //MARK: Actions
     var targetPositionPublisher : [PublishSubject<Int>] {get}
+    var manualAutomaticModePublisher : PublishSubject<Int> {get}
     //MARK: Dispatcher
     init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService:SunriseSunsetServicable, _ timePublisher:Observable<String>)
 }
@@ -28,8 +30,10 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
     //MARK: Subscriptions
     let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     let targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    let manualAutomaticModeObserver = PublishSubject<Int>()
     //MARK: Actions
     let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    let manualAutomaticModePublisher = PublishSubject<Int>()
     //MARK: Services
     let rollerShuttersService : RollerShutterServicable
     let inBedService: InBedServicable
@@ -48,6 +52,9 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
     //MARK: Reducer
     func reduce()
     {
+         //MARK: Wrap Manual/Automatic Mode
+        _ = self.manualAutomaticModePublisher.subscribe(manualAutomaticModeObserver)
+        
         //Group roller shutters
         let targetAllPublisher = PublishSubject<[Int]>()
         let targetAllExceptBedRoomPublisher = PublishSubject<[Int]>()
@@ -63,13 +70,15 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             }
         }
         //MARK:  Open AllRollingShutters at sunrise
-        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), resultSelector: {($0 == $1)})
+        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
+            {($0 == $1) && $2 == 0})
             .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue - 1))}
             .debug("sunrise")
             .subscribe(targetAllExceptBedRoomPublisher)
         
         //MARK:  Close AllRollingShutters at sunset
-        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), resultSelector: {($0 == $1)})
+        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
+            {($0 == $1) && $2 == 0})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
             .debug("sunset")
             .subscribe(targetAllPublisher)
