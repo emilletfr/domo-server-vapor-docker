@@ -9231,8 +9231,8 @@
 				OBJ_1634 /* InBedServiceTests.swift */,
 				OBJ_1635 /* IndoorTempServiceTests.swift */,
 				OBJ_1637 /* OutdoorTempServiceTests.swift */,
-				OBJ_1638 /* RollerShuttersViewModelTests.swift */,
 				OBJ_1639 /* SunriseSunsetServiceTests.swift */,
+				OBJ_1638 /* RollerShuttersViewModelTests.swift */,
 				OBJ_1640 /* ThermostatViewModelTests.swift */,
 			);
 			name = AppUnitTests;

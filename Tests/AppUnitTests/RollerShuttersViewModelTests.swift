@@ -16,7 +16,7 @@ import RxSwift
 
 class RollerShuttersViewModelTests: XCTestCase {
     
-    static let allTests = [("testSunriseSunset", testSunriseSunset)]
+   // static let allTests = [("testSunriseSunset", testSunriseSunset)]
     
     func testSunriseSunset()
     {
