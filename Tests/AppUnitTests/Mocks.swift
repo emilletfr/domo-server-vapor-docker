@@ -7,16 +7,43 @@
 //
 
 import RxSwift
+import Vapor
 
-class MockOutdoorTempService : OutdoorTempServicable
+let drop = Droplet()
+
+
+final class MockSunriseSunsetService : SunriseSunsetServicable
 {
-    let temperatureObserver  = PublishSubject<Double>()
+    let sunriseTimeObserver = PublishSubject<String>()
+    let sunsetTimeObserver = PublishSubject<String>()
+    
     required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60*60))
     {
     }
 }
 
-class MockIndoorTempService : IndoorTempServicable
+final class MockRollerShutterService : RollerShutterServicable
+{
+    let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    let targetPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    
+    let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
+    
+    required init( _ httpClient : HttpClientable = HttpClient())
+    {
+    }
+}
+
+final class MockOutdoorTempService : OutdoorTempServicable
+{
+    let temperatureObserver  = PublishSubject<Double>()
+    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60*60))
+    {
+        
+    }
+}
+
+final class MockIndoorTempService : IndoorTempServicable
 {
     var temperatureObserver =  PublishSubject<Double>()
     var humidityObserver = PublishSubject<Int>()
@@ -26,7 +53,7 @@ class MockIndoorTempService : IndoorTempServicable
     }
 }
 
-class MockInBedService : InBedServicable
+final class MockInBedService : InBedServicable
 {
     let isInBedObserver = PublishSubject<Bool>()
     
@@ -35,7 +62,7 @@ class MockInBedService : InBedServicable
     }
 }
 
-class MockBoilerService : BoilerServicable
+final class MockBoilerService : BoilerServicable
 {
     internal var heaterPublisher = PublishSubject<Bool>()
     internal var pompPublisher = PublishSubject<Bool>()

@@ -11,6 +11,8 @@ import RxSwift
 
 class OutdoorTempServiceTests: XCTestCase {
     
+    static let allTests = [("testRetrieveTemp", testRetrieveTemp)]
+    
     func testRetrieveTemp() {
         
             let expectation = self.expectation(description: "Handler called")
@@ -21,10 +23,5 @@ class OutdoorTempServiceTests: XCTestCase {
                 expectation.fulfill()
             }
             self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
-    
-    
     }
-    
-    
-    
 }

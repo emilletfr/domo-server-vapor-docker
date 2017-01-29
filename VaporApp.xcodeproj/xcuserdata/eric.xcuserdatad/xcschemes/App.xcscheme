@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_4079"
+               BlueprintIdentifier = "OBJ_4212"
                BuildableName = "App"
                BlueprintName = "App"
                ReferencedContainer = "container:VaporApp.xcodeproj">
@@ -28,11 +28,21 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_4319"
+               BuildableName = "AppUnitTests.xctest"
+               BlueprintName = "AppUnitTests"
+               ReferencedContainer = "container:VaporApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_4079"
+            BlueprintIdentifier = "OBJ_4212"
             BuildableName = "App"
             BlueprintName = "App"
             ReferencedContainer = "container:VaporApp.xcodeproj">
@@ -55,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_4079"
+            BlueprintIdentifier = "OBJ_4212"
             BuildableName = "App"
             BlueprintName = "App"
             ReferencedContainer = "container:VaporApp.xcodeproj">
@@ -74,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_4079"
+            BlueprintIdentifier = "OBJ_4212"
             BuildableName = "App"
             BlueprintName = "App"
             ReferencedContainer = "container:VaporApp.xcodeproj">

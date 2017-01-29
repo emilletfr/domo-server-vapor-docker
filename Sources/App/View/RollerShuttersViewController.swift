@@ -17,7 +17,6 @@ final class RollerShuttersViewController
     init(viewModel:RollerShuttersViewModelable = RollerShuttersViewModel())
     {
         self.viewModel = viewModel
-        
         var currentPositions = Array(repeating: 0, count: Place.count.rawValue)
         for placeIndex in 0..<Place.count.rawValue
         {

@@ -22,7 +22,7 @@ class OutdoorTempService : OutdoorTempServicable
     let httpClient : HttpClientable
     let autoRepeatTimer : RepeatTimer
     
-    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60*60))
+    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:3600))
     {
         self.httpClient = httpClient
         self.autoRepeatTimer = repeatTimer

@@ -12,6 +12,8 @@ import RxSwift
 
 class InBedServiceTest: XCTestCase
 {
+    static let allTests = [("testRetrieveIsInBed", testRetrieveIsInBed)]
+    
     func testRetrieveIsInBed()
     {
         let expectation = self.expectation(description: "Handler called")
@@ -23,7 +25,5 @@ class InBedServiceTest: XCTestCase
         }
         self.waitForExpectations(timeout: 10) { (error:Error?) in print(error as Any)}
     }
-
-    
  }
 
