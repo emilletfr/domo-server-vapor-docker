@@ -8,6 +8,7 @@
 
 import XCTest
 import RxSwift
+import Foundation
 
 class SunriseSunsetServiceTests: XCTestCase {
     
