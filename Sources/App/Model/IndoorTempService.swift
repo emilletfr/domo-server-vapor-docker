@@ -33,8 +33,7 @@ final class IndoorTempService : IndoorTempServicable
             guard let response = httpClient.sendGet("http://10.0.1.10/status"),
                 let temperature = response.parseToDoubleFrom(path: ["temperature"]),
                 let humidity = response.parseToIntFrom(path: ["humidity"])
-                else
-            {
+                else {
                 //     self?.temperatureObserver.onError(self!)
                 //    self?.humidityObserver.onError(self!)
                 return

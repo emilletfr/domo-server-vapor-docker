@@ -29,10 +29,9 @@ class InBedService : InBedServicable
         repeatTimer.didFireBlock = { [weak self] in
             let url = "http://10.0.1.24/status"
             guard let response = httpClient.sendGet(url), let isInBed = response.parseToIntFrom(path: ["inBed"])
-                else
-            {
-                //  self?.isInBedObserver.onError(self!);
-                return
+                else {
+                    //  self?.isInBedObserver.onError(self!);
+                    return
             }
             self?.isInBedObserver.onNext(Int(isInBed) == 1)
         }

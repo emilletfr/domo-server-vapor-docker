@@ -33,12 +33,10 @@ class BoilerService : BoilerServicable, Error
     required init(httpClient:HttpClientable = HttpClient())
     {
         self.httpClient = httpClient
-        
         _ = heaterPublisher.subscribe(onNext: { (onOff:Bool) in
             self.retryDelay = 0
             self.activate(heaterOrPomp:true, onOff)
         })
-        
         _ = pompPublisher.subscribe(onNext: { (onOff:Bool) in
             self.retryDelay = 0
             self.activate(heaterOrPomp:false, onOff)
@@ -47,15 +45,12 @@ class BoilerService : BoilerServicable, Error
     
     func activate(heaterOrPomp:Bool, _ onOff:Bool)
     {
-        DispatchQueue.global().async
-            {
-                self.actionSerialQueue.sync
-                    {
+        DispatchQueue.global().async {
+                self.actionSerialQueue.sync {
                         sleep(UInt32(self.retryDelay))
                         let url = "http://10.0.1.15:8015/" + (heaterOrPomp == false ? "1" : "0")  + (onOff == true ? "1" : "0")
                         if let response = self.httpClient.sendGet(url), let _ = response.parseToJSONFrom(path:["status"]) {/*print(status)*/}
-                        else
-                        {
+                        else {
                             self.retryDelay += 1
                             self.activate(heaterOrPomp: heaterOrPomp, onOff)
                         }

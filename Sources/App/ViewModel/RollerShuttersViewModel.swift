@@ -69,14 +69,14 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
                 _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
             }
         }
-        //MARK:  Open AllRollingShutters at sunrise
+        //MARK:  Open AllRollingShutters at sunrise if automatic mode
         _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
             .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue - 1))}
             .debug("sunrise")
             .subscribe(targetAllExceptBedRoomPublisher)
         
-        //MARK:  Close AllRollingShutters at sunset
+        //MARK:  Close AllRollingShutters at sunset if automatic mode
         _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}

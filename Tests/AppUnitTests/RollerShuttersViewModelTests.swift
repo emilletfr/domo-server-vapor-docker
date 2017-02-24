@@ -12,7 +12,7 @@ import Dispatch
 import Vapor
 import HTTP
 import RxSwift
-//@testable import VaporApp
+//@testable import App
 
 
 class RollerShuttersViewModelTests: XCTestCase {
@@ -40,7 +40,7 @@ class RollerShuttersViewModelTests: XCTestCase {
         mockSunriseSunsetService.sunriseTimeObserver.onNext("08:00")
         mockSunriseSunsetService.sunsetTimeObserver.onNext("20:00")
         
-        // Test if all Roller Shutters except in bedroom open at sunrise
+        // Test if all Roller Shutters except the one in bedroom open at sunrise
         var sequence = [Int:Int]()
         let open = shuttersObservable.subscribe(onNext:{sequence[$0.0] = $0.1})
         mockTimePublisher.onNext("08:00")

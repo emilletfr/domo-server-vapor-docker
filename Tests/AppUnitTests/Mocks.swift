@@ -11,7 +11,7 @@
 
 import RxSwift
 import Vapor
-//@testable import VaporApp
+//@testable import App
 
 let drop = Droplet()
 

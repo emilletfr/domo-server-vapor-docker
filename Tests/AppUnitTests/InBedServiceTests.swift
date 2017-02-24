@@ -8,12 +8,12 @@
 
 import XCTest
 import RxSwift
-//@testable import VaporApp
+//@testable import App
 
 
 class InBedServiceTest: XCTestCase
 {
-    static let allTests = [("testRetrieveIsInBed", testRetrieveIsInBed)]
+    //static let allTests = [("testRetrieveIsInBed", testRetrieveIsInBed)]
     
     func testRetrieveIsInBed()
     {

@@ -8,11 +8,11 @@
 
 import XCTest
 import RxSwift
-//@testable import VaporApp
+//@testable import App
 
 class OutdoorTempServiceTests: XCTestCase {
     
-    static let allTests = [("testRetrieveTemp", testRetrieveTemp)]
+    //static let allTests = [("testRetrieveTemp", testRetrieveTemp)]
     
     func testRetrieveTemp() {
         

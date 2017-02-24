@@ -33,8 +33,7 @@ final class SunriseSunsetService : SunriseSunsetServicable
         self.autoRepeatTimer = repeatTimer
         repeatTimer.didFireBlock = { [weak self] in
             guard let response = httpClient.sendGet("http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0") else {return}
-            guard let sunsetDateStr = response.parseToStringFrom(path: ["results", "civil_twilight_end"]), let sunriseDateStr =  response.parseToStringFrom(path: ["results", "sunrise"]) else
-            {
+            guard let sunsetDateStr = response.parseToStringFrom(path: ["results", "civil_twilight_end"]), let sunriseDateStr =  response.parseToStringFrom(path: ["results", "sunrise"]) else {
                 //     self?.sunriseTimeObserver.onError(self!)
                 //    self?.sunsetTimeObserver.onError(self!)
                 return
@@ -42,12 +41,12 @@ final class SunriseSunsetService : SunriseSunsetServicable
             let iso8601DateFormatter = DateFormatter()
             iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
             iso8601DateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-            guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr) else
-            {
-                print("ERROR - SunriseSunsetService:repeatTimerFired:guard:iso8601DateFormatter: \(sunriseDateStr)  \(sunsetDateStr)")
-                //    self?.sunriseTimeObserver.onError(self!)
-                //   self?.sunsetTimeObserver.onError(self!)
-                return
+            guard let sunsetDate = iso8601DateFormatter.date(from: sunsetDateStr), let sunriseDate = iso8601DateFormatter.date(from: sunriseDateStr)
+                else {
+                    print("ERROR - SunriseSunsetService:repeatTimerFired:guard:iso8601DateFormatter: \(sunriseDateStr)  \(sunsetDateStr)")
+                    //    self?.sunriseTimeObserver.onError(self!)
+                    //   self?.sunsetTimeObserver.onError(self!)
+                    return
             }
             let localDateformatter = DateFormatter()
             localDateformatter.timeZone = TimeZone(abbreviation: "CEST") // "CEST": "Europe/Paris"

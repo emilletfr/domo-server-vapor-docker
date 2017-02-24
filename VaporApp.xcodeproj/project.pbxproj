@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0784C65C1E3E1D7E00782ECF /* RollerShuttersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1627 /* RollerShuttersViewController.swift */; };
-		0784C65D1E3E1D7E00782ECF /* ThermostatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1628 /* ThermostatViewController.swift */; };
-		0784C65E1E3E1D7E00782ECF /* RollerShuttersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1630 /* RollerShuttersViewModel.swift */; };
-		0784C65F1E3E1D7E00782ECF /* ThermostatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1631 /* ThermostatViewModel.swift */; };
-		0784C6601E3E1D7E00782ECF /* BoilerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1618 /* BoilerService.swift */; };
-		0784C6611E3E1D7E00782ECF /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1619 /* HttpClient.swift */; };
-		0784C6621E3E1D7E00782ECF /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1620 /* InBedService.swift */; };
-		0784C6631E3E1D7E00782ECF /* IndoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1621 /* IndoorTempService.swift */; };
-		0784C6641E3E1D7E00782ECF /* OutdoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1622 /* OutdoorTempService.swift */; };
-		0784C6651E3E1D7E00782ECF /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1623 /* RepeatTimer.swift */; };
-		0784C6661E3E1D7E00782ECF /* RollerShutterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1624 /* RollerShutterService.swift */; };
-		0784C6671E3E1D7E00782ECF /* SunriseSunsetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1625 /* SunriseSunsetService.swift */; };
+		0784C8171E3F6E8C00782ECF /* RollerShuttersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1627 /* RollerShuttersViewController.swift */; };
+		0784C8181E3F6E8C00782ECF /* ThermostatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1628 /* ThermostatViewController.swift */; };
+		0784C8191E3F6E8C00782ECF /* RollerShuttersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1630 /* RollerShuttersViewModel.swift */; };
+		0784C81A1E3F6E8C00782ECF /* ThermostatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1631 /* ThermostatViewModel.swift */; };
+		0784C81B1E3F6E8C00782ECF /* BoilerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1618 /* BoilerService.swift */; };
+		0784C81C1E3F6E8C00782ECF /* InBedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1620 /* InBedService.swift */; };
+		0784C81D1E3F6E8C00782ECF /* IndoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1621 /* IndoorTempService.swift */; };
+		0784C81E1E3F6E8C00782ECF /* OutdoorTempService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1622 /* OutdoorTempService.swift */; };
+		0784C81F1E3F6E8C00782ECF /* RollerShutterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1624 /* RollerShutterService.swift */; };
+		0784C8201E3F6E8C00782ECF /* SunriseSunsetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1625 /* SunriseSunsetService.swift */; };
+		0784C8211E3F6E8C00782ECF /* RepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1623 /* RepeatTimer.swift */; };
+		0784C8221E3F6E8C00782ECF /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_1619 /* HttpClient.swift */; };
 		OBJ_1697 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Array.swift */; };
 		OBJ_1698 /* Bool+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Bool+String.swift */; };
 		OBJ_1699 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Box.swift */; };
@@ -6320,8 +6320,8 @@
 		OBJ_1688 /* RxCocoaRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoaRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_1689 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_169 /* cfb_enc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cfb_enc.c; sourceTree = "<group>"; };
-		OBJ_1690 /* App */ = {isa = PBXFileReference; lastKnownFileType = text; path = App; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_1691 /* AppUnitTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_1690 /* App */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = App; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_1691 /* AppUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = AppUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_17 /* FileProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProtocol.swift; sourceTree = "<group>"; };
 		OBJ_170 /* chacha-merged.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "chacha-merged.c"; sourceTree = "<group>"; };
 		OBJ_171 /* chacha.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chacha.c; sourceTree = "<group>"; };
@@ -9186,13 +9186,13 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_1618 /* BoilerService.swift */,
-				OBJ_1619 /* HttpClient.swift */,
 				OBJ_1620 /* InBedService.swift */,
 				OBJ_1621 /* IndoorTempService.swift */,
 				OBJ_1622 /* OutdoorTempService.swift */,
-				OBJ_1623 /* RepeatTimer.swift */,
 				OBJ_1624 /* RollerShutterService.swift */,
 				OBJ_1625 /* SunriseSunsetService.swift */,
+				OBJ_1623 /* RepeatTimer.swift */,
+				OBJ_1619 /* HttpClient.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -13946,25 +13946,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				0784C6601E3E1D7E00782ECF /* BoilerService.swift in Sources */,
-				0784C65E1E3E1D7E00782ECF /* RollerShuttersViewModel.swift in Sources */,
-				0784C6631E3E1D7E00782ECF /* IndoorTempService.swift in Sources */,
+				0784C81B1E3F6E8C00782ECF /* BoilerService.swift in Sources */,
+				0784C81C1E3F6E8C00782ECF /* InBedService.swift in Sources */,
+				0784C81E1E3F6E8C00782ECF /* OutdoorTempService.swift in Sources */,
+				0784C8191E3F6E8C00782ECF /* RollerShuttersViewModel.swift in Sources */,
 				OBJ_4324 /* InBedServiceTests.swift in Sources */,
+				0784C8201E3F6E8C00782ECF /* SunriseSunsetService.swift in Sources */,
+				0784C81F1E3F6E8C00782ECF /* RollerShutterService.swift in Sources */,
 				OBJ_4325 /* IndoorTempServiceTests.swift in Sources */,
+				0784C8221E3F6E8C00782ECF /* HttpClient.swift in Sources */,
 				OBJ_4326 /* Mocks.swift in Sources */,
-				0784C6671E3E1D7E00782ECF /* SunriseSunsetService.swift in Sources */,
-				0784C6641E3E1D7E00782ECF /* OutdoorTempService.swift in Sources */,
-				0784C65F1E3E1D7E00782ECF /* ThermostatViewModel.swift in Sources */,
+				0784C81A1E3F6E8C00782ECF /* ThermostatViewModel.swift in Sources */,
 				OBJ_4327 /* OutdoorTempServiceTests.swift in Sources */,
-				0784C6611E3E1D7E00782ECF /* HttpClient.swift in Sources */,
-				0784C6621E3E1D7E00782ECF /* InBedService.swift in Sources */,
-				0784C6661E3E1D7E00782ECF /* RollerShutterService.swift in Sources */,
+				0784C81D1E3F6E8C00782ECF /* IndoorTempService.swift in Sources */,
 				OBJ_4328 /* RollerShuttersViewModelTests.swift in Sources */,
-				0784C65D1E3E1D7E00782ECF /* ThermostatViewController.swift in Sources */,
+				0784C8181E3F6E8C00782ECF /* ThermostatViewController.swift in Sources */,
+				0784C8211E3F6E8C00782ECF /* RepeatTimer.swift in Sources */,
 				OBJ_4329 /* SunriseSunsetServiceTests.swift in Sources */,
-				0784C65C1E3E1D7E00782ECF /* RollerShuttersViewController.swift in Sources */,
+				0784C8171E3F6E8C00782ECF /* RollerShuttersViewController.swift in Sources */,
 				OBJ_4330 /* ThermostatViewModelTests.swift in Sources */,
-				0784C6651E3E1D7E00782ECF /* RepeatTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -17764,9 +17764,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "-DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -18522,6 +18523,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-DXcode";
@@ -18628,6 +18630,7 @@
 		OBJ_4214 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
@@ -18640,6 +18643,7 @@
 				INFOPLIST_FILE = VaporApp.xcodeproj/App_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_TEMP_DIR)/SymlinkLibs/";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
@@ -18651,6 +18655,7 @@
 		OBJ_4215 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
@@ -18687,6 +18692,7 @@
 				INFOPLIST_FILE = VaporApp.xcodeproj/AppUnitTests_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_TEMP_DIR)/SymlinkLibs/";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				TARGET_NAME = AppUnitTests;

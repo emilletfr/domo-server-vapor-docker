@@ -42,13 +42,11 @@ final class RollerShutterService : RollerShutterServicable
     
     func reduce()
     {
-        for placeIndex in 0..<Place.count.rawValue
-        {
+        for placeIndex in 0..<Place.count.rawValue {
             // Wrap to Initial State
-            DispatchQueue.global().async
-                {
-                    guard let response = self.httpClient.sendGet("http://10.0.1.1\(placeIndex)/status"), let position = response.parseToIntFrom(path:["open"]) else
-                    {
+            DispatchQueue.global().async {
+                    guard let response = self.httpClient.sendGet("http://10.0.1.1\(placeIndex)/status"), let position = response.parseToIntFrom(path:["open"])
+                        else {
                         //   self.currentPositionObserver[placeIndex].onError(self)
                         //  self.targetPositionObserver[placeIndex].onError(self)
                         return
@@ -69,10 +67,8 @@ final class RollerShutterService : RollerShutterServicable
     
     func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
     {
-        DispatchQueue.global().async
-            {
-                self.actionSerialQueue.sync
-                    {
+        DispatchQueue.global().async {
+                self.actionSerialQueue.sync {
                         let open = targetPosition > currentPosition ? "1" : "0"
                         let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
                         _ = self.httpClient.sendGet(urlString)

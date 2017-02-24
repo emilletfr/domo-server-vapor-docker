@@ -9,11 +9,11 @@
 import XCTest
 import RxSwift
 import Foundation
-//@testable import VaporApp
+//@testable import App
 
 class SunriseSunsetServiceTests: XCTestCase {
     
-    static let allTests = [("testRetrieveSunriseAndSunset", testRetrieveSunriseAndSunset)]
+    //static let allTests = [("testRetrieveSunriseAndSunset", testRetrieveSunriseAndSunset)]
 
     func testRetrieveSunriseAndSunset()
     {

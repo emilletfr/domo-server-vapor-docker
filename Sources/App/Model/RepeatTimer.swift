@@ -39,7 +39,7 @@ class RepeatTimer : RepeatTimerable
             return Disposables.create()
         }
     }
-
+    
     init(delay:UInt32)
     {
         /*
@@ -54,8 +54,7 @@ class RepeatTimer : RepeatTimerable
         DispatchQueue.global(qos:.default).async {
             usleep(10_000)
             self.didFireBlock()
-            while (true)
-            {
+            while (true) {
                 sleep(delay)
                 self.didFireBlock()
             }

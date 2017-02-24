@@ -12,13 +12,12 @@ import Dispatch
 import Vapor
 import HTTP
 import RxSwift
-//@testable import VaporApp
+//@testable import App
 
 
 class ThermostatViewModelTests: XCTestCase
 {
-    
-    static let allTests = [("testBoilerHeatingLevel", testBoilerHeatingLevel)]
+    //static let allTests = [("testBoilerHeatingLevel", testBoilerHeatingLevel)]
     
     var thermostatViewModel : ThermostatViewModel?
     
