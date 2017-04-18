@@ -19,7 +19,46 @@ class ThermostatViewModelTests: XCTestCase
 {
     //static let allTests = [("testBoilerHeatingLevel", testBoilerHeatingLevel)]
     
-    var thermostatViewModel : ThermostatViewModel?
+    var thermostatViewModel : ThermostatViewModel!
+    
+    func testBoilerTemperature()
+    {
+        //let expectation = self.expectation(description: "Handler called")
+        // Init Dependencies
+        let mockOutdoorTempService = MockOutdoorTempService()
+        let mockIndoorTempService = MockIndoorTempService()
+        let mockInBedService = MockInBedService()
+        let mockBoilerService = MockBoilerService()
+
+        // Init view model
+        thermostatViewModel = ThermostatViewModel(outdoorTempService: mockOutdoorTempService, indoorTempService: mockIndoorTempService, inBedService: mockInBedService, boilerService: mockBoilerService)
+        
+        mockOutdoorTempService.temperatureObserver.onNext(15)
+        
+        mockInBedService.isInBedObserver.onNext(false)
+        mockBoilerService.temperatureObserver.onNext(70)
+        
+        var count = 0
+        _ = mockBoilerService.temperaturePublisher.subscribe(onNext: { (temperature:Double) in
+            if count == 0 {XCTAssertTrue(temperature == 67.5)}
+            else if count == 1 {XCTAssertTrue(temperature == 70.0)}
+            else if count == 2 {XCTAssertTrue(temperature == 72.5)}
+            count += 1
+        })
+ 
+        thermostatViewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
+        thermostatViewModel.targetTemperaturePublisher.onNext(20)
+        thermostatViewModel.forcingWaterHeaterPublisher.onNext(0)
+    
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(20.5)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(21.0)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(20.5)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(20.0)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
+    }
     
     func testBoilerHeatingLevel()
     {

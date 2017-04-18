@@ -1,5 +1,4 @@
 module CLibreSSL {
-    umbrella header "/Users/eric/Desktop/domo/domo-server-vapor-docker/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/CLibreSSL.h"
-    link "CLibreSSL"
+    umbrella header "/Users/eric/Desktop/domo/domo-server-vapor-docker/.build/checkouts/clibressl.git-4924093653370840509/Sources/CLibreSSL/include/CLibreSSL.h"
     export *
 }

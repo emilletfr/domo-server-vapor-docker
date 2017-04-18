@@ -11,7 +11,7 @@
 
 import RxSwift
 import Vapor
-//@testable import App
+//@testable import SunriseSunsetServicable
 
 let drop = Droplet()
 
@@ -68,10 +68,12 @@ final class MockInBedService : InBedServicable
 
 final class MockBoilerService : BoilerServicable
 {
-    internal var heaterPublisher = PublishSubject<Bool>()
-    internal var pompPublisher = PublishSubject<Bool>()
+    var heaterPublisher = PublishSubject<Bool>()
+    var pompPublisher = PublishSubject<Bool>()
+    var temperaturePublisher = PublishSubject<Double>()
     
-    required init(httpClient:HttpClientable = HttpClient())
+    var temperatureObserver = PublishSubject<Double>()
+    required init(httpClient: HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
     {
     }
 }

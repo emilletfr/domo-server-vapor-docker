@@ -15,24 +15,33 @@ protocol BoilerServicable
 {
     var heaterPublisher : PublishSubject<Bool> {get}
     var pompPublisher : PublishSubject<Bool> {get}
+    var temperaturePublisher : PublishSubject<Double> {get}
     
-    init(httpClient:HttpClientable)
+    var temperatureObserver : PublishSubject<Double> {get}
+    
+    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
 }
 
 
 class BoilerService : BoilerServicable, Error
 {
+    internal var temperaturePublisher = PublishSubject<Double>()
     internal var heaterPublisher = PublishSubject<Bool>()
     internal var pompPublisher = PublishSubject<Bool>()
+    
+    internal var temperatureObserver = PublishSubject<Double>()
 
     let httpClient : HttpClientable
+    let repeatTimer : RepeatTimer
     
     let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.BoilerService")
     var retryDelay = 0
 
-    required init(httpClient:HttpClientable = HttpClient())
+    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
     {
+        self.repeatTimer = repeatTimer
         self.httpClient = httpClient
+        
         _ = heaterPublisher.subscribe(onNext: { (onOff:Bool) in
             self.retryDelay = 0
             self.activate(heaterOrPomp:true, onOff)
@@ -41,7 +50,22 @@ class BoilerService : BoilerServicable, Error
             self.retryDelay = 0
             self.activate(heaterOrPomp:false, onOff)
         })
+        
+        repeatTimer.didFireBlock = { [weak self] in
+            let url = "http://10.0.1.25/getTemperature"
+            guard let response = httpClient.sendGet(url), let temperature = response.parseToIntFrom(path: ["value"])
+                else {return}
+            self?.temperatureObserver.onNext(Double(temperature))
+        }
+        
+        _ = temperaturePublisher.subscribe(onNext: { (temperature:Double) in
+            DispatchQueue.global().async {
+                let url = "http://10.0.1.25/setTemperature?value=" + String(Int(temperature))
+                _ = self.httpClient.sendGet(url)
+            }
+        })
     }
+    
     
     func activate(heaterOrPomp:Bool, _ onOff:Bool)
     {

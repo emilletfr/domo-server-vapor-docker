@@ -1,7 +1,8 @@
 
 # docker run -t -i -p 8080:8080 -p 9001:9001 -v /Users/eric/Desktop/Test:/home  emilletfr/domo-server-vapor-docker
 
-FROM emilletfr/swift-docker:swift-3.0.2-release
+#FROM emilletfr/swift-docker:swift-3.0.2-release
+FROM swiftdocker/swift:3.0.2
 
 MAINTAINER Eric Millet <emilletfr@gmail.com>
 

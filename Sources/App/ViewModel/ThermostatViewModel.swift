@@ -132,16 +132,41 @@ final class ThermostatViewModel : ThermostatViewModelable
         // Collect max values when indoor temp > 20.0, target temp = 20 and boiler is heating
         // Add timestamp to collected max values and calculate average max value since last 24h
         let okToCaptureInTemp = Observable<Bool>.combineLatest(computedBoilerHeating, computedTargetTemp, resultSelector:{$0 == true && $1 == 20})
-        var maxTemp : Double?
         let indoorTempToMaxTemp = Observable<Double?>
             .combineLatest(indoorTempService.temperatureObserver, okToCaptureInTemp) { (indoorTemperature:Double, authorized:Bool) -> Double? in
-                if authorized == true {
-                    if indoorTemperature >= 20.0 {
-                        if maxTemp == nil {maxTemp = 0.0}
-                        maxTemp = indoorTemperature > maxTemp! ? indoorTemperature : maxTemp!}
-                    else {defer{maxTemp = nil}; return maxTemp}}
-                return nil
-        }
+                return authorized == true ? indoorTemperature : nil}
+            .filter{$0 != nil}
+            .map{$0!}
+            .scan((nil, nil)) {  (maxTemp: (new:Double?, old:Double?), indoorTemperature:Double) -> (Double?, Double?) in
+                var localMaxTemp = maxTemp.new
+                if indoorTemperature >= 20.0
+                {
+                    if localMaxTemp == nil {localMaxTemp = 0.0}
+                    localMaxTemp = indoorTemperature > localMaxTemp! ? indoorTemperature : localMaxTemp!
+                }
+                else {localMaxTemp = nil}
+                return (localMaxTemp, maxTemp.new)}
+            .map({ (maxTemp: (new:Double?, old:Double?)) -> Double? in
+                if maxTemp.new == nil && maxTemp.old != nil {return maxTemp.old}
+                else {return nil}
+            })
+        
+        // Regulate boiler temperature
+        _ = Observable.combineLatest(boilerService.temperatureObserver.debug("boilerTemperatureObserver"), indoorTempToMaxTemp, resultSelector: { (boilerTemperature:Double, maxIndoorTemperature:Double?) -> Double? in
+            if let maxIndoorTemperature = maxIndoorTemperature
+            {
+                let indoorTemperatureVsSetpointDelta = maxIndoorTemperature - 20.5
+                let boilerTemperatureDelta = indoorTemperatureVsSetpointDelta * 5.0  //0.5 -> 2.5°  /  0.2 -> 1°  /  0.4 -> 2°
+                var resultBoilerTemperature = boilerTemperature - boilerTemperatureDelta
+                if resultBoilerTemperature < 60.0 {resultBoilerTemperature = 60.0}
+                if resultBoilerTemperature > 90.0 {resultBoilerTemperature = 90.0}
+                return resultBoilerTemperature
+            }
+            else {return nil}})
+            .filter{$0 != nil}
+            .map{$0!}.debug("boilerTemperaturePublisher")
+            .subscribe(self.boilerService.temperaturePublisher)
+        
         // Add timestamp to Max Temps
         var datesForMaxTemperatures = [Date: Double]()
         var totalAverage = 0
