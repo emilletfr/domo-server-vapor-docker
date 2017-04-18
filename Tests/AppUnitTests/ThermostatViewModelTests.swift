@@ -33,6 +33,8 @@ class ThermostatViewModelTests: XCTestCase
         // Init view model
         thermostatViewModel = ThermostatViewModel(outdoorTempService: mockOutdoorTempService, indoorTempService: mockIndoorTempService, inBedService: mockInBedService, boilerService: mockBoilerService)
         
+        thermostatViewModel.noPicDetectionDelayForBoilerTemperature = 1
+        
         mockOutdoorTempService.temperatureObserver.onNext(15)
         
         mockInBedService.isInBedObserver.onNext(false)
@@ -41,9 +43,11 @@ class ThermostatViewModelTests: XCTestCase
         var count = 0
         _ = mockBoilerService.temperaturePublisher.subscribe(onNext: { (temperature:Double) in
             if count == 0 {XCTAssertTrue(temperature == 67.5)}
-            else if count == 1 {XCTAssertTrue(temperature == 70.0)}
-            else if count == 2 {XCTAssertTrue(temperature == 72.5)}
+            else if count == 1 {XCTAssertTrue(temperature == 75.0)}
+            else if count == 2 {XCTAssertTrue(temperature == 70.0)}
+            else if count == 3 {XCTAssertTrue(temperature == 72.5)}
             count += 1
+
         })
  
         thermostatViewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
@@ -53,7 +57,9 @@ class ThermostatViewModelTests: XCTestCase
         thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
         thermostatViewModel.indoorTempService.temperatureObserver.onNext(20.5)
         thermostatViewModel.indoorTempService.temperatureObserver.onNext(21.0)
-        thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(19.5)
+        sleep(2)
+        thermostatViewModel.indoorTempService.temperatureObserver.onNext(19.5)
         thermostatViewModel.indoorTempService.temperatureObserver.onNext(20.5)
         thermostatViewModel.indoorTempService.temperatureObserver.onNext(18.0)
         thermostatViewModel.indoorTempService.temperatureObserver.onNext(20.0)

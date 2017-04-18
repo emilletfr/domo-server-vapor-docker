@@ -53,6 +53,7 @@ final class ThermostatViewModel : ThermostatViewModelable
     let inBedService : InBedServicable
     let boilerService : BoilerServicable
     var boilerHeatingLevelMemorySpan = 3600.0*24.0
+    var noPicDetectionDelayForBoilerTemperature : Double = 60*60
     //MARK: Dispatcher
     required init(outdoorTempService:OutdoorTempServicable = OutdoorTempService(), indoorTempService:IndoorTempServicable = IndoorTempService(), inBedService:InBedServicable = InBedService(), boilerService:BoilerServicable = BoilerService())
     {
@@ -152,12 +153,31 @@ final class ThermostatViewModel : ThermostatViewModelable
             })
         
         // Regulate boiler temperature
-        _ = Observable.combineLatest(boilerService.temperatureObserver.debug("boilerTemperatureObserver"), indoorTempToMaxTemp, resultSelector: { (boilerTemperature:Double, maxIndoorTemperature:Double?) -> Double? in
-            if let maxIndoorTemperature = maxIndoorTemperature
+        var timeStampDate = Date()
+        
+        var boilerCurrentTemperature = 75.0
+        _ = boilerService.temperatureObserver
+            .debug("boilerTemperatureObserver")
+            .subscribe(onNext: { (temperature:Double) in boilerCurrentTemperature = temperature})
+        
+        var indoorCurrentTemperature = 20.0
+        _ = indoorTempService.temperatureObserver
+            .subscribe(onNext: { (temperature:Double) in indoorCurrentTemperature = temperature})
+        
+        _ = indoorTempToMaxTemp.map({ (maxIndoorTemperature:Double?) -> Double? in
+            var localMaxIndoorTemperature : Double? = maxIndoorTemperature
+            if timeStampDate.timeIntervalSinceNow < -self.noPicDetectionDelayForBoilerTemperature
             {
-                let indoorTemperatureVsSetpointDelta = maxIndoorTemperature - 20.5
+                localMaxIndoorTemperature = indoorCurrentTemperature
+                timeStampDate = Date()
+            }
+            
+            if let localMaxIndoorTemperature = localMaxIndoorTemperature
+            {
+                timeStampDate = Date()
+                let indoorTemperatureVsSetpointDelta = localMaxIndoorTemperature - 20.5
                 let boilerTemperatureDelta = indoorTemperatureVsSetpointDelta * 5.0  //0.5 -> 2.5°  /  0.2 -> 1°  /  0.4 -> 2°
-                var resultBoilerTemperature = boilerTemperature - boilerTemperatureDelta
+                var resultBoilerTemperature = boilerCurrentTemperature - boilerTemperatureDelta
                 if resultBoilerTemperature < 60.0 {resultBoilerTemperature = 60.0}
                 if resultBoilerTemperature > 90.0 {resultBoilerTemperature = 90.0}
                 return resultBoilerTemperature
