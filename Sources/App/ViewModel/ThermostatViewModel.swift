@@ -176,7 +176,7 @@ final class ThermostatViewModel : ThermostatViewModelable
             {
                 timeStampDate = Date()
                 let indoorTemperatureVsSetpointDelta = localMaxIndoorTemperature - 20.2 // 50% chauffe
-                let boilerTemperatureDelta = indoorTemperatureVsSetpointDelta * 5.0  //0.5 -> 2.5°  /  0.2 -> 1°  /  0.4 -> 2°
+                let boilerTemperatureDelta = indoorTemperatureVsSetpointDelta * 10.0 // 0.1 -> 1°  //0.5 -> 2.5°  /  0.2 -> 1°  /  0.4 -> 2°
                 var resultBoilerTemperature = boilerCurrentTemperature - boilerTemperatureDelta
                 if resultBoilerTemperature < 60.0 {resultBoilerTemperature = 60.0}
                 if resultBoilerTemperature > 90.0 {resultBoilerTemperature = 90.0}
