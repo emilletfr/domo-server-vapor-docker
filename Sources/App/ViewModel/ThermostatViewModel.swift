@@ -183,9 +183,7 @@ final class ThermostatViewModel : ThermostatViewModelable
                 return resultBoilerTemperature
             }
             else {return nil}})
-            .filter{$0 != nil}
-            .map{$0!}.debug("boilerTemperaturePublisher")
-            .subscribe(self.boilerService.temperaturePublisher)
+            .filter{$0 != nil}.map{$0!}.distinctUntilChanged().debug("boilerTemperaturePublisher").subscribe(self.boilerService.temperaturePublisher)
         
         // Add timestamp to Max Temps
         var datesForMaxTemperatures = [Date: Double]()
