@@ -1,0 +1,4 @@
+module CSQLite {
+    umbrella "/Users/eric/Desktop/vapor-swift4/domo-server-vapor-docker/.build/checkouts/sqlite.git--8232814251736334455/Sources/CSQLite/include"
+    export *
+}
