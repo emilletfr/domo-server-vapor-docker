@@ -26,7 +26,7 @@ class OutdoorTempService : OutdoorTempServicable
     {
         self.httpClient = httpClient
         self.autoRepeatTimer = repeatTimer
-        repeatTimer.didFireBlock = { [weak self] in
+        repeatTimer.didFireBlock = { [weak self] ()->() in
             let url = "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
             guard let response = httpClient.sendGet(url), let temperature = response.parseToDoubleFrom(path:["current", "temp_c"])
                 else {

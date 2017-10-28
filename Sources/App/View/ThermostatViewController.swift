@@ -7,7 +7,7 @@
 //
 
 import Vapor
-
+//import Run
 
 final class ThermostatViewController
 {
@@ -37,7 +37,8 @@ final class ThermostatViewController
         drop.get("force-hot-water/getOn") { request in
             return  try JSON(node: ["value": forceHotWater])}
         
-        drop.get("force-hot-water/setOn", Int.self) { request, value in
+        drop.get("force-hot-water/setOn", Int.parameter) { req in
+            let value = try req.parameters.next(Int.self)
             viewModel.forcingWaterHeaterPublisher.onNext(value)
             return try JSON(node: ["value": value])}
         
@@ -54,7 +55,8 @@ final class ThermostatViewController
         drop.get("thermostat/getTargetHeatingCoolingState") { request in
             return try JSON(node: ["value": targetHeatingCoolingState.rawValue])}
         
-        drop.get("thermostat/setTargetHeatingCoolingState", String.self) { request, value in
+        drop.get("thermostat/setTargetHeatingCoolingState", String.parameter) { req in
+            let value = try req.parameters.next(String.self)
             if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
              return try JSON(node: ["value": value])}
         
@@ -72,7 +74,8 @@ final class ThermostatViewController
         drop.get("thermostat/getTargetTemperature") { request in
             return  try JSON(node: ["value": targetTemperature])}
         
-        drop.get("thermostat/setTargetTemperature", String.self) { request, value in
+        drop.get("thermostat/setTargetTemperature", String.parameter) { req in
+            let value = try req.parameters.next(String.self)
             if let intValue = Int(value) {viewModel.targetTemperaturePublisher.onNext(intValue)}
             return try JSON(node: ["value": value])}
         
@@ -90,7 +93,7 @@ final class ThermostatViewController
         drop.get("thermostat/getTemperatureDisplayUnits") { request in
             try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])}
         
-        drop.get("thermostat/setTemperatureDisplayUnits", Int.self) { request, value in
+        drop.get("thermostat/setTemperatureDisplayUnits", Int.parameter) { req in
             try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])}
         
         //MARK:  Indoor Humidity

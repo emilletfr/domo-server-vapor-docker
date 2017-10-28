@@ -51,7 +51,7 @@ class BoilerService : BoilerServicable, Error
             self.activate(heaterOrPomp:false, onOff)
         })
         
-        repeatTimer.didFireBlock = { [weak self] in
+        repeatTimer.didFireBlock = { [weak self] ()->() in
             let url = "http://10.0.1.25/getTemperature"
             guard let response = httpClient.sendGet(url), let temperature = response.parseToIntFrom(path: ["value"])
                 else {return}

@@ -8,6 +8,7 @@
 
 import Vapor
 import RxSwift
+//import Run
 
 
 final class RollerShuttersViewController
@@ -26,13 +27,19 @@ final class RollerShuttersViewController
         
         var manualAutomaticMode = 0
         _ = viewModel.manualAutomaticModeObserver.subscribe(onNext: { manualAutomaticMode = $0 })
+
+       // drop.get
+
         drop.get("windows-covering-manual-automatic-mode/getOn")
-        { request in
+        { request -> ResponseRepresentable in
             return  try JSON(node: ["value": manualAutomaticMode])
         }
         
-        drop.get("windows-covering-manual-automatic-mode/setOn", Int.self)
-        { request, value in
+
+        
+        drop.get("windows-covering-manual-automatic-mode/setOn", Int.parameter)
+        { req in
+            let value = try req.parameters.next(Int.self)
             viewModel.manualAutomaticModePublisher.onNext(value)
             return try JSON(node: ["value": value])
         }
@@ -44,8 +51,10 @@ final class RollerShuttersViewController
         {
             _ = viewModel.currentPositionObserver[placeIndex].subscribe(onNext:{ currentPositions[placeIndex] = $0 })
         }
-        drop.get("window-covering/getCurrentPosition", Int.self)
-        { request, index in
+        
+        drop.get("window-covering/getCurrentPosition", Int.parameter)
+        { req in
+            let index = try req.parameters.next(Int.self)
             return try JSON(node: ["value": currentPositions[index]])
         }
         
@@ -54,13 +63,16 @@ final class RollerShuttersViewController
         {
             _ = viewModel.targetPositionObserver[placeIndex].subscribe(onNext:{ targetPositions[placeIndex] = $0 })
         }
-        drop.get("window-covering/getTargetPosition", Int.self)
-        { request, index in
+        drop.get("window-covering/getTargetPosition", Int.parameter)
+        { req in
+            let index = try req.parameters.next(Int.self)
             return try JSON(node: ["value": targetPositions[index]])
         }
         
-        drop.get("window-covering/setTargetPosition", Int.self, Int.self)
-        { request, index, position in
+        drop.get("window-covering/setTargetPosition", Int.parameter, Int.parameter)
+        { req in
+            let index = try req.parameters.next(Int.self)
+            let position = try req.parameters.next(Int.self)
             viewModel.targetPositionPublisher[index].onNext(position)
             return try JSON(node: ["value": position])
         }

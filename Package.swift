@@ -1,17 +1,25 @@
+// swift-tools-version:4.0
+
 import PackageDescription
 
 let package = Package(
     name: "VaporApp",
-    targets: [],
+    products: [
+        .executable(name: "App", targets: ["App"])
+    ],
     dependencies: [
-        .Package(url: "https://github.com/vapor/vapor.git", majorVersion: 1, minor: 5),
-        .Package(url: "https://github.com/ReactiveX/RxSwift.git", majorVersion: 3, minor: 4)
-      ],
-    exclude: [
-        "Config",
-        "Database",
-        "Localization",
-        "Public",
-        "Resources"
+        .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "2.1.0")),
+        .package(url: "https://github.com/vapor/fluent-provider.git", .upToNextMajor(from: "1.2.0")),
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0")
+    ],
+    targets: [
+        .target(name: "App", dependencies: ["Vapor", "FluentProvider", "RxSwift", "RxCocoa"],
+                exclude: [
+                    "Config",
+                    "Public",
+                    "Resources",
+                ]),
+        .testTarget(name: "AppTests", dependencies: ["App", "Testing"])
     ]
 )
+
