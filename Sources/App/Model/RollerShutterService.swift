@@ -68,19 +68,19 @@ final class RollerShutterService : RollerShutterServicable
     func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
     {
         DispatchQueue.global().async {
-                self.actionSerialQueue.sync {
-                        let open = targetPosition > currentPosition ? "1" : "0"
-                        let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
-                        _ = self.httpClient.sendGet(urlString)
-                        let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
-                        var delay = 140000*(offset)
-                        if targetPosition == 0 || targetPosition == 100 {delay = 14_000_000}
-                        usleep(useconds_t(delay))
-                        _ = self.httpClient.sendGet(urlString)
-                    DispatchQueue.main.async(execute: {
-                        self.currentPositionObserver[placeIndex].onNext(targetPosition)
-                    })
-                }
+            self.actionSerialQueue.sync {
+                let open = targetPosition > currentPosition ? "1" : "0"
+                let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
+                _ = self.httpClient.sendGet(urlString)
+                let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
+                var delay = 140000*(offset)
+                if targetPosition == 0 || targetPosition == 100 {delay = 14_000_000}
+                usleep(useconds_t(delay))
+                _ = self.httpClient.sendGet(urlString)
+                mainSerialQueue.async(execute: {
+                    self.currentPositionObserver[placeIndex].onNext(targetPosition)
+                })
+            }
         }
     }
 }

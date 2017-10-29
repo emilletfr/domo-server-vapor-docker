@@ -31,8 +31,9 @@ import Dispatch
 let drop = try Droplet()
 var thermostatViewController : ThermostatViewController?
 var rollerShuttersViewController : RollerShuttersViewController?
+let mainSerialQueue = DispatchQueue(label: "net.emillet.domo.Main")
 
-DispatchQueue.main.sync {
+mainSerialQueue.sync {
     thermostatViewController = ThermostatViewController()
     rollerShuttersViewController = RollerShuttersViewController()
 }
