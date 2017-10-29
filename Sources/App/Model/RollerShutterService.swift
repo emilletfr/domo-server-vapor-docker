@@ -32,6 +32,7 @@ final class RollerShutterService : RollerShutterServicable
     let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     
     let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.RollerShutterService")
+    let actionSerialQueu = DispatchQueue(label: "dd", qos: DispatchQoS.background, attributes: DispatchQueue.Attributes.concurrent, autoreleaseFrequency: DispatchQueue.AutoreleaseFrequency.inherit, target: nil);
     let httpClient : HttpClientable
     
     required init( _ httpClient : HttpClientable = HttpClient())
@@ -67,8 +68,8 @@ final class RollerShutterService : RollerShutterServicable
     
     func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
     {
-        DispatchQueue.global().async {
-            self.actionSerialQueue.sync {
+       // DispatchQueue.global().async {
+            self.actionSerialQueue.async {
                 let open = targetPosition > currentPosition ? "1" : "0"
                 let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
                 _ = self.httpClient.sendGet(urlString)
@@ -77,10 +78,10 @@ final class RollerShutterService : RollerShutterServicable
                 if targetPosition == 0 || targetPosition == 100 {delay = 14_000_000}
                 usleep(useconds_t(delay))
                 _ = self.httpClient.sendGet(urlString)
-                mainSerialQueue.async(execute: {
+                mainSerialQueue.async {
                     self.currentPositionObserver[placeIndex].onNext(targetPosition)
-                })
+                }
             }
-        }
+      //  }
     }
 }

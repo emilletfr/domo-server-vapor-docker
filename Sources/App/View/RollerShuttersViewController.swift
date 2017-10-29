@@ -40,7 +40,9 @@ final class RollerShuttersViewController
         drop.get("windows-covering-manual-automatic-mode/setOn", Int.parameter)
         { req in
             let value = try req.parameters.next(Int.self)
-            viewModel.manualAutomaticModePublisher.onNext(value)
+            mainSerialQueue.async{
+                viewModel.manualAutomaticModePublisher.onNext(value)
+            }
             return try JSON(node: ["value": value])
         }
         
@@ -73,7 +75,9 @@ final class RollerShuttersViewController
         { req in
             let index = try req.parameters.next(Int.self)
             let position = try req.parameters.next(Int.self)
+            mainSerialQueue.async{
             viewModel.targetPositionPublisher[index].onNext(position)
+            }
             return try JSON(node: ["value": position])
         }
     }
