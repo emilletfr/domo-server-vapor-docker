@@ -32,7 +32,6 @@ final class RollerShutterService : RollerShutterServicable
     let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     
     let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.RollerShutterService")
-    let actionSerialQueu = DispatchQueue(label: "dd", qos: DispatchQoS.background, attributes: DispatchQueue.Attributes.concurrent, autoreleaseFrequency: DispatchQueue.AutoreleaseFrequency.inherit, target: nil);
     let httpClient : HttpClientable
     
     required init( _ httpClient : HttpClientable = HttpClient())

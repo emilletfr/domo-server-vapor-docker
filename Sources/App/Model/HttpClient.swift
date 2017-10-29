@@ -20,7 +20,7 @@ protocol HttpClientable
     func parseToJSONFrom(path:[String]) -> JSON?
 }
 
-let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.HttpClient")
+//let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.HttpClient")
 
 class HttpClient : HttpClientable
 {
@@ -29,11 +29,11 @@ class HttpClient : HttpClientable
     
     func sendGet(_ url:String) -> Self?
     {
-        actionSerialQueue.async {
+   //     actionSerialQueue.async {
         self.response = nil
         do {self.response = try drop.client.get(url)}
         catch {print("ERROR - \(self):\(#function) \(error) \(url)");}
-         }
+    //     }
         return self
             
     }
