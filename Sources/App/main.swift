@@ -29,10 +29,12 @@ import Dispatch
  */
 
 let drop = try Droplet()
+var thermostatViewController : ThermostatViewController?
+var rollerShuttersViewController : RollerShuttersViewController?
 
 DispatchQueue.main.sync {
-    _ = ThermostatViewController()
-    _ = RollerShuttersViewController()
+    thermostatViewController = ThermostatViewController()
+    rollerShuttersViewController = RollerShuttersViewController()
 }
     
     drop.log.enabled =  [.error, .fatal]
