@@ -1,5 +1,6 @@
 //import App
 import Vapor
+import Dispatch
 
 /// We have isolated all of our App's logic into
 /// the App module because it makes our app
@@ -29,15 +30,16 @@ import Vapor
 
 let drop = try Droplet()
 
-let thermostatViewController = ThermostatViewController()
-let rollerShuttersViewController = RollerShuttersViewController()
-/*
- drop.get("") { (request) -> ResponseRepresentable in
- return "ResponseR";
- }
- */
+DispatchQueue.main.sync {
+    _ = ThermostatViewController()
+    _ = RollerShuttersViewController()
+}
+    
+    drop.log.enabled =  [.error, .fatal]
+    try drop.run()
+    
 
-drop.log.enabled =  [.error, .fatal]
-try drop.run()
+
+
 
 

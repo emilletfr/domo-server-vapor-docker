@@ -77,7 +77,9 @@ final class RollerShutterService : RollerShutterServicable
                         if targetPosition == 0 || targetPosition == 100 {delay = 14_000_000}
                         usleep(useconds_t(delay))
                         _ = self.httpClient.sendGet(urlString)
+                    DispatchQueue.main.async(execute: {
                         self.currentPositionObserver[placeIndex].onNext(targetPosition)
+                    })
                 }
         }
     }
