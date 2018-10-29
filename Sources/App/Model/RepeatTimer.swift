@@ -19,7 +19,7 @@ protocol RepeatTimerable
 
 class RepeatTimer : RepeatTimerable
 {
-    var didFireBlock : (Void) -> () = {}
+    var didFireBlock : () -> () = {}
     let repeatSubject = BehaviorSubject<Bool>(value:true)
     
     static func timePublisher() -> Observable<String>

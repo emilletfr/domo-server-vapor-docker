@@ -29,11 +29,11 @@ class HttpClient : HttpClientable
     
     func sendGet(_ url:String) -> Self?
     {
-  //      actionSerialQueue.sync {
+   //     actionSerialQueue.async {
         self.response = nil
         do {self.response = try drop.client.get(url)}
         catch {print("ERROR - \(self):\(#function) \(error) \(url)");}
-    //         }
+    //     }
         return self
             
     }

@@ -31,7 +31,7 @@ final class SunriseSunsetService : SunriseSunsetServicable
     {
         self.httpClient = httpClient
         self.autoRepeatTimer = repeatTimer
-        repeatTimer.didFireBlock = { [weak self] in
+        repeatTimer.didFireBlock = { [weak self] ()->() in
             guard let response = httpClient.sendGet("http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0") else {return}
             guard let sunsetDateStr = response.parseToStringFrom(path: ["results", "civil_twilight_end"]), let sunriseDateStr =  response.parseToStringFrom(path: ["results", "sunrise"]) else {
                 //     self?.sunriseTimeObserver.onError(self!)
