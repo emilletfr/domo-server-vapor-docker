@@ -8,7 +8,8 @@ let secondEmitter = PublishSubject<Int>()
 /// Called after your application has initialized.
 public func boot(_ application: Application) throws {
     app = application
-    _ = InBedService(httpClient: HttpClient(), refreshPeriod: 10)
+ //   _ = InBedService()
+    _ = SunriseSunsetService()
     
     func repeatedTask(task: RepeatedTask) {
         let secondsTimeStamp = Int(Date().timeIntervalSince1970)

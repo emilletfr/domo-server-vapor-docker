@@ -14,6 +14,6 @@ protocol SunriseSunsetServicable
 {
     var sunriseTimeObserver : PublishSubject<String> {get}
     var sunsetTimeObserver : PublishSubject<String> {get}
-    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
+    init(httpClient:HttpClientable, refreshPeriod: Int)
 }
 

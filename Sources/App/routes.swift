@@ -50,7 +50,7 @@ struct SSS: SunriseSunsetServicable {
     
     var sunsetTimeObserver: PublishSubject<String>
     
-    init(httpClient: HttpClientable, repeatTimer: RepeatTimer) {
+    init(httpClient: HttpClientable, refreshPeriod: Int) {
         sunriseTimeObserver = PublishSubject()
          sunsetTimeObserver = PublishSubject()
     }
@@ -71,7 +71,7 @@ public func routes(_ router: Router) throws {
     let rs = RollerShuttersViewController(viewModel:VM(
         RSS(httpClient: HC()),
         IBS(httpClient: HC(), refreshPeriod: 60),
-        SSS(httpClient: HC(), repeatTimer: RepeatTimer(delay: 60)),
+        SSS(httpClient: HC(), refreshPeriod: 60),
         RepeatTimer.timePublisher().distinctUntilChanged()
     ))
 

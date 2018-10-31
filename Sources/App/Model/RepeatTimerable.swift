@@ -15,7 +15,6 @@ protocol RepeatTimerable
     static func timePublisher() -> Observable<String>
 }
 
-
 class RepeatTimer : RepeatTimerable
 {
     var didFireBlock : () -> () = {}

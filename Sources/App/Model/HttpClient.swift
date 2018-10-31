@@ -17,8 +17,8 @@ class HttpClient : HttpClientable
     func send<T: Decodable>(url: String, responseType: T.Type) -> Observable<T> {
         return Observable<T>.create { observer in
             let client = try? app.make(Client.self)
-            _ = client?.get(url).do({ response in
-                let response: T? = try? response.content.syncDecode(T.self)
+            _ = client?.get(url).do({ r in
+                let response: T? = try? r.content.syncDecode(T.self)
                 if let response = response {
                     observer.onNext(response)
                 }

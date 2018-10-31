@@ -12,7 +12,7 @@ class InBedService : InBedServicable
 {
     let isInBedObserver = PublishSubject<Bool>()
     
-    required init(httpClient: HttpClientable, refreshPeriod: Int) {
+    required init(httpClient: HttpClientable = HttpClient(), refreshPeriod: Int = 60) {
         _ = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
             .flatMap { _ in return httpClient.send(url: "http://10.0.1.24/status", responseType: InBedResponse.self) }
