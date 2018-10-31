@@ -10,7 +10,6 @@ import Foundation
 import Dispatch
 import RxSwift
 
-
 protocol SunriseSunsetServicable
 {
     var sunriseTimeObserver : PublishSubject<String> {get}

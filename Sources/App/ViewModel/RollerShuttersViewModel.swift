@@ -10,23 +10,9 @@ import Foundation
 import RxSwift
 import Dispatch
 
-
-protocol RollerShuttersViewModelable
+final class RollerShuttersViewModel// : RollerShuttersViewModelable
 {
-    //MARK: Subscriptions
-    var currentPositionObserver : [PublishSubject<Int>] {get}
-    var targetPositionObserver : [PublishSubject<Int>] {get}
-    var manualAutomaticModeObserver : PublishSubject<Int> {get}
-    //MARK: Actions
-    var targetPositionPublisher : [PublishSubject<Int>] {get}
-    var manualAutomaticModePublisher : PublishSubject<Int> {get}
-    //MARK: Dispatcher
-    init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService:SunriseSunsetServicable, _ timePublisher:Observable<String>)
-}
-
-
-final class RollerShuttersViewModel : RollerShuttersViewModelable
-{
+    /*
     //MARK: Subscriptions
     let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     let targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
@@ -39,17 +25,21 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
     let inBedService: InBedServicable
     let sunriseSunsetService : SunriseSunsetServicable
     let timePublisher : Observable<String>
+ */
     //MARK: Dispatcher
-    required init(_ rollerShuttersService: RollerShutterServicable = RollerShutterService(), _ inBedService: InBedServicable = InBedService(), _ sunriseSunsetService : SunriseSunsetServicable = SunriseSunsetService(), _ timePublisher:Observable<String> = RepeatTimer.timePublisher().distinctUntilChanged())
+    required init(/*_ rollerShuttersService: RollerShutterServicable = RollerShutterService(), _ inBedService: InBedServicable = InBedService(), _ sunriseSunsetService : SunriseSunsetServicable = SunriseSunsetService(), _ timePublisher:Observable<String> = RepeatTimer.timePublisher().distinctUntilChanged()*/)
     {
+        /*
         self.rollerShuttersService = rollerShuttersService
         self.inBedService = inBedService
         self.sunriseSunsetService = sunriseSunsetService
         self.timePublisher = timePublisher
-        self.reduce()
+ */
+      //  self.reduce()
     }
     
     //MARK: Reducer
+    /*
     func reduce()
     {
          //MARK: Wrap Manual/Automatic Mode
@@ -94,4 +84,5 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .debug("OutOfBed")
             .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
     }
+ */
 }

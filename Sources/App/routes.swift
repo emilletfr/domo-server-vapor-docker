@@ -40,7 +40,7 @@ struct RSS: RollerShutterServicable {
 struct IBS: InBedServicable {
     var isInBedObserver: PublishSubject<Bool>
     
-    init(httpClient: HttpClientable, repeatTimer: RepeatTimer) {
+    init(httpClient: HttpClientable, refreshPeriod: Int) {
         isInBedObserver = PublishSubject()
     }
 }
@@ -57,20 +57,10 @@ struct SSS: SunriseSunsetServicable {
 }
 
 struct HC: HttpClientable {
-    func sendGet(_ url: String) -> HC? {
-        return nil
-    }
-    
-    func parseToStringFrom(path: [String]) -> String? {
-        return nil
-    }
-    
-    func parseToDoubleFrom(path: [String]) -> Double? {
-        return nil
-    }
-    
-    func parseToIntFrom(path: [String]) -> Int? {
-        return nil
+    func send<T>(url: String, responseType: T.Type) -> Observable<T> where T : Decodable {
+        return Observable<T>.create { observer in
+            return Disposables.create {}
+        }
     }
 
 }
@@ -80,7 +70,7 @@ public func routes(_ router: Router) throws {
   
     let rs = RollerShuttersViewController(viewModel:VM(
         RSS(httpClient: HC()),
-        IBS(httpClient: HC(), repeatTimer: RepeatTimer(delay: 60)),
+        IBS(httpClient: HC(), refreshPeriod: 60),
         SSS(httpClient: HC(), repeatTimer: RepeatTimer(delay: 60)),
         RepeatTimer.timePublisher().distinctUntilChanged()
     ))

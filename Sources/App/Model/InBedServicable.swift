@@ -8,9 +8,8 @@
 
 import RxSwift
 
-
 protocol InBedServicable
 {
     var isInBedObserver : PublishSubject<Bool> {get}
-    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
+    init(httpClient: HttpClientable, refreshPeriod: Int)
 }

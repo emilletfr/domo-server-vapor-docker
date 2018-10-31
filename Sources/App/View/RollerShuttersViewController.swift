@@ -23,8 +23,10 @@ final class RollerShuttersViewController
     
     init(viewModel:RollerShuttersViewModelable/* = RollerShuttersViewModel()*/)
     {
+        
         self.viewModel = viewModel
         // Set Initial Values in view model
+        /*
         viewModel.manualAutomaticModePublisher.onNext(0)
         // Subscribe to view model
         _ = viewModel.manualAutomaticModeObserver.subscribe(onNext: { self.manualAutomaticMode = $0 })
@@ -34,11 +36,13 @@ final class RollerShuttersViewController
         for placeIndex in 0..<Place.count.rawValue {
             _ = viewModel.targetPositionObserver[placeIndex].subscribe(onNext:{ self.targetPositions[placeIndex] = $0 })
         }
+ */
     }
     
     //MARK: Manage Mode: Manual or Automatic: open/close at sunrise/sunset
-    
+  //  var ee: InBedService?
     func getWindowsCoveringManualOrAutomaticMode(_ req: Request) throws -> Future<ReturnValue> {
+     //   defer {if ee == nil {ee = InBedService(refreshPeriod: 10)}}
         return req.future().transform(to: ReturnValue(value: manualAutomaticMode))
     }
     

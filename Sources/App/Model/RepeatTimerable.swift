@@ -10,7 +10,6 @@ import Foundation
 import Dispatch
 import RxSwift
 
-
 protocol RepeatTimerable
 {
     static func timePublisher() -> Observable<String>

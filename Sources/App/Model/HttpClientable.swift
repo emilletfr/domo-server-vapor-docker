@@ -6,16 +6,11 @@
 //
 //
 
-import HTTP
-import Vapor
-import Dispatch
-
+import RxSwift
 
 protocol HttpClientable
 {
-    func sendGet(_ url:String) -> Self?
-    func parseToStringFrom(path:[String]) -> String?
-    func parseToDoubleFrom(path:[String]) -> Double?
-    func parseToIntFrom(path:[String]) -> Int?
-   // func parseToJSONFrom(path:[String]) -> JSON?
+    init()
+    func send<T: Decodable>(url: String, responseType: T.Type) -> Observable<T>
 }
+
