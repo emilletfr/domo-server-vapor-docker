@@ -9,7 +9,15 @@ let secondEmitter = PublishSubject<Int>()
 public func boot(_ application: Application) throws {
     app = application
  //   _ = InBedService()
-    _ = SunriseSunsetService()
+    //_ = SunriseSunsetService()
+    let rs = RollerShutterService()
+  //  rs.currentPositionObserver[0].onNext(0)
+    let state = 100
+    rs.targetPositionPublisher[0].onNext(state)
+    rs.targetPositionPublisher[1].onNext(state)
+    rs.targetPositionPublisher[2].onNext(state)
+    rs.targetPositionPublisher[3].onNext(state)
+    rs.targetPositionPublisher[4].onNext(state)
     
     func repeatedTask(task: RepeatedTask) {
         let secondsTimeStamp = Int(Date().timeIntervalSince1970)

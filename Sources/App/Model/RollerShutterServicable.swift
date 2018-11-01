@@ -10,9 +10,6 @@ import Dispatch
 import RxSwift
 import Foundation
 
-
-enum Place: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
-
 protocol RollerShutterServicable
 {
     var currentPositionObserver : [PublishSubject<Int>] {get}
