@@ -16,17 +16,14 @@ struct ReturnValue: Content {
 
 final class RollerShuttersViewController
 {
-    let viewModel : RollerShuttersViewModelable
+    var viewModel : RollerShuttersViewModelable!
     var manualAutomaticMode = 0
     var currentPositions = Array(repeating: 0, count: Place.count.rawValue)
     var targetPositions = Array(repeating: 0, count: Place.count.rawValue)
     
-    init(viewModel:RollerShuttersViewModelable/* = RollerShuttersViewModel()*/)
-    {
-        
+    func start(viewModel:RollerShuttersViewModelable = RollerShuttersViewModel()) {
         self.viewModel = viewModel
         // Set Initial Values in view model
-        /*
         viewModel.manualAutomaticModePublisher.onNext(0)
         // Subscribe to view model
         _ = viewModel.manualAutomaticModeObserver.subscribe(onNext: { self.manualAutomaticMode = $0 })
@@ -36,13 +33,11 @@ final class RollerShuttersViewController
         for placeIndex in 0..<Place.count.rawValue {
             _ = viewModel.targetPositionObserver[placeIndex].subscribe(onNext:{ self.targetPositions[placeIndex] = $0 })
         }
- */
     }
     
     //MARK: Manage Mode: Manual or Automatic: open/close at sunrise/sunset
-  //  var ee: InBedService?
+    
     func getWindowsCoveringManualOrAutomaticMode(_ req: Request) throws -> Future<ReturnValue> {
-     //   defer {if ee == nil {ee = InBedService(refreshPeriod: 10)}}
         return req.future().transform(to: ReturnValue(value: manualAutomaticMode))
     }
     
@@ -67,7 +62,7 @@ final class RollerShuttersViewController
     func setWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnValue> {
         let index = try req.parameters.next(Int.self)
         let position = try req.parameters.next(Int.self)
-        defer {viewModel.targetPositionPublisher[index].onNext(position)}
+        defer {self.viewModel.targetPositionPublisher[index].onNext(position)}
         return req.future().transform(to: ReturnValue(value:position))
     }
 }
