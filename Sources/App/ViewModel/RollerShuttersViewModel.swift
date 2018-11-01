@@ -31,7 +31,6 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         self.rollerShuttersService = rollerShuttersService
         self.inBedService = inBedService
         self.sunriseSunsetService = sunriseSunsetService
-        
         self.reduce()
     }
     
