@@ -25,22 +25,36 @@ final class RollerShutterService : RollerShutterServicable
     func reduce() {
         for placeIndex in 0..<Place.count.rawValue {
             // Wrap to Initial State
-            let response = self.httpClient.send(url: "http://10.0.1.1\(placeIndex)/status", responseType: RollerShutterResponse.self)
+            _ = self.httpClient.send(url: "http://10.0.1.1\(placeIndex)/status", responseType: RollerShutterResponse.self)
                 .map({ (r) -> Int in return r.open*100 })
-            _ = response.subscribe(self.currentPositionObserver[placeIndex])
-            _ = response.subscribe(self.targetPositionObserver[placeIndex])
+                .subscribe(onNext: { (position) in
+                    self.currentPositionObserver[placeIndex].onNext(position)
+                    self.targetPositionObserver[placeIndex].onNext(position)
+                })
             
             // Wrap to Single command
-            _ = Observable.combineLatest(currentPositionObserver[placeIndex], targetPositionObserver[placeIndex], targetPositionPublisher[placeIndex].debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)), resultSelector: {(currentObs:$0, targetObs:$1, targetPub:$2)})
-                .filter({$0.0 != $0.2 && $0.1 != $0.2})
-                .subscribe(onNext: { (currentObs: Int, targetObs: Int, targetPub:Int) in
-                    self.targetPositionObserver[placeIndex].onNext(targetPub)
-                    self.action(placeIndex, currentObs, targetPub)
-                })
+            var currentPosition = 0
+            _ = self.currentPositionObserver[placeIndex].subscribe(onNext: { (position) in
+                currentPosition = position
+            })
+            
+            let act = targetPositionPublisher[placeIndex]
+                .flatMap { (target:Int) -> Observable<Int>  in
+                    return Observable.combineLatest(Observable.of(placeIndex), Observable.of(currentPosition), Observable.of(target))
+                        .filter({ (arg: (Int, Int, Int)) in let (_, current, target) = arg; return current != target })
+                        .flatMap({ (arg: (Int, Int, Int)) -> Observable<Int> in
+                            let (placeIndex, current, target) = arg
+                            return self.action(placeIndex, current, target)
+                        })
+            }
+            _ = act.subscribe(onNext: { (target:Int) in
+                self.currentPositionObserver[placeIndex].onNext(target)
+                self.targetPositionObserver[placeIndex].onNext(target)
+            })
         }
     }
     
-    func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int) {
+    func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int) -> Observable<Int>  {
         let open = targetPosition > currentPosition ? "1" : "0"
         let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
         let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
@@ -48,13 +62,12 @@ final class RollerShutterService : RollerShutterServicable
         print(delay)
         if targetPosition == 0 || targetPosition == 100 {delay = 14}
         
-        _ = self.httpClient.send(url: urlString, responseType: RollerShutterResponse.self)
+        return self.httpClient.send(url: urlString, responseType: RollerShutterResponse.self)
             .flatMap({ _ in return secondEmitter })
             .skip(delay)
             .take(1)
             .flatMap({_ in return self.httpClient.send(url: urlString, responseType: RollerShutterResponse.self)})
             .map({ _ in return targetPosition})
-            .subscribe(self.currentPositionObserver[placeIndex])
     }
     
     struct RollerShutterResponse: Decodable
