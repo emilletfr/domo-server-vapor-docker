@@ -33,21 +33,10 @@ final class RollerShutterService : RollerShutterServicable
                 })
             
             // Wrap to Single command
-            var currentPosition = 0
-            _ = self.currentPositionObserver[placeIndex].subscribe(onNext: { (position) in
-                currentPosition = position
-            })
-            
-            let act = targetPositionPublisher[placeIndex]
-                .flatMap { (target:Int) -> Observable<Int>  in
-                    return Observable.combineLatest(Observable.of(placeIndex), Observable.of(currentPosition), Observable.of(target))
-                        .filter({ (arg: (Int, Int, Int)) in let (_, current, target) = arg; return current != target })
-                        .flatMap({ (arg: (Int, Int, Int)) -> Observable<Int> in
-                            let (placeIndex, current, target) = arg
-                            return self.action(placeIndex, current, target)
-                        })
-            }
-            _ = act.subscribe(onNext: { (target:Int) in
+            _ = Observable.combineLatest(self.currentPositionObserver[placeIndex], self.targetPositionPublisher[placeIndex])
+                .filter { $0.0 != $0.1 }
+                .flatMap({ (current:Int, target:Int) -> Observable<Int> in return self.action(placeIndex, current, target) })
+                .subscribe(onNext: { (target:Int) in
                 self.currentPositionObserver[placeIndex].onNext(target)
                 self.targetPositionObserver[placeIndex].onNext(target)
             })
