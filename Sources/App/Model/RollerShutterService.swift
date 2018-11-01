@@ -23,26 +23,28 @@ final class RollerShutterService : RollerShutterServicable
     }
     
     func reduce() {
-        let queue = PublishSubject<(Int, Int, Int)>()
-       _ = queue.concatMap { (index:Int, current:Int, target:Int) -> Observable<(Int, Int)> in
-            return Observable.combineLatest(Observable.of(current), Observable.of(target))
-                .flatMap({ (current:Int, target:Int) -> Observable<Int> in return self.action(index, current, target) })
-                .map({ target -> (Int, Int) in return (index, target)})
-                .take(1)
-        }.subscribe(onNext: { (index:Int, target:Int) in
-            self.currentPositionObserver[index].onNext(target)
-            self.targetPositionObserver[index].onNext(target)
-        })
-
+        let action = PublishSubject<(Int, Int, Int)>()
+        // create actions
         for placeIndex in 0..<Place.count.rawValue {
             _ = Observable.combineLatest(currentPositionObserver[placeIndex].distinctUntilChanged(), targetPositionPublisher[placeIndex].distinctUntilChanged())
                 .subscribe(onNext: { (current:Int, target:Int) in
-                    queue.onNext((placeIndex, current, target))
+                    action.onNext((placeIndex, current, target))
                 })
         }
-        
+        // concat actions
+        let queue = action.concatMap { (index:Int, current:Int, target:Int) -> Observable<(Int, Int)> in
+            return Observable.combineLatest(Observable.of(current), Observable.of(target))
+                .flatMap({ (current:Int, target:Int) -> Observable<Int> in return self.process(index, current, target) })
+                .map({ target -> (Int, Int) in return (index, target)})
+                .take(1)
+        }
+        // action completion subscription
+        _ = queue.subscribe(onNext: { (index:Int, target:Int) in
+            self.currentPositionObserver[index].onNext(target)
+            self.targetPositionObserver[index].onNext(target)
+        })
+        // Wrap to Initial State
         for placeIndex in 0..<Place.count.rawValue {
-            // Wrap to Initial State
             _ = self.httpClient.send(url: "http://10.0.1.1\(placeIndex)/status", responseType: RollerShutterResponse.self)
                 .map({ (r) -> Int in return r.open*100 })
                 .subscribe(onNext: { (position) in
@@ -52,7 +54,7 @@ final class RollerShutterService : RollerShutterServicable
         }
     }
     
-    func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int) -> Observable<Int>  {
+    func process(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int) -> Observable<Int>  {
         if currentPosition == targetPosition {
             return Observable.of(targetPosition)
         }
