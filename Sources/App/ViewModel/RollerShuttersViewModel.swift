@@ -10,9 +10,8 @@ import Foundation
 import RxSwift
 import Dispatch
 
-final class RollerShuttersViewModel// : RollerShuttersViewModelable
+final class RollerShuttersViewModel : RollerShuttersViewModelable
 {
-    /*
     //MARK: Subscriptions
     let currentPositionObserver = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     let targetPositionObserver  = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
@@ -24,24 +23,32 @@ final class RollerShuttersViewModel// : RollerShuttersViewModelable
     let rollerShuttersService : RollerShutterServicable
     let inBedService: InBedServicable
     let sunriseSunsetService : SunriseSunsetServicable
-    let timePublisher : Observable<String>
- */
+    let hourMinutePublisher = PublishSubject<String>()
+ 
     //MARK: Dispatcher
-    required init(/*_ rollerShuttersService: RollerShutterServicable = RollerShutterService(), _ inBedService: InBedServicable = InBedService(), _ sunriseSunsetService : SunriseSunsetServicable = SunriseSunsetService(), _ timePublisher:Observable<String> = RepeatTimer.timePublisher().distinctUntilChanged()*/)
+    required init(rollerShuttersService: RollerShutterServicable = RollerShutterService(), inBedService: InBedServicable = InBedService(), sunriseSunsetService: SunriseSunsetServicable = SunriseSunsetService())
     {
-        /*
         self.rollerShuttersService = rollerShuttersService
         self.inBedService = inBedService
         self.sunriseSunsetService = sunriseSunsetService
-        self.timePublisher = timePublisher
- */
-      //  self.reduce()
+        
+        self.reduce()
     }
     
     //MARK: Reducer
-    /*
     func reduce()
     {
+        _ = secondEmitter.map({ _ -> String in
+            let date = Date(timeIntervalSinceNow: 0)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(abbreviation: "CEST")
+            dateFormatter.locale = Locale(identifier: "fr_FR")
+            dateFormatter.dateFormat =  "HH:mm"
+            return dateFormatter.string(from: date)
+        })
+            .distinctUntilChanged()
+            .subscribe(hourMinutePublisher)
+        
          //MARK: Wrap Manual/Automatic Mode
         _ = self.manualAutomaticModePublisher.subscribe(manualAutomaticModeObserver)
         
@@ -60,14 +67,14 @@ final class RollerShuttersViewModel// : RollerShuttersViewModelable
             }
         }
         //MARK:  Open AllRollingShutters at sunrise if automatic mode
-        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
+        _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
             .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue - 1))}
             .debug("sunrise")
             .subscribe(targetAllExceptBedRoomPublisher)
         
         //MARK:  Close AllRollingShutters at sunset if automatic mode
-        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
+        _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
             .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
             .debug("sunset")
@@ -84,5 +91,4 @@ final class RollerShuttersViewModel// : RollerShuttersViewModelable
             .debug("OutOfBed")
             .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
     }
- */
 }

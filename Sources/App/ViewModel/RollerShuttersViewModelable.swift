@@ -21,6 +21,6 @@ protocol RollerShuttersViewModelable
     var targetPositionPublisher : [PublishSubject<Int>] {get}
     var manualAutomaticModePublisher : PublishSubject<Int> {get}
     //MARK: Dispatcher
-    init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService:SunriseSunsetServicable, _ timePublisher:Observable<String>)
+    init(rollerShuttersService:RollerShutterServicable, inBedService:InBedServicable, sunriseSunsetService:SunriseSunsetServicable)
 }
 

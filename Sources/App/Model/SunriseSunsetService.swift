@@ -18,7 +18,7 @@ final class SunriseSunsetService : SunriseSunsetServicable
     
     required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60*60)
     {
-         let url = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
+        let url = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
         let sunriseSunsetObservable = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
             .flatMap { _ in return httpClient.send(url:url, responseType: SunriseSunsetResponse.self) }
@@ -63,7 +63,7 @@ final class SunriseSunsetService : SunriseSunsetServicable
             let nautical_twilight_end: String
             let astronomical_twilight_begin: String
             let astronomical_twilight_end: String
+        }
     }
-}
 }
 
