@@ -23,20 +23,25 @@ final class RollerShutterService : RollerShutterServicable
     }
     
     func reduce() {
-        let action = PublishSubject<(Int, Int, Int)>()
+        let action = PublishSubject<(Int, Int)>()
         // create actions
         for placeIndex in 0..<RollerShutter.count.rawValue {
-            _ = Observable.combineLatest(currentPositionObserver[placeIndex].distinctUntilChanged(), targetPositionPublisher[placeIndex].distinctUntilChanged())
+            _ = targetPositionPublisher[placeIndex].distinctUntilChanged()
                 .debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
-                .subscribe(onNext: { (current:Int, target:Int) in
+                .subscribe(onNext: { target in
                     self.targetPositionObserver[placeIndex].onNext(target)
-                    action.onNext((placeIndex, current, target))
+                    action.onNext((placeIndex, target))
                 })
         }
         // concat actions
-        let queue = action.concatMap { (index:Int, current:Int, target:Int) -> Observable<(Int, Int)> in
-            return Observable.combineLatest(Observable.of(current), Observable.of(target))
-                .flatMap({ (current:Int, target:Int) -> Observable<Int> in return self.process(index, current, target) })
+        let queue = action.concatMap { (index:Int, target:Int) -> Observable<(Int, Int)> in
+            var current = 100 - target
+            _ = self.currentPositionObserver[index].subscribe(onNext: { c in
+                current = c
+            })
+            return Observable.combineLatest(Observable.of(index), Observable.of(target))
+                .flatMap({ (index:Int, target:Int) -> Observable<Int> in
+                    return self.process(index, current, target) })
                 .map({ target -> (Int, Int) in return (index, target)})
                 .take(1)
         }

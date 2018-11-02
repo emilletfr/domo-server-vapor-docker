@@ -55,16 +55,19 @@ final class RollerShuttersViewController
     //MARK: Manage Positions
     
     func getWindowCoveringCurrentPosition(_ req: Request) throws -> Future<ReturnIntValue> {
+        print(req.debugDescription)
         let index = try req.parameters.next(Int.self)
         return req.future().transform(to: ReturnIntValue(value:currentPositions[index]))
     }
     
     func getWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnIntValue> {
+        print(req.debugDescription)
         let index = try req.parameters.next(Int.self)
         return req.future().transform(to: ReturnIntValue(value:targetPositions[index]))
     }
     
     func setWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnIntValue> {
+        print(req.debugDescription)
         let index = try req.parameters.next(Int.self)
         let position = try req.parameters.next(Int.self)
         defer {self.viewModel.targetPositionPublisher[index].onNext(position)}
