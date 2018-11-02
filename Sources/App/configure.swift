@@ -1,4 +1,3 @@
-import FluentSQLite
 import Vapor
 
 /// Called before your application initializes.
