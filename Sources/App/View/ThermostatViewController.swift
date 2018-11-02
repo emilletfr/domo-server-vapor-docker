@@ -72,7 +72,9 @@ final class ThermostatViewController
     
     func setThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<ReturnValue> {
         let value = try req.parameters.next(String.self)
-        if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
+        if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {
+            defer {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
+        }
         return req.future().transform(to: ReturnValue(value: Int(value)!))
     }
     
@@ -90,7 +92,9 @@ final class ThermostatViewController
     
     func setThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnValue> {
         let value = try req.parameters.next(String.self)
-        if let intValue = Int(value) {viewModel.targetTemperaturePublisher.onNext(intValue)}
+        if let intValue = Int(value) {
+            defer {viewModel.targetTemperaturePublisher.onNext(intValue)}
+        }
         return req.future().transform(to: ReturnValue(value: Int(value)!))
     }
     
