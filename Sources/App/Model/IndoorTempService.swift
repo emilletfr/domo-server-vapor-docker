@@ -20,18 +20,24 @@ final class IndoorTempService : IndoorTempServicable
         self.httpClient = httpClient
         _ = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
-            .flatMap { _ in return httpClient.send(url: IndoorTemp.baseUrl(appendPath: "status") , responseType: IndoorTempResponse.self) }
+            .flatMap { _ in return httpClient.send(url: IndoorTemp.baseUrl(appendPath: "status") , responseType: IndoorTemp.Response.self) }
             .subscribe(onNext: { [weak self] (indoorTempResponse) in
                 print(indoorTempResponse)
                 self?.temperatureObserver.onNext(indoorTempResponse.temperature - 0.2)
                 self?.humidityObserver.onNext(Int(indoorTempResponse.humidity))
             })
-        
-        struct IndoorTempResponse: Decodable //{ "open": 1, "temperature": 21.00, "humidity": 63.10}
-        {
-            let open: Int
-            let temperature: Double
-            let humidity: Double
-        }
+    }
+}
+
+struct IndoorTemp {
+    static func baseUrl(appendPath pathComponent: String = "") -> String {
+        return RollerShutter.livingRoom.baseUrl(appendPath: pathComponent)
+    }
+    
+    struct Response: Decodable //{ "open": 1, "temperature": 21.00, "humidity": 63.10}
+    {
+        let open: Int
+        let temperature: Double
+        let humidity: Double
     }
 }

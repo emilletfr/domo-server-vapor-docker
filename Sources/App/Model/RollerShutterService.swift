@@ -45,7 +45,7 @@ final class RollerShutterService : RollerShutterServicable
         })
         // Wrap to Initial State
         for placeIndex in 0..<RollerShutter.count.rawValue {
-            _ = self.httpClient.send(url: RollerShutter(rawValue: placeIndex)!.baseUrl(appendPath: "status"), responseType: RollerShutterResponse.self)
+            _ = self.httpClient.send(url: RollerShutter(rawValue: placeIndex)!.baseUrl(appendPath: "status"), responseType: RollerShutter.Response.self)
                 .map({ (r) -> Int in return r.open*100 })
                 .subscribe(onNext: { (position) in
                     self.currentPositionObserver[placeIndex].onNext(position)
@@ -64,15 +64,40 @@ final class RollerShutterService : RollerShutterServicable
         var delay : Int = Int(offset*14/100)
         if targetPosition == 0 || targetPosition == 100 {delay = 14}
         
-        return self.httpClient.send(url: urlString, responseType: RollerShutterResponse.self)
+        return self.httpClient.send(url: urlString, responseType: RollerShutter.Response.self)
             .flatMap({ _ in return secondEmitter }).skip(delay).take(1)
-            .flatMap({_ in return self.httpClient.send(url: urlString, responseType: RollerShutterResponse.self)})
+            .flatMap({_ in return self.httpClient.send(url: urlString, responseType: RollerShutter.Response.self)})
             .flatMap({ _ in return secondEmitter }).skip(1).take(1)
             .map({ _ in return targetPosition})
     }
+}
+
+enum RollerShutter: Int
+{
+    case livingRoom = 0, diningRoom, office, kitchen, bedroom, count
     
-    struct RollerShutterResponse: Decodable
+    func baseUrl(appendPath pathComponent: String = "") -> String {
+        let scheme = "http://"
+        var base = ""
+        switch self {
+        case .livingRoom: base = isHomeKitModulesNetworkIpOrDns
+            ?  "10.0.1.10" : "living-room"
+        case .diningRoom: base = isHomeKitModulesNetworkIpOrDns
+            ?  "10.0.1.11" : "dining-room"
+        case .office: base = isHomeKitModulesNetworkIpOrDns
+            ?  "10.0.1.12" : "office"
+        case .kitchen: base = isHomeKitModulesNetworkIpOrDns
+            ?  "10.0.1.13" : "kitchen"
+        case .bedroom: base = isHomeKitModulesNetworkIpOrDns
+            ?  "10.0.1.14" : "bedroom"
+        case .count: base = ""
+        }
+        return scheme + base + "/" + pathComponent
+    }
+    
+    struct Response: Decodable
     {
         let open: Int
     }
 }
+

@@ -16,23 +16,27 @@ class OutdoorTempService : OutdoorTempServicable
     required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60*60)
     {
         self.httpClient = httpClient
-        
-        let url = "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
         _ = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
-            .flatMap { _ in return httpClient.send(url: url, responseType: OutdoorTempResponse.self) }
+            .flatMap { _ in return httpClient.send(url: OutdoorTemp.baseUrl(), responseType: OutdoorTemp.Response.self) }
             .map({ r -> Double in return r.current.temp_c })
             .subscribe(self.temperatureObserver)
     }
 }
 
-
-struct OutdoorTempResponse: Decodable {
-    let current: Current
-    struct Current: Decodable {
-        let temp_c: Double
+struct OutdoorTemp
+{
+    static func baseUrl() -> String {
+       return "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
     }
     
+    struct Response: Decodable
+    {
+        let current: Current
+        struct Current: Decodable {
+            let temp_c: Double
+        }
+    }
 }
 
 /*

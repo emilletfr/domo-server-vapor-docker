@@ -18,10 +18,9 @@ final class SunriseSunsetService : SunriseSunsetServicable
     
     required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60*60)
     {
-        let url = "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
         let sunriseSunsetObservable = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
-            .flatMap { _ in return httpClient.send(url:url, responseType: SunriseSunsetResponse.self) }
+            .flatMap { _ in return httpClient.send(url:SunriseSunset.baseUrl(), responseType: SunriseSunset.Response.self) }
             .map({ (r) -> (String, String) in
                 let iso8601DateFormatter = DateFormatter()
                 iso8601DateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+00:00'"
@@ -47,8 +46,16 @@ final class SunriseSunsetService : SunriseSunsetServicable
             return sunset
             }.subscribe(sunsetTimeObserver)
     }
+}
+
+
+struct SunriseSunset
+{
+    static func baseUrl() -> String {
+        return "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
+    }
     
-    struct SunriseSunsetResponse: Decodable {
+    struct Response: Decodable {
         let results: Results
         let status:String
         
@@ -66,4 +73,3 @@ final class SunriseSunsetService : SunriseSunsetServicable
         }
     }
 }
-
