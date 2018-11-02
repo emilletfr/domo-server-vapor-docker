@@ -29,6 +29,7 @@ final class RollerShutterService : RollerShutterServicable
             _ = Observable.combineLatest(currentPositionObserver[placeIndex].distinctUntilChanged(), targetPositionPublisher[placeIndex].distinctUntilChanged())
                 .debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
                 .subscribe(onNext: { (current:Int, target:Int) in
+                    self.targetPositionObserver[placeIndex].onNext(target)
                     action.onNext((placeIndex, current, target))
                 })
         }

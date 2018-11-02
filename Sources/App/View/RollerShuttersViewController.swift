@@ -9,8 +9,12 @@
 import Vapor
 import RxSwift
 
-struct ReturnValue: Content {
+struct ReturnIntValue: Content {
     let value: Int
+}
+
+struct ReturnDoubleValue: Content {
+    let value: Double
 }
 
 final class RollerShuttersViewController
@@ -38,32 +42,32 @@ final class RollerShuttersViewController
     
     //MARK: Manage Mode: Manual or Automatic: open/close at sunrise/sunset
     
-    func getWindowsCoveringManualOrAutomaticMode(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: manualAutomaticMode))
+    func getWindowsCoveringManualOrAutomaticMode(_ req: Request) throws -> Future<ReturnIntValue> {
+        return req.future().transform(to: ReturnIntValue(value: manualAutomaticMode))
     }
     
-    func setWindowsCoveringManualOrAutomaticMode(_ req: Request) throws -> Future<ReturnValue> {
+    func setWindowsCoveringManualOrAutomaticMode(_ req: Request) throws -> Future<ReturnIntValue> {
         let value = try req.parameters.next(Int.self)
         defer {self.viewModel.manualAutomaticModePublisher.onNext(value)}
-        return req.future().transform(to: ReturnValue(value: value))
+        return req.future().transform(to: ReturnIntValue(value: value))
     }
     
     //MARK: Manage Positions
     
-    func getWindowCoveringCurrentPosition(_ req: Request) throws -> Future<ReturnValue> {
+    func getWindowCoveringCurrentPosition(_ req: Request) throws -> Future<ReturnIntValue> {
         let index = try req.parameters.next(Int.self)
-        return req.future().transform(to: ReturnValue(value:currentPositions[index]))
+        return req.future().transform(to: ReturnIntValue(value:currentPositions[index]))
     }
     
-    func getWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnValue> {
+    func getWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnIntValue> {
         let index = try req.parameters.next(Int.self)
-        return req.future().transform(to: ReturnValue(value:targetPositions[index]))
+        return req.future().transform(to: ReturnIntValue(value:targetPositions[index]))
     }
     
-    func setWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnValue> {
+    func setWindowCoveringTargetPosition(_ req: Request) throws -> Future<ReturnIntValue> {
         let index = try req.parameters.next(Int.self)
         let position = try req.parameters.next(Int.self)
         defer {self.viewModel.targetPositionPublisher[index].onNext(position)}
-        return req.future().transform(to: ReturnValue(value:position))
+        return req.future().transform(to: ReturnIntValue(value:position))
     }
 }

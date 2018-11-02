@@ -12,15 +12,15 @@ import Vapor
 final class ThermostatViewController
 {
     var viewModel : ThermostatViewModelable!
-    var boilerHeatingLevel = 0
-    var forceHotWater = 0
+    var boilerHeatingLevel: Double = 0
+    var forceHotWater: Int = 0
     var currentHeatingCoolingState = HeatingCoolingState.OFF
     var targetHeatingCoolingState = HeatingCoolingState.HEAT
-    var indoorTemperature = 20
-    var targetTemperature = 20
+    var indoorTemperature: Double = 20
+    var targetTemperature: Double = 20
     enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
-    var outdoorTemperature = 0
-    var indoorHumidity = 50
+    var outdoorTemperature: Double = 0
+    var indoorHumidity: Double = 50
     
     func start(viewModel:ThermostatViewModelable = ThermostatViewModel())
     {
@@ -44,80 +44,78 @@ final class ThermostatViewController
     
     //MARK: Boiler Heating Level
     
-    func getBoilerHeatingLevelCurrentRelativeHumidity(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.boilerHeatingLevel))
+    func getBoilerHeatingLevelCurrentRelativeHumidity(_ req: Request) throws -> Future<ReturnDoubleValue> {
+        return req.future().transform(to: ReturnDoubleValue(value: Double(self.boilerHeatingLevel)))
     }
     
     //MARK:  Force Hot Water
     
-    func getForceHotWater(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.forceHotWater))
+    func getForceHotWater(_ req: Request) throws -> Future<ReturnIntValue> {
+        return req.future().transform(to: ReturnIntValue(value: self.forceHotWater))
     }
     
-    func setForceHotWater(_ req: Request) throws -> Future<ReturnValue> {
+    func setForceHotWater(_ req: Request) throws -> Future<ReturnIntValue> {
         let value = try req.parameters.next(Int.self)
         defer {self.viewModel.forcingWaterHeaterPublisher.onNext(value)}
-        return req.future().transform(to: ReturnValue(value: value))
+        return req.future().transform(to: ReturnIntValue(value: value))
     }
     
     //MARK:  Heating Cooling State
     
-    func getThermostatCurrentHeatingCoolingState(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.currentHeatingCoolingState.rawValue))
+    func getThermostatCurrentHeatingCoolingState(_ req: Request) throws -> Future<ReturnIntValue> {
+        return req.future().transform(to: ReturnIntValue(value: self.currentHeatingCoolingState.rawValue))
     }
     
-    func getThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.targetHeatingCoolingState.rawValue))
+    func getThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<ReturnIntValue> {
+        return req.future().transform(to: ReturnIntValue(value: self.targetHeatingCoolingState.rawValue))
     }
     
-    func setThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<ReturnValue> {
-        let value = try req.parameters.next(String.self)
-        if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {
-            defer {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
-        }
-        return req.future().transform(to: ReturnValue(value: Int(value)!))
+    func setThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<ReturnIntValue> {
+        let value = try req.parameters.next(Int.self)
+        let state = HeatingCoolingState(rawValue:value)
+        defer {viewModel.targetHeatingCoolingStatePublisher.onNext(state!)}
+        return req.future().transform(to:ReturnIntValue(value: value))
     }
     
     //MARK:  Current Indoor Temperature
-    
-    func getThermostatCurrentTemperature(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.indoorTemperature))
+
+    func getThermostatCurrentTemperature(_ req: Request) throws -> Future<ReturnDoubleValue> {
+        return req.future().transform(to: ReturnDoubleValue(value: self.indoorTemperature))
     }
     
     //MARK:  Target Indoor Temperature
     
-    func getThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.targetTemperature))
+    func getThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnDoubleValue> {
+        return req.future().transform(to: ReturnDoubleValue(value: self.targetTemperature))
     }
     
-    func setThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnValue> {
-        let value = try req.parameters.next(String.self)
-        if let intValue = Int(value) {
-            defer {viewModel.targetTemperaturePublisher.onNext(intValue)}
-        }
-        return req.future().transform(to: ReturnValue(value: Int(value)!))
+    func setThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnDoubleValue> {
+        print(req.content)
+        let value = try req.parameters.next(Double.self)
+        defer {viewModel.targetTemperaturePublisher.onNext(value)}
+        return req.future().transform(to: ReturnDoubleValue(value: value))
     }
     
     //MARK:  Temperature Display Units
     
-    func getThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: TemperatureDisplayUnits.CELSIUS.rawValue))
+    func getThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<ReturnIntValue> {
+        return req.future().transform(to: ReturnIntValue(value: TemperatureDisplayUnits.CELSIUS.rawValue))
     }
     
-    func setThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: TemperatureDisplayUnits.CELSIUS.rawValue))
+    func setThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<ReturnIntValue> {
+        return req.future().transform(to: ReturnIntValue(value: TemperatureDisplayUnits.CELSIUS.rawValue))
     }
     
     //MARK:  Current Outdoor Temperature
     
-    func getTemperatureSensorCurrentTemperature(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.outdoorTemperature))
+    func getTemperatureSensorCurrentTemperature(_ req: Request) throws -> Future<ReturnDoubleValue> {
+        return req.future().transform(to: ReturnDoubleValue(value: self.outdoorTemperature))
     }
     
     //MARK:  Indoor Humidity
     
-    func getHumiditySensorCurrentRelativeHumidity(_ req: Request) throws -> Future<ReturnValue> {
-        return req.future().transform(to: ReturnValue(value: self.indoorHumidity))
+    func getHumiditySensorCurrentRelativeHumidity(_ req: Request) throws -> Future<ReturnDoubleValue> {
+        return req.future().transform(to: ReturnDoubleValue(value: self.indoorHumidity))
     }
 }
 

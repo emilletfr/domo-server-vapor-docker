@@ -33,14 +33,14 @@ class BoilerService : BoilerServicable, Error
         
         _ = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
-            .flatMap { _ -> Observable<ReturnValue> in
+            .flatMap { _ -> Observable<ReturnIntValue> in
                 let url = Boiler.temperature.baseUrl(appendPath: "getTemperature")
-                return httpClient.send(url:url, responseType: ReturnValue.self) }
+                return httpClient.send(url:url, responseType: ReturnIntValue.self) }
             .map({ (r) -> Double in return Double(r.value)})
             .subscribe(self.temperatureObserver)
         
         _ = temperaturePublisher.flatMap({ (temperature: Double) -> Observable<Boiler.ServoDegresResponse> in
-            let url = Boiler.temperature.baseUrl(appendPath: "setTemperature?value=" + String(Int(temperature)))
+            let url = Boiler.temperature.baseUrl(appendPath: "setTemperature?value=\(Int(temperature))")
             return httpClient.send(url:url, responseType: Boiler.ServoDegresResponse.self)
         }).subscribe()
     }

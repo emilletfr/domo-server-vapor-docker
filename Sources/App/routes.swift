@@ -38,10 +38,10 @@ public func routes(_ router: Router) throws {
     router.group("thermostat") { router in
         router.get("getCurrentHeatingCoolingState", use: th.getThermostatCurrentHeatingCoolingState)
         router.get("getTargetHeatingCoolingState", use: th.getThermostatTargetHeatingCoolingState)
-        router.get("setTargetHeatingCoolingState", String.parameter, use: th.setThermostatTargetHeatingCoolingState)
+        router.get("setTargetHeatingCoolingState", Int.parameter, use: th.setThermostatTargetHeatingCoolingState)
         router.get("getCurrentTemperature", use: th.getThermostatCurrentTemperature)
         router.get("getTargetTemperature", use: th.getThermostatTargetTemperature)
-        router.get("setTargetTemperature", String.parameter, use: th.setThermostatTargetTemperature)
+        router.get("setTargetTemperature", Double.parameter, use: th.setThermostatTargetTemperature)
         router.get("getTemperatureDisplayUnits", use: th.getThermostatTemperatureDisplayUnits)
         router.get("setTemperatureDisplayUnits", Int.parameter, use: th.setThermostatTemperatureDisplayUnits)
     }
