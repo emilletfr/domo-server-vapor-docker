@@ -22,7 +22,6 @@ final class IndoorTempService : IndoorTempServicable
             .filter { $0%refreshPeriod == 0 }
             .flatMap { _ in return httpClient.send(url: IndoorTemp.baseUrl(appendPath: "status") , responseType: IndoorTemp.Response.self) }
             .subscribe(onNext: { [weak self] (indoorTempResponse) in
-                print(indoorTempResponse)
                 self?.temperatureObserver.onNext(indoorTempResponse.temperature - 0.2)
                 self?.humidityObserver.onNext(Int(indoorTempResponse.humidity))
             })

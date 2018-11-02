@@ -90,7 +90,6 @@ final class ThermostatViewController
     }
     
     func setThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnDoubleValue> {
-        print(req.content)
         let value = try req.parameters.next(Double.self)
         defer {viewModel.targetTemperaturePublisher.onNext(value)}
         return req.future().transform(to: ReturnDoubleValue(value: value))
