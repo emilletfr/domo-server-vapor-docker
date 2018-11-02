@@ -34,13 +34,13 @@ class BoilerService : BoilerServicable, Error
         _ = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
             .flatMap { _ -> Observable<ReturnValue> in
-                let url = "http://10.0.1.25/getTemperature"
+                let url = Boiler.temperature.baseUrl(appendPath: "getTemperature")
                 return httpClient.send(url:url, responseType: ReturnValue.self) }
             .map({ (r) -> Double in return Double(r.value)})
             .subscribe(self.temperatureObserver)
         
         _ = temperaturePublisher.flatMap({ (temperature: Double) -> Observable<ReturnServoDegres> in
-            let url = "http://10.0.1.25/setTemperature?value=" + String(Int(temperature))
+            let url = Boiler.temperature.baseUrl(appendPath: "setTemperature?value=" + String(Int(temperature)))
             return httpClient.send(url:url, responseType: ReturnServoDegres.self)
         }).subscribe()
         
@@ -51,7 +51,7 @@ class BoilerService : BoilerServicable, Error
     }
     
     func activate(heaterOrPomp:Bool, _ onOff:Bool) {
-        let url = "http://10.0.1.15:8015/" + (heaterOrPomp == false ? "1" : "0")  + (onOff == true ? "1" : "0")
+        let url = Boiler.heaterAndPomp.baseUrl(appendPath: (heaterOrPomp == false ? "1" : "0")  + (onOff == true ? "1" : "0"))
         _ = self.httpClient.send(url: url, responseType: ReturnStatus.self).subscribe()
         
         // [{ "status": 1}]

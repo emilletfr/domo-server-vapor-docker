@@ -25,7 +25,7 @@ final class RollerShutterService : RollerShutterServicable
     func reduce() {
         let action = PublishSubject<(Int, Int, Int)>()
         // create actions
-        for placeIndex in 0..<Place.count.rawValue {
+        for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = Observable.combineLatest(currentPositionObserver[placeIndex].distinctUntilChanged(), targetPositionPublisher[placeIndex].distinctUntilChanged())
                 .subscribe(onNext: { (current:Int, target:Int) in
                     action.onNext((placeIndex, current, target))
@@ -44,8 +44,8 @@ final class RollerShutterService : RollerShutterServicable
             self.targetPositionObserver[index].onNext(target)
         })
         // Wrap to Initial State
-        for placeIndex in 0..<Place.count.rawValue {
-            _ = self.httpClient.send(url: "http://10.0.1.1\(placeIndex)/status", responseType: RollerShutterResponse.self)
+        for placeIndex in 0..<RollerShutter.count.rawValue {
+            _ = self.httpClient.send(url: RollerShutter(rawValue: placeIndex)!.baseUrl(appendPath: "status"), responseType: RollerShutterResponse.self)
                 .map({ (r) -> Int in return r.open*100 })
                 .subscribe(onNext: { (position) in
                     self.currentPositionObserver[placeIndex].onNext(position)
@@ -59,7 +59,7 @@ final class RollerShutterService : RollerShutterServicable
             return Observable.of(targetPosition)
         }
         let open = targetPosition > currentPosition ? "1" : "0"
-        let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
+        let urlString = RollerShutter(rawValue: placeIndex)!.baseUrl(appendPath: open)
         let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
         var delay : Int = Int(offset*14/100)
         if targetPosition == 0 || targetPosition == 100 {delay = 14}

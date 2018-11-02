@@ -56,26 +56,26 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
         let targetAllExceptBedRoomPublisher = PublishSubject<[Int]>()
         
         //MARK: Wrap observers and targetAllPublisher
-        for placeIndex in 0..<Place.count.rawValue {
+        for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
             _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
             _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
             _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
-            if placeIndex != Place.BEDROOM.rawValue {
+            if placeIndex != RollerShutter.bedroom.rawValue {
                 _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
             }
         }
         //MARK:  Open AllRollingShutters at sunrise if automatic mode
         _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue - 1))}
+            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: RollerShutter.count.rawValue - 1))}
             .debug("sunrise")
             .subscribe(targetAllExceptBedRoomPublisher)
         
         //MARK:  Close AllRollingShutters at sunset if automatic mode
         _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
+            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: RollerShutter.count.rawValue))}
             .debug("sunset")
             .subscribe(targetAllPublisher)
         
@@ -88,6 +88,6 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .filter{$0 == wakeUpSequence}
             .map{isInBedSequence in return 100}
             .debug("OutOfBed")
-            .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
+            .subscribe(self.rollerShuttersService.targetPositionPublisher[RollerShutter.bedroom.rawValue])
     }
 }

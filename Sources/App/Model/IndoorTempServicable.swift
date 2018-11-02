@@ -6,9 +6,7 @@
 //
 //
 
-import Dispatch
 import RxSwift
-
 
 protocol IndoorTempServicable
 {

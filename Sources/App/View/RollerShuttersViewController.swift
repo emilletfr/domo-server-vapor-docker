@@ -17,8 +17,8 @@ final class RollerShuttersViewController
 {
     var viewModel : RollerShuttersViewModelable!
     var manualAutomaticMode = 0
-    var currentPositions = Array(repeating: 0, count: Place.count.rawValue)
-    var targetPositions = Array(repeating: 0, count: Place.count.rawValue)
+    var currentPositions = Array(repeating: 0, count: RollerShutter.count.rawValue)
+    var targetPositions = Array(repeating: 0, count: RollerShutter.count.rawValue)
     
     func start(viewModel:RollerShuttersViewModelable = RollerShuttersViewModel()) {
         self.viewModel = viewModel
@@ -26,10 +26,10 @@ final class RollerShuttersViewController
         viewModel.manualAutomaticModePublisher.onNext(0)
         // Subscribe to view model
         _ = viewModel.manualAutomaticModeObserver.subscribe(onNext: { self.manualAutomaticMode = $0 })
-        for placeIndex in 0..<Place.count.rawValue {
+        for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = viewModel.currentPositionObserver[placeIndex].subscribe(onNext:{ self.currentPositions[placeIndex] = $0 })
         }
-        for placeIndex in 0..<Place.count.rawValue {
+        for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = viewModel.targetPositionObserver[placeIndex].subscribe(onNext:{ self.targetPositions[placeIndex] = $0 })
         }
     }

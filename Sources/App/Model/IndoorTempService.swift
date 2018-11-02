@@ -20,7 +20,7 @@ final class IndoorTempService : IndoorTempServicable
         self.httpClient = httpClient
         _ = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
-            .flatMap { _ in return httpClient.send(url: "http://10.0.1.10/status", responseType: IndoorTempResponse.self) }
+            .flatMap { _ in return httpClient.send(url: IndoorTemp.baseUrl(appendPath: "status") , responseType: IndoorTempResponse.self) }
             .subscribe(onNext: { [weak self] (indoorTempResponse) in
                 print(indoorTempResponse)
                 self?.temperatureObserver.onNext(indoorTempResponse.temperature - 0.2)
