@@ -15,108 +15,40 @@ final class ThermostatViewController
     var boilerHeatingLevel = 0
     var forceHotWater = 0
     var currentHeatingCoolingState = HeatingCoolingState.OFF
-     var targetHeatingCoolingState = HeatingCoolingState.HEAT
+    var targetHeatingCoolingState = HeatingCoolingState.HEAT
+    var indoorTemperature = 20
+    var targetTemperature = 20
+    enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
+    var outdoorTemperature = 0
+    var indoorHumidity = 50
     
     func start(viewModel:ThermostatViewModelable = ThermostatViewModel())
     {
         self.viewModel = viewModel
         
         // Set Initial Values
-        
         viewModel.targetHeatingCoolingStatePublisher.onNext(.HEAT)
         viewModel.targetTemperaturePublisher.onNext(20)
         viewModel.forcingWaterHeaterPublisher.onNext(0)
         
-        //MARK: Boiler Heating Level
-        
-         _ = viewModel.boilerHeatingLevelObserver.subscribe(onNext: { self.boilerHeatingLevel = $0 })
-    //     drop.get("boiler-heating-level/getCurrentRelativeHumidity") { request in
-     //    return  try JSON(node: ["value": boilerHeatingLevel])}
-         
-         //MARK:  Force Hot Water
-
-        
-         _ = viewModel.forcingWaterHeaterObserver.subscribe(onNext: { self.forceHotWater = $0 })
-  //       drop.get("force-hot-water/getOn") { request in
-     //    return  try JSON(node: ["value": forceHotWater])}
-
-        // drop.get("force-hot-water/setOn", Int.parameter) { req in
-     //    let value = try req.parameters.next(Int.self)
-      //   viewModel.forcingWaterHeaterPublisher.onNext(value)
-       //  return try JSON(node: ["value": value])}
-
-
-         //MARK:  Current Heating Cooling State
-         
-     //    var currentHeatingCoolingState = HeatingCoolingState.OFF
-         _ = viewModel.currentHeatingCoolingStateObserver.subscribe(onNext: { self.currentHeatingCoolingState = $0 })
-       //  drop.get("thermostat/getCurrentHeatingCoolingState") { request in return try JSON(node: ["value": currentHeatingCoolingState.rawValue])}
-        
-
-         //MARK:  Target Heating Cooling State
-         
-        // var targetHeatingCoolingState = HeatingCoolingState.HEAT
-         _ = viewModel.targetHeatingCoolingStateObserver.subscribe(onNext: { self.targetHeatingCoolingState = $0 })
-       //  drop.get("thermostat/getTargetHeatingCoolingState") { request in
-        // return try JSON(node: ["value": targetHeatingCoolingState.rawValue])}
-        
-                                                  /*
-        
-         drop.get("thermostat/setTargetHeatingCoolingState", String.parameter) { req in
-         let value = try req.parameters.next(String.self)
-         if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
-         return try JSON(node: ["value": value])}
-         
-         //MARK:  Current Indoor Temperature
-         
-         var indoorTemperature = 20
-         _ = viewModel.currentIndoorTemperatureObserver.subscribe(onNext: { indoorTemperature = $0 })
-         drop.get("thermostat/getCurrentTemperature") { request in
-         return try JSON(node: ["value": indoorTemperature])}
-         
-         //MARK:  Target Indoor Temperature
-         
-         var targetTemperature = 20
-         _ = viewModel.targetIndoorTemperatureObserver.subscribe(onNext: { targetTemperature = $0 })
-         drop.get("thermostat/getTargetTemperature") { request in
-         return  try JSON(node: ["value": targetTemperature])}
-         
-         drop.get("thermostat/setTargetTemperature", String.parameter) { req in
-         let value = try req.parameters.next(String.self)
-         if let intValue = Int(value) {viewModel.targetTemperaturePublisher.onNext(intValue)}
-         return try JSON(node: ["value": value])}
-         
-         //MARK:  Current Outdoor Temperature
-         
-         var outdoorTemperature = 0
-         _ = viewModel.currentOutdoorTemperatureObserver.subscribe(onNext: { outdoorTemperature = $0 })
-         drop.get("temperature-sensor/getCurrentTemperature") { request in
-         return try JSON(node: ["value": outdoorTemperature])}
-         
-         //MARK:  Temperature Display Units
-         
-         enum TemperatureDisplayUnits: Int { case CELSIUS = 0, FAHRENHEIT }
-         
-         drop.get("thermostat/getTemperatureDisplayUnits") { request in
-         try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])}
-         
-         drop.get("thermostat/setTemperatureDisplayUnits", Int.parameter) { req in
-         try JSON(node: ["value": TemperatureDisplayUnits.CELSIUS.rawValue])}
-         
-         //MARK:  Indoor Humidity
-         
-         var indoorHumidity = 50
-         _ = viewModel.currentIndoorHumidityObserver.subscribe(onNext: { indoorHumidity = $0 })
-         drop.get("humidity-sensor/getCurrentRelativeHumidity") { request in
-         return try JSON(node: ["value": indoorHumidity])
-         }
-        */
+        // Subscribe to view model
+        _ = viewModel.boilerHeatingLevelObserver.subscribe(onNext: { self.boilerHeatingLevel = $0 })
+        _ = viewModel.forcingWaterHeaterObserver.subscribe(onNext: { self.forceHotWater = $0 })
+        _ = viewModel.currentHeatingCoolingStateObserver.subscribe(onNext: { self.currentHeatingCoolingState = $0 })
+        _ = viewModel.targetHeatingCoolingStateObserver.subscribe(onNext: { self.targetHeatingCoolingState = $0 })
+        _ = viewModel.currentIndoorTemperatureObserver.subscribe(onNext: { self.indoorTemperature = $0 })
+        _ = viewModel.targetIndoorTemperatureObserver.subscribe(onNext: { self.targetTemperature = $0 })
+        _ = viewModel.currentOutdoorTemperatureObserver.subscribe(onNext: { self.outdoorTemperature = $0 })
+        _ = viewModel.currentIndoorHumidityObserver.subscribe(onNext: { self.indoorHumidity = $0 })
     }
-
+    
+    //MARK: Boiler Heating Level
     
     func getBoilerHeatingLevelCurrentRelativeHumidity(_ req: Request) throws -> Future<ReturnValue> {
         return req.future().transform(to: ReturnValue(value: self.boilerHeatingLevel))
     }
+    
+    //MARK:  Force Hot Water
     
     func getForceHotWater(_ req: Request) throws -> Future<ReturnValue> {
         return req.future().transform(to: ReturnValue(value: self.forceHotWater))
@@ -128,6 +60,8 @@ final class ThermostatViewController
         return req.future().transform(to: ReturnValue(value: value))
     }
     
+    //MARK:  Heating Cooling State
+    
     func getThermostatCurrentHeatingCoolingState(_ req: Request) throws -> Future<ReturnValue> {
         return req.future().transform(to: ReturnValue(value: self.currentHeatingCoolingState.rawValue))
     }
@@ -136,39 +70,50 @@ final class ThermostatViewController
         return req.future().transform(to: ReturnValue(value: self.targetHeatingCoolingState.rawValue))
     }
     
-    func setThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    func setThermostatTargetHeatingCoolingState(_ req: Request) throws -> Future<ReturnValue> {
+        let value = try req.parameters.next(String.self)
+        if let intValue = Int(value), let state = HeatingCoolingState(rawValue:intValue) {viewModel.targetHeatingCoolingStatePublisher.onNext(state)}
+        return req.future().transform(to: ReturnValue(value: Int(value)!))
     }
     
-    func getThermostatCurrentTemperature(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    //MARK:  Current Indoor Temperature
+    
+    func getThermostatCurrentTemperature(_ req: Request) throws -> Future<ReturnValue> {
+        return req.future().transform(to: ReturnValue(value: self.indoorTemperature))
     }
     
-    func getThermostatTargetTemperature(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    //MARK:  Target Indoor Temperature
+    
+    func getThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnValue> {
+        return req.future().transform(to: ReturnValue(value: self.targetTemperature))
     }
     
-    func setThermostatTargetTemperature(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    func setThermostatTargetTemperature(_ req: Request) throws -> Future<ReturnValue> {
+        let value = try req.parameters.next(String.self)
+        if let intValue = Int(value) {viewModel.targetTemperaturePublisher.onNext(intValue)}
+        return req.future().transform(to: ReturnValue(value: Int(value)!))
     }
     
-    func getThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    //MARK:  Temperature Display Units
+    
+    func getThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<ReturnValue> {
+        return req.future().transform(to: ReturnValue(value: TemperatureDisplayUnits.CELSIUS.rawValue))
     }
     
-    func setThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    func setThermostatTemperatureDisplayUnits(_ req: Request) throws -> Future<ReturnValue> {
+        return req.future().transform(to: ReturnValue(value: TemperatureDisplayUnits.CELSIUS.rawValue))
     }
     
-    func getTemperatureSensorCurrentTemperature(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    //MARK:  Current Outdoor Temperature
+    
+    func getTemperatureSensorCurrentTemperature(_ req: Request) throws -> Future<ReturnValue> {
+        return req.future().transform(to: ReturnValue(value: self.outdoorTemperature))
     }
     
-    func getHumiditySensorCurrentRelativeHumidity(_ req: Request) throws -> Future<String> {
-        return req.future().transform(to: "HELLO")
+    //MARK:  Indoor Humidity
+    
+    func getHumiditySensorCurrentRelativeHumidity(_ req: Request) throws -> Future<ReturnValue> {
+        return req.future().transform(to: ReturnValue(value: self.indoorHumidity))
     }
-    
-    
-
 }
 

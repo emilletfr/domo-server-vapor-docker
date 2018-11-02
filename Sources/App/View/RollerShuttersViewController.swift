@@ -22,8 +22,10 @@ final class RollerShuttersViewController
     
     func start(viewModel:RollerShuttersViewModelable = RollerShuttersViewModel()) {
         self.viewModel = viewModel
+        
         // Set Initial Values in view model
         viewModel.manualAutomaticModePublisher.onNext(0)
+        
         // Subscribe to view model
         _ = viewModel.manualAutomaticModeObserver.subscribe(onNext: { self.manualAutomaticMode = $0 })
         for placeIndex in 0..<RollerShutter.count.rawValue {
