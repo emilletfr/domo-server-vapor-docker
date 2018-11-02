@@ -60,9 +60,9 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
             _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
             _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
-            _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+            _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
             if placeIndex != RollerShutter.bedroom.rawValue {
-                _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
+                _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
             }
         }
         //MARK:  Open AllRollingShutters at sunrise if automatic mode
