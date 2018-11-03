@@ -51,33 +51,37 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
          //MARK: Wrap Manual/Automatic Mode
         _ = self.manualAutomaticModePublisher.subscribe(manualAutomaticModeObserver)
         
-        //Group roller shutters
-        let targetAllPublisher = PublishSubject<[Int]>()
-        let targetAllExceptBedRoomPublisher = PublishSubject<[Int]>()
-        
         //MARK: Wrap observers and targetAllPublisher
         for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
             _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
             _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
-            _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
-            if placeIndex != RollerShutter.bedroom.rawValue {
-                _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
-            }
         }
         //MARK:  Open AllRollingShutters at sunrise if automatic mode
         _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
-            {($0 == $1) && $2 == 0})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: RollerShutter.count.rawValue - 1))}
+            // {($0 == $1) && $2 == 0})
+            {$0.hasSuffix("5") && $2 == 0})
+            .filter{$0 == true}
             .debug("sunrise")
-            .subscribe(targetAllExceptBedRoomPublisher)
+            .subscribe(onNext: { _ in
+                for placeIndex in 0..<RollerShutter.count.rawValue {
+            //         if placeIndex != RollerShutter.bedroom.rawValue {
+                    self.rollerShuttersService.targetPositionPublisher[placeIndex].onNext(100)
+             //       }
+                }
+            })
         
         //MARK:  Close AllRollingShutters at sunset if automatic mode
         _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
-            {($0 == $1) && $2 == 0})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: RollerShutter.count.rawValue))}
+           // {($0 == $1) && $2 == 0})
+             {$0.hasSuffix("0") && $2 == 0})
+            .filter{$0 == true}
             .debug("sunset")
-            .subscribe(targetAllPublisher)
+            .subscribe(onNext: { _ in
+                for placeIndex in 0..<RollerShutter.count.rawValue {
+                    self.rollerShuttersService.targetPositionPublisher[placeIndex].onNext(0)
+                }
+        })
         
         //MARK:  Open bedroom rollershutter after getting out of bed for 15mn
         let wakeUpSequence = [true] + Array(repeating: false, count: 15)
