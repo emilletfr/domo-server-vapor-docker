@@ -18,12 +18,6 @@ class HttpClient : HttpClientable
         return Observable<T>.create { observer in
             let client = try? app.make(Client.self)
             _ = client?.get(url).do({ r in
-                // TODO: TO REMOVE
-                print("-----WS-LOG----")
-                print(url)
-                print(r.debugDescription)
-                print("-----WS-LOG----")
-                // TODO: TO REMOVE
                 let response: T? = try? r.content.syncDecode(T.self)
                 if let response = response {
                     observer.onNext(response)

@@ -61,9 +61,9 @@ enum Boiler: Int
         var base = ""
         switch self {
         case .heaterAndPomp: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.15:8015" : "boiler-heater-pomp.local"
+            ?  "192.168.8.56" : "boiler-heater-pomp.local"
         case .temperature: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.25" : "boiler-temperature.local"
+            ?  "192.168.8.57" : "boiler-temperature.local"
         case .count: base = ""
         }
         return scheme + base + "/" + pathComponent

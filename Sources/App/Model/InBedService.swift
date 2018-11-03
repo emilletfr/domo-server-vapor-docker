@@ -25,7 +25,7 @@ struct InBed {
     static func baseUrl(appendPath pathComponent: String = "") -> String {
         let scheme = "http://"
         let base = isHomeKitModulesNetworkIpOrDns
-            ? "10.0.1.24" : "bed-occupancy.local"
+            ? "192.168.8.55" : "bed-occupancy.local"
         return scheme + base + "/" + pathComponent
     }
     
