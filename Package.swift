@@ -1,25 +1,19 @@
 // swift-tools-version:4.0
-
 import PackageDescription
 
 let package = Package(
-    name: "VaporApp",
-    products: [
-        .executable(name: "App", targets: ["App"])
-    ],
+    name: "domo-server-vapor-docker",
     dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "2.1.0")),
-        .package(url: "https://github.com/vapor/fluent-provider.git", .upToNextMajor(from: "1.2.0")),
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0")
+        // 💧 A server-side Swift web framework.
+        .package(url: "https://github.com/vapor/vapor.git", from: "3.0.0"),
+
+        // 🔵 Swift ORM (queries, models, relations, etc) built on SQLite 3.
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0"),
     ],
     targets: [
-        .target(name: "App", dependencies: ["Vapor", "FluentProvider", "RxSwift", "RxCocoa"],
-                exclude: [
-                    "Config",
-                    "Public",
-                    "Resources",
-                ]),
-        .testTarget(name: "AppTests", dependencies: ["App", "Testing"])
+        .target(name: "App", dependencies: ["Vapor", "RxSwift"]),
+        .target(name: "Run", dependencies: ["App"]),
+        .testTarget(name: "AppTests", dependencies: ["App"])
     ]
 )
 

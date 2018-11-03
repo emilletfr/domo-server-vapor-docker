@@ -1,4 +1,6 @@
 Packages
 .build
-Config/secrets
-
+xcuserdata
+*.xcodeproj
+DerivedData/
+.DS_Store

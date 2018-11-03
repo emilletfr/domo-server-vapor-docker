@@ -6,23 +6,7 @@
 //
 //
 
-import Dispatch
 import RxSwift
-import Foundation
-
-
-enum Place: Int { case LIVING_ROOM = 0, DINING_ROOM, OFFICE, KITCHEN, BEDROOM, count }
-
-protocol RollerShutterServicable
-{
-    var currentPositionObserver : [PublishSubject<Int>] {get}
-    var targetPositionObserver : [PublishSubject<Int>] {get}
-    
-    var targetPositionPublisher : [PublishSubject<Int>] {get}
-    
-    init(_ httpClient : HttpClientable)
-}
-
 
 final class RollerShutterService : RollerShutterServicable
 {
@@ -31,58 +15,96 @@ final class RollerShutterService : RollerShutterServicable
     
     let targetPositionPublisher = [PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>(), PublishSubject<Int>()]
     
-    let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.RollerShutterService")
     let httpClient : HttpClientable
     
-    required init( _ httpClient : HttpClientable = HttpClient())
-    {
+    required init(httpClient : HttpClientable = HttpClient()) {
         self.httpClient = httpClient
         self.reduce()
     }
     
-    func reduce()
-    {
-        for placeIndex in 0..<Place.count.rawValue {
-            // Wrap to Initial State
-            DispatchQueue.global().async {
-                    guard let response = self.httpClient.sendGet("http://10.0.1.1\(placeIndex)/status"), let position = response.parseToIntFrom(path:["open"])
-                        else {
-                        //   self.currentPositionObserver[placeIndex].onError(self)
-                        //  self.targetPositionObserver[placeIndex].onError(self)
-                        return
-                    }
-                    self.currentPositionObserver[placeIndex].onNext(position*100)
-                    self.targetPositionObserver[placeIndex].onNext(position*100)
-            }
-            
-            // Wrap to Single command
-            _ = Observable.combineLatest(currentPositionObserver[placeIndex], targetPositionObserver[placeIndex], targetPositionPublisher[placeIndex].debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default)), resultSelector: {(currentObs:$0, targetObs:$1, targetPub:$2)})
-                .filter({$0.0 != $0.2 && $0.1 != $0.2})
-                .subscribe(onNext: { (currentObs: Int, targetObs: Int, targetPub:Int) in
-                    self.targetPositionObserver[placeIndex].onNext(targetPub)
-                    self.action(placeIndex, currentObs, targetPub)
+    func reduce() {
+        let action = PublishSubject<(Int, Int)>()
+        // create actions
+        for placeIndex in 0..<RollerShutter.count.rawValue {
+            _ = targetPositionPublisher[placeIndex].distinctUntilChanged()
+                .debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
+                .subscribe(onNext: { target in
+                    self.targetPositionObserver[placeIndex].onNext(target)
+                    action.onNext((placeIndex, target))
+                })
+        }
+        // concat actions
+        let queue = action.concatMap { (index:Int, target:Int) -> Observable<(Int, Int)> in
+            var current = 100 - target
+            _ = self.currentPositionObserver[index].subscribe(onNext: { c in
+                current = c
+            })
+            return Observable.combineLatest(Observable.of(index), Observable.of(target))
+                .flatMap({ (index:Int, target:Int) -> Observable<Int> in
+                    return self.process(index, current, target) })
+                .map({ target -> (Int, Int) in return (index, target)})
+                .take(1)
+        }
+        // action completion subscription
+        _ = queue.subscribe(onNext: { (index:Int, target:Int) in
+            self.currentPositionObserver[index].onNext(target)
+            self.targetPositionObserver[index].onNext(target)
+        })
+        // Wrap to Initial State
+        for placeIndex in 0..<RollerShutter.count.rawValue {
+            _ = self.httpClient.send(url: RollerShutter(rawValue: placeIndex)!.baseUrl(appendPath: "status"), responseType: RollerShutter.Response.self)
+                .map({ (r) -> Int in return r.open*100 })
+                .subscribe(onNext: { (position) in
+                    self.currentPositionObserver[placeIndex].onNext(position)
+                    self.targetPositionObserver[placeIndex].onNext(position)
                 })
         }
     }
     
-    func action(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int)
-    {
-        // DispatchQueue.global().async {
-        self.actionSerialQueue.async {
-            let open = targetPosition > currentPosition ? "1" : "0"
-            let urlString = "http://10.0.1.1\(placeIndex)/\(open)"
-            mainSerialQueue.async {
-                _ = self.httpClient.sendGet(urlString)
-            }
-            let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
-            var delay = 140000*(offset)
-            if targetPosition == 0 || targetPosition == 100 {delay = 14_000_000}
-            usleep(useconds_t(delay))
-            mainSerialQueue.async {
-                _ = self.httpClient.sendGet(urlString)
-                self.currentPositionObserver[placeIndex].onNext(targetPosition)
-            }
+    func process(_ placeIndex:Int, _ currentPosition:Int, _ targetPosition:Int) -> Observable<Int>  {
+        if currentPosition == targetPosition {
+            return Observable.of(targetPosition)
         }
-        //  }
+        let open = targetPosition > currentPosition ? "1" : "0"
+        let urlString = RollerShutter(rawValue: placeIndex)!.baseUrl(appendPath: open)
+        let offset = currentPosition > targetPosition ? currentPosition - targetPosition : targetPosition - currentPosition
+        var delay : Int = Int(offset*14/100)
+        if targetPosition == 0 || targetPosition == 100 {delay = 14}
+        
+        return self.httpClient.send(url: urlString, responseType: RollerShutter.Response.self)
+            .flatMap({ _ in return secondEmitter }).skip(delay).take(1)
+            .flatMap({_ in return self.httpClient.send(url: urlString, responseType: RollerShutter.Response.self)})
+            .flatMap({ _ in return secondEmitter }).skip(1).take(1)
+            .map({ _ in return targetPosition})
     }
 }
+
+enum RollerShutter: Int
+{
+    case livingRoom = 0, diningRoom, office, kitchen, bedroom, count
+    
+    func baseUrl(appendPath pathComponent: String = "") -> String {
+        let scheme = "http://"
+        var base = ""
+        switch self {
+        case .livingRoom: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.50" : "living-room.local"
+        case .diningRoom: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.51" : "dining-room.local"
+        case .office: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.52" : "office.local"
+        case .kitchen: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.53" : "kitchen.local"
+        case .bedroom: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.54" : "bedroom.local"
+        case .count: base = ""
+        }
+        return scheme + base + "/" + pathComponent
+    }
+    
+    struct Response: Decodable
+    {
+        let open: Int
+    }
+}
+

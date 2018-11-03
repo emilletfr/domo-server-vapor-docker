@@ -10,21 +10,6 @@ import Foundation
 import RxSwift
 import Dispatch
 
-
-protocol RollerShuttersViewModelable
-{
-    //MARK: Subscriptions
-    var currentPositionObserver : [PublishSubject<Int>] {get}
-    var targetPositionObserver : [PublishSubject<Int>] {get}
-    var manualAutomaticModeObserver : PublishSubject<Int> {get}
-    //MARK: Actions
-    var targetPositionPublisher : [PublishSubject<Int>] {get}
-    var manualAutomaticModePublisher : PublishSubject<Int> {get}
-    //MARK: Dispatcher
-    init(_ rollerShuttersService:RollerShutterServicable,_ inBedService:InBedServicable, _ sunriseSunsetService:SunriseSunsetServicable, _ timePublisher:Observable<String>)
-}
-
-
 final class RollerShuttersViewModel : RollerShuttersViewModelable
 {
     //MARK: Subscriptions
@@ -38,50 +23,63 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
     let rollerShuttersService : RollerShutterServicable
     let inBedService: InBedServicable
     let sunriseSunsetService : SunriseSunsetServicable
-    let timePublisher : Observable<String>
+    let hourMinutePublisher = PublishSubject<String>()
+    
     //MARK: Dispatcher
-    required init(_ rollerShuttersService: RollerShutterServicable = RollerShutterService(), _ inBedService: InBedServicable = InBedService(), _ sunriseSunsetService : SunriseSunsetServicable = SunriseSunsetService(), _ timePublisher:Observable<String> = RepeatTimer.timePublisher().distinctUntilChanged())
+    required init(rollerShuttersService: RollerShutterServicable = RollerShutterService(), inBedService: InBedServicable = InBedService(), sunriseSunsetService: SunriseSunsetServicable = SunriseSunsetService())
     {
         self.rollerShuttersService = rollerShuttersService
         self.inBedService = inBedService
         self.sunriseSunsetService = sunriseSunsetService
-        self.timePublisher = timePublisher
         self.reduce()
     }
     
     //MARK: Reducer
     func reduce()
     {
-         //MARK: Wrap Manual/Automatic Mode
+        _ = secondEmitter.map({ _ -> String in
+            let date = Date(timeIntervalSinceNow: 0)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(abbreviation: "CEST")
+            dateFormatter.locale = Locale(identifier: "fr_FR")
+            dateFormatter.dateFormat =  "HH:mm"
+            return dateFormatter.string(from: date)
+        })
+            .distinctUntilChanged()
+            .subscribe(hourMinutePublisher)
+        
+        //MARK: Wrap Manual/Automatic Mode
         _ = self.manualAutomaticModePublisher.subscribe(manualAutomaticModeObserver)
         
-        //Group roller shutters
-        let targetAllPublisher = PublishSubject<[Int]>()
-        let targetAllExceptBedRoomPublisher = PublishSubject<[Int]>()
-        
         //MARK: Wrap observers and targetAllPublisher
-        for placeIndex in 0..<Place.count.rawValue {
+        for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = self.rollerShuttersService.currentPositionObserver[placeIndex].subscribe(self.currentPositionObserver[placeIndex])
             _ = self.rollerShuttersService.targetPositionObserver[placeIndex].subscribe(self.targetPositionObserver[placeIndex])
             _ = self.targetPositionPublisher[placeIndex].subscribe(self.rollerShuttersService.targetPositionPublisher[placeIndex])
-            _ = targetAllPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
-            if placeIndex != Place.BEDROOM.rawValue {
-                _ = targetAllExceptBedRoomPublisher.map{$0[placeIndex]}.subscribe(rollerShuttersService.targetPositionPublisher[placeIndex])
-            }
         }
         //MARK:  Open AllRollingShutters at sunrise if automatic mode
-        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
+        _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunriseTimeObserver.debug("sunriseTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(100, count: Place.count.rawValue - 1))}
+            .filter{$0 == true}
             .debug("sunrise")
-            .subscribe(targetAllExceptBedRoomPublisher)
+            .subscribe(onNext: { _ in
+                for placeIndex in 0..<RollerShutter.count.rawValue {
+                    if placeIndex != RollerShutter.bedroom.rawValue {
+                        self.rollerShuttersService.targetPositionPublisher[placeIndex].onNext(100)
+                    }
+                }
+            })
         
         //MARK:  Close AllRollingShutters at sunset if automatic mode
-        _ = Observable.combineLatest(timePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
+        _ = Observable.combineLatest(hourMinutePublisher, sunriseSunsetService.sunsetTimeObserver.debug("sunsetTime"), manualAutomaticModePublisher, resultSelector:
             {($0 == $1) && $2 == 0})
-            .filter{$0 == true}.map{ok in return Array(repeatElement(0, count: Place.count.rawValue))}
+            .filter{$0 == true}
             .debug("sunset")
-            .subscribe(targetAllPublisher)
+            .subscribe(onNext: { _ in
+                for placeIndex in 0..<RollerShutter.count.rawValue {
+                    self.rollerShuttersService.targetPositionPublisher[placeIndex].onNext(0)
+                }
+            })
         
         //MARK:  Open bedroom rollershutter after getting out of bed for 15mn
         let wakeUpSequence = [true] + Array(repeating: false, count: 15)
@@ -92,6 +90,6 @@ final class RollerShuttersViewModel : RollerShuttersViewModelable
             .filter{$0 == wakeUpSequence}
             .map{isInBedSequence in return 100}
             .debug("OutOfBed")
-            .subscribe(self.rollerShuttersService.targetPositionPublisher[Place.BEDROOM.rawValue])
+            .subscribe(self.rollerShuttersService.targetPositionPublisher[RollerShutter.bedroom.rawValue])
     }
 }

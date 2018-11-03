@@ -8,32 +8,37 @@
 
 import RxSwift
 
-
-protocol OutdoorTempServicable
-{
-    var temperatureObserver : PublishSubject<Double> {get}
-    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
-}
-
-
 class OutdoorTempService : OutdoorTempServicable
 {
     let temperatureObserver  = PublishSubject<Double>()
     let httpClient : HttpClientable
-    let autoRepeatTimer : RepeatTimer
     
-    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:3600))
+    required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60*60)
     {
         self.httpClient = httpClient
-        self.autoRepeatTimer = repeatTimer
-        repeatTimer.didFireBlock = { [weak self] ()->() in
-            let url = "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
-            guard let response = httpClient.sendGet(url), let temperature = response.parseToDoubleFrom(path:["current", "temp_c"])
-                else {
-                //self?.temperatureObserver.onError(self!);
-                return
-            }
-            self?.temperatureObserver.onNext(temperature)
+        _ = Observable.merge(secondEmitter, Observable.of(0))
+            .filter { $0%refreshPeriod == 0 }
+            .flatMap { _ in return httpClient.send(url: OutdoorTemp.baseUrl(), responseType: OutdoorTemp.Response.self) }
+            .map({ r -> Double in return r.current.temp_c })
+            .subscribe(self.temperatureObserver)
+    }
+}
+
+struct OutdoorTemp
+{
+    static func baseUrl() -> String {
+       return "http://api.apixu.com/v1/current.json?key=1bd4a03d8e744bc89ff133424161712&q=damelevieres"
+    }
+    
+    struct Response: Decodable
+    {
+        let current: Current
+        struct Current: Decodable {
+            let temp_c: Double
         }
     }
 }
+
+/*
+{"location":{"name":"Damelevieres","region":"Lorraine","country":"France","lat":48.55,"lon":6.38,"tz_id":"Europe/Paris","localtime_epoch":1541088962,"localtime":"2018-11-01 17:16"},"current":{"last_updated_epoch":1541088021,"last_updated":"2018-11-01 17:00","temp_c":12.0,"temp_f":53.6,"is_day":1,"condition":{"text":"Sunny","icon":"//cdn.apixu.com/weather/64x64/day/113.png","code":1000},"wind_mph":10.5,"wind_kph":16.9,"wind_degree":190,"wind_dir":"S","pressure_mb":1011.0,"pressure_in":30.3,"precip_mm":0.1,"precip_in":0.0,"humidity":71,"cloud":0,"feelslike_c":10.2,"feelslike_f":50.3,"vis_km":10.0,"vis_miles":6.0}}
+ */

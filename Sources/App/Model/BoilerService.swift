@@ -10,19 +10,6 @@ import RxSwift
 import Foundation
 import Dispatch
 
-
-protocol BoilerServicable
-{
-    var heaterPublisher : PublishSubject<Bool> {get}
-    var pompPublisher : PublishSubject<Bool> {get}
-    var temperaturePublisher : PublishSubject<Double> {get}
-    
-    var temperatureObserver : PublishSubject<Double> {get}
-    
-    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
-}
-
-
 class BoilerService : BoilerServicable, Error
 {
     internal var temperaturePublisher = PublishSubject<Double>()
@@ -30,55 +17,65 @@ class BoilerService : BoilerServicable, Error
     internal var pompPublisher = PublishSubject<Bool>()
     
     internal var temperatureObserver = PublishSubject<Double>()
-
-    let httpClient : HttpClientable
-    let repeatTimer : RepeatTimer
     
-    let actionSerialQueue = DispatchQueue(label: "net.emillet.domo.BoilerService")
-    var retryDelay = 0
-
-    required init(httpClient:HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
+    let httpClient : HttpClientable
+    
+    required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60)
     {
-        self.repeatTimer = repeatTimer
         self.httpClient = httpClient
         
         _ = heaterPublisher.subscribe(onNext: { (onOff:Bool) in
-            self.retryDelay = 0
             self.activate(heaterOrPomp:true, onOff)
         })
         _ = pompPublisher.subscribe(onNext: { (onOff:Bool) in
-            self.retryDelay = 0
             self.activate(heaterOrPomp:false, onOff)
         })
         
-        repeatTimer.didFireBlock = { [weak self] ()->() in
-            let url = "http://10.0.1.25/getTemperature"
-            guard let response = httpClient.sendGet(url), let temperature = response.parseToIntFrom(path: ["value"])
-                else {return}
-            self?.temperatureObserver.onNext(Double(temperature))
-        }
+        _ = Observable.merge(secondEmitter, Observable.of(0))
+            .filter { $0%refreshPeriod == 0 }
+            .flatMap { _ -> Observable<ReturnIntValue> in
+                let url = Boiler.temperature.baseUrl(appendPath: "getTemperature")
+                return httpClient.send(url:url, responseType: ReturnIntValue.self) }
+            .map({ (r) -> Double in return Double(r.value)})
+            .subscribe(self.temperatureObserver)
         
-        _ = temperaturePublisher.subscribe(onNext: { (temperature:Double) in
-            DispatchQueue.global().async {
-                let url = "http://10.0.1.25/setTemperature?value=" + String(Int(temperature))
-                _ = self.httpClient.sendGet(url)
-            }
-        })
+        _ = temperaturePublisher.flatMap({ (temperature: Double) -> Observable<Boiler.ServoDegresResponse> in
+            let url = Boiler.temperature.baseUrl(appendPath: "setTemperature?value=\(Int(temperature))")
+            return httpClient.send(url:url, responseType: Boiler.ServoDegresResponse.self)
+        }).subscribe()
     }
     
+    func activate(heaterOrPomp:Bool, _ onOff:Bool) {
+        let url = Boiler.heaterAndPomp.baseUrl(appendPath: (heaterOrPomp == false ? "1" : "0")  + (onOff == true ? "1" : "0"))
+        _ = self.httpClient.send(url: url, responseType: Boiler.StatusResponse.self).subscribe()
+    }
+}
+
+
+enum Boiler: Int
+{
+    case heaterAndPomp = 0, temperature, count
     
-    func activate(heaterOrPomp:Bool, _ onOff:Bool)
-    {
-        DispatchQueue.global().async {
-                self.actionSerialQueue.sync {
-                        sleep(UInt32(self.retryDelay))
-                        let url = "http://10.0.1.15:8015/" + (heaterOrPomp == false ? "1" : "0")  + (onOff == true ? "1" : "0")
-                        if let response = self.httpClient.sendGet(url), let _ = response.parseToJSONFrom(path:["status"]) {/*print(status)*/}
-                        else {
-                            self.retryDelay += 1
-                            self.activate(heaterOrPomp: heaterOrPomp, onOff)
-                        }
-                }
+    func baseUrl(appendPath pathComponent: String = "") -> String {
+        let scheme = "http://"
+        var base = ""
+        switch self {
+        case .heaterAndPomp: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.56" : "boiler-heater-pomp.local"
+        case .temperature: base = isHomeKitModulesNetworkIpOrDns
+            ?  "192.168.8.57" : "boiler-temperature.local"
+        case .count: base = ""
         }
+        return scheme + base + "/" + pathComponent
+    }
+    
+    // { "servoDegres": 57}
+    struct ServoDegresResponse : Decodable {
+        let servoDegres: Int
+    }
+    
+    // [{ "status": 1}]
+    struct StatusResponse : Decodable {
+        let status: Int
     }
 }

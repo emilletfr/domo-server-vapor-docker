@@ -9,42 +9,19 @@
 import RxSwift
 import Foundation
 
-
-enum HeatingCoolingState: Int { case OFF = 0, HEAT, COOL, AUTO }
-
-protocol ThermostatViewModelable
-{
-    //MARK: Subscribers
-    var currentOutdoorTemperatureObserver : PublishSubject<Int> {get}
-    var currentIndoorHumidityObserver : PublishSubject<Int> {get}
-    var currentIndoorTemperatureObserver : PublishSubject<Int> {get}
-    var targetIndoorTemperatureObserver : PublishSubject<Int> {get}
-    var currentHeatingCoolingStateObserver : PublishSubject<HeatingCoolingState> {get}
-    var targetHeatingCoolingStateObserver : PublishSubject<HeatingCoolingState> {get}
-    var forcingWaterHeaterObserver : PublishSubject<Int> {get}
-    var boilerHeatingLevelObserver : PublishSubject<Int> {get}
-    //MARK: Actions
-    var targetTemperaturePublisher : PublishSubject<Int> {get}
-    var targetHeatingCoolingStatePublisher : PublishSubject<HeatingCoolingState> {get}
-    var forcingWaterHeaterPublisher : PublishSubject<Int> {get}
-    //MARK: Dispatcher
-    init(outdoorTempService:OutdoorTempServicable, indoorTempService:IndoorTempServicable, inBedService:InBedServicable, boilerService:BoilerServicable)
-}
-
-
 final class ThermostatViewModel : ThermostatViewModelable
 {
     //MARK: Subscribers
-    let currentOutdoorTemperatureObserver = PublishSubject<Int>()
-    let currentIndoorHumidityObserver = PublishSubject<Int>()
-    let currentIndoorTemperatureObserver = PublishSubject<Int>()
-    let targetIndoorTemperatureObserver = PublishSubject<Int>()
+    let currentOutdoorTemperatureObserver = PublishSubject<Double>()
+    let currentIndoorHumidityObserver = PublishSubject<Double>()
+    let currentIndoorTemperatureObserver = PublishSubject<Double>()
+    let targetIndoorTemperatureObserver = PublishSubject<Double>()
     let currentHeatingCoolingStateObserver = PublishSubject<HeatingCoolingState>()
     let targetHeatingCoolingStateObserver = PublishSubject<HeatingCoolingState>()
     let forcingWaterHeaterObserver = PublishSubject<Int>()
-    let boilerHeatingLevelObserver = PublishSubject<Int>()
+    let boilerHeatingLevelObserver = PublishSubject<Double>()
     //MARK: Actions
-    let targetTemperaturePublisher = PublishSubject<Int>()
+    let targetTemperaturePublisher = PublishSubject<Double>()
     let targetHeatingCoolingStatePublisher = PublishSubject<HeatingCoolingState>()
     let forcingWaterHeaterPublisher = PublishSubject<Int>()
     //MARK: Dependencies
@@ -69,18 +46,18 @@ final class ThermostatViewModel : ThermostatViewModelable
     {
         //MARK: Wrap Outdoor Temperature
         _ = outdoorTempService.temperatureObserver
-            .map{Int($0 < 0 ? 0 : $0)} // HomeKit do not support temperature < 0°C from temperature sensors
+            .map{Double($0 < 0 ? 0 : $0)} // HomeKit do not support temperature < 0°C from temperature sensors
             .subscribe(self.currentOutdoorTemperatureObserver)
         
         //MARK: Wrap Indoor temperature
         _ = indoorTempService.temperatureObserver
             .distinctUntilChanged().debug("computedIndoorTemperature")
-            .map{Int($0 < 0 ? 0 : $0)} // HomeKit do not support temperature < 0°C from temperature sensors
+            .map{Double($0 < 0 ? 0 : $0)} // HomeKit do not support temperature < 0°C from temperature sensors
             .subscribe(self.currentIndoorTemperatureObserver)
         
         //MARK: Wrap Indoor Humidity
         _ = indoorTempService.humidityObserver
-            .map{Int($0)}
+            .map{Double($0)}
             .subscribe(self.currentIndoorHumidityObserver)
         
         //MARK: Wrap Force Hot Water Observer
@@ -88,7 +65,7 @@ final class ThermostatViewModel : ThermostatViewModelable
             .subscribe(forcingWaterHeaterObserver)
         
         // Compute target temp following isInBed, target cooling state
-        let computedTargetTemp = Observable<Int>.combineLatest(inBedService.isInBedObserver, targetTemperaturePublisher, targetHeatingCoolingStatePublisher, resultSelector: { (isInbed:Bool, targetTemp:Int, targetHeatingCoolingState:HeatingCoolingState) -> Int in
+        let computedTargetTemp = Observable<Double>.combineLatest(inBedService.isInBedObserver, targetTemperaturePublisher, targetHeatingCoolingStatePublisher, resultSelector: { (isInbed:Bool, targetTemp:Double, targetHeatingCoolingState:HeatingCoolingState) -> Double in
             if isInbed == true {return targetTemp - 2}
             if targetHeatingCoolingState == .OFF {return 7}
             return targetTemp})
@@ -96,11 +73,11 @@ final class ThermostatViewModel : ThermostatViewModelable
         
         //MARK: Wrap Thermostat Temperature
         _ = computedTargetTemp.debug("computedTargetTemperature")
-            .map {Int($0 < 10 ? 10 : $0)} // HomeKit do not support thermostat target temperature < 10
+            .map {Double($0 < 10 ? 10 : $0)} // HomeKit do not support thermostat target temperature < 10
             .subscribe(self.targetIndoorTemperatureObserver)
         
         //MARK: Wrap Heater's Boiler
-        let computedBoilerHeating = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, computedTargetTemp, forcingWaterHeaterPublisher) { (targetHeatingCooling:HeatingCoolingState, outdoorTemp:Double, computedTargetTemp:Int, forcingWaterHeater:Int ) in
+        let computedBoilerHeating = Observable<Bool>.combineLatest(targetHeatingCoolingStatePublisher, outdoorTempService.temperatureObserver, computedTargetTemp, forcingWaterHeaterPublisher) { (targetHeatingCooling:HeatingCoolingState, outdoorTemp:Double, computedTargetTemp:Double, forcingWaterHeater:Int ) in
             if forcingWaterHeater == 1 {return true}
             else {return targetHeatingCooling != .OFF && outdoorTemp < Double(computedTargetTemp)}}
         
@@ -112,7 +89,7 @@ final class ThermostatViewModel : ThermostatViewModelable
         //MARK: Wrap Pomp's Boiler
         let computedBoilerPomping =  Observable<Bool>
             .combineLatest(computedBoilerHeating, indoorTempService.temperatureObserver, computedTargetTemp)
-            {(computedBoilerHeating:Bool, computedIndoorTemp:Double, computedTargetTemp:Int) in
+            {(computedBoilerHeating:Bool, computedIndoorTemp:Double, computedTargetTemp:Double) in
                 return computedIndoorTemp < Double(computedTargetTemp) && computedBoilerHeating == true
             }.distinctUntilChanged()
         
@@ -205,6 +182,6 @@ final class ThermostatViewModel : ThermostatViewModelable
             if datesForMaxTemperatures.count == 0 {totalAverage = 0}
             return totalAverage
         })
-        _ = filteredDateForMaxTemperatureToTotalAverage.filter{$0 != nil}.map{$0!}.distinctUntilChanged().subscribe(boilerHeatingLevelObserver)
+        _ = filteredDateForMaxTemperatureToTotalAverage.filter{$0 != nil}.map{Double($0!)}.distinctUntilChanged().subscribe(boilerHeatingLevelObserver)
     }
 }

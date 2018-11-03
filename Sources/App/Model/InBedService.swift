@@ -8,32 +8,30 @@
 
 import RxSwift
 
-
-protocol InBedServicable
-{
-    var isInBedObserver : PublishSubject<Bool> {get}
-    init(httpClient:HttpClientable, repeatTimer: RepeatTimer)
-}
-
-
 class InBedService : InBedServicable
 {
     let isInBedObserver = PublishSubject<Bool>()
-    let httpClient : HttpClientable
-    let repeatTimer : RepeatTimer
     
-    required init(httpClient: HttpClientable = HttpClient(), repeatTimer: RepeatTimer = RepeatTimer(delay:60))
-    {
-        self.httpClient = httpClient
-        self.repeatTimer = repeatTimer
-        repeatTimer.didFireBlock = { [weak self] ()->() in
-            let url = "http://10.0.1.24/status"
-            guard let response = httpClient.sendGet(url), let isInBed = response.parseToIntFrom(path: ["inBed"])
-                else {
-                    //  self?.isInBedObserver.onError(self!);
-                    return
-            }
-            self?.isInBedObserver.onNext(Int(isInBed) == 1)
-        }
+    required init(httpClient: HttpClientable = HttpClient(), refreshPeriod: Int = 60) {
+        _ = Observable.merge(secondEmitter, Observable.of(0))
+            .filter { $0%refreshPeriod == 0 }
+            .flatMap { _ in return httpClient.send(url: InBed.baseUrl(appendPath: "status"), responseType: InBed.Response.self) }
+            .map {$0.inBed == 1}
+            .subscribe(isInBedObserver)
+    }
+}
+
+struct InBed {
+    static func baseUrl(appendPath pathComponent: String = "") -> String {
+        let scheme = "http://"
+        let base = isHomeKitModulesNetworkIpOrDns
+            ? "192.168.8.55" : "bed-occupancy.local"
+        return scheme + base + "/" + pathComponent
+    }
+    
+    struct Response: Decodable {
+        let inBed: Int
+        let pressionThreshold: Int
+        let currentPression: Int
     }
 }
