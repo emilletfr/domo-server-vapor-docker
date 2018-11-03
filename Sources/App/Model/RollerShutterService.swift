@@ -27,7 +27,6 @@ final class RollerShutterService : RollerShutterServicable
         // create actions
         for placeIndex in 0..<RollerShutter.count.rawValue {
             _ = targetPositionPublisher[placeIndex].distinctUntilChanged()
-                .flatMap({ t in return hundredMilliSecondEmitter.skip(placeIndex + 1).take(1).map({ r -> Int in return t }) })
                 .debounce(1, scheduler: ConcurrentDispatchQueueScheduler(qos: .default))
                 .subscribe(onNext: { target in
                     self.targetPositionObserver[placeIndex].onNext(target)
