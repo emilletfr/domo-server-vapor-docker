@@ -88,15 +88,15 @@ enum RollerShutter: Int
         var base = ""
         switch self {
         case .livingRoom: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.10" : "living-room"
+            ?  "10.0.1.10" : "living-room.local"
         case .diningRoom: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.11" : "dining-room"
+            ?  "10.0.1.11" : "dining-room.local"
         case .office: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.12" : "office"
+            ?  "10.0.1.12" : "office.local"
         case .kitchen: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.13" : "kitchen"
+            ?  "10.0.1.13" : "kitchen.local"
         case .bedroom: base = isHomeKitModulesNetworkIpOrDns
-            ?  "10.0.1.14" : "bedroom"
+            ?  "10.0.1.14" : "bedroom.local"
         case .count: base = ""
         }
         return scheme + base + "/" + pathComponent
