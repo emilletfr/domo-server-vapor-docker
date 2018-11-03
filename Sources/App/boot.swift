@@ -7,7 +7,7 @@ import RxSwift
 // --hostname 0.0.0.0 --port 80
 
 var app: Application!
-let isHomeKitModulesNetworkIpOrDns: Bool = true
+let isHomeKitModulesNetworkIpOrDns: Bool = false
 let secondEmitter = PublishSubject<Int>()
 let hundredMilliSecondEmitter = PublishSubject<Int>()
 
