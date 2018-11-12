@@ -1,0 +1,7 @@
+#set("content") {
+    #for(tab in tabs) {
+        #if(tab.name == "log" && tab.activation == "active") {#embed("log")}
+        #if(tab.name == "settings" && tab.activation == "active") {#embed("settings")}
+    }
+}
+#embed("baseNavBar")
