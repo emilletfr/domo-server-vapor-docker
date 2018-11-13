@@ -53,4 +53,21 @@ public func routes(_ router: Router) throws {
     router.group("humidity-sensor") { router in
         router.get("getCurrentRelativeHumidity", use: th.getHumiditySensorCurrentRelativeHumidity)
     }
+    
+    // Web routes
+    
+    let rootRedirectionBlock: (_ req: Request) -> Future<Response> = { req in
+        let host = req.http.headers.firstValue(name: HTTPHeaderName("Host"))!
+        return req.future().map({ _ in
+            return req.redirect(to: "http://\(host)/web")
+        })
+    }
+    
+    let stateController = WebViewController(rootRedirectionBlock: rootRedirectionBlock)
+
+    router.group("web") { router in
+        router.get("/", use: stateController.index)
+        router.get("setActiveTabIndex", Int.parameter, use: stateController.setActiveTabIndex)
+    }
+
 }
