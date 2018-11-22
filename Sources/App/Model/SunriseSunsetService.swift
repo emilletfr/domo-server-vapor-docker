@@ -13,11 +13,14 @@ import RxSwift
 
 final class SunriseSunsetService : SunriseSunsetServicable
 {
-    let sunriseTimeObserver = PublishSubject<String>()
-    let sunsetTimeObserver = PublishSubject<String>()
+    let sunriseTimeObserver = ReplaySubject<String>.create(bufferSize: 1)
+    let sunsetTimeObserver = ReplaySubject<String>.create(bufferSize: 1)
     
-    required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60*60)
-    {
+    required init(httpClient:HttpClientable = HttpClient(), refreshPeriod: Int = 60*60) {
+        // default values
+        sunriseTimeObserver.onNext("08:00")
+        sunsetTimeObserver.onNext("22:00")
+        // fetch api
         let sunriseSunsetObservable = Observable.merge(secondEmitter, Observable.of(0))
             .filter { $0%refreshPeriod == 0 }
             .flatMap { _ in return httpClient.send(url:SunriseSunset.baseUrl(), responseType: SunriseSunset.Response.self) }
@@ -41,7 +44,7 @@ final class SunriseSunsetService : SunriseSunsetServicable
         _ = sunriseSunsetObservable.map { (sunrise, sunset) -> String in
             return sunrise
             }.subscribe(sunriseTimeObserver)
-        
+ 
         _ = sunriseSunsetObservable.map { (sunrise, sunset) -> String in
             return sunset
             }.subscribe(sunsetTimeObserver)
@@ -55,11 +58,13 @@ struct SunriseSunset
         return "http://api.sunrise-sunset.org/json?lat=48.556&lng=6.401&date=today&formatted=0"
     }
     
-    struct Response: Decodable {
+    struct Response: Decodable
+    {
         let results: Results
         let status:String
         
-        struct Results: Decodable {
+        struct Results: Decodable
+        {
             let sunrise: String
             let sunset: String
             let solar_noon: String
