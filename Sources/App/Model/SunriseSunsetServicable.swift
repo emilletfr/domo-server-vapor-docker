@@ -12,8 +12,8 @@ import RxSwift
 
 protocol SunriseSunsetServicable
 {
-    var sunriseTimeObserver : PublishSubject<String> {get}
-    var sunsetTimeObserver : PublishSubject<String> {get}
+    var sunriseTimeObserver : ReplaySubject<String> {get}
+    var sunsetTimeObserver : ReplaySubject<String> {get}
     init(httpClient:HttpClientable, refreshPeriod: Int)
 }
 
