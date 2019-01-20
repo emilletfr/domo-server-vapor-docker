@@ -1,6 +1,4 @@
-
-
-FROM helje5/rpi-swift:4.1.2
+FROM swift:4.2
 MAINTAINER Eric Millet <emilletfr@gmail.com>
 
 RUN mkdir /app
